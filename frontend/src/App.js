@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import {
-  BrowserRouter as Router,
+  HashRouter as Router, // <-- CHANGED FROM BrowserRouter
   Route,
   Routes,
   useNavigate,
@@ -40,7 +40,7 @@ const CARD_DATA = [
     icon: "🛠️",
     color: COLORS.highlight,
     textColor: COLORS.claret,
-    route: "/formulabuilder",
+    route: "formulabuilder",
     comingSoon: false,
   },
   {
@@ -50,7 +50,7 @@ const CARD_DATA = [
     icon: "⚗️",
     color: COLORS.carolina,
     textColor: COLORS.seal,
-    route: "/formulacategorylist",
+    route: "formulacategorylist",
     comingSoon: false,
   },
   {
@@ -60,7 +60,7 @@ const CARD_DATA = [
     icon: "🌿",
     color: COLORS.violet,
     textColor: COLORS.vanilla,
-    route: "/herbcategorylist",
+    route: "herbcategorylist",
     comingSoon: false,
   },
   {
@@ -69,7 +69,7 @@ const CARD_DATA = [
     icon: "🧩",
     color: COLORS.claret,
     textColor: COLORS.vanilla,
-    route: "/herbgroups",
+    route: "herbgroups",
     comingSoon: false,
   },
   {
@@ -453,7 +453,7 @@ function Home() {
                   font: "inherit",
                   padding: 0,
                 }}
-                onClick={() => navigate("/report")}
+                onClick={() => navigate("report")}
               >
                 Report an Error
               </button>
@@ -469,7 +469,7 @@ function Home() {
                   font: "inherit",
                   padding: 0,
                 }}
-                onClick={() => navigate("/about")}
+                onClick={() => navigate("about")}
               >
                 About
               </button>
@@ -492,7 +492,7 @@ function Home() {
                   transition: "background 0.2s",
                 }}
                 className="hover:bg-carolina"
-                onClick={() => navigate("/login")}
+                onClick={() => navigate("login")}
               >
                 Admin Login
               </button>
@@ -511,7 +511,7 @@ function Home() {
                   transition: "background 0.2s",
                 }}
                 className="hover:bg-violet"
-                onClick={() => navigate("/register")}
+                onClick={() => navigate("register")}
               >
                 Register Admin
               </button>
@@ -532,7 +532,7 @@ function Home() {
                 transition: "background 0.2s",
               }}
               className="hover:bg-violet"
-              onClick={() => navigate("/admin")}
+              onClick={() => navigate("admin")}
             >
               Admin Dashboard
             </button>
@@ -653,26 +653,23 @@ export default function App() {
         <Routes>
           <Route path="/" element={<Home />} />
           <Route index element={<Home />} />
-          <Route path="/formulabuilder" element={<FormulaBuilder />} />
-          <Route path="/herb/:id" element={<HerbCard />} />
-          <Route path="/herbCard" element={<HerbCard />} />
-          <Route path="/formulacard/:id" element={<FormulaCard />} />
-          <Route path="/formulaCard" element={<FormulaCard />} />
-          <Route
-            path="/formulacategorylist"
-            element={<FormulaCategoryList />}
-          />
-          <Route path="/herbcategorylist" element={<HerbCategoryList />} />
-          <Route path="/herbgroups" element={<HerbGroupsPage />} />
-          <Route path="/report" element={<ReportBug />} />
+          <Route path="formulabuilder" element={<FormulaBuilder />} />
+          <Route path="herb/:id" element={<HerbCard />} />
+          <Route path="herbCard" element={<HerbCard />} />
+          <Route path="formulacard/:id" element={<FormulaCard />} />
+          <Route path="formulaCard" element={<FormulaCard />} />
+          <Route path="formulacategorylist" element={<FormulaCategoryList />} />
+          <Route path="herbcategorylist" element={<HerbCategoryList />} />
+          <Route path="herbgroups" element={<HerbGroupsPage />} />
+          <Route path="report" element={<ReportBug />} />
           {/* Login Route */}
-          <Route path="/login" element={<LoginPage />} />
+          <Route path="login" element={<LoginPage />} />
           {/* Register Route for admin account */}
-          <Route path="/register" element={<RegisterPage />} />
+          <Route path="register" element={<RegisterPage />} />
           {/* Admin Dashboard Route */}
-          <Route path="/admin" element={<AdminDashboard />} />
+          <Route path="admin" element={<AdminDashboard />} />
           {/* About Route */}
-          <Route path="/about" element={<About />} />
+          <Route path="about" element={<About />} />
           <Route path="*" element={<Home />} />
         </Routes>
       </Router>
