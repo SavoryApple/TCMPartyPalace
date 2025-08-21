@@ -647,7 +647,8 @@ function Home() {
 export default function App() {
   return (
     <HerbCartProvider>
-      <Router basename="/TCMPartyPalace">
+      {/* REMOVE basename */}
+      <Router>
         <ScrollToTop />
         <GlobalAnimations />
         <Routes>
