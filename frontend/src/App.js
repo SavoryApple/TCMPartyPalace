@@ -336,7 +336,9 @@ function VisitorCounter() {
         }}
       >
         You are visitor number{" "}
-        <span style={{ color: COLORS.carolina, fontWeight: 900, fontSize: "1.3em" }}>
+        <span
+          style={{ color: COLORS.carolina, fontWeight: 900, fontSize: "1.3em" }}
+        >
           {count !== null ? count : "..."}
         </span>
         !
@@ -415,7 +417,8 @@ function ScrollDownHint() {
 
 function Home() {
   const navigate = useNavigate();
-  const isAdmin = localStorage.getItem("role") === "admin" && localStorage.getItem("token");
+  const isAdmin =
+    localStorage.getItem("role") === "admin" && localStorage.getItem("token");
   return (
     <div
       style={{
@@ -435,7 +438,10 @@ function Home() {
       >
         <AnimatedHeroTitle />
         <nav style={{ display: "flex", alignItems: "center", gap: "2em" }}>
-          <ul className="flex gap-6 font-semibold" style={{ margin: 0, padding: 0 }}>
+          <ul
+            className="flex gap-6 font-semibold"
+            style={{ margin: 0, padding: 0 }}
+          >
             <li>
               <button
                 className="hover:text-seal transition"
@@ -641,7 +647,7 @@ function Home() {
 export default function App() {
   return (
     <HerbCartProvider>
-      <Router>
+      <Router basename="/TCMPartyPalace">
         <ScrollToTop />
         <GlobalAnimations />
         <Routes>
@@ -657,10 +663,7 @@ export default function App() {
           />
           <Route path="/herbcategorylist" element={<HerbCategoryList />} />
           <Route path="/herbgroups" element={<HerbGroupsPage />} />
-          <Route
-            path="/report"
-            element={<ReportBug />}
-          />
+          <Route path="/report" element={<ReportBug />} />
           {/* Login Route */}
           <Route path="/login" element={<LoginPage />} />
           {/* Register Route for admin account */}
