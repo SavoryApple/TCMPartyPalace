@@ -652,6 +652,7 @@ export default function App() {
         <GlobalAnimations />
         <Routes>
           <Route path="/" element={<Home />} />
+          <Route index element={<Home />} />
           <Route path="/formulabuilder" element={<FormulaBuilder />} />
           <Route path="/herb/:id" element={<HerbCard />} />
           <Route path="/herbCard" element={<HerbCard />} />
