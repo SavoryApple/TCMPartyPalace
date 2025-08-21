@@ -672,6 +672,7 @@ export default function App() {
           <Route path="/admin" element={<AdminDashboard />} />
           {/* About Route */}
           <Route path="/about" element={<About />} />
+          <Route path="*" element={<Home />} />
         </Routes>
       </Router>
     </HerbCartProvider>
