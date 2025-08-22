@@ -15,6 +15,9 @@ const COLORS = {
   highlight: "#ffe066",
 };
 
+// API endpoint base
+const API_BASE_URL = process.env.REACT_APP_API_URL || "https://tcmpartypalace.onrender.com";
+
 // ---- Animated TCM Party Zone Logo ----
 function TcmPartyZoneHeader() {
   return (
@@ -381,9 +384,6 @@ function FormulaCard({
   );
 }
 
-// PATCH: Use backend endpoints for live herb/formula data
-const API_URL = process.env.REACT_APP_API_URL || "https://tcmpartypalace.onrender.com";
-
 export default function FormulaBuilder() {
   const [herbs, setHerbs] = useState([]);
   const [selectedFormulas, setSelectedFormulas] = useState([]);
@@ -412,17 +412,17 @@ export default function FormulaBuilder() {
     // eslint-disable-next-line
   }, [location.state]);
 
-  // PATCH: Use backend endpoints instead of static JSON files
+  // Use backend endpoints instead of static JSON files
   useEffect(() => {
     setLoading(true);
     Promise.all([
-      fetch(`${API_URL}/api/data/caleherbs`).then(r => r.json()),
-      fetch(`${API_URL}/api/data/caleandnccaomherbs`).then(r => r.json()),
-      fetch(`${API_URL}/api/data/nccaomherbs`).then(r => r.json()),
-      fetch(`${API_URL}/api/data/extraherbs`).then(r => r.json()),
-      fetch(`${API_URL}/api/data/caleandnccaomformulas`).then(r => r.json()),
-      fetch(`${API_URL}/api/data/nccaomformulas`).then(r => r.json()),
-      fetch(`${API_URL}/api/data/extraformulas`).then(r => r.json())
+      fetch(`${API_BASE_URL}/api/data/caleherbs`).then(r => r.json()),
+      fetch(`${API_BASE_URL}/api/data/caleandnccaomherbs`).then(r => r.json()),
+      fetch(`${API_BASE_URL}/api/data/nccaomherbs`).then(r => r.json()),
+      fetch(`${API_BASE_URL}/api/data/extraherbs`).then(r => r.json()),
+      fetch(`${API_BASE_URL}/api/data/caleandnccaomformulas`).then(r => r.json()),
+      fetch(`${API_BASE_URL}/api/data/nccaomformulas`).then(r => r.json()),
+      fetch(`${API_BASE_URL}/api/data/extraformulas`).then(r => r.json())
     ])
       .then(([caleHerbs, caleAndNccaomHerbs, nccaomHerbs, extraHerbs, caleNccaomFormulasShared, nccaomFormulasOnly, extraFormulas]) => {
         setHerbSources([

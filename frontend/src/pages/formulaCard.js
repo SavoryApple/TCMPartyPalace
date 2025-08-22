@@ -1,6 +1,9 @@
 import React, { useState, useEffect } from "react";
 import { useParams, useNavigate, Link, useLocation } from "react-router-dom";
 
+// API base URL for backend
+const API_BASE_URL = "https://tcmpartypalace.onrender.com";
+
 // Color scheme
 const COLORS = {
   vanilla: "#FFF7E3",
@@ -210,13 +213,13 @@ export default function FormulaCard() {
   useEffect(() => {
     setLoading(true);
     Promise.all([
-      fetch("/data/caleAndNccaomFormulasObject.json").then(r => r.json()),
-      fetch("/data/NCCAOMFormulasObject.json").then(r => r.json()),
-      fetch("/data/extraFormulasObject.json").then(r => r.json()),
-      fetch("/data/caleHerbsObject.json").then(r => r.json()),
-      fetch("/data/caleAndNccaomHerbsObject.json").then(r => r.json()),
-      fetch("/data/nccaomHerbsObject.json").then(r => r.json()),
-      fetch("/data/extraHerbsObject.json").then(r => r.json())
+      fetch(`${API_BASE_URL}/api/data/caleandnccaomformulas`).then(r => r.json()),
+      fetch(`${API_BASE_URL}/api/data/nccaomformulas`).then(r => r.json()),
+      fetch(`${API_BASE_URL}/api/data/extraformulas`).then(r => r.json()),
+      fetch(`${API_BASE_URL}/api/data/caleherbs`).then(r => r.json()),
+      fetch(`${API_BASE_URL}/api/data/caleandnccaomherbs`).then(r => r.json()),
+      fetch(`${API_BASE_URL}/api/data/nccaomherbs`).then(r => r.json()),
+      fetch(`${API_BASE_URL}/api/data/extraherbs`).then(r => r.json())
     ]).then(([caleNccaomFormulasShared, nccaomFormulasOnly, extraFormulas, caleHerbs, caleAndNccaomHerbs, nccaomHerbs, extraHerbs]) => {
       setAllFormulas([
         ...caleNccaomFormulasShared,
