@@ -668,7 +668,8 @@ export default function App() {
           <Route path="register" element={<RegisterPage />} />
           <Route path="admin" element={<AdminDashboard />} />
           <Route path="about" element={<About />} />
-          <Route path="*" element={<Home />} />
+          {/* Optionally, add a 404 route here if you want */}
+          {/* <Route path="*" element={<Home />} /> */}
         </Routes>
       </Router>
     </HerbCartProvider>

@@ -1,39 +1,57 @@
 import React, { createContext, useContext, useState } from "react";
 
-// 1. Create the context object.
 const HerbCartContext = createContext();
 
-// 2. Provider component that wraps your app and manages the cart state.
+const MAX_HERBS = 25;
+
 export function HerbCartProvider({ children }) {
   const [cart, setCart] = useState([]);
+  const [alert, setAlert] = useState(null); // For custom alerts
 
-  // Add a herb to the cart (no duplicates by name)
+  // Show alert for 2 seconds then hide
+  function showAlert(message) {
+    setAlert(message);
+    setTimeout(() => setAlert(null), 2000);
+  }
+
   const addHerb = (herb) => {
     const herbKey = herb.name || herb.pinyinName;
     setCart((prev) => {
+      if (prev.length >= MAX_HERBS) {
+        showAlert("You can only add up to 25 herbs to the cart!");
+        return prev;
+      }
       if (prev.some((h) => (h.name || h.pinyinName) === herbKey)) return prev;
       return [...prev, herb];
     });
   };
 
-  // Remove a herb by name
   const removeHerb = (herbName) => {
     setCart((prev) =>
       prev.filter((h) => (h.name || h.pinyinName) !== herbName)
     );
   };
 
-  // Clear the whole cart
   const clearCart = () => setCart([]);
 
+  const herbCount = cart.length;
+
   return (
-    <HerbCartContext.Provider value={{ cart, addHerb, removeHerb, clearCart }}>
+    <HerbCartContext.Provider value={{
+      cart,
+      addHerb,
+      removeHerb,
+      clearCart,
+      herbCount,
+      maxHerbs: MAX_HERBS,
+      alert,           // Pass alert state
+      setAlert,        // Pass setter in case you want to show other alerts
+    }}>
       {children}
     </HerbCartContext.Provider>
   );
 }
 
-// 3. Custom hook to access cart in any component.
 export function useHerbCart() {
   return useContext(HerbCartContext);
 }

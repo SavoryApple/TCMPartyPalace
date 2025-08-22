@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import { useParams, useNavigate, Link, useLocation } from "react-router-dom";
 import WhatFormulaMakesUpThoseHerbs from "../components/whatFormulaMakesUpThoseHerbs";
 import { useHerbCart } from "../context/HerbCartContext";
+import HerbCart from "../components/HerbCart";
 
 // --- Color scheme ---
 const COLORS = {
@@ -305,7 +306,7 @@ export default function HerbCard() {
   const [loading, setLoading] = useState(true);
 
   // Backend API base URL
-const API_URL = process.env.REACT_APP_API_URL || "https://tcmpartypalace.onrender.com";
+  const API_URL = process.env.REACT_APP_API_URL || "https://tcmpartypalace.onrender.com";
 
   useEffect(() => {
     setLoading(true);
@@ -361,10 +362,6 @@ const API_URL = process.env.REACT_APP_API_URL || "https://tcmpartypalace.onrende
       setShowCart(false);
     }
   }
-
-  // -- Cart Drawer UI --
-  const cartDrawerWidth = 270;
-  const cartDrawerTop = 90;
 
   // --- Loading State ---
   if (loading) {
@@ -447,114 +444,13 @@ const API_URL = process.env.REACT_APP_API_URL || "https://tcmpartypalace.onrende
       <GlobalAnimations />
       <TcmPartyZoneHeader />
 
-      {/* Cart Drawer */}
-      {showCart && (
-        <div
-          className="fixed bg-white border-l shadow-lg z-50 flex flex-col"
-          style={{
-            top: cartDrawerTop,
-            right: 18,
-            height: `calc(100vh - ${cartDrawerTop + 12}px)`,
-            width: cartDrawerWidth,
-            minWidth: cartDrawerWidth,
-            maxWidth: cartDrawerWidth,
-            minHeight: 120,
-            borderRadius: "1.2em",
-            boxShadow: "0 6px 40px -8px #7C5CD399",
-            padding: "14px 13px 12px 13px",
-            zIndex: 80,
-          }}
-        >
-          <div className="flex justify-between items-center mb-1">
-            <h3 className="font-bold text-lg" style={{ color: COLORS.violet }}>
-              Herb Cart
-            </h3>
-            <button onClick={() => setShowCart(false)} aria-label="Close" style={{
-              background: "none",
-              border: "none",
-              color: COLORS.claret,
-              fontSize: 19,
-              fontWeight: "bold",
-              cursor: "pointer",
-              borderRadius: 8,
-              padding: "0 6px",
-              lineHeight: 1,
-              marginLeft: 2,
-              transition: "background 0.15s",
-            }} title="Close">×</button>
-          </div>
-          <ul style={{
-            margin: "8px 0 0 0",
-            padding: 0,
-            listStyle: "none",
-            overflowY: "auto",
-            maxHeight: "38vh",
-            minHeight: 16,
-          }}>
-            {cart.length === 0 ? (
-              <li className="text-seal italic text-sm py-2 text-center">No herbs yet.</li>
-            ) : (
-              cart.map((h, idx) => (
-                <li key={`${getHerbKey(h) || idx}-cart`} className="flex items-center justify-between py-1 group" style={{
-                  borderBottom: idx !== cart.length - 1 ? "1px solid #eee" : "none",
-                  fontSize: 15,
-                  paddingBottom: 2,
-                }}>
-                  <span style={{
-                    overflow: "hidden",
-                    whiteSpace: "nowrap",
-                    textOverflow: "ellipsis",
-                    maxWidth: 128,
-                    color: COLORS.seal,
-                    fontWeight: 500,
-                  }} title={getHerbDisplayName(h)}>
-                    {getHerbDisplayName(h) || (
-                      <span style={{ color: COLORS.claret, fontStyle: "italic" }}>[Unknown]</span>
-                    )}
-                  </span>
-                  <button className="ml-2" style={{
-                    background: "none",
-                    border: "none",
-                    color: COLORS.claret,
-                    fontSize: 17,
-                    fontWeight: "bold",
-                    borderRadius: 8,
-                    cursor: "pointer",
-                    marginLeft: 4,
-                    padding: "0 4px",
-                    transition: "background 0.15s",
-                  }} aria-label="Remove" title="Remove" onClick={() => removeHerb(getHerbKey(h))}>×</button>
-                </li>
-              ))
-            )}
-          </ul>
-          <div className="flex flex-col items-stretch mt-4 gap-2">
-            <button disabled={cart.length === 0} className="w-full mb-1 px-2 py-1 rounded-full font-bold" style={{
-              background: COLORS.violet,
-              color: COLORS.vanilla,
-              fontSize: 15,
-              minHeight: 32,
-              cursor: cart.length === 0 ? "not-allowed" : "pointer",
-              opacity: cart.length === 0 ? 0.67 : 1,
-              fontWeight: 700,
-              transition: "background 0.15s, scale 0.15s",
-              boxShadow: "0 1px 5px 0 #7C5CD344",
-            }} onClick={handleCreateFormula}>Add to Formula</button>
-            <button className="w-full px-2 py-1 rounded-full font-bold" style={{
-              background: "#fff0f0",
-              color: COLORS.claret,
-              border: `1.2px solid ${COLORS.claret}`,
-              fontSize: 14,
-              minHeight: 28,
-              marginTop: 0,
-              fontWeight: 700,
-              opacity: cart.length === 0 ? 0.7 : 1,
-              cursor: cart.length === 0 ? "not-allowed" : "pointer",
-              transition: "background 0.14s",
-            }} onClick={clearCart} disabled={cart.length === 0} title="Remove all herbs from cart">Remove All</button>
-          </div>
-        </div>
-      )}
+      {/* HerbCart Drawer */}
+      <HerbCart
+        show={showCart}
+        onClose={() => setShowCart(false)}
+        onCreateFormula={handleCreateFormula}
+      />
+
       {/* Floating Cart Button */}
       <button
         className="fixed"
@@ -578,7 +474,7 @@ const API_URL = process.env.REACT_APP_API_URL || "https://tcmpartypalace.onrende
           border: `2px solid ${COLORS.vanilla}`,
           transition: "background 0.2s, scale 0.15s",
         }}
-        onClick={() => setShowCart((c) => !c)}
+        onClick={() => setShowCart(true)}
         aria-label="Show Cart"
         title="Show Cart"
       >
@@ -623,7 +519,7 @@ const API_URL = process.env.REACT_APP_API_URL || "https://tcmpartypalace.onrende
           textAlign: "left",
           boxShadow: `0 6px 40px -8px ${COLORS.shadowStrong}`,
           marginTop: "32px",
-          position: "relative", // <-- Needed for absolute positioning of image
+          position: "relative",
           minHeight: "300px",
         }}
       >
