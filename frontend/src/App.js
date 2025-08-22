@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import {
-  HashRouter as Router, // <-- CHANGED FROM BrowserRouter
+  HashRouter as Router,
   Route,
   Routes,
   useNavigate,
@@ -19,7 +19,9 @@ import ReportBug from "./pages/ReportBug";
 import LoginPage from "./pages/LoginPage";
 import RegisterPage from "./pages/RegisterPage";
 import AdminDashboard from "./pages/AdminDashboard";
-import About from "./pages/About"; // <-- import your new About page here
+import About from "./pages/About";
+
+const API_BASE_URL = "https://tcmpartypalace.onrender.com"; // <-- UPDATED BASE URL
 
 const COLORS = {
   vanilla: "#FFF7E3",
@@ -300,14 +302,14 @@ function VisitorCounter() {
   useEffect(() => {
     // Only increment for unique visitors (per browser/device)
     if (!localStorage.getItem("hasVisitedTCMPartyPalace")) {
-      fetch("http://localhost:5000/api/visit", { method: "POST" })
+      fetch(`${API_BASE_URL}/api/visit`, { method: "POST" })
         .then((res) => res.json())
         .then((data) => setCount(data.count))
         .catch(() => setCount("..."));
       localStorage.setItem("hasVisitedTCMPartyPalace", "true");
     } else {
       // Just GET the count, don't increment
-      fetch("http://localhost:5000/api/visit")
+      fetch(`${API_BASE_URL}/api/visit`)
         .then((res) => res.json())
         .then((data) => setCount(data.count))
         .catch(() => setCount("..."));
@@ -647,7 +649,6 @@ function Home() {
 export default function App() {
   return (
     <HerbCartProvider>
-      {/* REMOVE basename */}
       <Router>
         <ScrollToTop />
         <GlobalAnimations />
@@ -663,13 +664,9 @@ export default function App() {
           <Route path="herbcategorylist" element={<HerbCategoryList />} />
           <Route path="herbgroups" element={<HerbGroupsPage />} />
           <Route path="report" element={<ReportBug />} />
-          {/* Login Route */}
           <Route path="login" element={<LoginPage />} />
-          {/* Register Route for admin account */}
           <Route path="register" element={<RegisterPage />} />
-          {/* Admin Dashboard Route */}
           <Route path="admin" element={<AdminDashboard />} />
-          {/* About Route */}
           <Route path="about" element={<About />} />
           <Route path="*" element={<Home />} />
         </Routes>

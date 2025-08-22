@@ -76,7 +76,7 @@ export default function HomePageSearchBar() {
   const inputRef = useRef(null);
 
   // Backend API base URL (set via .env for deployment flexibility)
-  const API_URL = process.env.REACT_APP_API_URL || "http://localhost:5000";
+ const API_URL = process.env.REACT_APP_API_URL || "https://tcmpartypalace.onrender.com";
 
   // Fetch herbs and formulas from backend API on mount
   useEffect(() => {

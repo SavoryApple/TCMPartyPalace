@@ -17,7 +17,7 @@ const FILTER_BAR_HEIGHT = 56;
 const CARD_MAX_WIDTH = 650 * 1.25;
 
 // PATCH: Use backend API endpoints instead of local JSON files
-const API_URL = process.env.REACT_APP_API_URL || "http://localhost:5000";
+const API_URL = process.env.REACT_APP_API_URL || "https://tcmpartypalace.onrender.com";
 const herbApiEndpoints = [
   `${API_URL}/api/data/caleandnccaomherbs`,
   `${API_URL}/api/data/caleherbs`,

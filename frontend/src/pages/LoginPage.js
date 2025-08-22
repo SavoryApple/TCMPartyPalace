@@ -9,6 +9,9 @@ const COLORS = {
   seal: "#3B4461",
 };
 
+const API_URL =
+  process.env.REACT_APP_API_URL || "https://tcmpartypalace.onrender.com";
+
 export default function LoginPage() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
@@ -22,7 +25,7 @@ export default function LoginPage() {
     setLoading(true);
 
     try {
-      const response = await fetch("http://localhost:5000/api/auth/login", {
+      const response = await fetch(`${API_URL}/api/auth/login`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ email, password }),
@@ -42,7 +45,9 @@ export default function LoginPage() {
           navigate("/");
         }
       } else {
-        setError(data.message || data.error || "Login failed. Please try again.");
+        setError(
+          data.message || data.error || "Login failed. Please try again."
+        );
       }
     } catch (err) {
       setError("Network error. Please try again.");
