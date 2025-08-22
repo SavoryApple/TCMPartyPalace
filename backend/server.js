@@ -9,8 +9,17 @@ const authRoutes = require('./routes/auth'); // <-- Added line for auth
 
 const app = express();
 
-// Middleware
-app.use(cors());
+// CORS configuration (more secure for production)
+const allowedOrigins = [
+  "https://savoryapple.github.io", // Your frontend domain
+  "https://tcmpartypalace.onrender.com" // Your backend domain (optional)
+];
+
+app.use(cors({
+  origin: allowedOrigins,
+  credentials: true
+}));
+
 app.use(express.json());
 
 // Connect to MongoDB Atlas
@@ -25,6 +34,12 @@ mongoose.connect(process.env.MONGODB_URI, {
 app.use('/api/data', dataRoutes);
 app.use('/api/visit', visitRoutes);
 app.use('/api/auth', authRoutes); // <-- Added line for auth
+
+// Global error handler (returns JSON)
+app.use((err, req, res, next) => {
+  console.error(err.stack);
+  res.status(500).json({ error: 'Internal Server Error' });
+});
 
 // Start server
 const PORT = process.env.PORT || 5000;
