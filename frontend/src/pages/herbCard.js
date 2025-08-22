@@ -524,7 +524,7 @@ export default function HerbCard() {
         }}
       >
         {/* Herb Image in Top Right */}
-        <HerbImage url={herb.herbImageURL} alt={getHerbDisplayName(herb)} />
+        <HerbImage url={process.env.PUBLIC_URL + "/" + herb.herbImageURL} alt={getHerbDisplayName(herb)} />
         <div className="flex items-center mb-4 animate-bounceIn">
           <span className="text-4xl mr-3">🌿</span>
           <h2 className="font-bold text-3xl" style={{ color: COLORS.claret, textAlign: "left" }}>
