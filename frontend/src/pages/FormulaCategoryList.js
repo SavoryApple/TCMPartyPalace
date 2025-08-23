@@ -56,6 +56,47 @@ const GlobalAnimations = () => (
         text-fill-color: transparent;
         animation: shimmerText 3.2s ease-in-out infinite;
       }
+
+      /* Responsive overrides */
+      @media (max-width: 900px) {
+        .sidebar {
+          display: none !important;
+        }
+        .main-scroll {
+          padding-left: 0 !important;
+        }
+        .formula-card-section {
+          padding: 0 4vw !important;
+          max-width: 98vw !important;
+        }
+        .tcm-header {
+          font-size: 2rem !important;
+          padding-top: 1.2em !important;
+        }
+        .back-to-home-btn {
+          right: 8px !important;
+        }
+      }
+      @media (max-width: 600px) {
+        .formula-card-section {
+          padding: 0 1vw !important;
+          max-width: 100vw !important;
+        }
+        .formula-card {
+          padding: 1.2em !important;
+        }
+        .filter-bar {
+          font-size: 0.98rem !important;
+          padding: 0.7em 0.5em !important;
+        }
+        .main-scroll {
+          padding-right: 0 !important;
+        }
+        /* Show mobile category nav above cards */
+        .mobile-category-nav {
+          display: block !important;
+        }
+      }
     `}
   </style>
 );
@@ -63,7 +104,7 @@ const GlobalAnimations = () => (
 function TcmPartyZoneHeader() {
   return (
     <div
-      className="animate-shimmerText animate-fadeInScaleUp"
+      className="animate-shimmerText animate-fadeInScaleUp tcm-header"
       style={{
         fontWeight: 900,
         fontSize: "2.5rem",
@@ -108,18 +149,18 @@ function BackToTopButton({ scrollContainerRef }) {
       onClick={handleClick}
       style={{
         position: "fixed",
-        bottom: 28,
-        right: 28,
+        bottom: 18,
+        right: 18,
         zIndex: 70,
         background: COLORS.violet,
         color: COLORS.vanilla,
         borderRadius: "50%",
-        width: 55,
-        height: 55,
+        width: 44,
+        height: 44,
         border: `2.5px solid ${COLORS.seal}`,
         boxShadow: `0 6px 40px -8px ${COLORS.shadowStrong}`,
         fontWeight: 900,
-        fontSize: "2rem",
+        fontSize: "1.2rem",
         display: show ? "flex" : "none",
         alignItems: "center",
         justifyContent: "center",
@@ -367,8 +408,8 @@ export default function FormulaCategoryListPage() {
       <div
         className="flex flex-col gap-1 items-start"
         style={{
-          minWidth: 170,
-          maxWidth: 290,
+          minWidth: 120,
+          maxWidth: 100 + "vw",
           justifyContent: "center",
           marginTop: "6px",
           marginLeft: "1.2em"
@@ -394,9 +435,82 @@ export default function FormulaCategoryListPage() {
     );
   }
 
+  // --- Mobile category nav ---
+  function MobileCategoryNav() {
+    return (
+      <nav className="mobile-category-nav w-full px-2 py-2 mb-4 bg-white/90 rounded-xl shadow-md flex flex-wrap justify-center gap-2" style={{ display: "none" }}>
+        {categories.map((category, catIdx) =>
+          (category.subcategories || []).map((subcat, subIdx) => (
+            <button
+              key={subcat.title + subIdx}
+              data-subcategory={subcat.title}
+              onClick={() => handleSubcategoryScroll(subcat.title)}
+              className={[
+                "px-3 py-2 rounded font-semibold transition-colors hover:bg-violet/20 focus-visible:ring-2 focus-visible:ring-carolina",
+                activeSubcategory === subcat.title
+                  ? "bg-violet/30 text-carolina font-extrabold shadow"
+                  : "text-violet"
+              ].join(" ")}
+              style={{
+                color: COLORS.violet,
+                cursor: "pointer",
+                fontWeight: activeSubcategory === subcat.title ? 800 : 600,
+                border: activeSubcategory === subcat.title ? `2px solid ${COLORS.carolina}` : "none",
+                boxShadow: activeSubcategory === subcat.title ? `0 0 4px 0 ${COLORS.violet}` : "none"
+              }}
+              tabIndex={0}
+            >
+              {subcat.title}
+            </button>
+          ))
+        )}
+      </nav>
+    );
+  }
+
+  // --- Mobile filter bar for checkboxes ---
+  function MobileFilterBar() {
+    return (
+      <div className="w-full px-2 py-2 mb-2 bg-white/90 rounded-xl shadow-md flex flex-col items-center gap-2 sm:flex-row sm:justify-center flex-wrap">
+        <span className="font-extrabold text-violet text-lg tracking-tight mb-1" style={{textShadow:`0 1px 0 ${COLORS.vanilla}`}}>
+          Show formulas:
+        </span>
+        <div className="flex gap-2 flex-wrap justify-center">
+          <label className="flex items-center space-x-2 cursor-pointer">
+            <input
+              type="checkbox"
+              checked={showCaleNccaom}
+              onChange={() => setShowCaleNccaom((v) => !v)}
+              className="accent-green-700 w-4 h-4"
+            />
+            <span className="text-green-700 font-semibold">NCCAOM/CALE</span>
+          </label>
+          <label className="flex items-center space-x-2 cursor-pointer">
+            <input
+              type="checkbox"
+              checked={showNccaom}
+              onChange={() => setShowNccaom((v) => !v)}
+              className="accent-blue-700 w-4 h-4"
+            />
+            <span className="text-blue-700 font-semibold">NCCAOM</span>
+          </label>
+          <label className="flex items-center space-x-2 cursor-pointer">
+            <input
+              type="checkbox"
+              checked={showExtra}
+              onChange={() => setShowExtra((v) => !v)}
+              className="accent-gray-700 w-4 h-4"
+            />
+            <span className="text-gray-700 font-semibold">Extra</span>
+          </label>
+        </div>
+      </div>
+    );
+  }
+
   const filterBar = (
     <div
-      className="fixed top-0 left-0 w-full z-50 flex items-center justify-center py-3 px-2"
+      className="fixed top-0 left-0 w-full z-50 flex items-center justify-center py-3 px-2 filter-bar"
       style={{
         background: `linear-gradient(90deg, ${COLORS.vanilla} 65%, ${COLORS.carolina} 100%)`,
         borderBottom: `2.5px solid ${COLORS.violet}`,
@@ -441,7 +555,7 @@ export default function FormulaCategoryListPage() {
 
   const backToHomeButton = (
     <div
-      className="fixed"
+      className="fixed back-to-home-btn"
       style={{
         top: FILTER_BAR_HEIGHT + 16,
         right: 32,
@@ -469,10 +583,13 @@ export default function FormulaCategoryListPage() {
     return <div>No categories found. Check your data file structure.</div>;
   }
 
+  // Detect mobile screen
+  const isMobile = typeof window !== "undefined" && window.innerWidth < 900;
+
   return (
     <>
       <GlobalAnimations />
-      {filterBar}
+      {isMobile ? <MobileFilterBar /> : filterBar}
       {backToHomeButton}
       <BackToTopButton scrollContainerRef={scrollContainerRef} />
       <div
@@ -500,7 +617,7 @@ export default function FormulaCategoryListPage() {
         {/* Sidebar */}
         <aside
           ref={sidebarRef}
-          className="hidden md:flex flex-col"
+          className="sidebar hidden md:flex flex-col"
           style={{
             position: "fixed",
             top: `${FILTER_BAR_HEIGHT}px`,
@@ -591,7 +708,7 @@ export default function FormulaCategoryListPage() {
         {/* Main scroll area */}
         <div
           ref={scrollContainerRef}
-          className="custom-scrollbar-main"
+          className="main-scroll custom-scrollbar-main"
           style={{
             position: "fixed",
             top: FILTER_BAR_HEIGHT,
@@ -606,7 +723,6 @@ export default function FormulaCategoryListPage() {
             background: "none"
           }}
         >
-          {/* PATCH: TCM Party Palace logo centered above formula cards */}
           <div
             style={{
               width: "100%",
@@ -619,22 +735,24 @@ export default function FormulaCategoryListPage() {
           >
             <TcmPartyZoneHeader />
           </div>
+          {/* Mobile category nav above cards */}
+          {isMobile && <MobileCategoryNav />}
           <div
             className="flex flex-col items-center"
             style={{
               width: "100%",
               maxWidth: CARD_MAX_WIDTH + 120,
               margin: "0 auto",
-              paddingRight: 60,
+              paddingRight: 0,
             }}
           >
-            <div className="space-y-14 w-full flex flex-col items-center" style={{ maxWidth: CARD_MAX_WIDTH }}>
+            <div className="space-y-14 w-full flex flex-col items-center formula-card-section" style={{ maxWidth: CARD_MAX_WIDTH }}>
               {categories.map((category, catIdx) =>
                 (category.subcategories || []).map((subcat, subIdx) => (
                   <section
                     key={subcat.title + subIdx}
                     ref={(ref) => (subcategoryRefs.current[subcat.title] = ref)}
-                    className="shadow-2xl rounded-2xl border border-violet px-7 py-8"
+                    className="shadow-2xl rounded-2xl border border-violet px-7 py-8 formula-card"
                     style={{
                       background: "#fff",
                       boxShadow: `0 8px 40px -14px ${COLORS.violet}55, 0 1.5px 0 ${COLORS.vanilla}`,
@@ -675,6 +793,7 @@ export default function FormulaCategoryListPage() {
                         fontFamily: "inherit",
                         zIndex: 2,
                         position: "relative",
+                        wordBreak: "break-word"
                       }}
                     >
                       {subcat.title}
