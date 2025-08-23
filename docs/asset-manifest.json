@@ -1,13 +1,13 @@
 {
   "files": {
-    "main.css": "/TCMPartyPalace/static/css/main.71675ef8.css",
-    "main.js": "/TCMPartyPalace/static/js/main.42a5437d.js",
-    "index.html": "/TCMPartyPalace/index.html",
-    "main.71675ef8.css.map": "/TCMPartyPalace/static/css/main.71675ef8.css.map",
-    "main.42a5437d.js.map": "/TCMPartyPalace/static/js/main.42a5437d.js.map"
+    "main.css": "/static/css/main.32d55fdc.css",
+    "main.js": "/static/js/main.ff794e01.js",
+    "index.html": "/index.html",
+    "main.32d55fdc.css.map": "/static/css/main.32d55fdc.css.map",
+    "main.ff794e01.js.map": "/static/js/main.ff794e01.js.map"
   },
   "entrypoints": [
-    "static/css/main.71675ef8.css",
-    "static/js/main.42a5437d.js"
+    "static/css/main.32d55fdc.css",
+    "static/js/main.ff794e01.js"
   ]
 }
