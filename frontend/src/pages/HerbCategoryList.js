@@ -31,7 +31,7 @@ const herbCategoryListEndpoint = `${API_URL}/api/data/herbcategorylist`;
 function TcmPartyZoneHeader() {
   return (
     <div
-      className="animate-shimmerText animate-fadeInScaleUp"
+      className="animate-shimmerText animate-fadeInScaleUp tcm-header"
       style={{
         fontWeight: 900,
         fontSize: "2.5rem",
@@ -45,6 +45,7 @@ function TcmPartyZoneHeader() {
         textShadow: `0 3px 16px ${COLORS.shadowStrong}`,
         borderRadius: "1em",
         maxWidth: CARD_MAX_WIDTH,
+        transition: "font-size 0.2s"
       }}
     >
       The TCM Atlas (BETA) 🗺️
@@ -52,7 +53,7 @@ function TcmPartyZoneHeader() {
   );
 }
 
-// Animations for logo/text
+// Animations + Responsive styles
 const GlobalAnimations = () => (
   <style>
     {`
@@ -81,6 +82,55 @@ const GlobalAnimations = () => (
         background-clip: text;
         text-fill-color: transparent;
         animation: shimmerText 3.2s ease-in-out infinite;
+      }
+      /* --- RESPONSIVE OVERRIDES --- */
+      @media (max-width: 900px) {
+        .sidebar {
+          display: none !important;
+        }
+        .main-scroll {
+          padding-left: 0 !important;
+        }
+        .tcm-header {
+          font-size: 1.7rem !important;
+          padding-top: 1em !important;
+        }
+        .back-to-home-btn {
+          right: 8px !important;
+        }
+      }
+      @media (max-width: 700px) {
+        .space-y-14 {
+          gap: 2em !important;
+        }
+        .tcm-header {
+          font-size: 1.18rem !important;
+        }
+        .card-section {
+          padding: 0 1vw !important;
+          max-width: 99vw !important;
+        }
+        .card {
+          padding: 1em !important;
+          font-size: 1em !important;
+        }
+        .filter-bar {
+          font-size: 0.97rem !important;
+          padding: 0.7em 0.5em !important;
+        }
+      }
+      @media (max-width: 500px) {
+        .tcm-header {
+          font-size: 0.94rem !important;
+          padding-top: 0.65em !important;
+        }
+        .card-section {
+          padding: 0 !important;
+        }
+        .card {
+          padding: 0.55em !important;
+          font-size: 0.95em !important;
+        }
       }
     `}
   </style>
@@ -471,7 +521,7 @@ export default function HerbCategoryListPage() {
       <GlobalAnimations />
       {/* Filters/checkboxes remain fixed at top as before */}
       <div
-        className="fixed top-0 left-0 w-full z-50 flex items-center justify-center py-3 px-2"
+        className="fixed top-0 left-0 w-full z-50 flex items-center justify-center py-3 px-2 filter-bar"
         style={{
           background: `linear-gradient(90deg, ${COLORS.vanilla} 65%, ${COLORS.carolina} 100%)`,
           borderBottom: `2.5px solid ${COLORS.violet}`,
@@ -555,7 +605,7 @@ export default function HerbCategoryListPage() {
       </button>
       {/* Back to home button */}
       <div
-        className="fixed"
+        className="fixed back-to-home-btn"
         style={{
           top: FILTER_BAR_HEIGHT + 54,
           right: 32,
@@ -602,7 +652,7 @@ export default function HerbCategoryListPage() {
         {/* Sidebar as before */}
         <aside
           ref={sidebarRef}
-          className="hidden md:flex flex-col"
+          className="sidebar hidden md:flex flex-col"
           style={{
             position: "fixed",
             top: `${FILTER_BAR_HEIGHT + 52}px`,
@@ -700,7 +750,7 @@ export default function HerbCategoryListPage() {
         {/* Main scroll area */}
         <div
           ref={scrollContainerRef}
-          className="custom-scrollbar-main"
+          className="main-scroll custom-scrollbar-main"
           style={{
             position: "fixed",
             top: FILTER_BAR_HEIGHT,
@@ -726,6 +776,7 @@ export default function HerbCategoryListPage() {
           >
             {/* PATCH: Logo is now rendered above the card grid, not above checkboxes */}
             <div
+              className="tcm-header"
               style={{
                 width: "100%",
                 maxWidth: CARD_MAX_WIDTH,
@@ -740,7 +791,7 @@ export default function HerbCategoryListPage() {
               <TcmPartyZoneHeader />
             </div>
             <div
-              className="space-y-14 w-full flex flex-col items-center"
+              className="space-y-14 w-full flex flex-col items-center card-section"
               style={{ maxWidth: CARD_MAX_WIDTH }}
             >
               {categories.map((category, catIdx) =>
@@ -748,7 +799,7 @@ export default function HerbCategoryListPage() {
                   <section
                     key={subcat.name + "-" + subIdx}
                     ref={(ref) => (subcategoryRefs.current[subcat.name] = ref)}
-                    className="shadow-2xl rounded-2xl border border-violet px-7 py-8"
+                    className="shadow-2xl rounded-2xl border border-violet px-7 py-8 card"
                     style={{
                       background: "#fff",
                       boxShadow: `0 8px 40px -14px ${COLORS.violet}55, 0 1.5px 0 ${COLORS.vanilla}`,
@@ -795,16 +846,14 @@ export default function HerbCategoryListPage() {
                             herb;
                           const badge = herbObj && herbObj.badge;
                           const pinyinDisplay = getHerbDisplayName(herbObj);
-                          // Use keyActions from the herb object
                           const keyActions = herbObj.keyActions || herb.keyActions || "";
-                          // CHANGE: Use only properties from herb object, not temperature
                           const properties = herbObj.properties || herb.properties || "";
                           const pharmaceuticalName = herbObj.pharmaceuticalName || herbObj.pharmaceutical || "";
                           const { yoSanCarries, formats } = herbObj || {};
                           return (
                             <li
                               key={key}
-                              className="group transition-all duration-200 shadow-lg rounded-xl border border-carolina bg-white/95 hover:border-violet hover:scale-[1.025] active:scale-95 focus:ring-2 focus:ring-carolina cursor-pointer"
+                              className="group transition-all duration-200 shadow-lg rounded-xl border border-carolina bg-white/95 hover:border-violet hover:scale-[1.025] active:scale-95 focus:ring-2 focus:ring-carolina cursor-pointer card"
                               style={{
                                 background: "#fff",
                                 zIndex: 3,
@@ -819,9 +868,9 @@ export default function HerbCategoryListPage() {
                               }}
                               tabIndex={0}
                             >
-                              <div className="flex flex-row items-center w-full flex-wrap p-3"
+                              <div className="flex flex-row flex-wrap items-center w-full p-3"
                                 style={{ gap: "16px", justifyContent: "space-between", alignItems: "flex-start" }}>
-                                <div style={{ minWidth: 160, maxWidth: 260, flex: "1 1 160px", overflow: "hidden" }}>
+                                <div style={{ minWidth: 110, maxWidth: 260, flex: "1 1 110px", overflow: "hidden" }}>
                                   <span
                                     className="font-extrabold"
                                     style={{
@@ -859,7 +908,7 @@ export default function HerbCategoryListPage() {
                                     {pharmaceuticalName}
                                   </div>
                                 </div>
-                                <div style={{ flex: "2 1 310px", minWidth: 170, maxWidth: 320, overflow: "hidden" }}>
+                                <div style={{ flex: "2 1 170px", minWidth: 90, maxWidth: 320, overflow: "hidden" }}>
                                   <HighlightedKeyActions text={keyActions || ""} />
                                   {herbObj.explanation && (
                                     <span
@@ -882,7 +931,7 @@ export default function HerbCategoryListPage() {
                                     </span>
                                   )}
                                 </div>
-                                <div style={{ flex: "1 1 110px", minWidth: 110, maxWidth: 220, textAlign: "right" }}>
+                                <div style={{ flex: "1 1 90px", minWidth: 80, maxWidth: 220, textAlign: "right" }}>
                                   <HerbProperties properties={properties} />
                                   {(yoSanCarries !== undefined || (formats && formats.length > 0)) && (
                                     <HerbExtrasRight herbObj={herbObj} />

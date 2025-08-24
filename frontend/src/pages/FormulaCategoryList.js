@@ -26,7 +26,7 @@ const formulaApiEndpoints = [
 ];
 const formulaCategoryListEndpoint = `${API_URL}/api/data/formulacategorylist`;
 
-// --- Animations ---
+// --- Animations & Responsive Styles ---
 const GlobalAnimations = () => (
   <style>
     {`
@@ -56,7 +56,6 @@ const GlobalAnimations = () => (
         text-fill-color: transparent;
         animation: shimmerText 3.2s ease-in-out infinite;
       }
-
       /* Responsive overrides */
       @media (max-width: 900px) {
         .sidebar {
@@ -66,35 +65,55 @@ const GlobalAnimations = () => (
           padding-left: 0 !important;
         }
         .formula-card-section {
-          padding: 0 4vw !important;
+          padding: 0 2vw !important;
           max-width: 98vw !important;
         }
         .tcm-header {
-          font-size: 2rem !important;
-          padding-top: 1.2em !important;
+          font-size: 1.8rem !important;
+          padding-top: 1em !important;
         }
         .back-to-home-btn {
           right: 8px !important;
         }
       }
-      @media (max-width: 600px) {
+      @media (max-width: 700px) {
         .formula-card-section {
-          padding: 0 1vw !important;
+          padding: 0 0.5vw !important;
           max-width: 100vw !important;
         }
         .formula-card {
-          padding: 1.2em !important;
+          padding: 1em !important;
+          font-size: 1em !important;
         }
         .filter-bar {
-          font-size: 0.98rem !important;
-          padding: 0.7em 0.5em !important;
+          font-size: 0.94rem !important;
+          padding: 0.5em 0.4em !important;
         }
         .main-scroll {
           padding-right: 0 !important;
         }
-        /* Show mobile category nav above cards */
         .mobile-category-nav {
-          display: block !important;
+          display: flex !important;
+        }
+        .tcm-header {
+          font-size: 1.3rem !important;
+          line-height: 1.25em !important;
+        }
+      }
+      @media (max-width: 500px) {
+        .formula-card-section {
+          padding: 0 !important;
+        }
+        .formula-card {
+          padding: 0.5em !important;
+          font-size: 0.95em !important;
+        }
+        .back-to-home-btn {
+          right: 2px !important;
+        }
+        .tcm-header {
+          font-size: 1.06rem !important;
+          padding-top: 0.6em !important;
         }
       }
     `}
@@ -409,7 +428,7 @@ export default function FormulaCategoryListPage() {
         className="flex flex-col gap-1 items-start"
         style={{
           minWidth: 120,
-          maxWidth: 100 + "vw",
+          maxWidth: "100vw",
           justifyContent: "center",
           marginTop: "6px",
           marginLeft: "1.2em"

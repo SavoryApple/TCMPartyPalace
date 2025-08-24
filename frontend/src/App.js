@@ -216,6 +216,11 @@ const GlobalAnimations = () => (
       .animate-cardTextFade { animation: cardTextFade 0.9s cubic-bezier(.36,1.29,.45,1.01); }
       .card-shadow {
         box-shadow: 0 6px 40px -8px ${COLORS.shadowStrong};
+        min-width: 300px;
+        max-width: 360px;
+        width: 100%;
+        padding: 46px 32px 38px 32px;
+        font-size: 1.18rem;
       }
       @keyframes arrowBounce {
         0% { transform: translateY(0);}
@@ -223,6 +228,37 @@ const GlobalAnimations = () => (
         100% { transform: translateY(0);}
       }
       .animate-arrowBounce { animation: arrowBounce 1.1s infinite; }
+      /* --- Responsive styles for small devices --- */
+      @media (max-width: 700px) {
+        header {
+          flex-direction: column !important;
+          padding: 16px 6px !important;
+        }
+        .card-shadow {
+          min-width: 90vw !important;
+          max-width: 98vw !important;
+          padding: 32px 12px 24px 12px !important;
+          font-size: 1em !important;
+        }
+        section.w-full {
+          gap: 16px !important;
+          padding: 0 2vw !important;
+        }
+        nav {
+          flex-direction: column !important;
+          gap: 0.6em !important;
+        }
+        footer {
+          padding: 10px 2vw !important;
+          font-size: 0.95em !important;
+        }
+        .shrink-title {
+          font-size: 2em !important;
+        }
+        .shrink-build-learn {
+          font-size: 2.2em !important;
+        }
+      }
     `}
   </style>
 );
@@ -241,7 +277,7 @@ function ScrollToTop() {
 function AnimatedHeroTitle() {
   return (
     <div
-      className="animate-shimmerText animate-fadeInScaleUp"
+      className="animate-shimmerText animate-fadeInScaleUp shrink-title"
       style={{
         fontWeight: 900,
         fontSize: "2.5rem",
@@ -254,6 +290,7 @@ function AnimatedHeroTitle() {
         padding: "0.14em 0",
         textShadow: `0 3px 16px ${COLORS.shadowStrong}`,
         borderRadius: "1em",
+        transition: "font-size 0.2s"
       }}
     >
       The TCM Atlas (BETA) 🗺️
@@ -264,6 +301,7 @@ function AnimatedHeroTitle() {
 function AnimatedBuildLearnPractice() {
   return (
     <div
+      className="shrink-build-learn"
       style={{
         fontWeight: 900,
         fontSize: "3.6rem",
@@ -280,6 +318,7 @@ function AnimatedBuildLearnPractice() {
         borderRadius: "1em",
         WebkitFontSmoothing: "antialiased",
         filter: "drop-shadow(0 3px 1px rgba(124,92,211,0.20))",
+        transition: "font-size 0.2s"
       }}
     >
       Build, Learn, Practice!
@@ -426,6 +465,7 @@ function Home() {
       style={{
         minHeight: "100vh",
         background: `linear-gradient(120deg, ${COLORS.vanilla} 0%, ${COLORS.carolina} 50%, ${COLORS.violet} 100%)`,
+        overflowX: "hidden"
       }}
       className="flex flex-col"
     >
@@ -436,13 +476,16 @@ function Home() {
         style={{
           background: COLORS.carolina,
           borderBottom: `4px solid ${COLORS.violet}`,
+          display: "flex",
+          flexDirection: "row",
+          flexWrap: "wrap"
         }}
       >
         <AnimatedHeroTitle />
-        <nav style={{ display: "flex", alignItems: "center", gap: "2em" }}>
+        <nav style={{ display: "flex", alignItems: "center", gap: "2em", flexWrap: "wrap" }}>
           <ul
             className="flex gap-6 font-semibold"
-            style={{ margin: 0, padding: 0 }}
+            style={{ margin: 0, padding: 0, flexWrap: "wrap" }}
           >
             <li>
               <button
