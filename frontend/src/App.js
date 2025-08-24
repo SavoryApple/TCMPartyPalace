@@ -293,7 +293,7 @@ function AnimatedHeroTitle() {
         transition: "font-size 0.2s"
       }}
     >
-      The TCM Atlas (BETA) 🗺️
+      The TCM Atlas (LOCAL BETA) 🗺️
     </div>
   );
 }
