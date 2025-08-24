@@ -1,8 +1,7 @@
 import React, { useEffect, useState, useRef } from "react";
 import { useNavigate, Link } from "react-router-dom";
-import Logo from "../components/Logo"; // <-- Import Logo component
+import Logo from "../components/Logo";
 
-// --- Color scheme ---
 const COLORS = {
   vanilla: "#FFF7E3",
   violet: "#7C5CD3",
@@ -27,7 +26,6 @@ const formulaApiEndpoints = [
 ];
 const formulaCategoryListEndpoint = `${API_URL}/api/data/formulacategorylist`;
 
-// --- Animations & Responsive Styles ---
 const GlobalAnimations = () => (
   <style>
     {`
@@ -57,24 +55,26 @@ const GlobalAnimations = () => (
         text-fill-color: transparent;
         animation: shimmerText 3.2s ease-in-out infinite;
       }
-      /* Responsive overrides */
       @media (max-width: 900px) {
         .sidebar {
           display: none !important;
         }
-        .main-scroll {
+        .main-scroll,
+        .custom-scrollbar-main {
           padding-left: 0 !important;
+          padding-top: ${FILTER_BAR_HEIGHT + 58}px !important;
         }
         .formula-card-section {
           padding: 0 2vw !important;
           max-width: 98vw !important;
         }
-        .tcm-header {
-          font-size: 1.8rem !important;
-          padding-top: 1em !important;
+        .logo-mobile-top {
+          margin-top: 0.7em !important;
+          margin-bottom: 0.2em !important;
         }
-        .back-to-home-btn {
-          right: 8px !important;
+        .mobile-category-nav {
+          position: static !important;
+          margin-top: 1.2em !important;
         }
       }
       @media (max-width: 700px) {
@@ -86,19 +86,22 @@ const GlobalAnimations = () => (
           padding: 1em !important;
           font-size: 1em !important;
         }
-        .filter-bar {
+        .filter-bar,
+        .mobile-filter-bar {
           font-size: 0.94rem !important;
           padding: 0.5em 0.4em !important;
         }
-        .main-scroll {
+        .main-scroll,
+        .custom-scrollbar-main {
           padding-right: 0 !important;
         }
-        .mobile-category-nav {
-          display: flex !important;
+        .logo-mobile-top {
+          margin-top: 0.7em !important;
+          margin-bottom: 0.2em !important;
         }
-        .tcm-header {
-          font-size: 1.3rem !important;
-          line-height: 1.25em !important;
+        .mobile-category-nav {
+          position: static !important;
+          margin-top: 1.2em !important;
         }
       }
       @media (max-width: 500px) {
@@ -112,16 +115,19 @@ const GlobalAnimations = () => (
         .back-to-home-btn {
           right: 2px !important;
         }
-        .tcm-header {
-          font-size: 1.06rem !important;
-          padding-top: 0.6em !important;
+        .logo-mobile-top {
+          margin-top: 0.6em !important;
+          margin-bottom: 0.13em !important;
+        }
+        .mobile-category-nav {
+          position: static !important;
+          margin-top: 1em !important;
         }
       }
     `}
   </style>
 );
 
-// --- PATCH: Back to Top Button styled like herbCard.js ---
 function BackToTopButton({ scrollContainerRef }) {
   const [show, setShow] = useState(false);
 
@@ -210,7 +216,6 @@ function normalize(str) {
     .replace(/[\u0300-\u036f]/g, "");
 }
 
-// --- SORTING PATCH: Sort formulas by badge order before rendering each category ---
 function sortFormulasByBadge(formulas, getAnyFormulaMatchByName) {
   const badgeOrder = {
     "NCCAOM/CALE": 0,
@@ -224,6 +229,90 @@ function sortFormulasByBadge(formulas, getAnyFormulaMatchByName) {
     const bBadge = bObj?.badge?.label || "";
     return (badgeOrder[aBadge] ?? 99) - (badgeOrder[bBadge] ?? 99);
   });
+}
+
+function MobileCategoryNav({ categories, activeSubcategory, handleSubcategoryScroll }) {
+  return (
+    <nav className="mobile-category-nav w-full px-2 py-2 mb-4 bg-white/90 rounded-xl shadow-md flex flex-wrap justify-center gap-2"
+      style={{
+        position: "static",
+        marginTop: "1.2em",
+        zIndex: 1,
+      }}
+    >
+      {categories.map((category, catIdx) =>
+        (category.subcategories || []).map((subcat, subIdx) => (
+          <button
+            key={subcat.title + subIdx}
+            data-subcategory={subcat.title}
+            onClick={() => handleSubcategoryScroll(subcat.title)}
+            className={[
+              "px-3 py-2 rounded font-semibold transition-colors hover:bg-violet/20 focus-visible:ring-2 focus-visible:ring-carolina",
+              activeSubcategory === subcat.title
+                ? "bg-violet/30 text-carolina font-extrabold shadow"
+                : "text-violet"
+            ].join(" ")}
+            style={{
+              color: COLORS.violet,
+              cursor: "pointer",
+              fontWeight: activeSubcategory === subcat.title ? 800 : 600,
+              border: activeSubcategory === subcat.title ? `2px solid ${COLORS.carolina}` : "none",
+              boxShadow: activeSubcategory === subcat.title ? `0 0 4px 0 ${COLORS.violet}` : "none"
+            }}
+            tabIndex={0}
+          >
+            {subcat.title}
+          </button>
+        ))
+      )}
+    </nav>
+  );
+}
+
+function MobileFilterBar({ showCaleNccaom, setShowCaleNccaom, showNccaom, setShowNccaom, showExtra, setShowExtra }) {
+  return (
+    <div className="mobile-filter-bar w-full px-2 py-2 bg-white/90 rounded-xl shadow-md flex flex-col items-center gap-2 sm:flex-row sm:justify-center flex-wrap"
+      style={{
+        position: "fixed",
+        top: 0,
+        left: 0,
+        width: "100vw",
+        zIndex: 99,
+      }}>
+      <span className="font-extrabold text-violet text-lg tracking-tight mb-1" style={{textShadow:`0 1px 0 ${COLORS.vanilla}`}}>
+        Show formulas:
+      </span>
+      <div className="flex gap-2 flex-wrap justify-center">
+        <label className="flex items-center space-x-2 cursor-pointer">
+          <input
+            type="checkbox"
+            checked={showCaleNccaom}
+            onChange={() => setShowCaleNccaom((v) => !v)}
+            className="accent-green-700 w-4 h-4"
+          />
+          <span className="text-green-700 font-semibold">NCCAOM/CALE</span>
+        </label>
+        <label className="flex items-center space-x-2 cursor-pointer">
+          <input
+            type="checkbox"
+            checked={showNccaom}
+            onChange={() => setShowNccaom((v) => !v)}
+            className="accent-blue-700 w-4 h-4"
+          />
+          <span className="text-blue-700 font-semibold">NCCAOM</span>
+        </label>
+        <label className="flex items-center space-x-2 cursor-pointer">
+          <input
+            type="checkbox"
+            checked={showExtra}
+            onChange={() => setShowExtra((v) => !v)}
+            className="accent-gray-700 w-4 h-4"
+          />
+          <span className="text-gray-700 font-semibold">Extra</span>
+        </label>
+      </div>
+    </div>
+  );
 }
 
 export default function FormulaCategoryListPage() {
@@ -287,7 +376,6 @@ export default function FormulaCategoryListPage() {
       .catch(() => setLoading(false));
   }, []);
 
-  // --- Sidebar/category sync logic ---
   useEffect(() => {
     if (!categories.length) return;
 
@@ -303,7 +391,7 @@ export default function FormulaCategoryListPage() {
           const ref = subcategoryRefs.current[subcat.title];
           if (ref) {
             const rect = ref.getBoundingClientRect();
-            const top = Math.abs(rect.top - containerRect.top - 32); // fudge for header
+            const top = Math.abs(rect.top - containerRect.top - 32);
             if ((rect.top - containerRect.top) <= 64 && top < minTop) {
               minTop = top;
               bestSubcat = subcat.title;
@@ -312,13 +400,11 @@ export default function FormulaCategoryListPage() {
         });
       });
 
-      // fallback
       if (!bestSubcat && categories[0]?.subcategories?.[0]) {
         bestSubcat = categories[0].subcategories[0].title;
       }
       setActiveSubcategory(bestSubcat);
 
-      // Scroll sidebar to active button
       setTimeout(() => {
         const sidebar = sidebarRef.current;
         if (sidebar && bestSubcat) {
@@ -432,124 +518,6 @@ export default function FormulaCategoryListPage() {
     );
   }
 
-  // --- Mobile category nav ---
-  function MobileCategoryNav() {
-    return (
-      <nav className="mobile-category-nav w-full px-2 py-2 mb-4 bg-white/90 rounded-xl shadow-md flex flex-wrap justify-center gap-2" style={{ display: "none" }}>
-        {categories.map((category, catIdx) =>
-          (category.subcategories || []).map((subcat, subIdx) => (
-            <button
-              key={subcat.title + subIdx}
-              data-subcategory={subcat.title}
-              onClick={() => handleSubcategoryScroll(subcat.title)}
-              className={[
-                "px-3 py-2 rounded font-semibold transition-colors hover:bg-violet/20 focus-visible:ring-2 focus-visible:ring-carolina",
-                activeSubcategory === subcat.title
-                  ? "bg-violet/30 text-carolina font-extrabold shadow"
-                  : "text-violet"
-              ].join(" ")}
-              style={{
-                color: COLORS.violet,
-                cursor: "pointer",
-                fontWeight: activeSubcategory === subcat.title ? 800 : 600,
-                border: activeSubcategory === subcat.title ? `2px solid ${COLORS.carolina}` : "none",
-                boxShadow: activeSubcategory === subcat.title ? `0 0 4px 0 ${COLORS.violet}` : "none"
-              }}
-              tabIndex={0}
-            >
-              {subcat.title}
-            </button>
-          ))
-        )}
-      </nav>
-    );
-  }
-
-  // --- Mobile filter bar for checkboxes ---
-  function MobileFilterBar() {
-    return (
-      <div className="w-full px-2 py-2 mb-2 bg-white/90 rounded-xl shadow-md flex flex-col items-center gap-2 sm:flex-row sm:justify-center flex-wrap">
-        <span className="font-extrabold text-violet text-lg tracking-tight mb-1" style={{textShadow:`0 1px 0 ${COLORS.vanilla}`}}>
-          Show formulas:
-        </span>
-        <div className="flex gap-2 flex-wrap justify-center">
-          <label className="flex items-center space-x-2 cursor-pointer">
-            <input
-              type="checkbox"
-              checked={showCaleNccaom}
-              onChange={() => setShowCaleNccaom((v) => !v)}
-              className="accent-green-700 w-4 h-4"
-            />
-            <span className="text-green-700 font-semibold">NCCAOM/CALE</span>
-          </label>
-          <label className="flex items-center space-x-2 cursor-pointer">
-            <input
-              type="checkbox"
-              checked={showNccaom}
-              onChange={() => setShowNccaom((v) => !v)}
-              className="accent-blue-700 w-4 h-4"
-            />
-            <span className="text-blue-700 font-semibold">NCCAOM</span>
-          </label>
-          <label className="flex items-center space-x-2 cursor-pointer">
-            <input
-              type="checkbox"
-              checked={showExtra}
-              onChange={() => setShowExtra((v) => !v)}
-              className="accent-gray-700 w-4 h-4"
-            />
-            <span className="text-gray-700 font-semibold">Extra</span>
-          </label>
-        </div>
-      </div>
-    );
-  }
-
-  const filterBar = (
-    <div
-      className="fixed top-0 left-0 w-full z-50 flex items-center justify-center py-3 px-2 filter-bar"
-      style={{
-        background: `linear-gradient(90deg, ${COLORS.vanilla} 65%, ${COLORS.carolina} 100%)`,
-        borderBottom: `2.5px solid ${COLORS.violet}`,
-        boxShadow: `0 4px 16px -6px ${COLORS.violet}22`,
-        minHeight: FILTER_BAR_HEIGHT,
-        fontWeight: 600,
-        fontSize: "1.05rem"
-      }}
-    >
-      <span className="mr-6 font-extrabold text-violet text-lg tracking-tight" style={{textShadow:`0 1px 0 ${COLORS.vanilla}`}}>
-        Show formulas:
-      </span>
-      <label className="mx-4 flex items-center space-x-2 cursor-pointer">
-        <input
-          type="checkbox"
-          checked={showCaleNccaom}
-          onChange={() => setShowCaleNccaom((v) => !v)}
-          className="accent-green-700 w-4 h-4"
-        />
-        <span className="text-green-700 font-semibold">NCCAOM/CALE</span>
-      </label>
-      <label className="mx-4 flex items-center space-x-2 cursor-pointer">
-        <input
-          type="checkbox"
-          checked={showNccaom}
-          onChange={() => setShowNccaom((v) => !v)}
-          className="accent-blue-700 w-4 h-4"
-        />
-        <span className="text-blue-700 font-semibold">NCCAOM</span>
-      </label>
-      <label className="mx-4 flex items-center space-x-2 cursor-pointer">
-        <input
-          type="checkbox"
-          checked={showExtra}
-          onChange={() => setShowExtra((v) => !v)}
-          className="accent-gray-700 w-4 h-4"
-        />
-        <span className="text-gray-700 font-semibold">Extra</span>
-      </label>
-    </div>
-  );
-
   const backToHomeButton = (
     <div
       className="fixed back-to-home-btn"
@@ -580,13 +548,67 @@ export default function FormulaCategoryListPage() {
     return <div>No categories found. Check your data file structure.</div>;
   }
 
-  // Detect mobile screen
   const isMobile = typeof window !== "undefined" && window.innerWidth < 900;
 
   return (
     <>
       <GlobalAnimations />
-      {isMobile ? <MobileFilterBar /> : filterBar}
+      {/* Fixed filter bar on all screens */}
+      {isMobile ? (
+        <MobileFilterBar
+          showCaleNccaom={showCaleNccaom}
+          setShowCaleNccaom={setShowCaleNccaom}
+          showNccaom={showNccaom}
+          setShowNccaom={setShowNccaom}
+          showExtra={showExtra}
+          setShowExtra={setShowExtra}
+        />
+      ) : (
+        <div
+          className="fixed top-0 left-0 w-full z-50 flex items-center justify-center py-3 px-2 filter-bar"
+          style={{
+            background: `linear-gradient(90deg, ${COLORS.vanilla} 65%, ${COLORS.carolina} 100%)`,
+            borderBottom: `2.5px solid ${COLORS.violet}`,
+            boxShadow: `0 4px 16px -6px ${COLORS.violet}22`,
+            minHeight: FILTER_BAR_HEIGHT,
+            fontWeight: 600,
+            fontSize: "1.05rem",
+            flexWrap: "wrap",
+            justifyContent: "flex-start",
+          }}
+        >
+          <span className="mr-6 font-extrabold text-violet text-lg tracking-tight" style={{textShadow:`0 1px 0 ${COLORS.vanilla}`}}>
+            Show formulas:
+          </span>
+          <label className="mx-4 flex items-center space-x-2 cursor-pointer">
+            <input
+              type="checkbox"
+              checked={showCaleNccaom}
+              onChange={() => setShowCaleNccaom((v) => !v)}
+              className="accent-green-700 w-4 h-4"
+            />
+            <span className="text-green-700 font-semibold">NCCAOM/CALE</span>
+          </label>
+          <label className="mx-4 flex items-center space-x-2 cursor-pointer">
+            <input
+              type="checkbox"
+              checked={showNccaom}
+              onChange={() => setShowNccaom((v) => !v)}
+              className="accent-blue-700 w-4 h-4"
+            />
+            <span className="text-blue-700 font-semibold">NCCAOM</span>
+          </label>
+          <label className="mx-4 flex items-center space-x-2 cursor-pointer">
+            <input
+              type="checkbox"
+              checked={showExtra}
+              onChange={() => setShowExtra((v) => !v)}
+              className="accent-gray-700 w-4 h-4"
+            />
+            <span className="text-gray-700 font-semibold">Extra</span>
+          </label>
+        </div>
+      )}
       {backToHomeButton}
       <BackToTopButton scrollContainerRef={scrollContainerRef} />
       <div
@@ -702,6 +724,7 @@ export default function FormulaCategoryListPage() {
             </ul>
           </nav>
         </aside>
+
         {/* Main scroll area */}
         <div
           ref={scrollContainerRef}
@@ -721,24 +744,6 @@ export default function FormulaCategoryListPage() {
           }}
         >
           <div
-            style={{
-              width: "100%",
-              maxWidth: CARD_MAX_WIDTH,
-              margin: "0 auto",
-              textAlign: "center",
-              paddingTop: "2.2em",
-              marginBottom: "0.5em",
-              display: "flex",
-              justifyContent: "center",
-              alignItems: "center"
-            }}
-          >
-            {/* Replace TcmPartyZoneHeader with horizontally centered Logo */}
-            <Logo size={56} showBeta={true} />
-          </div>
-          {/* Mobile category nav above cards */}
-          {isMobile && <MobileCategoryNav />}
-          <div
             className="flex flex-col items-center"
             style={{
               width: "100%",
@@ -747,12 +752,57 @@ export default function FormulaCategoryListPage() {
               paddingRight: 0,
             }}
           >
+            {/* PATCH: Show logo at top of mobile, below filter bar and above category nav */}
+            {isMobile && (
+              <div
+                className="logo-mobile-top"
+                style={{
+                  width: "100%",
+                  maxWidth: CARD_MAX_WIDTH,
+                  margin: "0 auto",
+                  textAlign: "center",
+                  marginTop: "0.7em",
+                  marginBottom: "0.2em",
+                  position: "relative",
+                  zIndex: 1,
+                  display: "flex",
+                  justifyContent: "center",
+                  alignItems: "center",
+                }}
+              >
+                <Logo size={38} showBeta={true} />
+              </div>
+            )}
+            {isMobile && (
+              <MobileCategoryNav
+                categories={categories}
+                activeSubcategory={activeSubcategory}
+                handleSubcategoryScroll={handleSubcategoryScroll}
+              />
+            )}
+            {!isMobile && (
+              <div
+                style={{
+                  width: "100%",
+                  maxWidth: CARD_MAX_WIDTH,
+                  margin: "0 auto",
+                  textAlign: "center",
+                  paddingTop: "2.2em",
+                  marginBottom: "0.5em",
+                  display: "flex",
+                  justifyContent: "center",
+                  alignItems: "center"
+                }}
+              >
+                <Logo size={56} showBeta={true} />
+              </div>
+            )}
             <div className="space-y-14 w-full flex flex-col items-center formula-card-section" style={{ maxWidth: CARD_MAX_WIDTH }}>
               {categories.map((category, catIdx) =>
                 (category.subcategories || []).map((subcat, subIdx) => (
                   <section
                     key={subcat.title + subIdx}
-                    ref={(ref) => (subcategoryRefs.current[subcat.title] = ref)}
+                    ref={ref => { subcategoryRefs.current[subcat.title] = ref; }}
                     className="shadow-2xl rounded-2xl border border-violet px-7 py-8 formula-card"
                     style={{
                       background: "#fff",

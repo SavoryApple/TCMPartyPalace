@@ -323,44 +323,30 @@ function HerbExtrasRight({ herbObj }) {
   );
 }
 
+// --- PATCH: Mobile category nav styled like FormulaCategoryList.js ---
 function MobileCategoryNav({ categories, activeSubcategory, handleSubcategoryScroll }) {
   return (
-    <nav
-      className="mobile-category-nav"
-      style={{
-        display: "flex",
-        flexWrap: "wrap",
-        justifyContent: "center",
-        gap: "0.6em",
-        margin: "1em 0 1.3em 0",
-        padding: "0.6em 1em",
-        background: COLORS.vanilla,
-        borderRadius: "1em",
-        boxShadow: `0 2px 12px -6px ${COLORS.violet}33`,
-        maxWidth: "96vw",
-        alignItems: "center",
-      }}
-    >
-      {categories.map(category =>
-        (category.subcategories || []).map(subcat => (
+    <nav className="mobile-category-nav w-full px-2 py-2 mb-4 bg-white/90 rounded-xl shadow-md flex flex-wrap justify-center gap-2" style={{ display: "flex" }}>
+      {categories.map((category, catIdx) =>
+        (category.subcategories || []).map((subcat, subIdx) => (
           <button
-            key={subcat.name}
+            key={subcat.name + "-" + subIdx}
+            data-subcategory={subcat.name}
             onClick={() => handleSubcategoryScroll(subcat.name)}
-            className={activeSubcategory === subcat.name ? "active" : ""}
+            className={[
+              "px-3 py-2 rounded font-semibold transition-colors hover:bg-violet/20 focus-visible:ring-2 focus-visible:ring-carolina",
+              activeSubcategory === subcat.name
+                ? "bg-violet/30 text-carolina font-extrabold shadow"
+                : "text-violet"
+            ].join(" ")}
             style={{
-              padding: "0.7em 1.4em",
-              borderRadius: "2em",
-              fontWeight: 700,
               color: COLORS.violet,
-              background: activeSubcategory === subcat.name ? COLORS.carolina : COLORS.vanilla,
-              border: activeSubcategory === subcat.name ? `2px solid ${COLORS.violet}` : "none",
-              boxShadow: activeSubcategory === subcat.name ? `0 0 8px 0 ${COLORS.carolina}` : "none",
-              margin: "0.13em",
               cursor: "pointer",
-              transition: "background 0.18s",
-              fontSize: "1.05em",
-              whiteSpace: "nowrap",
+              fontWeight: activeSubcategory === subcat.name ? 800 : 600,
+              border: activeSubcategory === subcat.name ? `2px solid ${COLORS.carolina}` : "none",
+              boxShadow: activeSubcategory === subcat.name ? `0 0 4px 0 ${COLORS.violet}` : "none"
             }}
+            tabIndex={0}
           >
             {subcat.name}
           </button>
@@ -878,7 +864,7 @@ export default function HerbCategoryListPage() {
             >
               <Logo size={56} showBeta={true} />
             </div>
-            {/* Mobile category nav as a card above herb cards */}
+            {/* Mobile category nav as a card above herb cards, styled same as FormulaCategoryList.js */}
             {isMobile && (
               <MobileCategoryNav
                 categories={categories}

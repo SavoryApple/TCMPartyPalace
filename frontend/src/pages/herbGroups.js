@@ -2,6 +2,7 @@ import React, { useEffect, useState, useRef } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { useHerbCart } from "../context/HerbCartContext";
 import HerbCart from "../components/HerbCart";
+import Logo from "../components/Logo";
 
 const COLORS = {
   vanilla: "#FFF7E3",
@@ -16,7 +17,6 @@ const SIDEBAR_WIDTH = 300;
 const CARD_MAX_WIDTH = 650 * 1.25;
 const FILTER_BAR_HEIGHT = 56;
 
-// PATCH: Update for Fly.io API endpoint
 const API_URL = process.env.REACT_APP_API_URL || "https://thetcmatlas.fly.dev";
 const herbApiEndpoints = [
   `${API_URL}/api/data/caleandnccaomherbs`,
@@ -39,15 +39,6 @@ function getHerbDisplayName(herb) {
   if (herb.pharmaceuticalName) return herb.pharmaceuticalName;
   if (herb.pharmaceutical) return herb.pharmaceutical;
   return "Unknown";
-}
-
-function getHerbKey(herb) {
-  if (typeof herb === "string") {
-    return herb.replace(/\s*\(.*?\)/, "").trim();
-  }
-  if (herb.pinyinName) return herb.pinyinName;
-  if (herb.name) return herb.name;
-  return undefined;
 }
 
 function getHerbBadge(herb) {
@@ -152,6 +143,139 @@ function normalize(str) {
     .replace(/[\u0300-\u036f]/g, "");
 }
 
+const GlobalAnimations = () => (
+  <style>
+    {`
+      @keyframes pulseGlow {
+        0% { box-shadow: 0 0 0 0 ${COLORS.violet}33; }
+        50% { box-shadow: 0 0 16px 8px ${COLORS.violet}88; }
+        100% { box-shadow: 0 0 0 0 ${COLORS.violet}33; }
+      }
+      .animate-pulseGlow { animation: pulseGlow 2s infinite; }
+      @keyframes fadeInScaleUp {
+        0% { opacity: 0; transform: scale(0.97) translateY(14px);}
+        50% { opacity: 0.7; transform: scale(1.03) translateY(-6px);}
+        100% { opacity: 1; transform: scale(1) translateY(0);}
+      }
+      .animate-fadeInScaleUp { animation: fadeInScaleUp 0.7s cubic-bezier(.36,1.29,.45,1.01); }
+      @keyframes shimmerText {
+        0% { background-position: 0% 50%; }
+        50% { background-position: 100% 50%; }
+        100% { background-position: 0% 50%; }
+      }
+      .animate-shimmerText {
+        background: linear-gradient(90deg, ${COLORS.violet}, ${COLORS.carolina}, ${COLORS.claret}, ${COLORS.vanilla}, ${COLORS.highlight});
+        background-size: 400% 400%;
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+        background-clip: text;
+        text-fill-color: transparent;
+        animation: shimmerText 3.2s ease-in-out infinite;
+      }
+      @media (max-width: 900px) {
+        .sidebar {
+          display: none !important;
+        }
+        .main-scroll,
+        .custom-scrollbar-main {
+          padding-left: 0 !important;
+        }
+        .herb-group-section {
+          padding: 0 2vw !important;
+          max-width: 98vw !important;
+        }
+        .mobile-category-nav {
+          position: static !important;
+          margin-top: 1.4em !important;
+        }
+        .logo-mobile-top {
+          margin-top: 0.7em !important;
+          margin-bottom: 0.2em !important;
+        }
+      }
+      @media (max-width: 700px) {
+        .herb-group-section {
+          padding: 0 0.5vw !important;
+          max-width: 100vw !important;
+        }
+        .herb-group-card {
+          padding: 1em !important;
+          font-size: 1em !important;
+        }
+        .filter-bar {
+          font-size: 0.94rem !important;
+          padding: 0.5em 0.4em !important;
+        }
+        .main-scroll,
+        .custom-scrollbar-main {
+          padding-right: 0 !important;
+        }
+        .mobile-category-nav {
+          position: static !important;
+          margin-top: 1.4em !important;
+        }
+        .logo-mobile-top {
+          margin-top: 0.7em !important;
+          margin-bottom: 0.2em !important;
+        }
+      }
+      @media (max-width: 500px) {
+        .herb-group-section {
+          padding: 0 !important;
+        }
+        .herb-group-card {
+          padding: 0.5em !important;
+          font-size: 0.95em !important;
+        }
+        .mobile-category-nav {
+          position: static !important;
+          margin-top: 1.2em !important;
+        }
+        .logo-mobile-top {
+          margin-top: 0.6em !important;
+          margin-bottom: 0.13em !important;
+        }
+      }
+    `}
+  </style>
+);
+
+function MobileCategoryNav({ groups, activeCategory, handleCategoryScroll }) {
+  return (
+    <nav className="mobile-category-nav w-full px-2 py-2 mb-4 bg-white/90 rounded-xl shadow-md flex flex-wrap justify-center gap-2"
+      style={{
+        position: "static",
+        marginTop: "1.2em",
+        zIndex: 1,
+      }}
+    >
+      {groups.map((group, idx) => (
+        <button
+          key={group.category + "-" + idx}
+          data-category={group.category}
+          onClick={() => handleCategoryScroll(group.category)}
+          className={[
+            "px-3 py-2 rounded font-semibold transition-colors hover:bg-violet/20 focus-visible:ring-2 focus-visible:ring-carolina",
+            activeCategory === group.category
+              ? "bg-violet/30 text-carolina font-extrabold shadow"
+              : "text-violet"
+          ].join(" ")}
+          style={{
+            color: COLORS.violet,
+            cursor: "pointer",
+            fontWeight: activeCategory === group.category ? 800 : 600,
+            border: activeCategory === group.category ? `2px solid ${COLORS.carolina}` : "none",
+            boxShadow: activeCategory === group.category ? `0 0 4px 0 ${COLORS.violet}` : "none"
+          }}
+          tabIndex={0}
+        >
+          {group.category}
+        </button>
+      ))}
+    </nav>
+  );
+}
+
 export default function HerbGroupsPage() {
   const [groups, setGroups] = useState([]);
   const [loading, setLoading] = useState(true);
@@ -164,13 +288,11 @@ export default function HerbGroupsPage() {
     extra: [],
   });
 
-  // Filtering checkboxes (always boolean)
   const [showExtra, setShowExtra] = useState(true);
   const [showCaleNccaom, setShowCaleNccaom] = useState(true);
   const [showCale, setShowCale] = useState(true);
   const [showNccaom, setShowNccaom] = useState(true);
 
-  // The shared herb cart
   const { cart, addHerb, removeHerb, clearCart } = useHerbCart();
   const [showCart, setShowCart] = useState(false);
 
@@ -182,7 +304,17 @@ export default function HerbGroupsPage() {
   const [activeCategory, setActiveCategory] = useState(null);
   const [isSidebarHovered, setIsSidebarHovered] = useState(false);
 
-  // PATCH: Use backend endpoints for herb group and herb data
+  const [isMobile, setIsMobile] = useState(
+    typeof window !== "undefined" && window.innerWidth < 900
+  );
+  useEffect(() => {
+    function handleResize() {
+      setIsMobile(window.innerWidth < 900);
+    }
+    window.addEventListener("resize", handleResize);
+    return () => window.removeEventListener("resize", handleResize);
+  }, []);
+
   useEffect(() => {
     setLoading(true);
     Promise.all([
@@ -218,7 +350,6 @@ export default function HerbGroupsPage() {
       .catch(() => setLoading(false));
   }, []);
 
-  // Scroll spy for sidebar highlight
   useEffect(() => {
     const handleScroll = () => {
       if (!scrollContainerRef.current || !groups.length) return;
@@ -226,7 +357,7 @@ export default function HerbGroupsPage() {
         category: group.category,
         offset: categoryRefs.current[group.category]?.offsetTop ?? 0,
       }));
-      const scrollY = scrollContainerRef.current.scrollTop + (window.innerWidth > 768 ? 0 : FILTER_BAR_HEIGHT);
+      const scrollY = scrollContainerRef.current.scrollTop;
 
       let current = catRefs[0]?.category || null;
       for (let i = 0; i < catRefs.length; i++) {
@@ -265,7 +396,7 @@ export default function HerbGroupsPage() {
     return () => {
       if (scrollEl) scrollEl.removeEventListener("scroll", handleScroll);
     };
-  }, [groups]);
+  }, [groups, isMobile]);
 
   useEffect(() => {
     const container = scrollContainerRef.current;
@@ -334,9 +465,6 @@ export default function HerbGroupsPage() {
     }
   }
 
-  const cartDrawerWidth = 270;
-  const cartDrawerTop = FILTER_BAR_HEIGHT + 16 + 54;
-
   if (loading) return <div>Loading...</div>;
   if (!Array.isArray(groups) || groups.length === 0) {
     return <div>No herb groups found. Check your data file structure.</div>;
@@ -344,9 +472,10 @@ export default function HerbGroupsPage() {
 
   return (
     <>
-      {/* Header bar */}
+      <GlobalAnimations />
+      {/* Fixed filter bar (checkboxes) */}
       <div
-        className="fixed top-0 left-0 w-full z-50 flex items-center justify-center py-3 px-2"
+        className="fixed top-0 left-0 w-full z-50 flex items-center justify-center py-3 px-2 filter-bar"
         style={{
           background: `linear-gradient(90deg, ${COLORS.vanilla} 65%, ${COLORS.carolina} 100%)`,
           borderBottom: `2.5px solid ${COLORS.violet}`,
@@ -354,6 +483,8 @@ export default function HerbGroupsPage() {
           minHeight: FILTER_BAR_HEIGHT,
           fontWeight: 600,
           fontSize: "1.05rem",
+          flexWrap: "wrap",
+          justifyContent: "flex-start",
         }}
       >
         <span
@@ -362,7 +493,6 @@ export default function HerbGroupsPage() {
         >
           Herb Groups by Function
         </span>
-        {/* Filtering checkboxes */}
         <label className="mx-4 flex items-center space-x-2 cursor-pointer">
           <input
             type="checkbox"
@@ -400,13 +530,11 @@ export default function HerbGroupsPage() {
           <span className="text-gray-700 font-semibold">Extra</span>
         </label>
       </div>
-      {/* Cart Side Drawer (use HerbCart component) */}
       <HerbCart
         show={showCart}
         onClose={() => setShowCart(false)}
         onCreateFormula={handleCreateFormula}
       />
-      {/* Floating Cart Button */}
       <button
         className="fixed"
         style={{
@@ -449,7 +577,6 @@ export default function HerbGroupsPage() {
           </span>
         )}
       </button>
-      {/* Back to home button */}
       <div
         className="fixed"
         style={{
@@ -472,7 +599,6 @@ export default function HerbGroupsPage() {
           Back to Home
         </Link>
       </div>
-      {/* BG */}
       <div
         style={{
           position: "fixed",
@@ -495,10 +621,9 @@ export default function HerbGroupsPage() {
           overflow: "hidden",
         }}
       >
-        {/* Sidebar */}
         <aside
           ref={sidebarRef}
-          className="hidden md:flex flex-col"
+          className="sidebar hidden md:flex flex-col"
           style={{
             position: "fixed",
             top: `${FILTER_BAR_HEIGHT}px`,
@@ -570,10 +695,9 @@ export default function HerbGroupsPage() {
             </ul>
           </nav>
         </aside>
-        {/* Main scroll area */}
         <div
           ref={scrollContainerRef}
-          className="custom-scrollbar-main"
+          className="main-scroll custom-scrollbar-main"
           style={{
             position: "fixed",
             top: FILTER_BAR_HEIGHT,
@@ -597,15 +721,64 @@ export default function HerbGroupsPage() {
               paddingRight: 60,
             }}
           >
+            {/* PATCH: Show logo at top of mobile, below filter bar and above category nav */}
+            {isMobile && (
+              <div
+                className="logo-mobile-top"
+                style={{
+                  width: "100%",
+                  maxWidth: CARD_MAX_WIDTH,
+                  margin: "0 auto",
+                  textAlign: "center",
+                  marginTop: "0.7em",
+                  marginBottom: "0.2em",
+                  position: "relative",
+                  zIndex: 1,
+                  display: "flex",
+                  justifyContent: "center",
+                  alignItems: "center",
+                }}
+              >
+                <Logo size={38} showBeta={true} />
+              </div>
+            )}
+            {/* PATCH: Mobile category nav -- scrolls with content, not fixed, only one filter bar */}
+            {isMobile && (
+              <MobileCategoryNav
+                groups={groups}
+                activeCategory={activeCategory}
+                handleCategoryScroll={handleCategoryScroll}
+              />
+            )}
+            {/* Desktop logo position */}
+            {!isMobile && (
+              <div
+                style={{
+                  width: "100%",
+                  maxWidth: CARD_MAX_WIDTH,
+                  margin: "0 auto",
+                  textAlign: "center",
+                  marginTop: "1.5em",
+                  marginBottom: "1.2em",
+                  position: "relative",
+                  zIndex: 1,
+                  display: "flex",
+                  justifyContent: "center",
+                  alignItems: "center",
+                }}
+              >
+                <Logo size={56} showBeta={true} />
+              </div>
+            )}
             <div
-              className="space-y-14 w-full flex flex-col items-center"
+              className="space-y-14 w-full flex flex-col items-center herb-group-section"
               style={{ maxWidth: CARD_MAX_WIDTH }}
             >
               {groups.map((group, idx) => (
                 <section
                   key={group.category + "-" + idx}
                   ref={(ref) => (categoryRefs.current[group.category] = ref)}
-                  className="shadow-2xl rounded-2xl border border-violet px-7 py-8"
+                  className="shadow-2xl rounded-2xl border border-violet px-7 py-8 herb-group-card"
                   style={{
                     background: "#fff",
                     boxShadow: `0 8px 40px -14px ${COLORS.violet}55, 0 1.5px 0 ${COLORS.vanilla}`,
@@ -647,7 +820,6 @@ export default function HerbGroupsPage() {
                           group.category +
                           "-" +
                           i;
-                        // Find full herb object if available
                         const herbObj =
                           getHerbObjFromAll(getHerbDisplayName(herb)) || herb;
                         const badge = getHerbBadge(herbObj);
@@ -676,7 +848,10 @@ export default function HerbGroupsPage() {
                             }}
                             tabIndex={0}
                           >
-                            <div className="grid grid-cols-1 sm:grid-cols-5 gap-2 px-5 py-3 w-full min-w-0 items-center">
+                            <div
+                              className="flex flex-col sm:flex-row sm:items-center sm:gap-7 px-5 py-3 w-full min-w-0 items-center"
+                              style={{gap:"1.2em"}}
+                            >
                               <div className="flex flex-row items-center gap-2">
                                 <span
                                   className="font-extrabold text-violet text-[1.1rem] leading-tight whitespace-nowrap"
