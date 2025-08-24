@@ -29,6 +29,7 @@ const herbGroupsEndpoint = `${API_URL}/api/data/herbgroupslist`;
 
 function getHerbDisplayName(herb) {
   if (typeof herb === "string") {
+    // Remove parenthetical info for display, but keep it for card
     return herb.replace(/\s*\(.*?\)/, "").trim();
   }
   if (herb.pinyinName) return herb.pinyinName;
@@ -40,6 +41,15 @@ function getHerbDisplayName(herb) {
   if (herb.pharmaceuticalName) return herb.pharmaceuticalName;
   if (herb.pharmaceutical) return herb.pharmaceutical;
   return "Unknown";
+}
+
+function getHerbParenthetical(herb) {
+  // If herb string has parentheses, get the content.
+  if (typeof herb === "string") {
+    const match = herb.match(/\(([^)]+)\)/);
+    if (match) return match[1];
+  }
+  return null;
 }
 
 function getHerbBadge(herb) {
@@ -596,10 +606,10 @@ export default function HerbGroupsPage() {
           zIndex: 71,
           display: "flex",
           alignItems: "center",
+          flexDirection: "row"
         }}
       >
         <button
-          className="fixed"
           style={{
             background: COLORS.violet,
             color: COLORS.vanilla,
@@ -609,7 +619,6 @@ export default function HerbGroupsPage() {
             minWidth: 49,
             minHeight: 49,
             boxShadow: "0 2px 12px 0 #7C5CD366",
-            zIndex: 70,
             fontWeight: 700,
             fontSize: 28,
             display: "flex",
@@ -617,6 +626,8 @@ export default function HerbGroupsPage() {
             justifyContent: "center",
             border: `2px solid ${COLORS.vanilla}`,
             transition: "background 0.2s, scale 0.15s",
+            outline: "none",
+            cursor: "pointer",
           }}
           onClick={() => setShowCart((c) => !c)}
           aria-label="Show Cart"
@@ -877,16 +888,16 @@ export default function HerbGroupsPage() {
                     {(group.herbs || [])
                       .filter((herb) => passesFilter(getHerbDisplayName(herb)))
                       .map((herb, i) => {
+                        const pinyinDisplay = getHerbDisplayName(herb);
                         const key =
-                          getHerbDisplayName(herb) +
+                          pinyinDisplay +
                           "-" +
                           group.category +
                           "-" +
                           i;
                         const herbObj =
-                          getHerbObjFromAll(getHerbDisplayName(herb)) || herb;
+                          getHerbObjFromAll(pinyinDisplay) || herb;
                         const badge = getHerbBadge(herbObj);
-                        const pinyinDisplay = getHerbDisplayName(herbObj);
                         const pharmaceuticalName =
                           herbObj.pharmaceuticalName ||
                           herbObj.pharmaceutical ||
@@ -895,6 +906,7 @@ export default function HerbGroupsPage() {
                           herbObj.keyActions || herbObj.actions || "";
                         const properties = herbObj.properties;
                         const explanation = herbObj.explanation;
+                        const parenthetical = getHerbParenthetical(herb);
 
                         return (
                           <li
@@ -923,6 +935,24 @@ export default function HerbGroupsPage() {
                                 >
                                   {pinyinDisplay}
                                 </span>
+                                {/* Show parenthetical info if present */}
+                                {parenthetical && (
+                                  <span
+                                    style={{
+                                      marginLeft: "0.35em",
+                                      color: COLORS.claret,
+                                      background: "#fff7f0",
+                                      fontSize: "0.97em",
+                                      borderRadius: "0.8em",
+                                      padding: "0.11em 0.7em",
+                                      fontWeight: 500,
+                                      letterSpacing: "-.01em",
+                                    }}
+                                    title={parenthetical}
+                                  >
+                                    ({parenthetical})
+                                  </span>
+                                )}
                               </div>
                               <div>
                                 <span
