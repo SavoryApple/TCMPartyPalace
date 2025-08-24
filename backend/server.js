@@ -2,13 +2,13 @@ const express = require('express');
 const mongoose = require('mongoose');
 const cors = require('cors');
 
-// Load environment variables based on NODE_ENV
+// Load environment variables (always use dotenv, let host/CLI provide correct variables)
 const dotenv = require('dotenv');
-if (process.env.NODE_ENV === 'production') {
-  dotenv.config(); // Loads .env
-} else {
-  dotenv.config({ path: '.env.local' }); // Loads .env.local
-}
+dotenv.config(); // Loads .env if present, but host secrets override
+
+// Debug logging for environment and MongoDB URI
+console.log("NODE_ENV:", process.env.NODE_ENV);
+console.log("MONGODB_URI:", process.env.MONGODB_URI);
 
 const dataRoutes = require('./routes/data');
 const visitRoutes = require('./routes/visit');
@@ -42,6 +42,7 @@ app.use(express.json());
 
 // Content-Security-Policy (CSP) header middleware
 app.use((req, res, next) => {
+  // Use NODE_ENV to determine environment
   if (process.env.NODE_ENV === 'production') {
     // Production: Allow only backend and self
     res.setHeader(
@@ -58,8 +59,10 @@ app.use((req, res, next) => {
   next();
 });
 
-// Connect to MongoDB Atlas or local
+// Connect to MongoDB Atlas or local (use env variable from host or .env file)
 mongoose.connect(process.env.MONGODB_URI, {
+  // The following options are deprecated in Mongoose 8+/MongoDB driver 4+
+  // You may remove them when you upgrade dependencies.
   useNewUrlParser: true,
   useUnifiedTopology: true
 })
