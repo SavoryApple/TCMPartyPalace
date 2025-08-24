@@ -19,7 +19,7 @@
     "build": "react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject",
-    "build-prod": "rename .env.local .env.local.backup && npm run build && rename .env.local.backup .env.local"
+    "build-prod": "node scripts/build-prod.js"
   },
   "eslintConfig": {
     "extends": [
