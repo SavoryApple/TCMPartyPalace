@@ -1,13 +1,13 @@
 {
   "files": {
-    "main.css": "/TheTCMAtlas/static/css/main.32d55fdc.css",
-    "main.js": "/TheTCMAtlas/static/js/main.fa21124e.js",
-    "index.html": "/TheTCMAtlas/index.html",
-    "main.32d55fdc.css.map": "/TheTCMAtlas/static/css/main.32d55fdc.css.map",
-    "main.fa21124e.js.map": "/TheTCMAtlas/static/js/main.fa21124e.js.map"
+    "main.css": "/static/css/main.32d55fdc.css",
+    "main.js": "/static/js/main.568902cc.js",
+    "index.html": "/index.html",
+    "main.32d55fdc.css.map": "/static/css/main.32d55fdc.css.map",
+    "main.568902cc.js.map": "/static/js/main.568902cc.js.map"
   },
   "entrypoints": [
     "static/css/main.32d55fdc.css",
-    "static/js/main.fa21124e.js"
+    "static/js/main.568902cc.js"
   ]
 }

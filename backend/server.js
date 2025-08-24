@@ -21,6 +21,12 @@ app.use(cors({
   credentials: true
 }));
 
+// (OPTIONAL: you may REMOVE this line if it causes path-to-regexp error)
+// app.options('*', cors({
+//   origin: allowedOrigins,
+//   credentials: true
+// }));
+
 app.use(express.json());
 
 // Connect to MongoDB Atlas
