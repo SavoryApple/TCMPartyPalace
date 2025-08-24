@@ -1,5 +1,6 @@
 import React, { useEffect, useState, useRef } from "react";
 import { useNavigate, Link } from "react-router-dom";
+import Logo from "../components/Logo"; // <-- Import Logo component
 
 // --- Color scheme ---
 const COLORS = {
@@ -119,29 +120,6 @@ const GlobalAnimations = () => (
     `}
   </style>
 );
-
-function TcmPartyZoneHeader() {
-  return (
-    <div
-      className="animate-shimmerText animate-fadeInScaleUp tcm-header"
-      style={{
-        fontWeight: 900,
-        fontSize: "2.5rem",
-        letterSpacing: "-2px",
-        textAlign: "center",
-        fontFamily: "inherit",
-        lineHeight: 1.18,
-        userSelect: "none",
-        margin: "0.8em 0 0.3em 0",
-        padding: "0.14em 0",
-        textShadow: `0 3px 16px ${COLORS.shadowStrong}`,
-        borderRadius: "1em"
-      }}
-    >
-      The TCM Atlas (BETA) 🗺️
-    </div>
-  );
-}
 
 // --- PATCH: Back to Top Button styled like herbCard.js ---
 function BackToTopButton({ scrollContainerRef }) {
@@ -750,9 +728,13 @@ export default function FormulaCategoryListPage() {
               textAlign: "center",
               paddingTop: "2.2em",
               marginBottom: "0.5em",
+              display: "flex",
+              justifyContent: "center",
+              alignItems: "center"
             }}
           >
-            <TcmPartyZoneHeader />
+            {/* Replace TcmPartyZoneHeader with horizontally centered Logo */}
+            <Logo size={56} showBeta={true} />
           </div>
           {/* Mobile category nav above cards */}
           {isMobile && <MobileCategoryNav />}

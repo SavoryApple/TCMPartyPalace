@@ -1,7 +1,14 @@
 const express = require('express');
 const mongoose = require('mongoose');
 const cors = require('cors');
-require('dotenv').config();
+
+// Load environment variables based on NODE_ENV
+const dotenv = require('dotenv');
+if (process.env.NODE_ENV === 'production') {
+  dotenv.config(); // Loads .env
+} else {
+  dotenv.config({ path: '.env.local' }); // Loads .env.local
+}
 
 const dataRoutes = require('./routes/data');
 const visitRoutes = require('./routes/visit');
@@ -33,7 +40,25 @@ app.use(cors({
 
 app.use(express.json());
 
-// Connect to MongoDB Atlas
+// Content-Security-Policy (CSP) header middleware
+app.use((req, res, next) => {
+  if (process.env.NODE_ENV === 'production') {
+    // Production: Allow only backend and self
+    res.setHeader(
+      'Content-Security-Policy', 
+      "default-src 'self'; connect-src 'self' https://thetcmatlas.fly.dev"
+    );
+  } else {
+    // Development: Allow localhost:8080 for API calls
+    res.setHeader(
+      'Content-Security-Policy', 
+      "default-src 'self'; connect-src 'self' http://localhost:8080 https://thetcmatlas.fly.dev"
+    );
+  }
+  next();
+});
+
+// Connect to MongoDB Atlas or local
 mongoose.connect(process.env.MONGODB_URI, {
   useNewUrlParser: true,
   useUnifiedTopology: true

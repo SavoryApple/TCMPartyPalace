@@ -2,8 +2,8 @@ import React, { useEffect, useState, useRef } from "react";
 import { useNavigate, Link } from "react-router-dom";
 import { useHerbCart } from "../context/HerbCartContext";
 import HerbCart from "../components/HerbCart";
+import Logo from "../components/Logo";
 
-// COLORS and constants
 const COLORS = {
   vanilla: "#FFF7E3",
   violet: "#7C5CD3",
@@ -17,7 +17,6 @@ const SIDEBAR_WIDTH = 300;
 const FILTER_BAR_HEIGHT = 56;
 const CARD_MAX_WIDTH = 650 * 1.25;
 
-// PATCH: Use backend API endpoints instead of local JSON files
 const API_URL = process.env.REACT_APP_API_URL || "https://thetcmatlas.fly.dev";
 const herbApiEndpoints = [
   `${API_URL}/api/data/caleandnccaomherbs`,
@@ -27,33 +26,6 @@ const herbApiEndpoints = [
 ];
 const herbCategoryListEndpoint = `${API_URL}/api/data/herbcategorylist`;
 
-// Animated logo component
-function TcmPartyZoneHeader() {
-  return (
-    <div
-      className="animate-shimmerText animate-fadeInScaleUp tcm-header"
-      style={{
-        fontWeight: 900,
-        fontSize: "2.5rem",
-        letterSpacing: "-2px",
-        textAlign: "center",
-        fontFamily: "inherit",
-        lineHeight: 1.18,
-        userSelect: "none",
-        margin: "0.8em auto 0.3em auto",
-        padding: "0.14em 0",
-        textShadow: `0 3px 16px ${COLORS.shadowStrong}`,
-        borderRadius: "1em",
-        maxWidth: CARD_MAX_WIDTH,
-        transition: "font-size 0.2s"
-      }}
-    >
-      The TCM Atlas (BETA) 🗺️
-    </div>
-  );
-}
-
-// Animations + Responsive styles
 const GlobalAnimations = () => (
   <style>
     {`
@@ -83,7 +55,6 @@ const GlobalAnimations = () => (
         text-fill-color: transparent;
         animation: shimmerText 3.2s ease-in-out infinite;
       }
-      /* --- RESPONSIVE OVERRIDES --- */
       @media (max-width: 900px) {
         .sidebar {
           display: none !important;
@@ -91,20 +62,10 @@ const GlobalAnimations = () => (
         .main-scroll {
           padding-left: 0 !important;
         }
-        .tcm-header {
-          font-size: 1.7rem !important;
-          padding-top: 1em !important;
-        }
-        .back-to-home-btn {
-          right: 8px !important;
-        }
       }
       @media (max-width: 700px) {
         .space-y-14 {
           gap: 2em !important;
-        }
-        .tcm-header {
-          font-size: 1.18rem !important;
         }
         .card-section {
           padding: 0 1vw !important;
@@ -117,13 +78,18 @@ const GlobalAnimations = () => (
         .filter-bar {
           font-size: 0.97rem !important;
           padding: 0.7em 0.5em !important;
+          flex-wrap: wrap !important;
+          justify-content: flex-start !important;
+        }
+        .filter-checkbox-group {
+          flex-wrap: wrap !important;
+          gap: 8px !important;
+        }
+        .filter-bar label {
+          margin-bottom: 4px !important;
         }
       }
       @media (max-width: 500px) {
-        .tcm-header {
-          font-size: 0.94rem !important;
-          padding-top: 0.65em !important;
-        }
         .card-section {
           padding: 0 !important;
         }
@@ -131,10 +97,65 @@ const GlobalAnimations = () => (
           padding: 0.55em !important;
           font-size: 0.95em !important;
         }
+        .filter-bar {
+          font-size: 0.92rem !important;
+          padding: 0.6em 0.3em !important;
+        }
       }
     `}
   </style>
 );
+
+// --- Scroll Up Button PATCH ---
+function ScrollUpButton({ scrollContainerRef }) {
+  const [show, setShow] = useState(false);
+
+  useEffect(() => {
+    const container = scrollContainerRef.current;
+    if (!container) return;
+    const handleScroll = () => setShow(container.scrollTop > 180);
+    container.addEventListener("scroll", handleScroll, { passive: true });
+    handleScroll();
+    return () => container.removeEventListener("scroll", handleScroll);
+  }, [scrollContainerRef]);
+
+  function handleClick() {
+    const container = scrollContainerRef.current;
+    if (container) {
+      container.scrollTo({ top: 0, behavior: "smooth" });
+    }
+  }
+
+  return (
+    <button
+      onClick={handleClick}
+      style={{
+        background: COLORS.violet,
+        color: COLORS.vanilla,
+        borderRadius: "50%",
+        width: 44,
+        height: 44,
+        border: `2.5px solid ${COLORS.seal}`,
+        boxShadow: `0 6px 40px -8px ${COLORS.shadowStrong}`,
+        fontWeight: 900,
+        fontSize: "1.2rem",
+        display: show ? "flex" : "none",
+        alignItems: "center",
+        justifyContent: "center",
+        transition: "background 0.2s, scale 0.15s",
+        cursor: "pointer",
+        outline: "none",
+        animation: "pulseGlow 2s infinite",
+        marginLeft: "0.6em"
+      }}
+      aria-label="Scroll to top"
+      title="Scroll to top"
+      className="animate-fadeInScaleUp"
+    >
+      ↑
+    </button>
+  );
+}
 
 function getHerbDisplayName(herb) {
   if (herb.pinyinName) return herb.pinyinName;
@@ -146,11 +167,6 @@ function getHerbDisplayName(herb) {
   if (herb.pharmaceuticalName) return herb.pharmaceuticalName;
   if (herb.pharmaceutical) return herb.pharmaceutical;
   return "Unknown";
-}
-function getHerbKey(herb) {
-  if (herb.pinyinName) return herb.pinyinName;
-  if (herb.name) return herb.name;
-  return undefined;
 }
 function getHerbBadge(herb) {
   if (herb.nccaomAndCale === "yes" || herb.nccaomAndCaleOnly === "yes") {
@@ -307,6 +323,53 @@ function HerbExtrasRight({ herbObj }) {
   );
 }
 
+function MobileCategoryNav({ categories, activeSubcategory, handleSubcategoryScroll }) {
+  return (
+    <nav
+      className="mobile-category-nav"
+      style={{
+        display: "flex",
+        flexWrap: "wrap",
+        justifyContent: "center",
+        gap: "0.6em",
+        margin: "1em 0 1.3em 0",
+        padding: "0.6em 1em",
+        background: COLORS.vanilla,
+        borderRadius: "1em",
+        boxShadow: `0 2px 12px -6px ${COLORS.violet}33`,
+        maxWidth: "96vw",
+        alignItems: "center",
+      }}
+    >
+      {categories.map(category =>
+        (category.subcategories || []).map(subcat => (
+          <button
+            key={subcat.name}
+            onClick={() => handleSubcategoryScroll(subcat.name)}
+            className={activeSubcategory === subcat.name ? "active" : ""}
+            style={{
+              padding: "0.7em 1.4em",
+              borderRadius: "2em",
+              fontWeight: 700,
+              color: COLORS.violet,
+              background: activeSubcategory === subcat.name ? COLORS.carolina : COLORS.vanilla,
+              border: activeSubcategory === subcat.name ? `2px solid ${COLORS.violet}` : "none",
+              boxShadow: activeSubcategory === subcat.name ? `0 0 8px 0 ${COLORS.carolina}` : "none",
+              margin: "0.13em",
+              cursor: "pointer",
+              transition: "background 0.18s",
+              fontSize: "1.05em",
+              whiteSpace: "nowrap",
+            }}
+          >
+            {subcat.name}
+          </button>
+        ))
+      )}
+    </nav>
+  );
+}
+
 export default function HerbCategoryListPage() {
   const [categories, setCategories] = useState([]);
   const [loading, setLoading] = useState(true);
@@ -333,7 +396,17 @@ export default function HerbCategoryListPage() {
   const { cart, addHerb, removeHerb, clearCart } = useHerbCart();
   const [showCart, setShowCart] = useState(false);
 
-  // --- scroll spy for sidebar highlight (unchanged) ---
+  const [isMobile, setIsMobile] = useState(
+    typeof window !== "undefined" && window.innerWidth < 900
+  );
+  useEffect(() => {
+    function handleResize() {
+      setIsMobile(window.innerWidth < 900);
+    }
+    window.addEventListener("resize", handleResize);
+    return () => window.removeEventListener("resize", handleResize);
+  }, []);
+
   useEffect(() => {
     const handleScroll = () => {
       if (!scrollContainerRef.current || !categories.length) return;
@@ -393,7 +466,6 @@ export default function HerbCategoryListPage() {
     };
   }, [categories]);
 
-  // PATCH: Fetch data from backend endpoints instead of local JSON
   useEffect(() => {
     setLoading(true);
     Promise.all([
@@ -519,7 +591,6 @@ export default function HerbCategoryListPage() {
   return (
     <>
       <GlobalAnimations />
-      {/* Filters/checkboxes remain fixed at top as before */}
       <div
         className="fixed top-0 left-0 w-full z-50 flex items-center justify-center py-3 px-2 filter-bar"
         style={{
@@ -529,6 +600,8 @@ export default function HerbCategoryListPage() {
           minHeight: FILTER_BAR_HEIGHT,
           fontWeight: 600,
           fontSize: "1.05rem",
+          flexWrap: "wrap",
+          justifyContent: "flex-start",
         }}
       >
         <span
@@ -537,73 +610,88 @@ export default function HerbCategoryListPage() {
         >
           Show herbs:
         </span>
-        <label className="mx-4 flex items-center space-x-2 cursor-pointer">
-          <input type="checkbox" checked={!!showCaleNccaom} onChange={() => setShowCaleNccaom((v) => !v)} className="accent-green-700 w-4 h-4" />
-          <span className="text-green-700 font-semibold">NCCAOM/CALE</span>
-        </label>
-        <label className="mx-4 flex items-center space-x-2 cursor-pointer">
-          <input type="checkbox" checked={!!showCale} onChange={() => setShowCale((v) => !v)} className="accent-yellow-800 w-4 h-4" />
-          <span className="text-yellow-800 font-semibold">CALE</span>
-        </label>
-        <label className="mx-4 flex items-center space-x-2 cursor-pointer">
-          <input type="checkbox" checked={!!showNccaom} onChange={() => setShowNccaom((v) => !v)} className="accent-blue-700 w-4 h-4" />
-          <span className="text-blue-700 font-semibold">NCCAOM</span>
-        </label>
-        <label className="mx-4 flex items-center space-x-2 cursor-pointer">
-          <input type="checkbox" checked={!!showExtra} onChange={() => setShowExtra((v) => !v)} className="accent-gray-700 w-4 h-4" />
-          <span className="text-gray-700 font-semibold">Extra</span>
-        </label>
+        <div className="filter-checkbox-group" style={{
+          display: "flex",
+          flexWrap: "wrap",
+          gap: "8px",
+          maxWidth: "100vw",
+        }}>
+          <label className="mx-4 flex items-center space-x-2 cursor-pointer" style={{ marginBottom: 4 }}>
+            <input type="checkbox" checked={!!showCaleNccaom} onChange={() => setShowCaleNccaom((v) => !v)} className="accent-green-700 w-4 h-4" />
+            <span className="text-green-700 font-semibold">NCCAOM/CALE</span>
+          </label>
+          <label className="mx-4 flex items-center space-x-2 cursor-pointer" style={{ marginBottom: 4 }}>
+            <input type="checkbox" checked={!!showCale} onChange={() => setShowCale((v) => !v)} className="accent-yellow-800 w-4 h-4" />
+            <span className="text-yellow-800 font-semibold">CALE</span>
+          </label>
+          <label className="mx-4 flex items-center space-x-2 cursor-pointer" style={{ marginBottom: 4 }}>
+            <input type="checkbox" checked={!!showNccaom} onChange={() => setShowNccaom((v) => !v)} className="accent-blue-700 w-4 h-4" />
+            <span className="text-blue-700 font-semibold">NCCAOM</span>
+          </label>
+          <label className="mx-4 flex items-center space-x-2 cursor-pointer" style={{ marginBottom: 4 }}>
+            <input type="checkbox" checked={!!showExtra} onChange={() => setShowExtra((v) => !v)} className="accent-gray-700 w-4 h-4" />
+            <span className="text-gray-700 font-semibold">Extra</span>
+          </label>
+        </div>
       </div>
-      {/* Cart Side Drawer (now using HerbCart) */}
       <HerbCart
         show={showCart}
         onClose={() => setShowCart(false)}
         onCreateFormula={handleCreateFormula}
       />
-      {/* Floating Cart Button */}
-      <button
-        className="fixed"
+      {/* Floating Cart Button and ScrollUpButton PATCH */}
+      <div
         style={{
+          position: "fixed",
           right: 18,
           bottom: 28,
-          background: COLORS.violet,
-          color: COLORS.vanilla,
-          borderRadius: "50%",
-          width: 49,
-          height: 49,
-          minWidth: 49,
-          minHeight: 49,
-          boxShadow: "0 2px 12px 0 #7C5CD366",
-          zIndex: 70,
-          fontWeight: 700,
-          fontSize: 28,
+          zIndex: 71,
           display: "flex",
           alignItems: "center",
-          justifyContent: "center",
-          border: `2px solid ${COLORS.vanilla}`,
-          transition: "background 0.2s, scale 0.15s",
         }}
-        onClick={() => setShowCart((c) => !c)}
-        aria-label="Show Cart"
-        title="Show Cart"
       >
-        🛒{cart.length > 0 && (
-          <span
-            style={{
-              fontSize: 16,
-              marginLeft: 5,
-              background: COLORS.claret,
-              color: COLORS.vanilla,
-              borderRadius: "50%",
-              padding: "2px 8px",
-              fontWeight: 500,
-            }}
-          >
-            {cart.length}
-          </span>
-        )}
-      </button>
-      {/* Back to home button */}
+        <button
+          style={{
+            background: COLORS.violet,
+            color: COLORS.vanilla,
+            borderRadius: "50%",
+            width: 49,
+            height: 49,
+            minWidth: 49,
+            minHeight: 49,
+            boxShadow: "0 2px 12px 0 #7C5CD366",
+            fontWeight: 700,
+            fontSize: 28,
+            display: "flex",
+            alignItems: "center",
+            justifyContent: "center",
+            border: `2px solid ${COLORS.vanilla}`,
+            transition: "background 0.2s, scale 0.15s",
+            outline: "none",
+            cursor: "pointer",
+          }}
+          onClick={() => setShowCart((c) => !c)}
+          aria-label="Show Cart"
+          title="Show Cart"
+        >
+          🛒{cart.length > 0 && (
+            <span
+              style={{
+                fontSize: 16,
+                marginLeft: 5,
+                background: COLORS.claret,
+                color: COLORS.vanilla,
+                borderRadius: "50%",
+                padding: "2px 8px",
+                fontWeight: 500,
+              }}
+            >
+              {cart.length}
+            </span>
+          )}
+        </button>
+        <ScrollUpButton scrollContainerRef={scrollContainerRef} />
+      </div>
       <div
         className="fixed back-to-home-btn"
         style={{
@@ -626,7 +714,6 @@ export default function HerbCategoryListPage() {
           Back to Home
         </Link>
       </div>
-      {/* BG */}
       <div
         style={{
           position: "fixed",
@@ -675,7 +762,6 @@ export default function HerbCategoryListPage() {
           onMouseEnter={() => setIsSidebarHovered(true)}
           onMouseLeave={() => setIsSidebarHovered(false)}
         >
-          {/* ... sidebar nav unchanged ... */}
           <nav className="py-8 px-2">
             <h2
               className="text-lg font-bold mb-4 pl-2"
@@ -774,9 +860,8 @@ export default function HerbCategoryListPage() {
               paddingRight: 60,
             }}
           >
-            {/* PATCH: Logo is now rendered above the card grid, not above checkboxes */}
+            {/* Centered animated Logo */}
             <div
-              className="tcm-header"
               style={{
                 width: "100%",
                 maxWidth: CARD_MAX_WIDTH,
@@ -786,10 +871,21 @@ export default function HerbCategoryListPage() {
                 marginBottom: "1.2em",
                 position: "relative",
                 zIndex: 1,
+                display: "flex",
+                justifyContent: "center",
+                alignItems: "center",
               }}
             >
-              <TcmPartyZoneHeader />
+              <Logo size={56} showBeta={true} />
             </div>
+            {/* Mobile category nav as a card above herb cards */}
+            {isMobile && (
+              <MobileCategoryNav
+                categories={categories}
+                activeSubcategory={activeSubcategory}
+                handleSubcategoryScroll={handleSubcategoryScroll}
+              />
+            )}
             <div
               className="space-y-14 w-full flex flex-col items-center card-section"
               style={{ maxWidth: CARD_MAX_WIDTH }}

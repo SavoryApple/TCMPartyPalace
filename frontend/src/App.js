@@ -20,6 +20,7 @@ import LoginPage from "./pages/LoginPage";
 import RegisterPage from "./pages/RegisterPage";
 import AdminDashboard from "./pages/AdminDashboard";
 import About from "./pages/About";
+import Logo from "./components/Logo"; // <-- Import the new Logo component
 
 const API_BASE_URL = "https://thetcmatlas.fly.dev"; // <-- UPDATED BASE URL
 
@@ -274,30 +275,6 @@ function ScrollToTop() {
   return null;
 }
 
-function AnimatedHeroTitle() {
-  return (
-    <div
-      className="animate-shimmerText animate-fadeInScaleUp shrink-title"
-      style={{
-        fontWeight: 900,
-        fontSize: "2.5rem",
-        letterSpacing: "-2px",
-        textAlign: "center",
-        fontFamily: "inherit",
-        lineHeight: 1.18,
-        userSelect: "none",
-        marginBottom: "0.3em",
-        padding: "0.14em 0",
-        textShadow: `0 3px 16px ${COLORS.shadowStrong}`,
-        borderRadius: "1em",
-        transition: "font-size 0.2s"
-      }}
-    >
-      The TCM Atlas (LOCAL BETA) 🗺️
-    </div>
-  );
-}
-
 function AnimatedBuildLearnPractice() {
   return (
     <div
@@ -481,7 +458,8 @@ function Home() {
           flexWrap: "wrap"
         }}
       >
-        <AnimatedHeroTitle />
+        {/* Replace AnimatedHeroTitle with Logo */}
+        <Logo size={56} showBeta={true} style={{ marginRight: "1em" }} />
         <nav style={{ display: "flex", alignItems: "center", gap: "2em", flexWrap: "wrap" }}>
           <ul
             className="flex gap-6 font-semibold"

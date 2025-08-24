@@ -4,6 +4,7 @@ import FormulaSearchBar from "../components/formulaBuilderSearchBar";
 import WhatFormulaMakesUpThoseHerbs from "../components/whatFormulaMakesUpThoseHerbs";
 import FormulaBuilderHerbList from "../components/formulaBuilderHerbList";
 import HerbListCopyToClipboard from "../components/herbListCopyToClipboard";
+import Logo from "../components/Logo"; // <-- Import Logo component
 
 // Color scheme
 const COLORS = {
@@ -17,50 +18,6 @@ const COLORS = {
 
 // API endpoint base
 const API_BASE_URL = process.env.REACT_APP_API_URL || "https://thetcmatlas.fly.dev";
-
-// ---- Animated TCM Atlas Logo ----
-function TcmPartyZoneHeader() {
-  return (
-    <div
-      className="tcm-party-logo"
-      style={{
-        fontWeight: 900,
-        fontSize: "2.5rem",
-        letterSpacing: "-2px",
-        textAlign: "center",
-        fontFamily: "inherit",
-        lineHeight: 1.18,
-        userSelect: "none",
-        margin: "1.1em auto 0.2em auto",
-        padding: "0.14em 0",
-        borderRadius: "1em",
-        maxWidth: 900,
-        background: "none",
-      }}
-    >
-      <span className="shimmer-text">The TCM Atlas (BETA) 🗺️</span>
-      <style>
-        {`
-          .shimmer-text {
-            background: linear-gradient(90deg, ${COLORS.violet}, ${COLORS.carolina}, ${COLORS.claret}, ${COLORS.vanilla}, ${COLORS.highlight});
-            background-size: 400% 400%;
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
-            text-fill-color: transparent;
-            animation: shimmerText 3.2s ease-in-out infinite;
-            display: inline-block;
-          }
-          @keyframes shimmerText {
-            0% { background-position: 0% 50%; }
-            50% { background-position: 100% 50%; }
-            100% { background-position: 0% 50%; }
-          }
-        `}
-      </style>
-    </div>
-  );
-}
 
 // ---- Back to Top Button ----
 function BackToTopButton() {
@@ -673,9 +630,18 @@ export default function FormulaBuilder() {
           .animate-bounceIn { animation: bounceIn 0.45s cubic-bezier(.36,1.29,.45,1.01);}
         `}
       </style>
-      {/* The TCM Atlas Logo at very top (animated shimmer, crisp, not blurry) */}
-      <div style={{ width: "100%", textAlign: "center" }}>
-        <TcmPartyZoneHeader />
+      {/* Centered The TCM Atlas Logo at very top (animated shimmer, crisp, not blurry) */}
+      <div
+        style={{
+          width: "100%",
+          display: "flex",
+          justifyContent: "center",
+          alignItems: "center",
+          marginTop: "1.1em",
+          marginBottom: "0.2em"
+        }}
+      >
+        <Logo size={56} showBeta={true} />
       </div>
       {herbWarning && (
         <div
