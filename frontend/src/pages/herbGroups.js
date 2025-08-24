@@ -11,6 +11,7 @@ const COLORS = {
   claret: "#A52439",
   seal: "#3B4461",
   highlight: "#ffe066",
+  shadowStrong: "#7C5CD399",
 };
 
 const SIDEBAR_WIDTH = 300;
@@ -239,6 +240,57 @@ const GlobalAnimations = () => (
     `}
   </style>
 );
+
+// --- Scroll Up Button PATCH ---
+function ScrollUpButton({ scrollContainerRef }) {
+  const [show, setShow] = useState(false);
+
+  useEffect(() => {
+    const container = scrollContainerRef.current;
+    if (!container) return;
+    const handleScroll = () => setShow(container.scrollTop > 180);
+    container.addEventListener("scroll", handleScroll, { passive: true });
+    handleScroll();
+    return () => container.removeEventListener("scroll", handleScroll);
+  }, [scrollContainerRef]);
+
+  function handleClick() {
+    const container = scrollContainerRef.current;
+    if (container) {
+      container.scrollTo({ top: 0, behavior: "smooth" });
+    }
+  }
+
+  return (
+    <button
+      onClick={handleClick}
+      style={{
+        background: COLORS.violet,
+        color: COLORS.vanilla,
+        borderRadius: "50%",
+        width: 44,
+        height: 44,
+        border: `2.5px solid ${COLORS.seal}`,
+        boxShadow: `0 6px 40px -8px ${COLORS.shadowStrong}`,
+        fontWeight: 900,
+        fontSize: "1.2rem",
+        display: show ? "flex" : "none",
+        alignItems: "center",
+        justifyContent: "center",
+        transition: "background 0.2s, scale 0.15s",
+        cursor: "pointer",
+        outline: "none",
+        animation: "pulseGlow 2s infinite",
+        marginLeft: "0.6em"
+      }}
+      aria-label="Scroll to top"
+      title="Scroll to top"
+      className="animate-fadeInScaleUp"
+    >
+      ↑
+    </button>
+  );
+}
 
 function MobileCategoryNav({ groups, activeCategory, handleCategoryScroll }) {
   return (
@@ -535,48 +587,59 @@ export default function HerbGroupsPage() {
         onClose={() => setShowCart(false)}
         onCreateFormula={handleCreateFormula}
       />
-      <button
-        className="fixed"
+      {/* Floating Cart Button and ScrollUpButton PATCH */}
+      <div
         style={{
+          position: "fixed",
           right: 18,
           bottom: 28,
-          background: COLORS.violet,
-          color: COLORS.vanilla,
-          borderRadius: "50%",
-          width: 49,
-          height: 49,
-          minWidth: 49,
-          minHeight: 49,
-          boxShadow: "0 2px 12px 0 #7C5CD366",
-          zIndex: 70,
-          fontWeight: 700,
-          fontSize: 28,
+          zIndex: 71,
           display: "flex",
           alignItems: "center",
-          justifyContent: "center",
-          border: `2px solid ${COLORS.vanilla}`,
-          transition: "background 0.2s, scale 0.15s",
         }}
-        onClick={() => setShowCart((c) => !c)}
-        aria-label="Show Cart"
-        title="Show Cart"
       >
-        🛒{cart.length > 0 && (
-          <span
-            style={{
-              fontSize: 16,
-              marginLeft: 5,
-              background: COLORS.claret,
-              color: COLORS.vanilla,
-              borderRadius: "50%",
-              padding: "2px 8px",
-              fontWeight: 500,
-            }}
-          >
-            {cart.length}
-          </span>
-        )}
-      </button>
+        <button
+          className="fixed"
+          style={{
+            background: COLORS.violet,
+            color: COLORS.vanilla,
+            borderRadius: "50%",
+            width: 49,
+            height: 49,
+            minWidth: 49,
+            minHeight: 49,
+            boxShadow: "0 2px 12px 0 #7C5CD366",
+            zIndex: 70,
+            fontWeight: 700,
+            fontSize: 28,
+            display: "flex",
+            alignItems: "center",
+            justifyContent: "center",
+            border: `2px solid ${COLORS.vanilla}`,
+            transition: "background 0.2s, scale 0.15s",
+          }}
+          onClick={() => setShowCart((c) => !c)}
+          aria-label="Show Cart"
+          title="Show Cart"
+        >
+          🛒{cart.length > 0 && (
+            <span
+              style={{
+                fontSize: 16,
+                marginLeft: 5,
+                background: COLORS.claret,
+                color: COLORS.vanilla,
+                borderRadius: "50%",
+                padding: "2px 8px",
+                fontWeight: 500,
+              }}
+            >
+              {cart.length}
+            </span>
+          )}
+        </button>
+        <ScrollUpButton scrollContainerRef={scrollContainerRef} />
+      </div>
       <div
         className="fixed"
         style={{

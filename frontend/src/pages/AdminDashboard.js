@@ -24,6 +24,7 @@ const COLLECTIONS = [
   { key: "caleandnccaomformulas", label: "Formulas - CALE+NCCAOM" },
   { key: "herbcategorylist", label: "Herb Category List" },
   { key: "formulacategorylist", label: "Formula Category List" },
+  { key: "herbGroupsList", label: "Herb Groups List" }, // <-- Added here
 ];
 
 const API_URL = process.env.REACT_APP_API_URL || "https://thetcmatlas.fly.dev";
