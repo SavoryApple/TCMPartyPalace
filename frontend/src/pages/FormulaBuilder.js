@@ -801,12 +801,12 @@ export default function FormulaBuilder() {
         </div>
       </div>
       <WhatFormulaMakesUpThoseHerbs
-        herbs={herbs}
-        excludeFormulaPinyinNames={selectedFormulas.map((f) => f.pinyinName)}
-        onAddFormula={handleAddOtherHerbsToList}
-        showIndividualAddButtons={selectedFormulas.length > 0}
-        onAddIndividualHerb={handleAddIndividualHerbFromFormula}
-      />
+  herbs={herbs}
+  excludeFormulaPinyinNames={selectedFormulas.map((f) => f.pinyinName)}
+  onAddFormula={handleAddOtherHerbsToList}
+  showIndividualAddButtons={true}
+  onAddIndividualHerb={handleAddIndividualHerbFromFormula}
+/>
     </div>
   );
 }
