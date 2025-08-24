@@ -18,7 +18,7 @@ const SIDEBAR_WIDTH = 300;
 const FILTER_BAR_HEIGHT = 56;
 const CARD_MAX_WIDTH = 980;
 
-const API_URL = process.env.REACT_APP_API_URL || "https://tcmpartypalace.onrender.com";
+const API_URL = process.env.REACT_APP_API_URL || "https://thetcmatlas.fly.dev";
 const formulaApiEndpoints = [
   `${API_URL}/api/data/caleandnccaomformulas`,
   `${API_URL}/api/data/nccaomformulas`,
