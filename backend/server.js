@@ -31,6 +31,11 @@ mongoose.connect(process.env.MONGODB_URI, {
   .then(() => console.log('MongoDB connected'))
   .catch(err => console.error('MongoDB connection error:', err));
 
+// Root route for health check or welcome message
+app.get('/', (req, res) => {
+  res.send('Welcome to The TCM Atlas API!');
+});
+
 // API Routes
 app.use('/api/data', dataRoutes);
 app.use('/api/visit', visitRoutes);

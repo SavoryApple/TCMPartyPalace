@@ -21,7 +21,7 @@ import RegisterPage from "./pages/RegisterPage";
 import AdminDashboard from "./pages/AdminDashboard";
 import About from "./pages/About";
 
-const API_BASE_URL = "https://tcmpartypalace.onrender.com"; // <-- UPDATED BASE URL
+const API_BASE_URL = "https://thetcmatlas.fly.dev"; // <-- UPDATED BASE URL
 
 const COLORS = {
   vanilla: "#FFF7E3",

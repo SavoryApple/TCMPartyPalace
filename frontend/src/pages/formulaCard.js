@@ -2,9 +2,8 @@ import React, { useState, useEffect } from "react";
 import { useParams, useNavigate, Link, useLocation } from "react-router-dom";
 
 // API base URL for backend
-const API_BASE_URL = "https://tcmpartypalace.onrender.com";
+const API_BASE_URL = "https://thetcmatlas.fly.dev";
 
-// Color scheme
 const COLORS = {
   vanilla: "#FFF7E3",
   violet: "#7C5CD3",

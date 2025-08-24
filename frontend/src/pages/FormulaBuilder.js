@@ -16,7 +16,7 @@ const COLORS = {
 };
 
 // API endpoint base
-const API_BASE_URL = process.env.REACT_APP_API_URL || "https://tcmpartypalace.onrender.com";
+const API_BASE_URL = process.env.REACT_APP_API_URL || "https://thetcmatlas.fly.dev";
 
 // ---- Animated TCM Party Zone Logo ----
 function TcmPartyZoneHeader() {
