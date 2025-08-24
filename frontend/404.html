@@ -4,12 +4,10 @@
     <meta charset="utf-8">
     <title>Redirecting...</title>
     <script>
-      // Redirect for SPA on GitHub Pages (subdirectory)
+      // Redirect for SPA on GitHub Pages or custom domain (root deployment)
       var pathname = window.location.pathname;
-      // Remove the /TCMPartyPalace prefix if present
-      var redirectPath = pathname.replace(/^\/TCMPartyPalace/, "");
-      // Redirect to index.html with the correct path as hash
-      window.location.replace("/TCMPartyPalace/index.html#" + redirectPath + window.location.search + window.location.hash);
+      // Redirect to index.html with the path as hash
+      window.location.replace("/index.html#" + pathname + window.location.search + window.location.hash);
     </script>
   </head>
   <body>

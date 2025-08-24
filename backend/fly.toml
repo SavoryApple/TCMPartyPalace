@@ -1,0 +1,5 @@
+app = "thetcmatlas"
+
+[env]
+# Add environment variables here, e.g.
+# PORT = "8080"
