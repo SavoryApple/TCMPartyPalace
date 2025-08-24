@@ -16,7 +16,8 @@ const SIDEBAR_WIDTH = 300;
 const CARD_MAX_WIDTH = 650 * 1.25;
 const FILTER_BAR_HEIGHT = 56;
 
-const API_URL = process.env.REACT_APP_API_URL || "https://tcmpartypalace.onrender.com";
+// PATCH: Update for Fly.io API endpoint
+const API_URL = process.env.REACT_APP_API_URL || "https://thetcmatlas.fly.dev";
 const herbApiEndpoints = [
   `${API_URL}/api/data/caleandnccaomherbs`,
   `${API_URL}/api/data/caleherbs`,

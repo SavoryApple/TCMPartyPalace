@@ -306,7 +306,7 @@ export default function HerbCard() {
   const [loading, setLoading] = useState(true);
 
   // Backend API base URL
-  const API_URL = process.env.REACT_APP_API_URL || "https://tcmpartypalace.onrender.com";
+  const API_URL = process.env.REACT_APP_API_URL || "https://thetcmatlas.fly.dev";
 
   useEffect(() => {
     setLoading(true);

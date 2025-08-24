@@ -55,7 +55,7 @@ function Badge({ badge }) {
 }
 
 // PATCH: Use backend API for herb/formula data
-const API_URL = process.env.REACT_APP_API_URL || "https://tcmpartypalace.onrender.com";
+const API_URL = process.env.REACT_APP_API_URL || "https://thetcmatlas.fly.dev";
 
 export default function SearchBar({ onSelect, disabled }) {
   const [search, setSearch] = useState("");

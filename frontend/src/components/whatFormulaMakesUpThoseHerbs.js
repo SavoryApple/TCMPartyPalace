@@ -68,7 +68,7 @@ function parseHerbPinyinNameVariants(ingredientStr) {
 }
 
 // PATCH: Use backend endpoints for live data
-const API_URL = process.env.REACT_APP_API_URL || "https://tcmpartypalace.onrender.com";
+const API_URL = process.env.REACT_APP_API_URL || "https://thetcmatlas.fly.dev";
 
 export default function WhatFormulaMakesUpThoseHerbs({
   herbs,

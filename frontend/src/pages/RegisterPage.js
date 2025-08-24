@@ -9,7 +9,8 @@ const COLORS = {
   seal: "#3B4461",
 };
 
-const API_URL = process.env.REACT_APP_API_URL || "https://tcmpartypalace.onrender.com";
+// PATCH: Update for Fly.io API endpoint
+const API_URL = process.env.REACT_APP_API_URL || "https://thetcmatlas.fly.dev";
 
 export default function RegisterPage() {
   const [email, setEmail] = useState("");

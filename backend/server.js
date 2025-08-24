@@ -12,7 +12,7 @@ const app = express();
 // CORS configuration (more secure for production)
 const allowedOrigins = [
   "https://savoryapple.github.io", // Your frontend domain
-  "https://tcmpartypalace.onrender.com", // Your backend domain (optional)
+  "https://thetcmatlas.fly.dev",   // Your backend domain on Fly.io
   "http://localhost:3000"
 ];
 
