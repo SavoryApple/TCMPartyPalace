@@ -5,27 +5,31 @@ require('dotenv').config();
 
 const dataRoutes = require('./routes/data');
 const visitRoutes = require('./routes/visit');
-const authRoutes = require('./routes/auth'); // <-- Added line for auth
+const authRoutes = require('./routes/auth');
 
 const app = express();
 
-// CORS configuration (more secure for production)
+// CORS configuration (put FIRST, before any routes)
 const allowedOrigins = [
-  "https://savoryapple.github.io", // Your frontend domain
-  "https://thetcmatlas.fly.dev",   // Your backend domain on Fly.io
-  "http://localhost:3000"
+  "https://savoryapple.github.io",
+  "https://thetcmatlas.fly.dev",
+  "http://localhost:3000",
+  "https://thetcmatlas.com",
+  "https://www.thetcmatlas.com"
 ];
 
 app.use(cors({
-  origin: allowedOrigins,
+  origin: function(origin, callback) {
+    // allow requests with no origin (like mobile apps or curl requests)
+    if (!origin) return callback(null, true);
+    if (allowedOrigins.includes(origin)) {
+      return callback(null, true);
+    } else {
+      return callback(new Error('Not allowed by CORS'));
+    }
+  },
   credentials: true
 }));
-
-// (OPTIONAL: you may REMOVE this line if it causes path-to-regexp error)
-// app.options('*', cors({
-//   origin: allowedOrigins,
-//   credentials: true
-// }));
 
 app.use(express.json());
 
@@ -45,7 +49,7 @@ app.get('/', (req, res) => {
 // API Routes
 app.use('/api/data', dataRoutes);
 app.use('/api/visit', visitRoutes);
-app.use('/api/auth', authRoutes); // <-- Added line for auth
+app.use('/api/auth', authRoutes);
 
 // Global error handler (returns JSON)
 app.use((err, req, res, next) => {
