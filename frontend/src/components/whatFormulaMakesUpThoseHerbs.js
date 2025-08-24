@@ -23,14 +23,13 @@ function Badge({ badge }) {
   );
 }
 
-// Color scheme (keep in sync with FormulaBuilder.js)
 const COLORS = {
   vanilla: "#FFF7E3",
   violet: "#7C5CD3",
   carolina: "#68C5E6",
   claret: "#A52439",
   seal: "#3B4461",
-  highlight: "#ffe066", // Highlight color for present herbs
+  highlight: "#ffe066",
 };
 
 function normalize(str) {
@@ -55,32 +54,28 @@ function normalize(str) {
     : "";
 }
 
-/**
- * Extract all plausible pinyin names from an ingredient string.
- */
 function parseHerbPinyinNameVariants(ingredientStr) {
   let base = ingredientStr
-    .replace(/\([^)]+\)/g, "") // remove parentheticals
-    .replace(/\d+(\.\d+)?(-\d+(\.\d+)?)?\s*(g|ml|pieces)?/gi, "") // remove dosages incl. ml
+    .replace(/\([^)]+\)/g, "")
+    .replace(/\d+(\.\d+)?(-\d+(\.\d+)?)?\s*(g|ml|pieces)?/gi, "")
     .trim();
   base = base.replace(/\s+/g, " ");
   return [base];
 }
 
-// PATCH: Use backend endpoints for live data
 const API_URL = process.env.REACT_APP_API_URL || "https://thetcmatlas.fly.dev";
 
 export default function WhatFormulaMakesUpThoseHerbs({
   herbs,
   excludeFormulaPinyinNames = [],
-  onAddFormula
+  onAddFormula,
+  showIndividualAddButtons = false,
+  onAddIndividualHerb
 }) {
-  // State to hold loaded data
   const [allHerbs, setAllHerbs] = useState([]);
   const [allFormulas, setAllFormulas] = useState([]);
   const [loading, setLoading] = useState(true);
 
-  // Fetch from API endpoints instead of local files
   useEffect(() => {
     setLoading(true);
     Promise.all([
@@ -117,8 +112,6 @@ export default function WhatFormulaMakesUpThoseHerbs({
     }).catch(() => setLoading(false));
   }, []);
 
-  // --- All hooks below depend on loaded data ---
-  // Memoize normalized custom herb pinyin
   const customHerbPinyinNormalized = useMemo(() => {
     if (!herbs) return [];
     return herbs
@@ -142,7 +135,6 @@ export default function WhatFormulaMakesUpThoseHerbs({
     [customHerbPinyinNormalized]
   );
 
-  // Find full herb object from normalized pinyin
   function findFullHerbObject(pinyinName) {
     const normalized = normalize(pinyinName);
     return allHerbs.find(h => {
@@ -157,7 +149,6 @@ export default function WhatFormulaMakesUpThoseHerbs({
     });
   }
 
-  // Core: match all formulas that have all the selected herbs
   const matchingFormulas = useMemo(() => {
     if (customHerbPinyinNormalized.length === 0 || allFormulas.length === 0) return [];
     return allFormulas.filter((formula) => {
@@ -174,7 +165,6 @@ export default function WhatFormulaMakesUpThoseHerbs({
     });
   }, [customHerbPinyinNormalized, allFormulas, excludeFormulaPinyinNames]);
 
-  // For highlighting: create a set of normalized herb names in the user's herb list
   const herbKeys = useMemo(() => new Set((herbs || []).map(h => {
     if (h.pinyinName) {
       return normalize(Array.isArray(h.pinyinName) ? h.pinyinName[0] : h.pinyinName);
@@ -237,7 +227,6 @@ export default function WhatFormulaMakesUpThoseHerbs({
       .filter(Boolean);
   }
 
-  // ---- SMART TRANSFER HERBS LOGIC for the button ----
   function getTransferCount(formula) {
     const otherHerbs = getOtherHerbsForFormula(formula);
     return otherHerbs.length;
@@ -247,6 +236,11 @@ export default function WhatFormulaMakesUpThoseHerbs({
     if (!onAddFormula) return;
     const otherHerbs = getOtherHerbsForFormula(formula);
     onAddFormula(otherHerbs);
+  }
+
+  function handleAddIndividualHerbClick(herbObj) {
+    if (!onAddIndividualHerb) return;
+    onAddIndividualHerb(herbObj);
   }
 
   if (loading) {
@@ -269,6 +263,7 @@ export default function WhatFormulaMakesUpThoseHerbs({
       </div>
     );
   }
+
   return (
     <div className="w-full max-w-5xl mx-auto mt-10 mb-16 p-8 rounded-3xl shadow-2xl bg-white/80 border-2 border-violet flex flex-col items-center animate-fadeIn">
       <h3 className="font-bold text-xl mb-4 text-claret">
@@ -278,6 +273,7 @@ export default function WhatFormulaMakesUpThoseHerbs({
         {matchingFormulas.map((formula) => {
           const transferCount = getTransferCount(formula);
           const badge = getFormulaBadge(formula);
+          const addableHerbs = getOtherHerbsForFormula(formula);
           return (
             <div
               key={formula.pinyinName}
@@ -302,7 +298,7 @@ export default function WhatFormulaMakesUpThoseHerbs({
               </div>
               <div className="mt-2">
                 <strong>Ingredients:</strong>
-                <ul className="list-disc pl-5 mt-1">
+                <ul className="pl-0 mt-1">
                   {formula.ingredientsAndDosages.map((ing, i) => {
                     let style = {};
                     if (isHerbPresent(ing)) {
@@ -330,24 +326,44 @@ export default function WhatFormulaMakesUpThoseHerbs({
                     } else {
                       style = { fontSize: "0.92rem" };
                     }
+                    const otherHerbObj = addableHerbs.find(h =>
+                      normalize(h.pinyinName || h.name || h.originalString) ===
+                      normalize(parseHerbPinyinNameVariants(ing)[0])
+                    );
                     return (
-                      <li key={i} className="transition-all duration-150" style={style}>
-                        {ing}
-                        {isHerbPresent(ing) ? (
-                          <span
-                            className="ml-2"
-                            style={{ fontSize: "0.95em", fontWeight: "bold" }}
-                          >
-                            ✔
-                          </span>
-                        ) : isSharedHerb(ing) ? (
-                          <span
-                            className="ml-2"
-                            style={{ fontSize: "0.95em", fontWeight: "bold" }}
-                          >
-                            ★
-                          </span>
-                        ) : null}
+                      <li key={i} className="transition-all duration-150 flex items-center w-full" style={{ ...style, listStyle: "none", padding: "4px 0" }}>
+                        <div style={{ flex: 1, minWidth: 0 }}>
+                          <span>{ing}</span>
+                          {isHerbPresent(ing) ? (
+                            <span
+                              className="ml-2"
+                              style={{ fontSize: "0.95em", fontWeight: "bold" }}
+                            >
+                              ✔
+                            </span>
+                          ) : isSharedHerb(ing) ? (
+                            <span
+                              className="ml-2"
+                              style={{ fontSize: "0.95em", fontWeight: "bold" }}
+                            >
+                              ★
+                            </span>
+                          ) : null}
+                        </div>
+                        {showIndividualAddButtons && onAddIndividualHerb && otherHerbObj && (
+                          <div style={{ flex: "none", marginLeft: "auto" }}>
+                            <button
+                              className="ml-3 px-2 py-1 rounded-full text-xs font-bold bg-violet text-vanilla shadow hover:scale-105 transition"
+                              style={{
+                                cursor: "pointer",
+                                fontSize: "0.92rem",
+                              }}
+                              onClick={() => handleAddIndividualHerbClick(otherHerbObj)}
+                            >
+                              +
+                            </button>
+                          </div>
+                        )}
                       </li>
                     );
                   })}

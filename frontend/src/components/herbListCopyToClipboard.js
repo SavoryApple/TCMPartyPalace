@@ -452,7 +452,7 @@ export default function HerbListCopyToClipboard({ herbs, onRemoveHerb, onResetHe
                   }}
                 >
                   <span role="img" aria-label="edit" style={{ fontSize: "1.13em" }}>✏️</span>
-                  <span>Click any dosage below to edit it</span>
+                  <span>Click any dosage below to edit</span>
                 </span>
               </div>
               <div>
