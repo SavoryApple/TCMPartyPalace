@@ -1,6 +1,9 @@
 import React, { useState, useEffect } from "react";
 import { useNavigate, Link } from "react-router-dom";
 
+// Import the auto-logout hook
+import useAutoLogout from "../hooks/useAutoLogout"; // <-- Make sure this path is correct
+
 const COLORS = {
   vanilla: "#FFF7E3",
   violet: "#7C5CD3",
@@ -53,6 +56,14 @@ export default function AdminDashboard() {
     }
   }, [navigate]);
 
+  // Auto-logout logic
+  function handleLogout() {
+    localStorage.clear();
+    navigate("/login");
+  }
+
+  useAutoLogout(handleLogout);
+
   useEffect(() => {
     async function fetchData() {
       setLoading(true);
@@ -63,7 +74,10 @@ export default function AdminDashboard() {
         const token = localStorage.getItem("token");
         const res = await fetch(
           `${API_URL}/api/data/${collection}`,
-          { headers: { Authorization: `Bearer ${token}` } }
+          {
+            headers: { Authorization: `Bearer ${token}` },
+            credentials: "include"
+          }
         );
         if (!res.ok) throw new Error("Failed to fetch data");
         const data = await res.json();
@@ -99,6 +113,7 @@ export default function AdminDashboard() {
             Authorization: `Bearer ${token}`,
           },
           body: JSON.stringify(obj),
+          credentials: "include"
         }
       );
       if (!res.ok) {
@@ -137,6 +152,7 @@ export default function AdminDashboard() {
         {
           method: "DELETE",
           headers: { Authorization: `Bearer ${token}` },
+          credentials: "include"
         }
       );
       if (!res.ok) {
@@ -170,6 +186,7 @@ export default function AdminDashboard() {
             Authorization: `Bearer ${token}`,
           },
           body: JSON.stringify(obj),
+          credentials: "include"
         }
       );
       if (!res.ok) {
@@ -187,11 +204,6 @@ export default function AdminDashboard() {
     } catch (err) {
       setError("Error adding: " + err.message);
     }
-  }
-
-  function handleLogout() {
-    localStorage.clear();
-    navigate("/login");
   }
 
   return (

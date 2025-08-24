@@ -18,7 +18,7 @@ const COLORS = {
 // API endpoint base
 const API_BASE_URL = process.env.REACT_APP_API_URL || "https://thetcmatlas.fly.dev";
 
-// ---- Animated TCM Party Zone Logo ----
+// ---- Animated TCM Atlas Logo ----
 function TcmPartyZoneHeader() {
   return (
     <div
@@ -38,7 +38,7 @@ function TcmPartyZoneHeader() {
         background: "none",
       }}
     >
-      <span className="shimmer-text">TCM Party Palace (BETA) 🎉</span>
+      <span className="shimmer-text">The TCM Atlas (BETA) 🗺️</span>
       <style>
         {`
           .shimmer-text {
@@ -673,7 +673,7 @@ export default function FormulaBuilder() {
           .animate-bounceIn { animation: bounceIn 0.45s cubic-bezier(.36,1.29,.45,1.01);}
         `}
       </style>
-      {/* TCM Party Zone Logo at very top (animated shimmer, crisp, not blurry) */}
+      {/* The TCM Atlas Logo at very top (animated shimmer, crisp, not blurry) */}
       <div style={{ width: "100%", textAlign: "center" }}>
         <TcmPartyZoneHeader />
       </div>

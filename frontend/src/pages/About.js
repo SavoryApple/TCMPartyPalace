@@ -61,7 +61,7 @@ function TcmPartyZoneHeader() {
         display: "inline-block"
       }}
     >
-      TCM Party Palace (BETA) 🎉
+      The TCM Atlas (BETA) 🗺️
     </div>
   );
 }
@@ -132,7 +132,7 @@ export default function About() {
             fontWeight: 500,
           }}
         >
-          TCM Party Palace was born from a real need in the clinic: I wanted a practical tool to effortlessly and quickly look up Chinese herbal formulas and single herbs. I found myself wishing for the ability to copy and paste herbs and dosages directly into my charting platform (like Jane), rather than wasting time flipping through books or searching scattered resources. To my surprise, I couldn't find anything online that truly fit these needs—so I set out to fill that gap!
+          The TCM Atlas was born from a real need in the clinic: I wanted a practical tool to effortlessly and quickly look up Chinese herbal formulas and single herbs. I found myself wishing for the ability to copy and paste herbs and dosages directly into my charting platform (like Jane), rather than wasting time flipping through books or searching scattered resources. To my surprise, I couldn't find anything online that truly fit these needs—so I set out to fill that gap!
         </p>
         <div
           style={{

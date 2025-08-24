@@ -30,6 +30,7 @@ export default function LoginPage() {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ email, password }),
+        credentials: "include" // <-- Added for CORS/session support
       });
       const data = await response.json();
 

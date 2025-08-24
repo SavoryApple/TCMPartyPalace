@@ -119,7 +119,7 @@ function TcmPartyZoneHeader() {
         borderRadius: "1em"
       }}
     >
-      TCM Party Palace (BETA) 🎉
+      The TCM Atlas (BETA) 🗺️
     </div>
   );
 }

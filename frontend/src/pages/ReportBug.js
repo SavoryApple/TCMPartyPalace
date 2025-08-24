@@ -172,7 +172,7 @@ export default function ReportBug() {
               marginBottom: "0.8em"
             }}
           >
-            Thank you for helping improve TCM Party Palace!
+            Thank you for helping improve The TCM Atlas!
           </span>
         </div>
       </div>

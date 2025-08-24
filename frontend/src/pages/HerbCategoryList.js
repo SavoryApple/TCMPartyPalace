@@ -47,7 +47,7 @@ function TcmPartyZoneHeader() {
         maxWidth: CARD_MAX_WIDTH,
       }}
     >
-      TCM Party Palace (BETA) 🎉
+      The TCM Atlas (BETA) 🗺️
     </div>
   );
 }

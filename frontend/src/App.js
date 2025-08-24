@@ -256,7 +256,7 @@ function AnimatedHeroTitle() {
         borderRadius: "1em",
       }}
     >
-      TCM Party Palace (BETA) 🎉
+      The TCM Atlas (BETA) 🗺️
     </div>
   );
 }
@@ -638,7 +638,7 @@ function Home() {
         }}
       >
         <p>
-          &copy; {new Date().getFullYear()} TCM Party Palace · Made with passion
+          &copy; {new Date().getFullYear()} The TCM Atlas · Made with passion
           for Chinese Medicine
         </p>
       </footer>
