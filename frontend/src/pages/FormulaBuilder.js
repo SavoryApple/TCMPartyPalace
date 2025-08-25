@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useMemo } from "react";
+import React, { useState, useEffect, useMemo, useRef } from "react";
 import { Link, useLocation } from "react-router-dom";
 import FormulaSearchBar from "../components/formulaBuilderSearchBar";
 import WhatFormulaMakesUpThoseHerbs from "../components/whatFormulaMakesUpThoseHerbs";
@@ -143,6 +143,7 @@ function FormulaCard({
   herbs,
   getTransferHerbObjectByPinyin,
   onAddIndividualHerb,
+  cardRef, // <-- Accept a ref
 }) {
   const [exiting, setExiting] = useState(false);
   const handleRemove = () => {
@@ -209,6 +210,7 @@ function FormulaCard({
 
   return (
     <div
+      ref={cardRef} // <-- Attach ref
       className={`bg-white/80 border-2 border-[${COLORS.violet}] rounded-xl p-7 mb-6 flex flex-col shadow-2xl relative w-full max-w-xl mx-auto animate-fadeIn transition-all duration-300 hover:border-[${COLORS.claret}] backdrop-blur-lg hover:scale-[1.03] ${
         exiting ? "animate-slideOut" : ""
       }`}
@@ -377,6 +379,9 @@ export default function FormulaBuilder() {
     const params = new URLSearchParams(location.search);
     return params.get("formula");
   }, [location.search]);
+
+  // --- Added: Store refs for formula cards ---
+  const formulaCardRefs = useRef([]);
 
   useEffect(() => {
     if (
@@ -548,7 +553,11 @@ export default function FormulaBuilder() {
     setSelectedFormulas(selectedFormulas.filter((_, i) => i !== idx));
   }
 
+  // --- Modified handler to preserve scroll position ---
   function handleTransferHerbsFromFormula(formulaIdx, customMissingCount) {
+    // Store current scroll position
+    const scrollY = window.scrollY;
+
     const selectedFormula = selectedFormulas[formulaIdx];
     if (!selectedFormula) return;
     const formulaHerbs = selectedFormula.ingredientsAndDosages
@@ -594,6 +603,11 @@ export default function FormulaBuilder() {
       setHerbWarning("Your formula already contains that/those herb(s)!");
     }
     setTimeout(() => setHerbWarning(""), 1800);
+
+    // Restore scroll position after update
+    setTimeout(() => {
+      window.scrollTo({ top: scrollY });
+    }, 0);
   }
 
   function handleAddIndividualHerbFromFormula(herbObj) {
@@ -774,6 +788,7 @@ export default function FormulaBuilder() {
                       herbs={herbs}
                       getTransferHerbObjectByPinyin={getTransferHerbObjectByPinyin}
                       onAddIndividualHerb={handleAddIndividualHerbFromFormula}
+                      cardRef={el => formulaCardRefs.current[idx] = el} // <-- Pass ref
                     />
                   </div>
                 ))}
@@ -801,12 +816,12 @@ export default function FormulaBuilder() {
         </div>
       </div>
       <WhatFormulaMakesUpThoseHerbs
-  herbs={herbs}
-  excludeFormulaPinyinNames={selectedFormulas.map((f) => f.pinyinName)}
-  onAddFormula={handleAddOtherHerbsToList}
-  showIndividualAddButtons={true}
-  onAddIndividualHerb={handleAddIndividualHerbFromFormula}
-/>
+        herbs={herbs}
+        excludeFormulaPinyinNames={selectedFormulas.map((f) => f.pinyinName)}
+        onAddFormula={handleAddOtherHerbsToList}
+        showIndividualAddButtons={true}
+        onAddIndividualHerb={handleAddIndividualHerbFromFormula}
+      />
     </div>
   );
 }
