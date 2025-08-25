@@ -15,14 +15,13 @@ import HerbCategoryList from "./pages/HerbCategoryList";
 import HerbGroupsPage from "./pages/herbGroups";
 import { HerbCartProvider } from "./context/HerbCartContext";
 import ReportBug from "./pages/ReportBug";
-
 import LoginPage from "./pages/LoginPage";
 import RegisterPage from "./pages/RegisterPage";
 import AdminDashboard from "./pages/AdminDashboard";
 import About from "./pages/About";
-import Logo from "./components/Logo"; // <-- Import the new Logo component
+import Logo from "./components/Logo";
 
-const API_BASE_URL = "https://thetcmatlas.fly.dev"; // <-- UPDATED BASE URL
+const API_BASE_URL = "https://thetcmatlas.fly.dev";
 
 const COLORS = {
   vanilla: "#FFF7E3",
@@ -260,19 +259,182 @@ const GlobalAnimations = () => (
           font-size: 2.2em !important;
         }
       }
+      /* --- Stylized Tutorial Button --- */
+      .tutorial-btn {
+        background: linear-gradient(92deg, #7C5CD3 0%, #68C5E6 100%);
+        color: #FFF7E3;
+        font-weight: 900;
+        font-size: 1.16em;
+        border: none;
+        border-radius: 2em;
+        padding: 16px 38px;
+        box-shadow: 0 6px 24px -8px #7C5CD399, 0 2px 8px #68C5E633;
+        margin-bottom: 1.3em;
+        cursor: pointer;
+        transition: background 0.18s, transform 0.13s, box-shadow 0.18s;
+        position: relative;
+        z-index: 2;
+        outline: none;
+        letter-spacing: -0.01em;
+        display: inline-flex;
+        align-items: center;
+        gap: 0.7em;
+        user-select: none;
+      }
+      .tutorial-btn:hover, .tutorial-btn:focus {
+        background: linear-gradient(92deg, #68C5E6 0%, #7C5CD3 100%);
+        color: #fff0f0;
+        transform: scale(1.04) translateY(-2px);
+        box-shadow: 0 12px 32px -10px #7C5CD399;
+      }
+      .tutorial-btn-icon {
+        font-size: 1.8em;
+        filter: drop-shadow(0 2px 8px #3B4461);
+        animation: iconBounce 1.7s infinite;
+      }
+      .tutorial-btn-label {
+        font-size: 1.08em;
+        font-weight: 900;
+        background: linear-gradient(90deg, #ffe066 20%, #68C5E6 80%);
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+        background-clip: text;
+        text-fill-color: transparent;
+        text-shadow: 0 1px 6px #7C5CD344;
+        letter-spacing: -0.01em;
+      }
+      /* Tutorial Modal Styles */
+      .tutorial-modal-backdrop {
+        position: fixed;
+        top: 0; left: 0; right: 0; bottom: 0;
+        background: rgba(60,60,60,0.46);
+        z-index: 9998;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        animation: fadeInScaleUp 0.4s;
+      }
+      .tutorial-modal-content {
+        background: #fff;
+        border-radius: 1.6em;
+        padding: 28px 32px 16px 32px;
+        box-shadow: 0 16px 60px -16px ${COLORS.shadowStrong};
+        max-width: 98vw;
+        width: 480px;
+        position: relative;
+        z-index: 9999;
+        animation: fadeInScaleUp 0.4s;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+      }
+      .tutorial-modal-close-btn {
+        position: absolute;
+        top: 16px;
+        right: 20px;
+        background: ${COLORS.claret};
+        color: ${COLORS.vanilla};
+        border: none;
+        border-radius: 999px;
+        font-size: 1.19em;
+        font-weight: 700;
+        width: 2.6em;
+        height: 2.6em;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        cursor: pointer;
+        box-shadow: 0 2px 8px -2px ${COLORS.claret}66;
+        transition: background 0.14s;
+      }
+      .tutorial-video-title {
+        color: ${COLORS.violet};
+        font-size: 1.5em;
+        font-weight: 900;
+        letter-spacing: -0.01em;
+        margin-bottom: 18px;
+        text-align: center;
+      }
+      .tutorial-video-description {
+        font-size: 1.07em;
+        font-weight: 500;
+        color: ${COLORS.seal};
+        margin-bottom: 10px;
+        text-align: center;
+      }
+      .tutorial-modal-video {
+        width: 100%;
+        max-width: 420px;
+        border-radius: 1em;
+        box-shadow: 0 4px 18px -6px ${COLORS.shadowStrong};
+      }
     `}
   </style>
 );
 
-// ScrollToTop component for route changes
 function ScrollToTop() {
   const { pathname } = useLocation();
-
   useEffect(() => {
     window.scrollTo(0, 0);
   }, [pathname]);
-
   return null;
+}
+
+// --- Updated TutorialModal to use YouTube iframe ---
+function TutorialModal({ open, onClose }) {
+  if (!open) return null;
+
+  // Replace with your own unlisted YouTube video ID
+  const youtubeVideoId = "esDYrMcjCJw"; // <-- update this with your actual video ID
+  const youtubeEmbedUrl = `https://www.youtube.com/embed/${youtubeVideoId}?rel=0&modestbranding=1`;
+
+  return (
+    <div className="tutorial-modal-backdrop" tabIndex={-1} onClick={onClose}>
+      <div
+        className="tutorial-modal-content"
+        onClick={e => e.stopPropagation()}
+        role="dialog"
+        aria-modal="true"
+      >
+        <button
+          className="tutorial-modal-close-btn"
+          onClick={onClose}
+          aria-label="Close tutorial"
+          title="Close"
+        >
+          ×
+        </button>
+        <div className="tutorial-video-title">Site Tutorial</div>
+        <div className="tutorial-video-description">
+          Watch this walkthrough to learn how to use the TCM Atlas website. <br />
+          <span style={{ fontSize: "0.95em", color: "#68C5E6" }}>
+            (You can pause, scrub, or adjust volume as needed.)
+          </span>
+        </div>
+        <div style={{ width: "100%", maxWidth: 420 }}>
+          <div style={{ position: "relative", paddingBottom: "56.25%", height: 0, width: "100%" }}>
+            <iframe
+              className="tutorial-modal-video"
+              src={youtubeEmbedUrl}
+              title="TCM Atlas Tutorial"
+              allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+              allowFullScreen
+              style={{
+                position: "absolute",
+                top: 0,
+                left: 0,
+                width: "100%",
+                height: "100%",
+                borderRadius: "1em",
+                border: "none",
+                boxShadow: "0 4px 18px -6px " + COLORS.shadowStrong,
+              }}
+            />
+          </div>
+        </div>
+      </div>
+    </div>
+  );
 }
 
 function AnimatedBuildLearnPractice() {
@@ -299,24 +461,13 @@ function AnimatedBuildLearnPractice() {
       }}
     >
       Build, Learn, Practice!
-      <span
-        style={{
-          marginLeft: "0.28em",
-          fontSize: "1.2em",
-          verticalAlign: "middle",
-        }}
-      >
-        🧑‍🎓🧨
-      </span>
     </div>
   );
 }
 
 function VisitorCounter() {
   const [count, setCount] = useState(null);
-
   useEffect(() => {
-    // Only increment for unique visitors (per browser/device)
     if (!localStorage.getItem("hasVisitedTCMPartyPalace")) {
       fetch(`${API_BASE_URL}/api/visit`, { method: "POST" })
         .then((res) => res.json())
@@ -324,14 +475,12 @@ function VisitorCounter() {
         .catch(() => setCount("..."));
       localStorage.setItem("hasVisitedTCMPartyPalace", "true");
     } else {
-      // Just GET the count, don't increment
       fetch(`${API_BASE_URL}/api/visit`)
         .then((res) => res.json())
         .then((data) => setCount(data.count))
         .catch(() => setCount("..."));
     }
   }, []);
-
   return (
     <div
       className="flex flex-col items-center justify-center w-full"
@@ -365,21 +514,16 @@ function VisitorCounter() {
   );
 }
 
-// --- ScrollDownHint instructions ---
 function ScrollDownHint() {
   const [visible, setVisible] = useState(false);
   useEffect(() => {
-    // Only show if not previously dismissed
     const hasDismissed = document.cookie
       .split("; ")
       .find((row) => row.startsWith("tcmpartypalace_scrollhint="));
     if (!hasDismissed) setVisible(true);
-
     function onScroll() {
-      // Hide and persist in cookie if scrolled down 50px or more
       if (window.scrollY > 50 && visible) {
         setVisible(false);
-        // Set cookie to persist for ~1 year
         const expires = new Date();
         expires.setFullYear(expires.getFullYear() + 1);
         document.cookie = `tcmpartypalace_scrollhint=true; expires=${expires.toUTCString()}; path=/`;
@@ -390,7 +534,6 @@ function ScrollDownHint() {
     }
     return () => window.removeEventListener("scroll", onScroll);
   }, [visible]);
-
   if (!visible) return null;
   return (
     <div
@@ -437,6 +580,8 @@ function Home() {
   const navigate = useNavigate();
   const isAdmin =
     localStorage.getItem("role") === "admin" && localStorage.getItem("token");
+  const [tutorialOpen, setTutorialOpen] = useState(false);
+
   return (
     <div
       style={{
@@ -448,6 +593,7 @@ function Home() {
     >
       <GlobalAnimations />
       <ScrollDownHint />
+      <TutorialModal open={tutorialOpen} onClose={() => setTutorialOpen(false)} />
       <header
         className="py-6 px-8 flex justify-between items-center shadow-lg animate-fadeInScaleUp"
         style={{
@@ -458,7 +604,6 @@ function Home() {
           flexWrap: "wrap"
         }}
       >
-        {/* Replace AnimatedHeroTitle with Logo */}
         <Logo size={56} showBeta={true} style={{ marginRight: "1em" }} />
         <nav style={{ display: "flex", alignItems: "center", gap: "2em", flexWrap: "wrap" }}>
           <ul
@@ -567,6 +712,14 @@ function Home() {
       </div>
       <section className="flex-grow flex flex-col justify-center items-center text-center px-4 animate-fadeInScaleUp">
         <div className="max-w-2xl mx-auto py-10 relative">
+          <button
+            onClick={() => setTutorialOpen(true)}
+            className="tutorial-btn animate-fadeInScaleUp"
+            aria-label="Open site tutorial"
+          >
+            <span className="tutorial-btn-icon" aria-hidden="true">📺</span>
+            <span className="tutorial-btn-label">Watch Tutorial</span>
+          </button>
           <AnimatedBuildLearnPractice />
           <VisitorCounter />
           <p
@@ -689,8 +842,6 @@ export default function App() {
           <Route path="register" element={<RegisterPage />} />
           <Route path="admin" element={<AdminDashboard />} />
           <Route path="about" element={<About />} />
-          {/* Optionally, add a 404 route here if you want */}
-          {/* <Route path="*" element={<Home />} /> */}
         </Routes>
       </Router>
     </HerbCartProvider>

@@ -70,6 +70,16 @@ const GlobalAnimations = () => (
         100% { opacity: 1; transform: scale(1);}
       }
       .animate-imgPop { animation: imgPop 0.3s cubic-bezier(.36,1.29,.45,1.01);}
+      /* Flex container for floating buttons */
+      .floating-btns-container {
+        position: fixed;
+        right: 18px;
+        bottom: 28px;
+        z-index: 80;
+        display: flex;
+        align-items: center;
+        gap: 10px;
+      }
     `}
   </style>
 );
@@ -130,16 +140,7 @@ function getHerbKey(herb) {
   return undefined;
 }
 
-function BackToTopButton() {
-  const [show, setShow] = useState(false);
-
-  useEffect(() => {
-    function onScroll() {
-      setShow(window.scrollY > 180);
-    }
-    window.addEventListener("scroll", onScroll, { passive: true });
-    return () => window.removeEventListener("scroll", onScroll);
-  }, []);
+function BackToTopButton({ show }) {
   function handleClick() {
     window.scrollTo({ top: 0, behavior: "smooth" });
   }
@@ -147,15 +148,11 @@ function BackToTopButton() {
     <button
       onClick={handleClick}
       style={{
-        position: "fixed",
-        bottom: 28,
-        right: 28,
-        zIndex: 70,
         background: COLORS.violet,
         color: COLORS.vanilla,
         borderRadius: "50%",
-        width: 55,
-        height: 55,
+        width: 49,
+        height: 49,
         border: `2.5px solid ${COLORS.vanilla}`,
         boxShadow: `0 6px 40px -8px ${COLORS.shadowStrong}`,
         fontWeight: 900,
@@ -363,6 +360,16 @@ export default function HerbCard() {
     }
   }
 
+  // For floating buttons
+  const [showBackToTop, setShowBackToTop] = useState(false);
+  useEffect(() => {
+    function onScroll() {
+      setShowBackToTop(window.scrollY > 180);
+    }
+    window.addEventListener("scroll", onScroll, { passive: true });
+    return () => window.removeEventListener("scroll", onScroll);
+  }, []);
+
   // --- Loading State ---
   if (loading) {
     return (
@@ -388,7 +395,33 @@ export default function HerbCard() {
           <h2 className="text-3xl font-bold mb-4" style={{ color: COLORS.claret }}>Loading...</h2>
           <p className="mb-3">Loading herb data...</p>
         </div>
-        <BackToTopButton />
+        <div className="floating-btns-container">
+          <button
+            style={{
+              background: COLORS.violet,
+              color: COLORS.vanilla,
+              borderRadius: "50%",
+              width: 49,
+              height: 49,
+              minWidth: 49,
+              minHeight: 49,
+              boxShadow: "0 2px 12px 0 #7C5CD366",
+              fontWeight: 700,
+              fontSize: 28,
+              display: "flex",
+              alignItems: "center",
+              justifyContent: "center",
+              border: `2px solid ${COLORS.vanilla}`,
+              transition: "background 0.2s, scale 0.15s",
+            }}
+            aria-label="Show Cart"
+            title="Show Cart"
+            disabled
+          >
+            🛒
+          </button>
+          <BackToTopButton show={showBackToTop} />
+        </div>
       </div>
     );
   }
@@ -430,7 +463,33 @@ export default function HerbCard() {
             Back to Home
           </button>
         </div>
-        <BackToTopButton />
+        <div className="floating-btns-container">
+          <button
+            style={{
+              background: COLORS.violet,
+              color: COLORS.vanilla,
+              borderRadius: "50%",
+              width: 49,
+              height: 49,
+              minWidth: 49,
+              minHeight: 49,
+              boxShadow: "0 2px 12px 0 #7C5CD366",
+              fontWeight: 700,
+              fontSize: 28,
+              display: "flex",
+              alignItems: "center",
+              justifyContent: "center",
+              border: `2px solid ${COLORS.vanilla}`,
+              transition: "background 0.2s, scale 0.15s",
+            }}
+            aria-label="Show Cart"
+            title="Show Cart"
+            disabled
+          >
+            🛒
+          </button>
+          <BackToTopButton show={showBackToTop} />
+        </div>
       </div>
     );
   }
@@ -451,49 +510,49 @@ export default function HerbCard() {
         onCreateFormula={handleCreateFormula}
       />
 
-      {/* Floating Cart Button */}
-      <button
-        className="fixed"
-        style={{
-          right: 18,
-          bottom: 28,
-          background: COLORS.violet,
-          color: COLORS.vanilla,
-          borderRadius: "50%",
-          width: 49,
-          height: 49,
-          minWidth: 49,
-          minHeight: 49,
-          boxShadow: "0 2px 12px 0 #7C5CD366",
-          zIndex: 70,
-          fontWeight: 700,
-          fontSize: 28,
-          display: "flex",
-          alignItems: "center",
-          justifyContent: "center",
-          border: `2px solid ${COLORS.vanilla}`,
-          transition: "background 0.2s, scale 0.15s",
-        }}
-        onClick={() => setShowCart(true)}
-        aria-label="Show Cart"
-        title="Show Cart"
-      >
-        🛒{cart.length > 0 && (
-          <span
-            style={{
-              fontSize: 16,
-              marginLeft: 5,
-              background: COLORS.claret,
-              color: COLORS.vanilla,
-              borderRadius: "50%",
-              padding: "2px 8px",
-              fontWeight: 500,
-            }}
-          >
-            {cart.length}
-          </span>
-        )}
-      </button>
+      {/* Floating Cart & BackToTop Buttons */}
+      <div className="floating-btns-container">
+        <button
+          style={{
+            background: COLORS.violet,
+            color: COLORS.vanilla,
+            borderRadius: "50%",
+            width: 49,
+            height: 49,
+            minWidth: 49,
+            minHeight: 49,
+            boxShadow: "0 2px 12px 0 #7C5CD366",
+            zIndex: 81,
+            fontWeight: 700,
+            fontSize: 28,
+            display: "flex",
+            alignItems: "center",
+            justifyContent: "center",
+            border: `2px solid ${COLORS.vanilla}`,
+            transition: "background 0.2s, scale 0.15s",
+          }}
+          onClick={() => setShowCart(true)}
+          aria-label="Show Cart"
+          title="Show Cart"
+        >
+          🛒{cart.length > 0 && (
+            <span
+              style={{
+                fontSize: 16,
+                marginLeft: 5,
+                background: COLORS.claret,
+                color: COLORS.vanilla,
+                borderRadius: "50%",
+                padding: "2px 8px",
+                fontWeight: 500,
+              }}
+            >
+              {cart.length}
+            </span>
+          )}
+        </button>
+        <BackToTopButton show={showBackToTop} />
+      </div>
       {/* Main Herb Card UI */}
       <div className="fixed top-8 right-10 z-40">
         <Link
@@ -639,7 +698,6 @@ export default function HerbCard() {
           herbs={[herb]}
         />
       </div>
-      <BackToTopButton />
     </div>
   );
 }

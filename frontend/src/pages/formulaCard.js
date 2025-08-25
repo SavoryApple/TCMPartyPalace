@@ -1,5 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { useParams, useNavigate, Link, useLocation } from "react-router-dom";
+import { useHerbCart } from "../context/HerbCartContext";
+import HerbCart from "../components/HerbCart";
 
 // API base URL for backend
 const API_BASE_URL = "https://thetcmatlas.fly.dev";
@@ -10,6 +12,7 @@ const COLORS = {
   carolina: "#68C5E6",
   claret: "#A52439",
   seal: "#3B4461",
+  accent: "#fff0f0"
 };
 
 const GlobalAnimations = () => (
@@ -57,6 +60,55 @@ const GlobalAnimations = () => (
         color: #68C5E6;
         box-shadow: 0 2px 4px 0 #7C5CD333;
         outline: none;
+      }
+      .herb-link-in-cart {
+        background: ${COLORS.carolina};
+        color: ${COLORS.seal};
+        border-radius: 1em;
+        font-weight: bold;
+        box-shadow: 0 0 0 2px ${COLORS.violet}33;
+        padding: 0 0.4em;
+        border: 2px solid ${COLORS.violet};
+      }
+      /* Floating Cart & Back to Top Button styles */
+      .floating-btns-container {
+        position: fixed;
+        right: 18px;
+        bottom: 28px;
+        z-index: 80;
+        display: flex;
+        align-items: center;
+        gap: 10px;
+      }
+      .floating-backtotop-btn {
+        background: #7C5CD3;
+        color: #FFF7E3;
+        border-radius: 50%;
+        width: 49px;
+        height: 49px;
+        border: 2.5px solid #FFF7E3;
+        box-shadow: 0 6px 40px -8px #7C5CD399;
+        font-weight: 900;
+        font-size: 2rem;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        transition: background 0.2s, scale 0.15s;
+        cursor: pointer;
+        outline: none;
+        opacity: 1;
+      }
+      @media (max-width: 600px) {
+        .floating-btns-container {
+          right: 8px;
+          bottom: 12px;
+          gap: 6px;
+        }
+        .floating-backtotop-btn {
+          width: 38px;
+          height: 38px;
+          font-size: 1.2rem;
+        }
       }
     `}
   </style>
@@ -110,89 +162,20 @@ function getPinyinFromIngredient(ingredient) {
   return ingredient.split(" ").slice(0, 2).join(" ").trim();
 }
 
-function HerbSideCard({ herb, query, onClose }) {
+function BackToTopButton({ show }) {
+  const handleClick = () => {
+    window.scrollTo({ top: 0, behavior: "smooth" });
+  };
+  if (!show) return null;
   return (
-    <div
-      className="animate-fadeIn"
-      style={{
-        position: "fixed",
-        top: "84px",
-        right: "24px",
-        width: "390px",
-        maxWidth: "85vw",
-        background: `linear-gradient(120deg, ${COLORS.vanilla} 80%, ${COLORS.carolina} 100%)`,
-        border: `2px solid ${COLORS.violet}`,
-        borderRadius: "38px",
-        boxShadow: `-6px 0 24px 1px ${COLORS.violet}22`,
-        padding: "36px 28px 28px 28px",
-        zIndex: 99,
-        height: "calc(100vh - 104px)",
-        overflowY: "auto"
-      }}
+    <button
+      className="floating-backtotop-btn animate-fadeInScale"
+      onClick={handleClick}
+      aria-label="Back to top"
+      title="Back to top"
     >
-      <button
-        className="absolute top-6 right-8 px-4 py-2 font-bold rounded-full shadow-xl transition hover:scale-105 animate-bounceIn"
-        style={{
-          background: COLORS.claret,
-          color: COLORS.vanilla,
-          fontSize: "1.05rem",
-          zIndex: 100
-        }}
-        onClick={onClose}
-      >
-        Close
-      </button>
-      <div className="mb-6">
-        <span className="text-4xl mr-3">🌿</span>
-        <h2 className="font-bold text-2xl mb-2" style={{ color: COLORS.claret }}>
-          {highlightText(Array.isArray(herb.pinyinName) ? herb.pinyinName[0] : herb.pinyinName, query)}
-          <span className="ml-2 text-lg" style={{ color: COLORS.violet }}>{herb.chineseCharacters}</span>
-        </h2>
-      </div>
-      <div style={{ color: COLORS.violet }} className="mb-2">
-        <strong>Category:</strong> {highlightText(herb.category, query)}
-      </div>
-      <div style={{ color: COLORS.seal }} className="mb-2">
-        <strong>Pharmaceutical Name:</strong> {highlightText(herb.pharmaceuticalName, query)}
-      </div>
-      <div style={{ color: COLORS.seal }} className="mb-2">
-        <strong>English Name(s):</strong>{" "}
-        {safeArr(herb.englishNames).map((n, i) => (
-          <span key={i}>{highlightText(n, query)}{i < safeArr(herb.englishNames).length - 1 ? ", " : ""}</span>
-        ))}
-      </div>
-      <div style={{ color: COLORS.seal }} className="mb-2">
-        <strong>Properties:</strong>{" "}
-        {typeof herb.properties === "object"
-          ? [safeArr(herb.properties.taste).join(", "), safeArr(herb.properties.temperature).join(", ")].filter(Boolean).join(" / ")
-          : highlightText(herb.properties, query)}
-      </div>
-      <div style={{ color: COLORS.seal }} className="mb-2">
-        <strong>Channels Entered:</strong>{" "}
-        {safeArr(herb.channelsEntered).join(", ")}
-      </div>
-      <div style={{ color: COLORS.seal }} className="mb-2">
-        <strong>Keywords:</strong>{" "}
-        {safeArr(herb.keywords).map((k, i) => (
-          <span key={i}>{highlightText(k, query)}{i < safeArr(herb.keywords).length - 1 ? ", " : ""}</span>
-        ))}
-      </div>
-      <div style={{ color: COLORS.seal }} className="mb-2">
-        <strong>Dosage:</strong> {highlightText(herb.dosage, query)}
-      </div>
-      <div style={{ color: COLORS.seal }} className="mb-2">
-        <strong>Cautions/Contraindications:</strong>{" "}
-        {safeArr(herb.cautionsAndContraindications).map((c, i) => (
-          <span key={i}>{highlightText(c, query)}{i < safeArr(herb.cautionsAndContraindications).length - 1 ? "; " : ""}</span>
-        ))}
-      </div>
-      <div style={{ color: COLORS.seal }} className="mb-2">
-        <strong>Notes:</strong>{" "}
-        {safeArr(herb.notes).map((n, i) => (
-          <span key={i}>{highlightText(n, query)}{i < safeArr(herb.notes).length - 1 ? "; " : ""}</span>
-        ))}
-      </div>
-    </div>
+      ↑
+    </button>
   );
 }
 
@@ -203,11 +186,14 @@ export default function FormulaCard() {
   const { id } = useParams();
   const navigate = useNavigate();
 
+  const { cart, addHerb, removeHerb, clearCart } = useHerbCart();
+  const [showCart, setShowCart] = useState(false);
+
   const [allFormulas, setAllFormulas] = useState([]);
   const [allHerbs, setAllHerbs] = useState([]);
-  const [sideHerb, setSideHerb] = useState(null);
   const [loading, setLoading] = useState(true);
-  const [herbLinkAnimating, setHerbLinkAnimating] = useState({}); // for per-link animation
+  const [herbLinkAnimating, setHerbLinkAnimating] = useState({});
+  const [showBackToTop, setShowBackToTop] = useState(false);
 
   useEffect(() => {
     setLoading(true);
@@ -233,6 +219,14 @@ export default function FormulaCard() {
       ]);
       setLoading(false);
     }).catch(() => setLoading(false));
+  }, []);
+
+  useEffect(() => {
+    function onScroll() {
+      setShowBackToTop(window.scrollY > 180);
+    }
+    window.addEventListener("scroll", onScroll, { passive: true });
+    return () => window.removeEventListener("scroll", onScroll);
   }, []);
 
   let formula = null;
@@ -268,13 +262,33 @@ export default function FormulaCard() {
     }
   }
 
-  // Animation handler for herb links
   function handleHerbLinkClick(herbObj, idx) {
     setHerbLinkAnimating(prev => ({ ...prev, [idx]: true }));
     setTimeout(() => setHerbLinkAnimating(prev => ({ ...prev, [idx]: false })), 350);
-    setSideHerb(herbObj);
+    addHerb(herbObj);
+    setShowCart(true);
   }
 
+  function handleCreateFormula() {
+    if (cart.length > 0) {
+      navigate("/formulabuilder", { state: { herbCart: cart } });
+      clearCart();
+      setShowCart(false);
+    }
+  }
+
+  // Helper to check if a herb is in the cart
+  function getHerbKey(herb) {
+    if (herb.pinyinName) return herb.pinyinName;
+    if (herb.name) return herb.name;
+    return undefined;
+  }
+  function isHerbInCart(herbObj) {
+    const herbKey = getHerbKey(herbObj);
+    return cart.some(h => getHerbKey(h) === herbKey);
+  }
+
+  // --- Loading State ---
   if (loading) {
     return (
       <div
@@ -296,6 +310,33 @@ export default function FormulaCard() {
         >
           <h2 className="text-3xl font-bold mb-4" style={{ color: COLORS.claret }}>Loading...</h2>
           <p className="mb-3">Loading formula data...</p>
+        </div>
+        <div className="floating-btns-container">
+          <button
+            style={{
+              background: COLORS.violet,
+              color: COLORS.vanilla,
+              borderRadius: "50%",
+              width: 49,
+              height: 49,
+              minWidth: 49,
+              minHeight: 49,
+              boxShadow: "0 2px 12px 0 #7C5CD366",
+              fontWeight: 700,
+              fontSize: 28,
+              display: "flex",
+              alignItems: "center",
+              justifyContent: "center",
+              border: `2px solid ${COLORS.vanilla}`,
+              transition: "background 0.2s, scale 0.15s",
+            }}
+            aria-label="Show Cart"
+            title="Show Cart"
+            disabled
+          >
+            🛒
+          </button>
+          <BackToTopButton show={showBackToTop} />
         </div>
       </div>
     );
@@ -333,6 +374,33 @@ export default function FormulaCard() {
             Back to Home
           </button>
         </div>
+        <div className="floating-btns-container">
+          <button
+            style={{
+              background: COLORS.violet,
+              color: COLORS.vanilla,
+              borderRadius: "50%",
+              width: 49,
+              height: 49,
+              minWidth: 49,
+              minHeight: 49,
+              boxShadow: "0 2px 12px 0 #7C5CD366",
+              fontWeight: 700,
+              fontSize: 28,
+              display: "flex",
+              alignItems: "center",
+              justifyContent: "center",
+              border: `2px solid ${COLORS.vanilla}`,
+              transition: "background 0.2s, scale 0.15s",
+            }}
+            aria-label="Show Cart"
+            title="Show Cart"
+            disabled
+          >
+            🛒
+          </button>
+          <BackToTopButton show={showBackToTop} />
+        </div>
       </div>
     );
   }
@@ -356,6 +424,55 @@ export default function FormulaCard() {
         >
           Back to Home
         </Link>
+      </div>
+      {/* HerbCart Drawer */}
+      <HerbCart
+        show={showCart}
+        onClose={() => setShowCart(false)}
+        onCreateFormula={handleCreateFormula}
+      />
+      {/* Floating Cart & BackToTop Buttons */}
+      <div className="floating-btns-container">
+        <button
+          style={{
+            background: COLORS.violet,
+            color: COLORS.vanilla,
+            borderRadius: "50%",
+            width: 49,
+            height: 49,
+            minWidth: 49,
+            minHeight: 49,
+            boxShadow: "0 2px 12px 0 #7C5CD366",
+            zIndex: 81,
+            fontWeight: 700,
+            fontSize: 28,
+            display: "flex",
+            alignItems: "center",
+            justifyContent: "center",
+            border: `2px solid ${COLORS.vanilla}`,
+            transition: "background 0.2s, scale 0.15s",
+          }}
+          onClick={() => setShowCart(true)}
+          aria-label="Show Cart"
+          title="Show Cart"
+        >
+          🛒{cart.length > 0 && (
+            <span
+              style={{
+                fontSize: 16,
+                marginLeft: 5,
+                background: COLORS.claret,
+                color: COLORS.vanilla,
+                borderRadius: "50%",
+                padding: "2px 8px",
+                fontWeight: 500,
+              }}
+            >
+              {cart.length}
+            </span>
+          )}
+        </button>
+        <BackToTopButton show={showBackToTop} />
       </div>
       {/* Formula Card */}
       <div
@@ -415,16 +532,16 @@ export default function FormulaCard() {
                 let pinyinNorm = pinyin.toLowerCase().replace(/\s+/g, "");
                 return names.some(n => n === pinyinNorm);
               });
+              const inCart = herbObj && isHerbInCart(herbObj);
               return (
                 <li key={i} style={{ display: "flex", alignItems: "center", marginBottom: "2px" }}>
                   <span style={numberCircleStyle}>{i + 1}</span>
                   {herbObj ? (
                     <button
                       className={
-                        `${herbLinkAnimating[i] ? "herb-link-pop " : ""}herb-link-hover`
+                        `${herbLinkAnimating[i] ? "herb-link-pop " : ""}herb-link-hover${inCart ? " herb-link-in-cart" : ""}`
                       }
                       style={{
-                        color: COLORS.violet,
                         textDecoration: "underline",
                         background: "none",
                         border: "none",
@@ -432,12 +549,22 @@ export default function FormulaCard() {
                         cursor: "pointer",
                         fontWeight: "bold",
                         fontSize: "1em",
-                        marginRight: "0.35em"
+                        marginRight: "0.35em",
+                        ...(inCart ? {
+                          // Additional highlight style if in cart
+                          background: COLORS.carolina,
+                          color: COLORS.seal,
+                          borderRadius: "1em",
+                          border: `2px solid ${COLORS.violet}`,
+                          boxShadow: `0 0 0 2px ${COLORS.violet}33`,
+                          padding: "0 0.4em"
+                        } : { color: COLORS.violet })
                       }}
                       onClick={() => handleHerbLinkClick(herbObj, i)}
-                      title={`View details for ${herbObj.pinyinName}`}
+                      title={inCart ? `${herbObj.pinyinName} is already in cart` : `Add ${herbObj.pinyinName} to cart`}
                     >
                       {highlightText(ing, query)}
+                      {inCart && <span style={{ fontWeight: 700, color: COLORS.claret, marginLeft: 3 }}>✔</span>}
                     </button>
                   ) : (
                     <span>{highlightText(ing, query)}</span>
@@ -488,13 +615,6 @@ export default function FormulaCard() {
           Go Back
         </button>
       </div>
-      {sideHerb && (
-        <HerbSideCard
-          herb={sideHerb}
-          query={query}
-          onClose={() => setSideHerb(null)}
-        />
-      )}
     </div>
   );
 }

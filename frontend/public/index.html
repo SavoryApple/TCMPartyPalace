@@ -9,12 +9,14 @@
     <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
     <link rel="manifest" href="%PUBLIC_URL%/manifest.json" />
     <!-- Updated CSP to allow API calls, images, and inline styles -->
-    <meta http-equiv="Content-Security-Policy"
+<meta http-equiv="Content-Security-Policy"
       content="
         default-src 'self';
         img-src 'self' data:;
         connect-src 'self' http://localhost:8080 https://thetcmatlas.fly.dev;
         style-src 'self' 'unsafe-inline';
+        frame-src 'self' https://www.youtube.com;
+        child-src 'self' https://www.youtube.com;
       " />
     <title>The TCM Atlas</title>
   </head>
