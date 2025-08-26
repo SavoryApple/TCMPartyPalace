@@ -21,27 +21,29 @@ import AdminDashboard from "./pages/AdminDashboard";
 import About from "./pages/About";
 import Logo from "./components/Logo";
 
-const API_BASE_URL = "https://thetcmatlas.fly.dev";
-
+// Chinese/Oriental theme colors
 const COLORS = {
-  vanilla: "#FFF7E3",
-  violet: "#7C5CD3",
-  carolina: "#68C5E6",
-  claret: "#A52439",
-  seal: "#3B4461",
-  highlight: "#ffe066",
-  shadow: "#7C5CD344",
-  shadowStrong: "#7C5CD399",
-  accent: "#fff0f0",
+  backgroundRed: "#9A2D1F",
+  backgroundGold: "#F9E8C2",
+  accentGold: "#D4AF37",
+  accentDarkGold: "#B38E3F",
+  accentBlack: "#44210A",
+  accentCrimson: "#C0392B",
+  accentIvory: "#FCF5E5",
+  accentEmerald: "#438C3B",
+  accentBlue: "#2176AE",
+  accentGray: "#D9C8B4",
+  shadow: "#B38E3F88",
+  shadowStrong: "#B38E3FCC",
 };
 
 const CARD_DATA = [
   {
     title: "Create Formula",
     description: "Build, compare, and save your own herbal formulas.",
-    icon: "🛠️",
-    color: COLORS.highlight,
-    textColor: COLORS.claret,
+    icon: "🪔",
+    color: COLORS.accentGold,
+    textColor: COLORS.accentBlack,
     route: "formulabuilder",
     comingSoon: false,
   },
@@ -49,9 +51,9 @@ const CARD_DATA = [
     title: "Formulas Listed by Category",
     description:
       "Explore classic formulas grouped by their TCM function and type.",
-    icon: "⚗️",
-    color: COLORS.carolina,
-    textColor: COLORS.seal,
+    icon: "⛩️",
+    color: COLORS.backgroundGold,
+    textColor: COLORS.backgroundRed,
     route: "formulacategorylist",
     comingSoon: false,
   },
@@ -59,27 +61,27 @@ const CARD_DATA = [
     title: "Herbs Listed by Category",
     description:
       "Browse all Chinese herbs organized by their traditional categories.",
-    icon: "🌿",
-    color: COLORS.violet,
-    textColor: COLORS.vanilla,
+    icon: "🌱",
+    color: COLORS.accentEmerald,
+    textColor: COLORS.accentIvory,
     route: "herbcategorylist",
     comingSoon: false,
   },
   {
     title: "Common Herb Combinations",
     description: "Explore herbs grouped by similar functions and properties.",
-    icon: "🧩",
-    color: COLORS.claret,
-    textColor: COLORS.vanilla,
+    icon: "🍃",
+    color: COLORS.accentGold,
+    textColor: COLORS.accentBlack,
     route: "herbgroups",
     comingSoon: false,
   },
   {
     title: "Dui Yao Herb Pairs (coming soon)",
     description: "Classic synergistic herb pairs used in Chinese medicine.",
-    icon: "👯‍♂️",
-    color: COLORS.violet,
-    textColor: COLORS.vanilla,
+    icon: "👬",
+    color: COLORS.backgroundRed,
+    textColor: COLORS.accentIvory,
     route: "",
     comingSoon: true,
   },
@@ -87,8 +89,8 @@ const CARD_DATA = [
     title: "Wen Bing Formulas (coming soon)",
     description: "Formulas from the Wen Bing (Warm Disease) school.",
     icon: "🔥",
-    color: COLORS.highlight,
-    textColor: COLORS.claret,
+    color: COLORS.accentCrimson,
+    textColor: COLORS.accentIvory,
     route: "",
     comingSoon: true,
   },
@@ -96,17 +98,17 @@ const CARD_DATA = [
     title: "Shang Han Lun Formulas (coming soon)",
     description: "Formulas from the Shang Han Lun (Cold Damage) school.",
     icon: "❄️",
-    color: COLORS.carolina,
-    textColor: COLORS.seal,
+    color: COLORS.accentBlue,
+    textColor: COLORS.backgroundGold,
     route: "",
     comingSoon: true,
   },
   {
     title: "Formulas Listed by Symptom (coming soon)",
-    description: "Find formulas based on presenting symptoms .",
+    description: "Find formulas based on presenting symptoms.",
     icon: "🤒",
-    color: COLORS.claret,
-    textColor: COLORS.vanilla,
+    color: COLORS.backgroundRed,
+    textColor: COLORS.accentIvory,
     route: "",
     comingSoon: true,
   },
@@ -114,8 +116,8 @@ const CARD_DATA = [
     title: "Formulas Listed by TCM Syndrome (coming soon)",
     description: "Browse formulas by TCM syndrome or pattern.",
     icon: "🩺",
-    color: COLORS.seal,
-    textColor: COLORS.vanilla,
+    color: COLORS.accentEmerald,
+    textColor: COLORS.accentIvory,
     route: "",
     comingSoon: true,
   },
@@ -123,8 +125,8 @@ const CARD_DATA = [
     title: "Formulas by TCM Diagnosis (coming soon)",
     description: "Find formulas based on TCM patterns and diagnoses.",
     icon: "📋",
-    color: COLORS.vanilla,
-    textColor: COLORS.claret,
+    color: COLORS.backgroundGold,
+    textColor: COLORS.backgroundRed,
     route: "",
     comingSoon: true,
   },
@@ -133,8 +135,8 @@ const CARD_DATA = [
     description:
       "Look up acupuncture point locations, functions, and indications.",
     icon: "🧷",
-    color: COLORS.seal,
-    textColor: COLORS.vanilla,
+    color: COLORS.accentBlue,
+    textColor: COLORS.backgroundGold,
     route: "",
     comingSoon: true,
   },
@@ -142,8 +144,8 @@ const CARD_DATA = [
     title: "Treatment Plans by Syndrome (coming soon)",
     description: "Treatment strategies based on TCM syndromes and patterns.",
     icon: "🩺",
-    color: COLORS.carolina,
-    textColor: COLORS.seal,
+    color: COLORS.accentEmerald,
+    textColor: COLORS.accentIvory,
     route: "",
     comingSoon: true,
   },
@@ -152,16 +154,35 @@ const CARD_DATA = [
     description:
       "Test your skills and knowledge with interactive learning games.",
     icon: "🎮",
-    color: COLORS.violet,
-    textColor: COLORS.vanilla,
+    color: COLORS.accentBlue,
+    textColor: COLORS.backgroundGold,
     route: "",
     comingSoon: true,
   },
 ];
 
+// Responsive background image hook
+function useResponsiveBgImage() {
+  const [bgImage, setBgImage] = useState("/images/backgroundlarger2.jpg");
+  useEffect(() => {
+    function updateBg() {
+      if (window.innerWidth < 700) {
+        setBgImage("/images/backgroundsmaller2.jpg");
+      } else {
+        setBgImage("/images/backgroundlarger2.jpg");
+      }
+    }
+    updateBg();
+    window.addEventListener("resize", updateBg);
+    return () => window.removeEventListener("resize", updateBg);
+  }, []);
+  return bgImage;
+}
+
 const GlobalAnimations = () => (
   <style>
     {`
+      body { margin: 0; padding: 0; }
       @keyframes fadeInScaleUp {
         0% { opacity: 0; transform: scale(0.97) translateY(14px);}
         50% { opacity: 0.7; transform: scale(1.03) translateY(-6px);}
@@ -169,9 +190,9 @@ const GlobalAnimations = () => (
       }
       .animate-fadeInScaleUp { animation: fadeInScaleUp 0.7s cubic-bezier(.36,1.29,.45,1.01); }
       @keyframes cardPulse {
-        0% { box-shadow: 0 6px 40px -8px ${COLORS.shadowStrong}; border-color: ${COLORS.violet}; }
-        50% { box-shadow: 0 12px 48px -8px ${COLORS.shadowStrong}; border-color: ${COLORS.carolina}; }
-        100% { box-shadow: 0 6px 40px -8px ${COLORS.shadowStrong}; border-color: ${COLORS.violet}; }
+        0% { box-shadow: 0 6px 40px -8px ${COLORS.shadowStrong}; border-color: ${COLORS.accentGold}; }
+        50% { box-shadow: 0 12px 48px -8px ${COLORS.shadowStrong}; border-color: ${COLORS.accentDarkGold}; }
+        100% { box-shadow: 0 6px 40px -8px ${COLORS.shadowStrong}; border-color: ${COLORS.accentGold}; }
       }
       .animate-cardPulse:hover { animation: cardPulse 1.2s cubic-bezier(.36,1.29,.45,1.01) infinite; }
       @keyframes shimmerText {
@@ -180,7 +201,7 @@ const GlobalAnimations = () => (
         100% { background-position: 0% 50%; }
       }
       .animate-shimmerText {
-        background: linear-gradient(90deg, ${COLORS.violet}, ${COLORS.carolina}, ${COLORS.claret}, ${COLORS.vanilla}, ${COLORS.highlight});
+        background: linear-gradient(90deg, ${COLORS.accentGold}, ${COLORS.backgroundRed}, ${COLORS.accentEmerald}, ${COLORS.backgroundGold});
         background-size: 400% 400%;
         -webkit-background-clip: text;
         -webkit-text-fill-color: transparent;
@@ -188,19 +209,6 @@ const GlobalAnimations = () => (
         text-fill-color: transparent;
         animation: shimmerText 3.2s ease-in-out infinite;
       }
-      @keyframes funWiggle {
-        0% { transform: rotate(-2deg) scale(0.98);}
-        20% { transform: rotate(3deg) scale(1.08);}
-        50% { transform: rotate(-2deg) scale(1.05);}
-        80% { transform: rotate(2deg) scale(1.03);}
-        100% { transform: rotate(-2deg) scale(0.98);}
-      }
-      .animate-funWiggle { animation: funWiggle 1.8s infinite; }
-      @keyframes heroSubPop {
-        0% { opacity: 0; transform: scale(0.92);}
-        100% { opacity: 1; transform: scale(1);}
-      }
-      .animate-heroSubPop { animation: heroSubPop 1.3s cubic-bezier(.36,1.29,.45,1.01); }
       @keyframes iconBounce {
         0% { transform: scale(1) translateY(0);}
         30% { transform: scale(1.15) translateY(-8px);}
@@ -216,60 +224,50 @@ const GlobalAnimations = () => (
       .animate-cardTextFade { animation: cardTextFade 0.9s cubic-bezier(.36,1.29,.45,1.01); }
       .card-shadow {
         box-shadow: 0 6px 40px -8px ${COLORS.shadowStrong};
-        min-width: 300px;
-        max-width: 360px;
+        min-width: 270px;
+        max-width: 340px;
         width: 100%;
-        padding: 46px 32px 38px 32px;
-        font-size: 1.18rem;
+        border-radius: 1.2em;
+        padding: 40px 24px 30px 24px;
+        font-size: 1.12rem;
+        border: 2.5px solid ${COLORS.accentGold};
       }
-      @keyframes arrowBounce {
-        0% { transform: translateY(0);}
-        50% { transform: translateY(-16px);}
-        100% { transform: translateY(0);}
-      }
-      .animate-arrowBounce { animation: arrowBounce 1.1s infinite; }
-      /* --- Responsive styles for small devices --- */
-      @media (max-width: 700px) {
-        header {
-          flex-direction: column !important;
-          padding: 16px 6px !important;
+      @media (max-width: 900px) {
+        .max-w-2xl {
+          max-width: 98vw !important;
         }
         .card-shadow {
-          min-width: 90vw !important;
-          max-width: 98vw !important;
-          padding: 32px 12px 24px 12px !important;
+          min-width: 98vw !important;
+          max-width: 99vw !important;
+          padding: 24px 6px 16px 6px !important;
           font-size: 1em !important;
         }
-        section.w-full {
-          gap: 16px !important;
-          padding: 0 2vw !important;
+      }
+      @media (max-width: 600px) {
+        .max-w-2xl {
+          max-width: 99vw !important;
         }
-        nav {
-          flex-direction: column !important;
-          gap: 0.6em !important;
-        }
-        footer {
-          padding: 10px 2vw !important;
-          font-size: 0.95em !important;
-        }
-        .shrink-title {
-          font-size: 2em !important;
-        }
-        .shrink-build-learn {
-          font-size: 2.2em !important;
+        .card-shadow {
+          min-width: 99vw !important;
         }
       }
-      /* --- Stylized Tutorial Button --- */
+      @media (max-width: 500px) {
+        header { flex-direction: column !important; padding: 10px 2px !important; }
+        .max-w-2xl { max-width: 100vw !important; }
+        .card-shadow { min-width: 100vw !important; max-width: 100vw !important; padding: 20px 2px 12px 2px !important; }
+        .tutorial-btn { padding: 12px 8vw !important; font-size: 1em; }
+        .hero-top { padding: 8px 2vw !important; }
+      }
       .tutorial-btn {
-        background: linear-gradient(92deg, #7C5CD3 0%, #68C5E6 100%);
-        color: #FFF7E3;
+        background: linear-gradient(92deg, #D4AF37 0%, #B38E3F 100%);
+        color: #44210A;
         font-weight: 900;
-        font-size: 1.16em;
+        font-size: 1.12em;
         border: none;
         border-radius: 2em;
-        padding: 16px 38px;
-        box-shadow: 0 6px 24px -8px #7C5CD399, 0 2px 8px #68C5E633;
-        margin-bottom: 1.3em;
+        padding: 14px 30px;
+        box-shadow: 0 6px 24px -8px #B38E3FCC, 0 2px 8px #E3BC6F33;
+        margin-bottom: 1.1em;
         cursor: pointer;
         transition: background 0.18s, transform 0.13s, box-shadow 0.18s;
         position: relative;
@@ -280,93 +278,30 @@ const GlobalAnimations = () => (
         align-items: center;
         gap: 0.7em;
         user-select: none;
+        font-family: "Noto Serif SC", "Songti SC", "KaiTi", serif;
       }
       .tutorial-btn:hover, .tutorial-btn:focus {
-        background: linear-gradient(92deg, #68C5E6 0%, #7C5CD3 100%);
-        color: #fff0f0;
+        background: linear-gradient(92deg, #B38E3F 0%, #D4AF37 100%);
+        color: #FCF5E5;
         transform: scale(1.04) translateY(-2px);
-        box-shadow: 0 12px 32px -10px #7C5CD399;
+        box-shadow: 0 12px 32px -10px #B38E3FCC;
       }
       .tutorial-btn-icon {
         font-size: 1.8em;
-        filter: drop-shadow(0 2px 8px #3B4461);
+        filter: drop-shadow(0 2px 8px #44210A);
         animation: iconBounce 1.7s infinite;
       }
       .tutorial-btn-label {
         font-size: 1.08em;
         font-weight: 900;
-        background: linear-gradient(90deg, #ffe066 20%, #68C5E6 80%);
+        background: linear-gradient(90deg, #D4AF37 20%, #9A2D1F 80%);
         -webkit-background-clip: text;
         -webkit-text-fill-color: transparent;
         background-clip: text;
         text-fill-color: transparent;
-        text-shadow: 0 1px 6px #7C5CD344;
+        text-shadow: 0 1px 6px #B38E3F44;
         letter-spacing: -0.01em;
-      }
-      /* Tutorial Modal Styles */
-      .tutorial-modal-backdrop {
-        position: fixed;
-        top: 0; left: 0; right: 0; bottom: 0;
-        background: rgba(60,60,60,0.46);
-        z-index: 9998;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        animation: fadeInScaleUp 0.4s;
-      }
-      .tutorial-modal-content {
-        background: #fff;
-        border-radius: 1.6em;
-        padding: 28px 32px 16px 32px;
-        box-shadow: 0 16px 60px -16px ${COLORS.shadowStrong};
-        max-width: 98vw;
-        width: 480px;
-        position: relative;
-        z-index: 9999;
-        animation: fadeInScaleUp 0.4s;
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-      }
-      .tutorial-modal-close-btn {
-        position: absolute;
-        top: 16px;
-        right: 20px;
-        background: ${COLORS.claret};
-        color: ${COLORS.vanilla};
-        border: none;
-        border-radius: 999px;
-        font-size: 1.19em;
-        font-weight: 700;
-        width: 2.6em;
-        height: 2.6em;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        cursor: pointer;
-        box-shadow: 0 2px 8px -2px ${COLORS.claret}66;
-        transition: background 0.14s;
-      }
-      .tutorial-video-title {
-        color: ${COLORS.violet};
-        font-size: 1.5em;
-        font-weight: 900;
-        letter-spacing: -0.01em;
-        margin-bottom: 18px;
-        text-align: center;
-      }
-      .tutorial-video-description {
-        font-size: 1.07em;
-        font-weight: 500;
-        color: ${COLORS.seal};
-        margin-bottom: 10px;
-        text-align: center;
-      }
-      .tutorial-modal-video {
-        width: 100%;
-        max-width: 420px;
-        border-radius: 1em;
-        box-shadow: 0 4px 18px -6px ${COLORS.shadowStrong};
+        font-family: "Noto Serif SC", "Songti SC", "KaiTi", serif;
       }
     `}
   </style>
@@ -380,12 +315,9 @@ function ScrollToTop() {
   return null;
 }
 
-// --- Updated TutorialModal to use YouTube iframe ---
 function TutorialModal({ open, onClose }) {
   if (!open) return null;
-
-  // Replace with your own unlisted YouTube video ID
-  const youtubeVideoId = "esDYrMcjCJw"; // <-- update this with your actual video ID
+  const youtubeVideoId = "esDYrMcjCJw";
   const youtubeEmbedUrl = `https://www.youtube.com/embed/${youtubeVideoId}?rel=0&modestbranding=1`;
 
   return (
@@ -406,9 +338,9 @@ function TutorialModal({ open, onClose }) {
         </button>
         <div className="tutorial-video-title">Site Tutorial</div>
         <div className="tutorial-video-description">
-          Watch this walkthrough to learn how to use the TCM Atlas website. <br />
-          <span style={{ fontSize: "0.95em", color: "#68C5E6" }}>
-            (You can pause, scrub, or adjust volume as needed.)
+          Watch this walkthrough to learn how to use the TCM Atlas website.<br />
+          <span style={{ fontSize: "0.95em", color: COLORS.accentGold }}>
+            (You can pause, adjust volume, or scrub the timeline.)
           </span>
         </div>
         <div style={{ width: "100%", maxWidth: 420 }}>
@@ -426,8 +358,9 @@ function TutorialModal({ open, onClose }) {
                 width: "100%",
                 height: "100%",
                 borderRadius: "1em",
-                border: "none",
+                border: `2px solid ${COLORS.accentGold}`,
                 boxShadow: "0 4px 18px -6px " + COLORS.shadowStrong,
+                background: COLORS.accentIvory,
               }}
             />
           </div>
@@ -437,45 +370,17 @@ function TutorialModal({ open, onClose }) {
   );
 }
 
-function AnimatedBuildLearnPractice() {
-  return (
-    <div
-      className="shrink-build-learn"
-      style={{
-        fontWeight: 900,
-        fontSize: "3.6rem",
-        letterSpacing: "-.02em",
-        marginBottom: "0.21em",
-        marginTop: "0.21em",
-        textShadow: `
-          0 4px 16px ${COLORS.violet},
-          0 1px 0 ${COLORS.vanilla},
-          0 0 16px ${COLORS.carolina},
-          0 0 0 #000
-        `,
-        userSelect: "none",
-        borderRadius: "1em",
-        WebkitFontSmoothing: "antialiased",
-        filter: "drop-shadow(0 3px 1px rgba(124,92,211,0.20))",
-        transition: "font-size 0.2s"
-      }}
-    >
-      Build, Learn, Practice!
-    </div>
-  );
-}
-
 function VisitorCounter() {
   const [count, setCount] = useState(null);
   useEffect(() => {
     if (!localStorage.getItem("hasVisitedTCMPartyPalace")) {
-      fetch(`${API_BASE_URL}/api/visit`, { method: "POST" })
+      fetch(`https://thetcmatlas.fly.dev/api/visit`, { method: "POST" })
         .then((res) => res.json())
         .then((data) => setCount(data.count))
         .catch(() => setCount("..."));
       localStorage.setItem("hasVisitedTCMPartyPalace", "true");
     } else {
-      fetch(`${API_BASE_URL}/api/visit`)
+      fetch(`https://thetcmatlas.fly.dev/api/visit`)
         .then((res) => res.json())
         .then((data) => setCount(data.count))
         .catch(() => setCount("..."));
@@ -485,31 +390,61 @@ function VisitorCounter() {
     <div
       className="flex flex-col items-center justify-center w-full"
       style={{
-        minHeight: "50px",
-        padding: "12px 0",
+        minHeight: "40px",
+        padding: "10px 0",
       }}
     >
       <div
         style={{
-          background: COLORS.vanilla,
-          color: COLORS.claret,
-          border: `2px solid ${COLORS.violet}`,
+          background: COLORS.backgroundGold,
+          color: COLORS.backgroundRed,
+          border: `2px double ${COLORS.accentGold}`,
           borderRadius: "2em",
-          padding: "12px 32px",
-          fontSize: "1.25em",
-          fontWeight: 700,
-          boxShadow: `0 4px 28px -8px ${COLORS.shadowStrong}`,
-          marginBottom: "0.25em",
+          padding: "10px 24px",
+          fontSize: "1.09em",
+          fontWeight: 800,
+          boxShadow: `0 4px 18px -8px ${COLORS.shadowStrong}`,
+          marginBottom: "0.2em",
+          fontFamily: '"Noto Serif SC", "Songti SC", "KaiTi", serif',
         }}
       >
-        You are visitor number{" "}
-        <span
-          style={{ color: COLORS.carolina, fontWeight: 900, fontSize: "1.3em" }}
-        >
+        You are visitor number <span style={{ color: COLORS.accentGold, fontWeight: 900, fontSize: "1.22em" }}>
           {count !== null ? count : "..."}
-        </span>
-        !
+        </span>!
       </div>
+    </div>
+  );
+}
+
+function AnimatedBuildLearnPractice() {
+  return (
+    <div
+      className="animate-shimmerText"
+      style={{
+        fontWeight: 900,
+        fontSize: "2.2rem",
+        letterSpacing: "-.02em",
+        marginBottom: "0.21em",
+        marginTop: "0.21em",
+        textShadow: `
+          0 4px 16px ${COLORS.accentGold},
+          0 1px 0 ${COLORS.backgroundGold},
+          0 0 16px ${COLORS.backgroundRed},
+          0 0 0 #000
+        `,
+        userSelect: "none",
+        borderRadius: "1em",
+        WebkitFontSmoothing: "antialiased",
+        filter: "drop-shadow(0 3px 1px rgba(179,142,63,0.18))",
+        transition: "font-size 0.2s",
+        fontFamily: '"Noto Serif SC", "Songti SC", "KaiTi", serif',
+        position: "relative",
+        zIndex: 2,
+        display: "block",
+        textAlign: "center"
+      }}
+    >
+      Build · Learn · Practice
     </div>
   );
 }
@@ -541,30 +476,31 @@ function ScrollDownHint() {
         position: "fixed",
         left: "50%",
         transform: "translateX(-50%)",
-        bottom: 24,
+        bottom: 20,
         zIndex: 9999,
-        padding: "16px 36px 16px 36px",
-        background: COLORS.violet,
-        color: COLORS.vanilla,
+        padding: "13px 30px 13px 30px",
+        background: COLORS.backgroundRed,
+        color: COLORS.accentGold,
         borderRadius: "2em",
         fontWeight: 700,
-        fontSize: "1.21em",
-        boxShadow: `0 6px 40px -8px ${COLORS.shadowStrong}`,
-        border: `2px solid ${COLORS.carolina}`,
+        fontSize: "1.13em",
+        boxShadow: `0 6px 28px -8px ${COLORS.shadowStrong}`,
+        border: `2px double ${COLORS.accentGold}`,
         display: "flex",
         alignItems: "center",
         gap: "1em",
         pointerEvents: "none",
-        opacity: 0.95,
+        opacity: 0.96,
         userSelect: "none",
         transition: "opacity 0.2s",
+        fontFamily: '"Noto Serif SC", "Songti SC", "KaiTi", serif',
       }}
       className="animate-fadeInScaleUp"
     >
       <span>Scroll down for more!</span>
       <span
         style={{
-          fontSize: "2.2em",
+          fontSize: "2em",
           lineHeight: "1em",
           display: "inline-block",
         }}
@@ -578,48 +514,55 @@ function ScrollDownHint() {
 
 function Home() {
   const navigate = useNavigate();
-  const isAdmin =
-    localStorage.getItem("role") === "admin" && localStorage.getItem("token");
+  const isAdmin = localStorage.getItem("role") === "admin" && localStorage.getItem("token");
   const [tutorialOpen, setTutorialOpen] = useState(false);
+  const bgImage = useResponsiveBgImage();
 
   return (
     <div
       style={{
         minHeight: "100vh",
-        background: `linear-gradient(120deg, ${COLORS.vanilla} 0%, ${COLORS.carolina} 50%, ${COLORS.violet} 100%)`,
-        overflowX: "hidden"
+        width: "100vw",
+        background: COLORS.backgroundGold,
+        overflowX: "hidden",
+        fontFamily: '"Noto Serif SC", "Songti SC", "KaiTi", serif',
+        position: "relative",
       }}
       className="flex flex-col"
     >
       <GlobalAnimations />
       <ScrollDownHint />
       <TutorialModal open={tutorialOpen} onClose={() => setTutorialOpen(false)} />
+      {/* NAV BAR */}
       <header
-        className="py-6 px-8 flex justify-between items-center shadow-lg animate-fadeInScaleUp"
+        className="py-5 px-5 flex justify-between items-center shadow-lg animate-fadeInScaleUp"
         style={{
-          background: COLORS.carolina,
-          borderBottom: `4px solid ${COLORS.violet}`,
+          background: "rgba(166,44,26,0.92)",
+          borderBottom: `5px double ${COLORS.accentGold}`,
           display: "flex",
-          flexDirection: "row",
-          flexWrap: "wrap"
+          flexDirection: window.innerWidth < 600 ? "column" : "row",
+          flexWrap: "wrap",
+          position: "sticky",
+          top: 0,
+          zIndex: 10,
         }}
       >
-        <Logo size={56} showBeta={true} style={{ marginRight: "1em" }} />
+        <Logo size={window.innerWidth < 600 ? 44 : 60} showBeta={true} style={{ marginRight: "1em", filter: "drop-shadow(0 2px 7px #C9A052)" }} />
         <nav style={{ display: "flex", alignItems: "center", gap: "2em", flexWrap: "wrap" }}>
           <ul
-            className="flex gap-6 font-semibold"
-            style={{ margin: 0, padding: 0, flexWrap: "wrap" }}
+            className="flex gap-7 font-semibold"
+            style={{ margin: 0, padding: 0, flexWrap: "wrap", fontFamily: '"Noto Serif SC", "Songti SC", "KaiTi", serif' }}
           >
             <li>
               <button
-                className="hover:text-seal transition"
                 style={{
-                  color: COLORS.violet,
+                  color: COLORS.accentGold,
                   background: "none",
                   border: "none",
                   cursor: "pointer",
                   font: "inherit",
                   padding: 0,
+                  fontFamily: '"Noto Serif SC", "Songti SC", "KaiTi", serif'
                 }}
                 onClick={() => navigate("report")}
               >
@@ -628,14 +571,14 @@ function Home() {
             </li>
             <li>
               <button
-                className="hover:text-seal transition"
                 style={{
-                  color: COLORS.violet,
+                  color: COLORS.accentGold,
                   background: "none",
                   border: "none",
                   cursor: "pointer",
                   font: "inherit",
                   padding: 0,
+                  fontFamily: '"Noto Serif SC", "Songti SC", "KaiTi", serif'
                 }}
                 onClick={() => navigate("about")}
               >
@@ -648,8 +591,8 @@ function Home() {
               <button
                 style={{
                   marginLeft: "2em",
-                  background: COLORS.violet,
-                  color: COLORS.vanilla,
+                  background: COLORS.accentGold,
+                  color: COLORS.backgroundRed,
                   border: "none",
                   borderRadius: "1.3em",
                   fontWeight: 700,
@@ -657,9 +600,8 @@ function Home() {
                   padding: "8px 26px",
                   cursor: "pointer",
                   boxShadow: `0 3px 8px -2px ${COLORS.shadowStrong}`,
-                  transition: "background 0.2s",
                 }}
-                className="hover:bg-carolina"
+                className="hover:bg-accentDarkGold"
                 onClick={() => navigate("login")}
               >
                 Admin Login
@@ -667,8 +609,8 @@ function Home() {
               <button
                 style={{
                   marginLeft: "0.5em",
-                  background: COLORS.seal,
-                  color: COLORS.vanilla,
+                  background: COLORS.accentBlack,
+                  color: COLORS.accentGold,
                   border: "none",
                   borderRadius: "1.3em",
                   fontWeight: 700,
@@ -676,9 +618,8 @@ function Home() {
                   padding: "8px 26px",
                   cursor: "pointer",
                   boxShadow: `0 3px 8px -2px ${COLORS.shadowStrong}`,
-                  transition: "background 0.2s",
                 }}
-                className="hover:bg-violet"
+                className="hover:bg-backgroundRed"
                 onClick={() => navigate("register")}
               >
                 Register Admin
@@ -688,8 +629,8 @@ function Home() {
             <button
               style={{
                 marginLeft: "2em",
-                background: COLORS.carolina,
-                color: COLORS.violet,
+                background: COLORS.accentEmerald,
+                color: COLORS.accentIvory,
                 border: "none",
                 borderRadius: "1.3em",
                 fontWeight: 700,
@@ -697,9 +638,8 @@ function Home() {
                 padding: "8px 26px",
                 cursor: "pointer",
                 boxShadow: `0 3px 8px -2px ${COLORS.shadowStrong}`,
-                transition: "background 0.2s",
               }}
-              className="hover:bg-violet"
+              className="hover:bg-backgroundRed"
               onClick={() => navigate("admin")}
             >
               Admin Dashboard
@@ -707,30 +647,86 @@ function Home() {
           )}
         </nav>
       </header>
-      <div className="animate-fadeInScaleUp">
-        <HomePageSearchBar />
-      </div>
-      <section className="flex-grow flex flex-col justify-center items-center text-center px-4 animate-fadeInScaleUp">
-        <div className="max-w-2xl mx-auto py-10 relative">
-          <button
-            onClick={() => setTutorialOpen(true)}
-            className="tutorial-btn animate-fadeInScaleUp"
-            aria-label="Open site tutorial"
-          >
-            <span className="tutorial-btn-icon" aria-hidden="true">📺</span>
-            <span className="tutorial-btn-label">Watch Tutorial</span>
-          </button>
-          <AnimatedBuildLearnPractice />
-          <VisitorCounter />
-          <p
-            className="text-xl mb-8 animate-cardTextFade"
-            style={{ color: COLORS.seal }}
-          >
-            Interactive clinical and educational tool
-          </p>
+      {/* HERO SECTION */}
+      <div
+        style={{
+          width: "100%",
+          minHeight: window.innerWidth < 700 ? "220px" : "330px",
+          background: `url('${bgImage}') center center / cover no-repeat`,
+          borderBottom: `5px double ${COLORS.accentGold}`,
+          display: "flex",
+          flexDirection: "column",
+          alignItems: "center",
+          justifyContent: "flex-end",
+          position: "relative",
+        }}
+      >
+        <div className="hero-top" style={{
+          width: "100%",
+          maxWidth: 720,
+          margin: "0 auto",
+          zIndex: 2,
+          padding: window.innerWidth < 500 ? "8px 2vw" : "24px 1vw",
+          position: "relative"
+        }}>
+          <HomePageSearchBar />
         </div>
-      </section>
-      <section className="w-full flex flex-wrap justify-center gap-10 px-8 pb-12 mt-2">
+        <div className="animate-fadeInScaleUp" style={{
+          width: "100%",
+          maxWidth: window.innerWidth < 900 ? "99vw" : "700px",
+          margin: "0 auto",
+          position: "relative",
+          zIndex: 2,
+          padding: window.innerWidth < 500 ? "0 2vw" : "0",
+        }}>
+          <section
+            className="flex flex-col justify-center items-center text-center px-4 animate-fadeInScaleUp"
+            style={{
+              background: "rgba(252,245,229,0.93)",
+              borderRadius: "1.4em",
+              boxShadow: `0 2px 18px 0 ${COLORS.shadowStrong}`,
+              border: `2px solid ${COLORS.accentGold}`,
+              margin: "0 auto",
+              marginBottom: window.innerWidth < 700 ? "12px" : "32px",
+              pointerEvents: "all",
+              paddingTop: "32px" // <--- extra padding above Watch Tutorial button
+            }}
+          >
+            <button
+              onClick={() => setTutorialOpen(true)}
+              className="tutorial-btn animate-fadeInScaleUp"
+              aria-label="Open site tutorial"
+            >
+              <span className="tutorial-btn-icon" aria-hidden="true">📺</span>
+              <span className="tutorial-btn-label">Watch Tutorial</span>
+            </button>
+            <AnimatedBuildLearnPractice />
+            <VisitorCounter />
+            <p
+              className="text-xl mb-7 animate-cardTextFade"
+              style={{
+                color: COLORS.accentBlack,
+                fontFamily: '"Noto Serif SC", "Songti SC", "KaiTi", serif',
+                fontWeight: 500,
+                marginTop: 12
+              }}
+            >
+              Interactive clinical and educational tool for Chinese Medicine
+            </p>
+          </section>
+        </div>
+      </div>
+      {/* CARD BUTTONS */}
+      <section
+        className="w-full flex flex-wrap justify-center gap-10 px-8 pb-12 mt-2"
+        style={{
+          display: "flex",
+          flexWrap: "wrap",
+          justifyContent: "center",
+          gap: window.innerWidth < 600 ? "14px" : "28px",
+          marginTop: window.innerWidth < 700 ? "10px" : "24px"
+        }}
+      >
         {CARD_DATA.map((card, i) => (
           <button
             key={card.title}
@@ -738,22 +734,22 @@ function Home() {
             style={{
               background: card.color,
               color: card.textColor,
-              borderRadius: "2.2em",
-              minWidth: 300,
-              maxWidth: 360,
+              borderRadius: "1.2em",
+              minWidth: 270,
+              maxWidth: 340,
               width: "100%",
-              padding: "46px 32px 38px 32px",
+              padding: window.innerWidth < 600 ? "30px 10px 20px 10px" : "40px 24px 30px 24px",
               fontWeight: 700,
-              fontFamily: "inherit",
-              fontSize: "1.18rem",
-              border: `2.5px solid ${COLORS.violet}`,
+              fontFamily: '"Noto Serif SC", "Songti SC", "KaiTi", serif',
+              fontSize: "1.12rem",
+              border: `2.5px solid ${COLORS.accentGold}`,
               marginBottom: 10,
               cursor: card.comingSoon ? "not-allowed" : "pointer",
               position: "relative",
               boxShadow: `0 6px 40px -8px ${COLORS.shadowStrong}`,
-              transition: "box-shadow 0.25s, border-color 0.3s",
               opacity: card.comingSoon ? 0.55 : 1,
               filter: card.comingSoon ? "grayscale(0.35)" : "none",
+              textAlign: "center",
             }}
             onClick={() => {
               if (!card.comingSoon && card.route) {
@@ -767,9 +763,9 @@ function Home() {
             <span
               className="animate-iconBounce"
               style={{
-                fontSize: "2.9em",
-                marginBottom: "0.18em",
-                textShadow: `0 3px 11px ${COLORS.seal}33, 0 0 16px ${COLORS.violet}`,
+                fontSize: "2.5em",
+                marginBottom: "0.13em",
+                textShadow: `0 2px 7px ${COLORS.accentGold}, 0 0 10px ${COLORS.backgroundRed}`,
                 display: "block",
               }}
             >
@@ -778,12 +774,13 @@ function Home() {
             <span
               className="animate-cardTextFade"
               style={{
-                fontSize: "1.32em",
+                fontSize: "1.22em",
                 fontWeight: 900,
                 letterSpacing: "-.01em",
-                marginBottom: 8,
+                marginBottom: 7,
                 color: card.textColor,
-                textShadow: `0 1px 0 ${COLORS.vanilla}, 0 1.5px 8px ${COLORS.violet}18`,
+                textShadow: `0 1px 0 ${COLORS.backgroundGold}, 0 1.5px 8px ${COLORS.accentGold}18`,
+                fontFamily: '"Noto Serif SC", "Songti SC", "KaiTi", serif',
               }}
             >
               {card.title}
@@ -792,11 +789,12 @@ function Home() {
               className="animate-cardTextFade"
               style={{
                 fontWeight: 500,
-                fontSize: "1.05em",
+                fontSize: "1.03em",
                 color: card.textColor,
                 opacity: 0.93,
-                textShadow: `0 1px 0 ${COLORS.vanilla}`,
+                textShadow: `0 1px 0 ${COLORS.backgroundGold}`,
                 marginBottom: 2,
+                fontFamily: '"Noto Serif SC", "Songti SC", "KaiTi", serif',
               }}
             >
               {card.description}
@@ -804,16 +802,21 @@ function Home() {
           </button>
         ))}
       </section>
+      {/* FOOTER */}
       <footer
         className="p-6 text-center animate-cardTextFade"
         style={{
-          background: COLORS.seal,
-          color: COLORS.vanilla,
+          background: COLORS.backgroundRed,
+          color: COLORS.accentGold,
+          fontFamily: '"Noto Serif SC", "Songti SC", "KaiTi", serif',
+          borderTop: `5px double ${COLORS.accentGold}`,
+          fontWeight: 700,
+          letterSpacing: "0.02em",
+          marginTop: window.innerWidth < 700 ? "10px" : "24px"
         }}
       >
         <p>
-          &copy; {new Date().getFullYear()} The TCM Atlas · Made with passion
-          for Chinese Medicine
+          &copy; {new Date().getFullYear()} The TCM Atlas · Made with passion for Chinese Medicine
         </p>
       </footer>
     </div>
