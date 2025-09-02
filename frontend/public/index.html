@@ -2,14 +2,64 @@
 <html lang="en">
   <head>
     <meta charset="utf-8" />
-    <link rel="icon" href="%PUBLIC_URL%/favicon.ico" />
+    <title>The TCM Atlas | Build, Learn, and Practice Chinese Medicine</title>
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="theme-color" content="#000000" />
-    <meta name="description" content="The TCM Atlas" />
+
+    <!-- SEO Meta Tags -->
+    <meta name="description" content="Interactively explore Chinese medicine formulas, herbs, and treatment strategies. Build your own formulas, compare classic remedies, and much more." />
+    <meta name="robots" content="index,follow" />
+    <link rel="canonical" href="https://thetcmatlas.fly.dev/" />
+
+    <!-- Open Graph Meta Tags -->
+    <meta property="og:title" content="The TCM Atlas | Build, Learn, and Practice Chinese Medicine" />
+    <meta property="og:description" content="Interactively explore Chinese medicine formulas, herbs, and treatment strategies. Build your own formulas, compare classic remedies, and much more." />
+    <meta property="og:image" content="https://thetcmatlas.fly.dev/images/og-image.jpg" />
+    <meta property="og:url" content="https://thetcmatlas.fly.dev/" />
+    <meta property="og:type" content="website" />
+
+    <!-- Twitter Card Meta Tags -->
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content="The TCM Atlas | Build, Learn, and Practice Chinese Medicine" />
+    <meta name="twitter:description" content="Interactively explore Chinese medicine formulas, herbs, and treatment strategies. Build your own formulas, compare classic remedies, and much more." />
+    <meta name="twitter:image" content="https://thetcmatlas.fly.dev/images/og-image.jpg" />
+
+    <!-- Structured Data (JSON-LD) -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "WebSite",
+      "name": "The TCM Atlas",
+      "url": "https://thetcmatlas.fly.dev/",
+      "description": "Interactively explore Chinese medicine formulas, herbs, and treatment strategies. Build your own formulas, compare classic remedies, and much more."
+    }
+    </script>
+
+    <!-- Favicons and Icons -->
+    <link rel="icon" type="image/png" sizes="16x16" href="/logo16.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="/logo32.png">
     <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
-    <link rel="manifest" href="%PUBLIC_URL%/manifest.json" />
+    <link rel="manifest" href="/manifest.json" />
+
+    <!-- Mobile Browser Config and PWA Support -->
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <meta name="mobile-web-app-capable" content="yes">
+
+    <!-- Preconnect for API and Font (if used) -->
+    <link rel="preconnect" href="https://thetcmatlas.fly.dev">
+    <!-- Example for Google Fonts (uncomment if used)
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+SC:wght@400;700&display=swap" rel="stylesheet">
+    -->
+
+    <!-- Site Verification (optional, add your code if needed) -->
+    <!-- <meta name="google-site-verification" content="your-google-code" /> -->
+    <!-- <meta name="msvalidate.01" content="your-bing-code" /> -->
+
     <!-- Updated CSP to allow API calls, images, and inline styles -->
-<meta http-equiv="Content-Security-Policy"
+    <meta http-equiv="Content-Security-Policy"
       content="
         default-src 'self';
         img-src 'self' data:;
@@ -18,10 +68,21 @@
         frame-src 'self' https://www.youtube.com;
         child-src 'self' https://www.youtube.com;
       " />
-    <title>The TCM Atlas</title>
   </head>
   <body>
-    <noscript>You need to enable JavaScript to run this app.</noscript>
+    <noscript>
+      You need to enable JavaScript to run this app.
+      The TCM Atlas is an interactive tool for learning about Chinese medicine formulas, herbs, and strategies. If you cannot enable JavaScript, please contact us for more information.
+    </noscript>
     <div id="root"></div>
+    <!-- Optional: Google Analytics (add your code if needed)
+    <script async src="https://www.googletagmanager.com/gtag/js?id=UA-XXXXXXXXX-X"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+      gtag('config', 'UA-XXXXXXXXX-X');
+    </script>
+    -->
   </body>
 </html>

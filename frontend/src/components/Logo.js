@@ -4,14 +4,19 @@ import React from "react";
 // and displays "The TCM Atlas" text with the same shimmer and fade-in animation as before
 // To use: <Logo size={56} />
 
+// Use App.js color scheme:
 const COLORS = {
-  vanilla: "#FFF7E3",
-  violet: "#7C5CD3",
-  carolina: "#68C5E6",
-  claret: "#A52439",
-  seal: "#3B4461",
-  highlight: "#ffe066",
-  shadowStrong: "#7C5CD399",
+  backgroundRed: "#9A2D1F",
+  backgroundGold: "#F9E8C2",
+  accentGold: "#D4AF37",
+  accentDarkGold: "#B38E3F",
+  accentBlack: "#44210A",
+  accentCrimson: "#C0392B",
+  accentIvory: "#FCF5E5",
+  accentEmerald: "#438C3B",
+  accentBlue: "#2176AE",
+  accentGray: "#D9C8B4",
+  shadowStrong: "#B38E3FCC",
 };
 
 export default function Logo({
@@ -54,7 +59,7 @@ export default function Logo({
           display: "inline-block",
           verticalAlign: "middle",
           marginRight: "0.2em",
-          boxShadow: `0 2px 10px -2px ${COLORS.violet}44`,
+          boxShadow: `0 2px 10px -2px ${COLORS.accentGold}44`,
           borderRadius: "20%",
         }}
         draggable={false}
@@ -63,7 +68,7 @@ export default function Logo({
         The TCM Atlas
         {showBeta && (
           <span style={{ fontSize: "0.55em", marginLeft: "0.5em", fontWeight: 700 }}>
-            (BETA)
+            (v1.0)
           </span>
         )}
       </span>
@@ -82,7 +87,7 @@ export default function Logo({
             100% { background-position: 0% 50%; }
           }
           .animate-shimmerText {
-            background: linear-gradient(90deg, ${COLORS.violet}, ${COLORS.carolina}, ${COLORS.claret}, ${COLORS.vanilla}, ${COLORS.highlight});
+            background: linear-gradient(90deg, ${COLORS.accentGold}, ${COLORS.backgroundRed}, ${COLORS.accentEmerald}, ${COLORS.backgroundGold});
             background-size: 400% 400%;
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;

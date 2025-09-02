@@ -1,60 +1,103 @@
 import React, { useEffect, useState, useRef } from "react";
 import { useNavigate, Link } from "react-router-dom";
-import Logo from "../components/Logo";
+import FormulaCategoryListSideBar from "../components/FormulaCategoryListSideBar";
+import FooterCard from "../components/FooterCard";
+import NavBar from "../components/NavBar";
+import FormulasByCategory from "../components/FormulasByCategory";
+import Badge from "../components/Badge";
+import BackToTopButton from "../components/BackToTopButton";
 
+// --- CONSTANTS ---
 const COLORS = {
-  vanilla: "#FFF7E3",
-  violet: "#7C5CD3",
-  carolina: "#68C5E6",
-  claret: "#A52439",
-  seal: "#3B4461",
-  highlight: "#ffe066",
-  shadow: "#7C5CD344",
-  shadowStrong: "#7C5CD399",
-  accent: "#fff0f0",
+  backgroundRed: "#9A2D1F",
+  backgroundGold: "#F9E8C2",
+  accentGold: "#D4AF37",
+  accentDarkGold: "#B38E3F",
+  accentBlack: "#44210A",
+  accentCrimson: "#C0392B",
+  accentIvory: "#FCF5E5",
+  accentEmerald: "#438C3B",
+  accentBlue: "#2176AE",
+  accentGray: "#D9C8B4",
+  shadow: "#B38E3F88",
+  shadowStrong: "#B38E3FCC",
 };
 
 const SIDEBAR_WIDTH = 300;
 const FILTER_BAR_HEIGHT = 56;
+const NAVBAR_HEIGHT = 72;
 const CARD_MAX_WIDTH = 980;
 
+const formulaCategoryListEndpoint = "/data/formulaCategoryListObject.json";
 const API_URL = process.env.REACT_APP_API_URL || "https://thetcmatlas.fly.dev";
 const formulaApiEndpoints = [
   `${API_URL}/api/data/caleandnccaomformulas`,
   `${API_URL}/api/data/nccaomformulas`,
   `${API_URL}/api/data/extraformulas`,
 ];
-const formulaCategoryListEndpoint = `${API_URL}/api/data/formulacategorylist`;
+
+// --- UTILS ---
+function normalize(str) {
+  return (str || "")
+    .replace(/\s|-/g, "")
+    .toLowerCase()
+    .normalize("NFD")
+    .replace(/[\u0300-\u036f]/g, "");
+}
+function getFormulaBadge(formula) {
+  if (formula.caleAndNccaom === "yes" || formula.origin === "CALE") {
+    return { label: "NCCAOM/CALE" };
+  }
+  if (formula.nccaom === "yes" && formula.caleAndNccaom !== "yes") {
+    return { label: "NCCAOM" };
+  }
+  if (formula.extraFormula === "yes") {
+    return { label: "Extra" };
+  }
+  return null;
+}
+
+const KEYACTIONS_EXPLANATION_STYLE = {
+  background: "#FCF5E5",
+  color: "#C0392B",
+  fontWeight: 600,
+  fontSize: "1.05em",
+  borderRadius: "1em",
+  padding: "14px 20px",
+  marginTop: "10px",
+  marginBottom: "2px",
+  textAlign: "center",
+  boxShadow: "0 2px 18px -4px #B38E3FCC",
+  border: "2px solid #F9E8C2",
+  letterSpacing: ".01em",
+  maxWidth: "98%",
+  alignSelf: "center",
+  wordBreak: "break-word",
+  lineHeight: "1.4",
+};
+
+function KeyActionsExplanation({ keyActions }) {
+  if (!keyActions) return null;
+  return (
+    <div
+      className="formula-keyactions-explanation"
+      style={KEYACTIONS_EXPLANATION_STYLE}
+    >
+      {keyActions}
+    </div>
+  );
+}
 
 const GlobalAnimations = () => (
   <style>
     {`
       @keyframes pulseGlow {
-        0% { box-shadow: 0 0 0 0 ${COLORS.violet}33; }
-        50% { box-shadow: 0 0 16px 8px ${COLORS.violet}88; }
-        100% { box-shadow: 0 0 0 0 ${COLORS.violet}33; }
+        0% { box-shadow: 0 0 0 0 ${COLORS.accentGold}33; }
+        50% { box-shadow: 0 0 16px 8px ${COLORS.accentGold}88; }
+        100% { box-shadow: 0 0 0 0 ${COLORS.accentGold}33; }
       }
       .animate-pulseGlow { animation: pulseGlow 2s infinite; }
-      @keyframes fadeInScaleUp {
-        0% { opacity: 0; transform: scale(0.97) translateY(14px);}
-        50% { opacity: 0.7; transform: scale(1.03) translateY(-6px);}
-        100% { opacity: 1; transform: scale(1) translateY(0);}
-      }
-      .animate-fadeInScaleUp { animation: fadeInScaleUp 0.7s cubic-bezier(.36,1.29,.45,1.01); }
-      @keyframes shimmerText {
-        0% { background-position: 0% 50%; }
-        50% { background-position: 100% 50%; }
-        100% { background-position: 0% 50%; }
-      }
-      .animate-shimmerText {
-        background: linear-gradient(90deg, ${COLORS.violet}, ${COLORS.carolina}, ${COLORS.claret}, ${COLORS.vanilla}, ${COLORS.highlight});
-        background-size: 400% 400%;
-        -webkit-background-clip: text;
-        -webkit-text-fill-color: transparent;
-        background-clip: text;
-        text-fill-color: transparent;
-        animation: shimmerText 3.2s ease-in-out infinite;
-      }
+      body { background: ${COLORS.backgroundGold}; }
       @media (max-width: 900px) {
         .sidebar {
           display: none !important;
@@ -62,19 +105,12 @@ const GlobalAnimations = () => (
         .main-scroll,
         .custom-scrollbar-main {
           padding-left: 0 !important;
-          padding-top: ${FILTER_BAR_HEIGHT + 58}px !important;
+          margin-left: 0 !important;
+          margin-right: 0 !important;
         }
         .formula-card-section {
           padding: 0 2vw !important;
           max-width: 98vw !important;
-        }
-        .logo-mobile-top {
-          margin-top: 0.7em !important;
-          margin-bottom: 0.2em !important;
-        }
-        .mobile-category-nav {
-          position: static !important;
-          margin-top: 1.2em !important;
         }
       }
       @media (max-width: 700px) {
@@ -95,14 +131,6 @@ const GlobalAnimations = () => (
         .custom-scrollbar-main {
           padding-right: 0 !important;
         }
-        .logo-mobile-top {
-          margin-top: 0.7em !important;
-          margin-bottom: 0.2em !important;
-        }
-        .mobile-category-nav {
-          position: static !important;
-          margin-top: 1.2em !important;
-        }
       }
       @media (max-width: 500px) {
         .formula-card-section {
@@ -115,121 +143,10 @@ const GlobalAnimations = () => (
         .back-to-home-btn {
           right: 2px !important;
         }
-        .logo-mobile-top {
-          margin-top: 0.6em !important;
-          margin-bottom: 0.13em !important;
-        }
-        .mobile-category-nav {
-          position: static !important;
-          margin-top: 1em !important;
-        }
       }
     `}
   </style>
 );
-
-function BackToTopButton({ scrollContainerRef }) {
-  const [show, setShow] = useState(false);
-
-  useEffect(() => {
-    const container = scrollContainerRef.current;
-    if (!container) return;
-    const handleScroll = () => setShow(container.scrollTop > 180);
-    container.addEventListener("scroll", handleScroll, { passive: true });
-    handleScroll();
-    return () => container.removeEventListener("scroll", handleScroll);
-  }, [scrollContainerRef]);
-
-  function handleClick() {
-    const container = scrollContainerRef.current;
-    if (container) {
-      container.scrollTo({ top: 0, behavior: "smooth" });
-    }
-  }
-
-  return (
-    <button
-      onClick={handleClick}
-      style={{
-        position: "fixed",
-        bottom: 18,
-        right: 18,
-        zIndex: 70,
-        background: COLORS.violet,
-        color: COLORS.vanilla,
-        borderRadius: "50%",
-        width: 44,
-        height: 44,
-        border: `2.5px solid ${COLORS.seal}`,
-        boxShadow: `0 6px 40px -8px ${COLORS.shadowStrong}`,
-        fontWeight: 900,
-        fontSize: "1.2rem",
-        display: show ? "flex" : "none",
-        alignItems: "center",
-        justifyContent: "center",
-        transition: "background 0.2s, scale 0.15s",
-        cursor: "pointer",
-        outline: "none",
-        animation: "pulseGlow 2s infinite",
-      }}
-      aria-label="Back to top"
-      title="Back to top"
-      className="animate-fadeInScaleUp"
-    >
-      ↑
-    </button>
-  );
-}
-
-function getFormulaBadge(formula) {
-  if (formula.caleAndNccaom === "yes" || formula.origin === "CALE") {
-    return { label: "NCCAOM/CALE", color: "bg-green-200 text-green-700" };
-  }
-  if (formula.nccaom === "yes" && formula.caleAndNccaom !== "yes") {
-    return { label: "NCCAOM", color: "bg-blue-200 text-blue-700" };
-  }
-  if (formula.extraFormula === "yes") {
-    return { label: "Extra", color: "bg-gray-200 text-gray-700" };
-  }
-  return null;
-}
-
-function Badge({ badge }) {
-  if (!badge) return null;
-  let className = "inline-block ml-2 px-2 py-1 rounded text-xs font-semibold align-middle transition-all duration-200";
-  if (badge.color) className += ` ${badge.color}`;
-  return (
-    <span
-      className={className}
-      style={badge.color ? {} : { background: "#e0e0e0", color: "#333" }}
-    >
-      {badge.label}
-    </span>
-  );
-}
-
-function normalize(str) {
-  return (str || "")
-    .replace(/\s|-/g, "")
-    .toLowerCase()
-    .normalize("NFD")
-    .replace(/[\u0300-\u036f]/g, "");
-}
-
-function sortFormulasByBadge(formulas, getAnyFormulaMatchByName) {
-  const badgeOrder = {
-    "NCCAOM/CALE": 0,
-    "NCCAOM": 1,
-    "Extra": 2,
-  };
-  return [...formulas].sort((a, b) => {
-    const aObj = getAnyFormulaMatchByName(a.name);
-    const bObj = getAnyFormulaMatchByName(b.name);
-    const aBadge = aObj?.badge?.label || "";
-    const bBadge = bObj?.badge?.label || "";
-    return (badgeOrder[aBadge] ?? 99) - (badgeOrder[bBadge] ?? 99);
-  });
-}
 
 function MobileCategoryNav({ categories, activeSubcategory, handleSubcategoryScroll }) {
   return (
@@ -240,24 +157,24 @@ function MobileCategoryNav({ categories, activeSubcategory, handleSubcategoryScr
         zIndex: 1,
       }}
     >
-      {categories.map((category, catIdx) =>
-        (category.subcategories || []).map((subcat, subIdx) => (
+      {categories.map((category) =>
+        (category.subcategories || []).map((subcat) => (
           <button
-            key={subcat.title + subIdx}
+            key={subcat.title}
             data-subcategory={subcat.title}
             onClick={() => handleSubcategoryScroll(subcat.title)}
             className={[
-              "px-3 py-2 rounded font-semibold transition-colors hover:bg-violet/20 focus-visible:ring-2 focus-visible:ring-carolina",
+              "px-3 py-2 rounded font-semibold transition-colors hover:bg-accentGold/20 focus-visible:ring-2 focus-visible:ring-accentEmerald",
               activeSubcategory === subcat.title
-                ? "bg-violet/30 text-carolina font-extrabold shadow"
-                : "text-violet"
+                ? "bg-accentGold/30 text-accentEmerald font-extrabold shadow"
+                : "text-backgroundRed"
             ].join(" ")}
             style={{
-              color: COLORS.violet,
+              color: COLORS.backgroundRed,
               cursor: "pointer",
               fontWeight: activeSubcategory === subcat.title ? 800 : 600,
-              border: activeSubcategory === subcat.title ? `2px solid ${COLORS.carolina}` : "none",
-              boxShadow: activeSubcategory === subcat.title ? `0 0 4px 0 ${COLORS.violet}` : "none"
+              border: activeSubcategory === subcat.title ? `2px solid ${COLORS.accentEmerald}` : "none",
+              boxShadow: activeSubcategory === subcat.title ? `0 0 4px 0 ${COLORS.accentGold}` : "none"
             }}
             tabIndex={0}
           >
@@ -269,50 +186,106 @@ function MobileCategoryNav({ categories, activeSubcategory, handleSubcategoryScr
   );
 }
 
-function MobileFilterBar({ showCaleNccaom, setShowCaleNccaom, showNccaom, setShowNccaom, showExtra, setShowExtra }) {
+function FilterBar({
+  showCaleNccaom,
+  setShowCaleNccaom,
+  showNccaom,
+  setShowNccaom,
+  showExtra,
+  setShowExtra,
+  isFixed,
+  filterBarRef,
+}) {
   return (
-    <div className="mobile-filter-bar w-full px-2 py-2 bg-white/90 rounded-xl shadow-md flex flex-col items-center gap-2 sm:flex-row sm:justify-center flex-wrap"
+    <div
+      ref={filterBarRef}
+      className="filter-bar w-full px-2 py-2 bg-backgroundGold shadow rounded-xl flex flex-col items-center gap-2 sm:flex-row sm:justify-start flex-wrap"
       style={{
-        position: "fixed",
-        top: 0,
+        position: isFixed ? "fixed" : "relative",
+        top: isFixed ? 0 : undefined,
         left: 0,
         width: "100vw",
         zIndex: 99,
-      }}>
-      <span className="font-extrabold text-violet text-lg tracking-tight mb-1" style={{textShadow:`0 1px 0 ${COLORS.vanilla}`}}>
+        boxShadow: isFixed
+          ? `0 2px 16px -6px ${COLORS.shadowStrong}`
+          : "none",
+        borderBottom: `2.5px solid ${COLORS.accentGold}`,
+        background: COLORS.backgroundGold,
+        fontWeight: 600,
+        fontSize: "1.05rem",
+        flexWrap: "wrap",
+        justifyContent: "flex-start",
+        minHeight: FILTER_BAR_HEIGHT,
+        marginTop: isFixed ? 0 : undefined,
+      }}
+    >
+      <span className="mr-6 font-extrabold text-backgroundRed text-lg tracking-tight" style={{textShadow:`0 1px 0 ${COLORS.backgroundGold}`}}>
         Show formulas:
       </span>
-      <div className="flex gap-2 flex-wrap justify-center">
-        <label className="flex items-center space-x-2 cursor-pointer">
-          <input
-            type="checkbox"
-            checked={showCaleNccaom}
-            onChange={() => setShowCaleNccaom((v) => !v)}
-            className="accent-green-700 w-4 h-4"
-          />
-          <span className="text-green-700 font-semibold">NCCAOM/CALE</span>
-        </label>
-        <label className="flex items-center space-x-2 cursor-pointer">
-          <input
-            type="checkbox"
-            checked={showNccaom}
-            onChange={() => setShowNccaom((v) => !v)}
-            className="accent-blue-700 w-4 h-4"
-          />
-          <span className="text-blue-700 font-semibold">NCCAOM</span>
-        </label>
-        <label className="flex items-center space-x-2 cursor-pointer">
-          <input
-            type="checkbox"
-            checked={showExtra}
-            onChange={() => setShowExtra((v) => !v)}
-            className="accent-gray-700 w-4 h-4"
-          />
-          <span className="text-gray-700 font-semibold">Extra</span>
-        </label>
-      </div>
+      <label className="mx-4 flex items-center space-x-2 cursor-pointer">
+        <input
+          type="checkbox"
+          checked={showCaleNccaom}
+          onChange={() => setShowCaleNccaom((v) => !v)}
+          className="accent-accentEmerald w-4 h-4"
+        />
+        <Badge badge={{ label: "NCCAOM/CALE" }} style={{ marginLeft: 0 }} />
+      </label>
+      <label className="mx-4 flex items-center space-x-2 cursor-pointer">
+        <input
+          type="checkbox"
+          checked={showNccaom}
+          onChange={() => setShowNccaom((v) => !v)}
+          className="accent-accentBlue w-4 h-4"
+        />
+        <Badge badge={{ label: "NCCAOM" }} style={{ marginLeft: 0 }} />
+      </label>
+      <label className="mx-4 flex items-center space-x-2 cursor-pointer">
+        <input
+          type="checkbox"
+          checked={showExtra}
+          onChange={() => setShowExtra((v) => !v)}
+          className="accent-accentGray w-4 h-4"
+        />
+        <Badge badge={{ label: "Extra" }} style={{ marginLeft: 0 }} />
+      </label>
     </div>
   );
+}
+
+// --- Scroll Sync ---
+function useScrollSync(categories, subcategoryRefs, sidebarTop, setActiveSubcategory, scrollSyncEnabled) {
+  useEffect(() => {
+    if (!categories.length || !scrollSyncEnabled) return;
+    const handleScroll = () => {
+      let bestSubcat = null;
+      let bestDistance = Infinity;
+
+      categories.forEach((category) => {
+        (category.subcategories || []).forEach((subcat) => {
+          const ref = subcategoryRefs.current[subcat.title];
+          if (ref) {
+            const rect = ref.getBoundingClientRect();
+            const distance = Math.abs(rect.top - sidebarTop - NAVBAR_HEIGHT);
+            if (distance < bestDistance) {
+              bestDistance = distance;
+              bestSubcat = subcat.title;
+            }
+          }
+        });
+      });
+
+      if (bestSubcat) {
+        setActiveSubcategory(bestSubcat);
+      } else if (categories.length && categories[0].subcategories?.length) {
+        setActiveSubcategory(categories[0].subcategories[0].title);
+      }
+    };
+
+    window.addEventListener("scroll", handleScroll, { passive: true });
+    handleScroll();
+    return () => window.removeEventListener("scroll", handleScroll);
+  }, [categories, sidebarTop, setActiveSubcategory, subcategoryRefs, scrollSyncEnabled]);
 }
 
 export default function FormulaCategoryListPage() {
@@ -323,12 +296,16 @@ export default function FormulaCategoryListPage() {
   const [showCaleNccaom, setShowCaleNccaom] = useState(true);
   const [showNccaom, setShowNccaom] = useState(true);
 
+  const [isFilterFixed, setIsFilterFixed] = useState(false);
+  const filterBarRef = useRef();
+  const navBarRef = useRef();
+
   const navigate = useNavigate();
 
-  const categoryRefs = useRef({});
   const subcategoryRefs = useRef({});
   const sidebarRef = useRef();
   const scrollContainerRef = useRef();
+  const formulasSectionRef = useRef();
 
   const [formulasByType, setFormulasByType] = useState({
     caleNccaom: [],
@@ -338,6 +315,41 @@ export default function FormulaCategoryListPage() {
   const [allFormulas, setAllFormulas] = useState([]);
   const [activeSubcategory, setActiveSubcategory] = useState(null);
   const [isSidebarHovered, setIsSidebarHovered] = useState(false);
+
+  const [sidebarTop, setSidebarTop] = useState(NAVBAR_HEIGHT + FILTER_BAR_HEIGHT);
+
+  const [scrollSyncEnabled, setScrollSyncEnabled] = useState(true);
+  const lastClickedSubcategoryRef = useRef(null);
+
+  // REMOVED: const getFixedTop = () => filterBarRef.current?.offsetHeight || FILTER_BAR_HEIGHT;
+  // REMOVED: const [backToHomeFixed, setBackToHomeFixed] = useState(false);
+
+  useEffect(() => {
+    function updateSidebarTop() {
+      const filterBarHeight = filterBarRef.current?.offsetHeight || FILTER_BAR_HEIGHT;
+      const navBarHeight = navBarRef.current?.offsetHeight || NAVBAR_HEIGHT;
+      let top = isFilterFixed ? filterBarHeight : navBarHeight + filterBarHeight;
+      setSidebarTop(top);
+    }
+    updateSidebarTop();
+    window.addEventListener("scroll", updateSidebarTop, { passive: true });
+    window.addEventListener("resize", updateSidebarTop);
+    return () => {
+      window.removeEventListener("scroll", updateSidebarTop);
+      window.removeEventListener("resize", updateSidebarTop);
+    };
+  }, [isFilterFixed, filterBarRef, navBarRef]);
+
+  useEffect(() => {
+    function onScroll() {
+      const navBarHeight = navBarRef.current?.offsetHeight || NAVBAR_HEIGHT;
+      setIsFilterFixed(window.scrollY >= navBarHeight);
+      // REMOVED: setBackToHomeFixed(window.scrollY > navBarHeight);
+    }
+    window.addEventListener("scroll", onScroll, { passive: true });
+    onScroll();
+    return () => window.removeEventListener("scroll", onScroll);
+  }, [navBarRef]);
 
   useEffect(() => {
     setLoading(true);
@@ -377,77 +389,80 @@ export default function FormulaCategoryListPage() {
   }, []);
 
   useEffect(() => {
-    if (!categories.length) return;
+    if (scrollSyncEnabled) return;
+    const handleManualScroll = () => setScrollSyncEnabled(true);
+    window.addEventListener("scroll", handleManualScroll, { passive: true });
+    return () => window.removeEventListener("scroll", handleManualScroll);
+  }, [scrollSyncEnabled]);
 
-    const handleScroll = () => {
-      const container = scrollContainerRef.current;
-      if (!container) return;
-      const containerRect = container.getBoundingClientRect();
-      let bestSubcat = null;
-      let minTop = Infinity;
-
-      categories.forEach((category) => {
-        (category.subcategories || []).forEach((subcat) => {
-          const ref = subcategoryRefs.current[subcat.title];
-          if (ref) {
-            const rect = ref.getBoundingClientRect();
-            const top = Math.abs(rect.top - containerRect.top - 32);
-            if ((rect.top - containerRect.top) <= 64 && top < minTop) {
-              minTop = top;
-              bestSubcat = subcat.title;
-            }
-          }
-        });
-      });
-
-      if (!bestSubcat && categories[0]?.subcategories?.[0]) {
-        bestSubcat = categories[0].subcategories[0].title;
-      }
-      setActiveSubcategory(bestSubcat);
-
-      setTimeout(() => {
-        const sidebar = sidebarRef.current;
-        if (sidebar && bestSubcat) {
-          const activeBtn = sidebar.querySelector(`[data-subcategory="${bestSubcat}"]`);
-          if (activeBtn) {
-            activeBtn.scrollIntoView({ block: "center", behavior: "smooth" });
-          }
-        }
-      }, 80);
-    };
-
-    const container = scrollContainerRef.current;
-    if (container) {
-      container.addEventListener("scroll", handleScroll, { passive: true });
-      setTimeout(handleScroll, 0);
-    }
-    return () => {
-      if (container) container.removeEventListener("scroll", handleScroll);
-    };
-  }, [categories, showCaleNccaom, showNccaom, showExtra]);
+  useScrollSync(
+    categories,
+    subcategoryRefs,
+    sidebarTop,
+    setActiveSubcategory,
+    scrollSyncEnabled
+  );
 
   useEffect(() => {
     const container = scrollContainerRef.current;
     if (container) {
       container.style.overflowY = isSidebarHovered ? "hidden" : "scroll";
     }
-  }, [isSidebarHovered]);
+  }, [isSidebarHovered, scrollContainerRef]);
+
+  useEffect(() => {
+    if (
+      lastClickedSubcategoryRef.current !== null &&
+      subcategoryRefs.current[lastClickedSubcategoryRef.current]
+    ) {
+      setTimeout(() => {
+        const ref = subcategoryRefs.current[lastClickedSubcategoryRef.current];
+        if (ref && ref.getBoundingClientRect) {
+          const rect = ref.getBoundingClientRect();
+          const sectionTop = rect.top + window.scrollY;
+          window.scrollTo({
+            top: sectionTop - (isFilterFixed ? FILTER_BAR_HEIGHT : NAVBAR_HEIGHT + FILTER_BAR_HEIGHT),
+            behavior: "smooth"
+          });
+          lastClickedSubcategoryRef.current = null;
+        }
+      }, 150);
+    }
+  }, [activeSubcategory, subcategoryRefs, isFilterFixed]);
+
+  useEffect(() => {
+    if (!sidebarRef.current || lastClickedSubcategoryRef.current) return;
+    const sidebar = sidebarRef.current;
+    const activeBtn = sidebar.querySelector(`[data-subcategory="${activeSubcategory}"]`);
+    if (!activeBtn) return;
+
+    const sidebarRect = sidebar.getBoundingClientRect();
+    const btnRect = activeBtn.getBoundingClientRect();
+
+    const margin = 12;
+    if (btnRect.top < sidebarRect.top + margin) {
+      sidebar.scrollTop += btnRect.top - sidebarRect.top - margin;
+    } else if (btnRect.bottom > sidebarRect.bottom - margin) {
+      sidebar.scrollTop += btnRect.bottom - sidebarRect.bottom + margin;
+    }
+  }, [activeSubcategory, sidebarRef, lastClickedSubcategoryRef]);
 
   function handleSubcategoryScroll(title) {
-    const ref = subcategoryRefs.current[title];
-    if (ref && ref.scrollIntoView) {
-      ref.scrollIntoView({ behavior: "smooth", block: "start" });
-    }
+    lastClickedSubcategoryRef.current = title;
+    setScrollSyncEnabled(false);
     setActiveSubcategory(title);
     setTimeout(() => {
-      const sidebar = sidebarRef.current;
-      if (sidebar) {
-        const activeBtn = sidebar.querySelector(`[data-subcategory="${title}"]`);
-        if (activeBtn) {
-          activeBtn.scrollIntoView({ block: "center", behavior: "smooth" });
-        }
+      const ref = subcategoryRefs.current[title];
+      if (ref && ref.getBoundingClientRect) {
+        const rect = ref.getBoundingClientRect();
+        const sectionTop = rect.top + window.scrollY;
+        window.scrollTo({
+          top: sectionTop - (isFilterFixed ? FILTER_BAR_HEIGHT : NAVBAR_HEIGHT + FILTER_BAR_HEIGHT),
+          behavior: "smooth"
+        });
+        lastClickedSubcategoryRef.current = null;
       }
-    }, 120);
+    }, 150);
   }
 
   function handleFormulaClick(formulaObj) {
@@ -483,10 +498,19 @@ export default function FormulaCategoryListPage() {
     return formula.name;
   }
 
-  function renderFormulaExtras(formulaObj) {
-    if (!formulaObj) return null;
+  function renderFormulaExtras(formulaObj, formula) {
+    const keyActionsValue =
+      (formula && formula.keyActions) ||
+      (formula && formula.explanation) ||
+      formulaObj.keyActions ||
+      formulaObj.explanation ||
+      undefined;
+
+    const explanationBlock = keyActionsValue ? (
+      <KeyActionsExplanation keyActions={keyActionsValue} />
+    ) : null;
+
     const { yoSanCarries, formats } = formulaObj;
-    if (!yoSanCarries && (!formats || formats.length === 0)) return null;
     return (
       <div
         className="flex flex-col gap-1 items-start"
@@ -494,22 +518,23 @@ export default function FormulaCategoryListPage() {
           minWidth: 120,
           maxWidth: "100vw",
           justifyContent: "center",
-          marginTop: "6px",
+          marginTop: explanationBlock ? "18px" : "6px",
           marginLeft: "1.2em"
         }}
       >
+        {explanationBlock}
         {yoSanCarries !== undefined && (
           <div>
-            <strong style={{ color: COLORS.violet }}>Yo San Carries:</strong>{" "}
-            <span style={{ color: yoSanCarries ? COLORS.carolina : COLORS.claret, fontWeight: 600 }}>
+            <strong style={{ color: COLORS.backgroundRed }}>Yo San Carries:</strong>{" "}
+            <span style={{ color: yoSanCarries ? COLORS.accentEmerald : COLORS.accentCrimson, fontWeight: 600 }}>
               {yoSanCarries === true ? "Yes" : yoSanCarries === false ? "No" : ""}
             </span>
           </div>
         )}
         {formats && Array.isArray(formats) && formats.length > 0 && (
           <div>
-            <strong style={{ color: COLORS.violet }}>Format:</strong>{" "}
-            <span style={{ color: COLORS.seal }}>
+            <strong style={{ color: COLORS.backgroundRed }}>Format:</strong>{" "}
+            <span style={{ color: COLORS.accentBlack }}>
               {formats.join(", ")}
             </span>
           </div>
@@ -520,21 +545,26 @@ export default function FormulaCategoryListPage() {
 
   const backToHomeButton = (
     <div
-      className="fixed back-to-home-btn"
       style={{
-        top: FILTER_BAR_HEIGHT + 16,
+        position: isFilterFixed ? "fixed" : "relative",
+        top: isFilterFixed ? (filterBarRef.current?.offsetHeight || FILTER_BAR_HEIGHT) : undefined,
         right: 32,
-        zIndex: 51,
+        marginTop: isFilterFixed ? 8 : 16,
+        zIndex: 120,
+        display: "flex",
+        justifyContent: "flex-end",
+        pointerEvents: "auto"
       }}
+      className="back-to-home-btn"
     >
       <Link
         to="/"
-        className="px-5 py-2 rounded-full font-bold shadow-xl transition-all duration-200 hover:scale-105 active:scale-95 focus:ring-2 focus:ring-carolina"
+        className="px-5 py-2 rounded-full font-bold shadow-xl transition-all duration-200 hover:scale-105 active:scale-95 focus:ring-2 focus:ring-accentEmerald"
         style={{
-          background: COLORS.violet,
-          color: COLORS.vanilla,
-          border: `2px solid ${COLORS.seal}`,
-          textShadow: `0 1px 0 ${COLORS.carolina}`,
+          background: COLORS.accentGold,
+          color: COLORS.backgroundRed,
+          border: `2px solid ${COLORS.accentBlack}`,
+          textShadow: `0 1px 0 ${COLORS.backgroundGold}`,
         }}
         tabIndex={0}
       >
@@ -549,230 +579,89 @@ export default function FormulaCategoryListPage() {
   }
 
   const isMobile = typeof window !== "undefined" && window.innerWidth < 900;
+  const backgroundGradient = `linear-gradient(135deg, ${COLORS.backgroundGold} 0%, ${COLORS.accentEmerald} 35%, ${COLORS.accentGold} 100%)`;
+
+  const filterSpacerHeight = isFilterFixed
+    ? filterBarRef.current?.offsetHeight || FILTER_BAR_HEIGHT
+    : 0;
 
   return (
     <>
-      <GlobalAnimations />
-      {/* Fixed filter bar on all screens */}
-      {isMobile ? (
-        <MobileFilterBar
+      <div
+        style={{
+          minHeight: "100vh",
+          width: "100vw",
+          background: backgroundGradient,
+          fontFamily: '"Noto Serif SC", "Songti SC", "KaiTi", serif',
+          position: "relative",
+          overflow: "hidden",
+        }}
+      >
+        <GlobalAnimations />
+        <div ref={navBarRef}>
+          <NavBar
+            showReportError={true}
+            showAbout={true}
+            showAdminButtons={true}
+            showLogo={true}
+            fixed={false}
+          />
+        </div>
+        <FilterBar
           showCaleNccaom={showCaleNccaom}
           setShowCaleNccaom={setShowCaleNccaom}
           showNccaom={showNccaom}
           setShowNccaom={setShowNccaom}
           showExtra={showExtra}
           setShowExtra={setShowExtra}
+          isFixed={isFilterFixed}
+          filterBarRef={filterBarRef}
         />
-      ) : (
-        <div
-          className="fixed top-0 left-0 w-full z-50 flex items-center justify-center py-3 px-2 filter-bar"
-          style={{
-            background: `linear-gradient(90deg, ${COLORS.vanilla} 65%, ${COLORS.carolina} 100%)`,
-            borderBottom: `2.5px solid ${COLORS.violet}`,
-            boxShadow: `0 4px 16px -6px ${COLORS.violet}22`,
-            minHeight: FILTER_BAR_HEIGHT,
-            fontWeight: 600,
-            fontSize: "1.05rem",
-            flexWrap: "wrap",
-            justifyContent: "flex-start",
-          }}
-        >
-          <span className="mr-6 font-extrabold text-violet text-lg tracking-tight" style={{textShadow:`0 1px 0 ${COLORS.vanilla}`}}>
-            Show formulas:
-          </span>
-          <label className="mx-4 flex items-center space-x-2 cursor-pointer">
-            <input
-              type="checkbox"
-              checked={showCaleNccaom}
-              onChange={() => setShowCaleNccaom((v) => !v)}
-              className="accent-green-700 w-4 h-4"
-            />
-            <span className="text-green-700 font-semibold">NCCAOM/CALE</span>
-          </label>
-          <label className="mx-4 flex items-center space-x-2 cursor-pointer">
-            <input
-              type="checkbox"
-              checked={showNccaom}
-              onChange={() => setShowNccaom((v) => !v)}
-              className="accent-blue-700 w-4 h-4"
-            />
-            <span className="text-blue-700 font-semibold">NCCAOM</span>
-          </label>
-          <label className="mx-4 flex items-center space-x-2 cursor-pointer">
-            <input
-              type="checkbox"
-              checked={showExtra}
-              onChange={() => setShowExtra((v) => !v)}
-              className="accent-gray-700 w-4 h-4"
-            />
-            <span className="text-gray-700 font-semibold">Extra</span>
-          </label>
-        </div>
-      )}
-      {backToHomeButton}
-      <BackToTopButton scrollContainerRef={scrollContainerRef} />
-      <div
-        style={{
-          position: "fixed",
-          inset: 0,
-          zIndex: 0,
-          width: "100vw",
-          height: "100vh",
-          background: `linear-gradient(135deg, ${COLORS.vanilla} 0%, ${COLORS.carolina} 35%, ${COLORS.violet} 100%)`,
-        }}
-        aria-hidden="true"
-      />
-      <div
-        className="relative w-full"
-        style={{
-          minHeight: "100vh",
-          height: "100vh",
-          position: "relative",
-          zIndex: 1,
-          width: "100vw",
-          overflow: "hidden"
-        }}
-      >
-        {/* Sidebar */}
-        <aside
-          ref={sidebarRef}
-          className="sidebar hidden md:flex flex-col"
-          style={{
-            position: "fixed",
-            top: `${FILTER_BAR_HEIGHT}px`,
-            left: 0,
-            width: SIDEBAR_WIDTH,
-            height: `calc(100vh - ${FILTER_BAR_HEIGHT}px)`,
-            overflowY: "auto",
-            background: `linear-gradient(160deg, ${COLORS.vanilla} 80%, ${COLORS.carolina} 100%)`,
-            borderRadius: "2em",
-            border: `2.5px solid ${COLORS.violet}`,
-            boxShadow: `0 0 24px -8px ${COLORS.violet}44`,
-            zIndex: 20,
-            marginTop: "0.5em",
-            marginBottom: "0.5em",
-            paddingTop: "0.75em",
-            scrollbarWidth: "thin",
-            scrollbarColor: `${COLORS.violet} ${COLORS.vanilla}`,
-            transition: "box-shadow 0.2s"
-          }}
-          onMouseEnter={() => setIsSidebarHovered(true)}
-          onMouseLeave={() => setIsSidebarHovered(false)}
-        >
-          <nav className="py-8 px-2">
-            <h2
-              className="text-lg font-bold mb-4 pl-2"
-              style={{
-                color: COLORS.violet,
-                letterSpacing: "-.01em",
-                textShadow: `0 1px 0 ${COLORS.carolina}`,
-                borderLeft: `6px solid ${COLORS.carolina}`,
-                paddingLeft: "0.5em",
-              }}
-            >
-              Categories
-            </h2>
-            <ul className="space-y-2">
-              {categories.map((category, catIdx) => (
-                <React.Fragment key={category.category + catIdx}>
-                  <li>
-                    <div
-                      style={{
-                        color: COLORS.claret,
-                        fontWeight: 800,
-                        fontSize: "1.05em",
-                        padding: "0.25em 0.7em 0.15em 0.7em",
-                        margin: "0.3em 0",
-                        borderLeft: `5px solid ${COLORS.claret}`,
-                        background: COLORS.vanilla,
-                        borderRadius: "0 1.2em 1.2em 0",
-                        letterSpacing: "-.01em",
-                        boxShadow: `1px 2px 10px -9px ${COLORS.claret}`,
-                      }}
-                    >
-                      {category.category}
-                    </div>
-                  </li>
-                  {(category.subcategories || []).map((subcat, subIdx) => (
-                    <li key={subcat.title + subIdx}>
-                      <button
-                        data-subcategory={subcat.title}
-                        onClick={() => handleSubcategoryScroll(subcat.title)}
-                        className={[
-                          "w-full text-left px-3 py-2 rounded transition-colors font-semibold hover:bg-violet/20",
-                          activeSubcategory === subcat.title
-                            ? "bg-violet/30 text-carolina font-extrabold shadow"
-                            : "",
-                          "focus-visible:ring-2 focus-visible:ring-carolina"
-                        ].join(" ")}
-                        style={{
-                          color: COLORS.violet,
-                          cursor: "pointer",
-                          fontWeight: 700,
-                          transition: "background 0.2s, transform 0.1s",
-                          outline: activeSubcategory === subcat.title ? `2px solid ${COLORS.carolina}` : "none",
-                          boxShadow: activeSubcategory === subcat.title ? `0 0 4px 0 ${COLORS.violet}` : "none"
-                        }}
-                        tabIndex={0}
-                      >
-                        {subcat.title}
-                      </button>
-                    </li>
-                  ))}
-                </React.Fragment>
-              ))}
-            </ul>
-          </nav>
-        </aside>
-
-        {/* Main scroll area */}
-        <div
-          ref={scrollContainerRef}
-          className="main-scroll custom-scrollbar-main"
-          style={{
-            position: "fixed",
-            top: FILTER_BAR_HEIGHT,
-            left: 0,
-            width: "100vw",
-            height: `calc(100vh - ${FILTER_BAR_HEIGHT}px)`,
-            overflowY: "scroll",
-            overflowX: "hidden",
-            WebkitOverflowScrolling: "touch",
-            zIndex: 10,
-            paddingLeft: SIDEBAR_WIDTH,
-            background: "none"
-          }}
-        >
+        {backToHomeButton}
+        {isFilterFixed && (
           <div
-            className="flex flex-col items-center"
             style={{
-              width: "100%",
-              maxWidth: CARD_MAX_WIDTH + 120,
-              margin: "0 auto",
-              paddingRight: 0,
+              height: filterSpacerHeight,
+              width: "100vw"
             }}
+          />
+        )}
+        <div
+          style={{
+            display: "flex",
+            flexDirection: "row",
+            alignItems: "flex-start",
+            width: "100vw",
+            minHeight: "70vh",
+            position: "relative",
+          }}
+        >
+          {!isMobile && (
+            <FormulaCategoryListSideBar
+              categories={categories}
+              activeSubcategory={activeSubcategory}
+              handleSubcategoryScroll={handleSubcategoryScroll}
+              sidebarRef={sidebarRef}
+              isSidebarHovered={isSidebarHovered}
+              setIsSidebarHovered={setIsSidebarHovered}
+              sidebarTop={sidebarTop}
+            />
+          )}
+          <div
+            className="main-scroll custom-scrollbar-main"
+            style={{
+              marginLeft: !isMobile ? SIDEBAR_WIDTH : 0,
+              width: !isMobile ? `calc(100vw - ${SIDEBAR_WIDTH}px)` : "100vw",
+              minHeight: "100vh",
+              display: "flex",
+              flexDirection: "column",
+              alignItems: "center",
+              transition: "margin-left 0.2s, width 0.2s",
+              background: "none",
+              boxSizing: "border-box",
+            }}
+            ref={scrollContainerRef}
           >
-            {/* PATCH: Show logo at top of mobile, below filter bar and above category nav */}
-            {isMobile && (
-              <div
-                className="logo-mobile-top"
-                style={{
-                  width: "100%",
-                  maxWidth: CARD_MAX_WIDTH,
-                  margin: "0 auto",
-                  textAlign: "center",
-                  marginTop: "0.7em",
-                  marginBottom: "0.2em",
-                  position: "relative",
-                  zIndex: 1,
-                  display: "flex",
-                  justifyContent: "center",
-                  alignItems: "center",
-                }}
-              >
-                <Logo size={38} showBeta={true} />
-              </div>
-            )}
             {isMobile && (
               <MobileCategoryNav
                 categories={categories}
@@ -780,249 +669,48 @@ export default function FormulaCategoryListPage() {
                 handleSubcategoryScroll={handleSubcategoryScroll}
               />
             )}
-            {!isMobile && (
-              <div
-                style={{
-                  width: "100%",
-                  maxWidth: CARD_MAX_WIDTH,
-                  margin: "0 auto",
-                  textAlign: "center",
-                  paddingTop: "2.2em",
-                  marginBottom: "0.5em",
-                  display: "flex",
-                  justifyContent: "center",
-                  alignItems: "center"
-                }}
-              >
-                <Logo size={56} showBeta={true} />
-              </div>
-            )}
-            <div className="space-y-14 w-full flex flex-col items-center formula-card-section" style={{ maxWidth: CARD_MAX_WIDTH }}>
-              {categories.map((category, catIdx) =>
-                (category.subcategories || []).map((subcat, subIdx) => (
-                  <section
-                    key={subcat.title + subIdx}
-                    ref={ref => { subcategoryRefs.current[subcat.title] = ref; }}
-                    className="shadow-2xl rounded-2xl border border-violet px-7 py-8 formula-card"
-                    style={{
-                      background: "#fff",
-                      boxShadow: `0 8px 40px -14px ${COLORS.violet}55, 0 1.5px 0 ${COLORS.vanilla}`,
-                      borderColor: COLORS.violet,
-                      position: "relative",
-                      overflow: "hidden",
-                      width: "100%",
-                      maxWidth: CARD_MAX_WIDTH,
-                    }}
-                  >
-                    <div
-                      style={{
-                        position: "absolute",
-                        top: 0,
-                        right: 0,
-                        width: "180px",
-                        height: "100%",
-                        zIndex: 1,
-                        background: `linear-gradient(105deg, transparent 60%, ${COLORS.carolina}55 100%)`,
-                        pointerEvents: "none",
-                        borderRadius: "1.5em",
-                      }}
-                    />
-                    <h3
-                      className="mb-7 tracking-tight"
-                      style={{
-                        fontSize: "2.1rem",
-                        fontWeight: 900,
-                        color: COLORS.violet,
-                        borderLeft: `8px solid ${COLORS.claret}`,
-                        background: COLORS.vanilla,
-                        padding: "0.22em 1.2em",
-                        marginLeft: "-1.2em",
-                        borderRadius: "0 1.7em 1.7em 0",
-                        boxShadow: `1px 2px 12px -7px ${COLORS.claret}`,
-                        textShadow: `0 1px 0 ${COLORS.carolina}`,
-                        letterSpacing: "-.02em",
-                        fontFamily: "inherit",
-                        zIndex: 2,
-                        position: "relative",
-                        wordBreak: "break-word"
-                      }}
-                    >
-                      {subcat.title}
-                    </h3>
-                    <ul className="flex flex-col gap-7">
-                      {sortFormulasByBadge(subcat.formulas || [], getAnyFormulaMatchByName).map((formula, i) => {
-                        const formulaObjAny = getAnyFormulaMatchByName(formula.name);
-                        if (!formulaObjAny) {
-                          return (
-                            <li
-                              key={formula.name + i}
-                              className="group transition-all duration-200 shadow-lg rounded-xl border border-gray-200 opacity-40 grayscale cursor-not-allowed"
-                              style={{
-                                cursor: "not-allowed",
-                                background: "#fff",
-                                zIndex: 3,
-                                filter: "grayscale(0.85) brightness(0.98)",
-                                opacity: 0.4,
-                                pointerEvents: "none",
-                                transition: "box-shadow .2s, transform .15s"
-                              }}
-                              tabIndex={-1}
-                            >
-                              <div className="flex flex-col sm:flex-row sm:items-center sm:gap-7 p-5">
-                                <div className="flex items-center min-w-0 flex-shrink-0 mr-3">
-                                  <span
-                                    className="font-extrabold truncate"
-                                    style={{
-                                      fontSize: "1.25rem",
-                                      color: COLORS.violet,
-                                      letterSpacing: "-.01em",
-                                      textShadow: `0 1px 0 ${COLORS.highlight}`,
-                                      fontFamily: "inherit",
-                                      opacity: 0.7,
-                                      whiteSpace: "nowrap",
-                                      maxWidth: 600,
-                                      overflow: "hidden",
-                                      textOverflow: "ellipsis",
-                                      transition: "color 0.2s"
-                                    }}
-                                  >
-                                    {getDisplayFormulaName(formula, formulaObjAny)}
-                                  </span>
-                                </div>
-                                <span
-                                  className="italic font-semibold"
-                                  style={{
-                                    fontSize: "0.93rem",
-                                    color: COLORS.seal,
-                                    marginLeft: "0.85em",
-                                    minWidth: 70,
-                                    maxWidth: "none",
-                                    fontFamily: "serif",
-                                    letterSpacing: "-.01em",
-                                    opacity: 0.6,
-                                    flex: "0 1 auto",
-                                    whiteSpace: "normal",
-                                    lineHeight: 1.35,
-                                    transition: "color 0.2s"
-                                  }}
-                                >
-                                  {formula.english}
-                                </span>
-                                {formula.explanation && (
-                                  <span
-                                    className="mt-2 sm:mt-0 text-sm"
-                                    style={{
-                                      color: COLORS.claret,
-                                      background: COLORS.highlight,
-                                      borderRadius: "0.7em",
-                                      fontWeight: 500,
-                                      padding: "0.22em 1.1em",
-                                      marginLeft: "0.95em",
-                                      boxShadow: `0px 1px 5px -3px ${COLORS.seal}60`,
-                                      fontFamily: "inherit",
-                                      fontSize: "1.01em",
-                                      opacity: 0.5,
-                                      transition: "background 0.2s, color 0.2s"
-                                    }}
-                                  >
-                                    {formula.explanation}
-                                  </span>
-                                )}
-                              </div>
-                            </li>
-                          );
-                        }
-                        const formulaObj = getFormulaMatchByName(formula.name);
-                        if (!formulaObj) return null;
-                        return (
-                          <li
-                            key={formula.name + i}
-                            className="group transition-all duration-200 shadow-lg rounded-xl border border-carolina bg-white/95 cursor-pointer hover:border-violet hover:scale-[1.025] active:scale-95 focus:ring-2 focus:ring-carolina"
-                            style={{
-                              background: "#fff",
-                              zIndex: 3,
-                              transition: "box-shadow .2s, transform .15s"
-                            }}
-                            onClick={() => handleFormulaClick(formulaObj)}
-                            tabIndex={0}
-                            onKeyDown={(e) => {
-                              if (e.key === "Enter" || e.key === " ") {
-                                handleFormulaClick(formulaObj);
-                              }
-                            }}
-                          >
-                            <div className="flex flex-col sm:flex-row sm:items-center sm:gap-7 p-5">
-                              <div className="flex items-center min-w-0 flex-shrink-0 mr-3">
-                                <span
-                                  className="font-extrabold"
-                                  style={{
-                                    fontSize: "1.25rem",
-                                    color: COLORS.violet,
-                                    letterSpacing: "-.01em",
-                                    textShadow: `0 1px 0 ${COLORS.highlight}`,
-                                    fontFamily: "inherit",
-                                    whiteSpace: "nowrap",
-                                    maxWidth: 600,
-                                    overflow: "hidden",
-                                    textOverflow: "ellipsis",
-                                    transition: "color 0.2s"
-                                  }}
-                                >
-                                  {getDisplayFormulaName(formula, formulaObj)}
-                                </span>
-                                <span className="ml-2 flex-shrink-0">
-                                  <Badge badge={formulaObj.badge} />
-                                </span>
-                              </div>
-                              <span
-                                className="italic font-semibold"
-                                style={{
-                                  fontSize: "0.93rem",
-                                  color: COLORS.seal,
-                                  marginLeft: "0.85em",
-                                  minWidth: 70,
-                                  maxWidth: "none",
-                                  fontFamily: "serif",
-                                  letterSpacing: "-.01em",
-                                  flex: "0 1 auto",
-                                  whiteSpace: "normal",
-                                  lineHeight: 1.35,
-                                  transition: "color 0.2s"
-                                }}
-                              >
-                                {formula.english}
-                              </span>
-                              {formula.explanation && (
-                                <span
-                                  className="mt-2 sm:mt-0 text-sm"
-                                  style={{
-                                    color: COLORS.claret,
-                                    background: COLORS.highlight,
-                                    borderRadius: "0.7em",
-                                    fontWeight: 500,
-                                    padding: "0.22em 1.1em",
-                                    marginLeft: "0.95em",
-                                    boxShadow: `0px 1px 5px -3px ${COLORS.seal}60`,
-                                    fontFamily: "inherit",
-                                    fontSize: "1.01em",
-                                    transition: "background 0.2s, color 0.2s"
-                                  }}
-                                >
-                                  {formula.explanation}
-                                </span>
-                              )}
-                              {renderFormulaExtras(formulaObj)}
-                            </div>
-                          </li>
-                        );
-                      })}
-                    </ul>
-                  </section>
-                ))
-              )}
+            <div
+              className="formula-card-section"
+              style={{
+                width: "100%",
+                maxWidth: CARD_MAX_WIDTH,
+                marginLeft: "auto",
+                marginRight: "auto",
+                background: "none",
+                padding: isMobile ? "0 2vw" : "0",
+                boxSizing: "border-box"
+              }}
+            >
+              <FormulasByCategory
+                categories={categories}
+                subcategoryRefs={subcategoryRefs}
+                getAnyFormulaMatchByName={getAnyFormulaMatchByName}
+                getFormulaMatchByName={getFormulaMatchByName}
+                getDisplayFormulaName={getDisplayFormulaName}
+                handleFormulaClick={handleFormulaClick}
+                renderFormulaExtras={renderFormulaExtras}
+                CARD_MAX_WIDTH={CARD_MAX_WIDTH}
+                activeSubcategory={activeSubcategory}
+                ref={formulasSectionRef}
+              />
             </div>
           </div>
         </div>
+        <div
+          style={{
+            width: "100vw",
+            marginTop: 32,
+            marginBottom: 0,
+            display: "flex",
+            justifyContent: "center",
+            alignItems: "center",
+            position: "relative",
+            zIndex: 1,
+          }}
+        >
+          <FooterCard />
+        </div>
+        <BackToTopButton right={75} />
       </div>
     </>
   );

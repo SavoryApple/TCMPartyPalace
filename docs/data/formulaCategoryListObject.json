@@ -1,0 +1,2226 @@
+[
+  {
+    "category": "Formulas that Release the Exterior",
+    "subcategories": [
+      {
+        "title": "Formulas That Release Wind Cold",
+        "formulas": [
+          {
+            "name": "Gui Zhi Tang",
+            "english": "Cinnamon Twig Decoction",
+            "explanation": "w-c w/ mild sweating"
+          },
+          {
+            "name": "Ma Huang Tang",
+            "english": "Ephedra Decoction",
+            "explanation": "excess w-c w/ no sweat, choose for asthma/wheeze"
+          },
+          {
+            "name": "Da Qing Long Tang",
+            "english": "Major Bluegreen Dragon Decoction",
+            "explanation": "like ma huang tang, but w/ interior heat"
+          },
+          {
+            "name": "Xiao Qing Long Tang",
+            "english": "Minor Bluegreen Dragon Decoction",
+            "explanation": "w-c w/ congested fluids (LU phlegm + coughing)"
+          },
+          {
+            "name": "Jiu Wei Qiang Huo Tang",
+            "english": "Nine-Ingredient Decoction with Notopterygium",
+            "explanation": "release exterior w-c-d (80%), clear internal heat (20%)"
+          },
+          {
+            "name": "Xiang Su San",
+            "english": "Cyperus and Perilla Leaf Powder",
+            "explanation": "w-c w/ qi stagnation in MJ"
+          },
+          {
+            "name": "Xiang Ru San",
+            "english": "Mosla Powder",
+            "explanation": "w-c w/ interior dampness"
+          },
+          {
+            "name": "Cong Chi Tang",
+            "english": "Scallion and Prepared Soybean Decoction",
+            "explanation": "early stage w-c w/ mild symptoms"
+          }
+        ]
+      },
+      {
+        "title": "Formulas That Release Exterior Wind Heat",
+        "formulas": [
+          {
+            "name": "Sang Ju Yin",
+            "english": "Mulberry Leaf and Chrysanthemum Decoction",
+            "explanation": "for ext. w-h w/ COUGH (shares 5 out of 6 ingredients with yin qiao san)"
+          },
+          {
+            "name": "Yin Qiao San",
+            "english": "Honeysuckle and Forsythia Powder",
+            "explanation": "classic formula for wind-heat w/ SORE THROAT"
+          },
+          {
+            "name": "Chai Ge Jie Ji Tang",
+            "english": "Bupleurum and Kudzu Decoction to Release the Muscle Layer",
+            "explanation": "for ext. w-c turning into heat affecting the muscle layer (eye pain, headache, toothache, body aches)"
+          },
+          {
+            "name": "Sheng Ma Ge Gen Tang",
+            "english": "Cimicifuga and Kudzu Decoction",
+            "explanation": "releases exterior, muscle layer and VENTS RASHES (esp measles, like if you want the rash to express and release to the surface)"
+          },
+          {
+            "name": "Chuan Bei Pi Pa Gao",
+            "english": "Loquat syrup",
+            "explanation": "patent syrup for sore throat and cough"
+          },
+          {
+            "name": "Chuan Xin Lian Kang Yan Pian",
+            "english": "Loquat syrup",
+            "explanation": "patent: Clears heat, resolves toxin, cools blood, disperses swelling. Clears heat and reduces inflammation in the three burners"
+          },
+          {
+            "name": "Gan Mao Ling",
+            "english": "Common Cold Pill™",
+            "explanation": "patent: Releases the exterior, dispels wind, clears heat, relieves symptoms of the common cold"
+          },
+          {
+            "name": "Yin Qiao Jie Du Pian",
+            "english": "CF Signoff™",
+            "explanation": "patent: for the early stages of colds and flu, especially when symptoms include sore throat and fever"
+          }
+        ]
+      },
+      {
+        "title": "Formulas that Release the Exterior with Head and Neck Symptoms",
+        "formulas": [
+          {
+            "name": "Chuan Xiong Cha Tiao San",
+            "english": "Ligusticum Powder to be Taken with Green Tea",
+            "explanation": "wind invasion (heat or cold) w/ HEADACHE"
+          },
+          {
+            "name": "Cang Er Zi San",
+            "english": "Xanthium Powder",
+            "explanation": "wind-cold attacking head causing NASAL DISCHARGE, sinus infection or congestion"
+          },
+          {
+            "name": "Ge Gen Tang",
+            "english": "Kudzu Decoction",
+            "explanation": "w-c w/ STIFF NECK/UPPER BACK"
+          },
+          {
+            "name": "Bi Yan Pian",
+            "english": "Nasopass",
+            "explanation": "patent: clears congestion, sinus infection, and cools nasal inflammation"
+          },
+          {
+            "name": "Chuan Xiong Cha Tiao Pian",
+            "english": "HeadClarity™",
+            "explanation": "patent: treats head/neck, disperses wind, alleviates pain"
+          },
+          {
+            "name": "Ke Chuan Pian",
+            "english": "Breathmooth™",
+            "explanation": "patent: Cough and wheezing with external wind invasion. mostly treats the symptom"
+          },
+          {
+            "name": "Pian Tou Tong Pian",
+            "english": "Headelight™",
+            "explanation": "patent: Dispels wind, alleviates pain, unblocks meridians, relieves headaches"
+          },
+          {
+            "name": "Te Xiao Bi Min Gan Pian",
+            "english": "Allerpeace™",
+            "explanation": "patent: Dispels wind, opens nasal passages, clears heat, relieves allergy symptoms"
+          }
+        ]
+      },
+      {
+        "title": "Formulas That Release the Exterior with Concurrent Deficiency Patterns",
+        "formulas": [
+          {
+            "name": "Ren Shen Bai Du San",
+            "english": "Ginseng Powder to Overcome Pathogenic Influences",
+            "explanation": "for ext. wind cold damp w/ qi deficiency (mostly for children)"
+          },
+          {
+            "name": "Ma Huang Xi Xin Fu Zi Tang",
+            "english": "Ephedra, Asarum and Prepared Aconite Decoction",
+            "explanation": "w-c w/ concurrent yang deficiency"
+          },
+          {
+            "name": "Jia Jian Wei Rui Tang",
+            "english": "Modified Polygonum Odoratum Decoction",
+            "explanation": "for wind-heat w/ yin deficiency"
+          },
+          {
+            "name": "Zai Zao San",
+            "english": "Renewal Powder",
+            "explanation": "for ext. w-c w/ qi and yang def."
+          }
+        ]
+      },
+      {
+        "title": "Formulas That Release the Exterior with Underlying Excess (Interior)",
+        "formulas": [
+          {
+            "name": "Ge Gen Huang Qin Huang Lian Tang",
+            "english": "Kudzu, Scutellaria and Coptis Decoction",
+            "explanation": "wind-heat (30%) w/ damp heat diarrhea (70%)"
+          },
+          {
+            "name": "Fang Feng Tong Sheng San",
+            "english": "Ledebouriella Powder that Sagely Unblocks",
+            "explanation": "for concurrent wind-heat, interior heat, and constipation"
+          },
+          {
+            "name": "Shi Gao Tang",
+            "english": "Gypsum Decoction",
+            "explanation": "w-c w/ internal heat (severe internal heat)"
+          },
+          {
+            "name": "Wu Ji San",
+            "english": "Five-Accumulation Powder",
+            "explanation": "w-c w/ interior cold, damp, phlegm, qi, and blood stagnation"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "category": "Formulas that Clear Heat",
+    "subcategories": [
+      {
+        "title": "Formulas That Clear Heat from the Qi Level",
+        "formulas": [
+          {
+            "name": "Bai Hu Tang",
+            "english": "White Tiger Decoction",
+            "explanation": "king formula for true heat in the qi level (irritable, 4 bigs, bright red, tropical/childhood diseases, encephalitis, periodontitus, arthritis)"
+          },
+          {
+            "name": "Zhu Ye Shi Gao Tang",
+            "english": "Lophatherus and Gypsum Decoction",
+            "explanation": "clears qi level heat w/ some damaged fluids and yin. generates fluids when heat is moving into yin def. heat (late stage chronic febrile diseases)"
+          },
+          {
+            "name": "Zhi Zi Chi Tang",
+            "english": "Gardenia and Prepared Soybean Decoction",
+            "explanation": "irritability due to lingering qi level heat"
+          }
+        ]
+      },
+      {
+        "title": "Formulas That Clear Heat from Ying/Xue and Cool Blood",
+        "formulas": [
+          {
+            "name": "Xi Jiao Di Huang Tang",
+            "english": "Rhinoceros Horn and Rehmannia Decoction",
+            "explanation": "clears heat, cools blood, moves blood. This is for deep blood level heat: thirst with inability to swallow, always shen disturbed"
+          },
+          {
+            "name": "Qing Ying Tang",
+            "english": "Clear the Nutritive Level Decoction",
+            "explanation": "clears heat from ying level (delerium/*shen disturbance, thirst, speckled rash, purpura)"
+          }
+        ]
+      },
+      {
+        "title": "Formulas That Clear Heat & Relieve Toxicity",
+        "formulas": [
+          {
+            "name": "Huang Lian Jie Du Tang",
+            "english": "Coptis Decoction to Relieve Toxicity",
+            "explanation": "excess toxic heat and fire in all 3 jiaos, all organ heat"
+          },
+          {
+            "name": "Xie Xin Tang",
+            "english": "Drain the Epigastrium Decoction",
+            "explanation": "d-h toxins w/ clumping. Heat in all 3 jiaos but cleared thru stool. For deep toxic heat like sepsis w/ constipation"
+          },
+          {
+            "name": "Xian Fang Huo Ming Yin",
+            "english": "Sublime Formula for Sustaining Life",
+            "explanation": "reduces swelling from absesses (mastitis/drains pus; can be used topically or orally)"
+          },
+          {
+            "name": "Pu Ji Xiao Du Yin",
+            "english": "Universal Benefit Decoction to Eliminate Toxin",
+            "explanation": "clears heat and toxin, esp mumps (swollen pudgy face). More for acute UJ toxic heat"
+          },
+          {
+            "name": "Liu Shen Wan",
+            "english": "Six-Miracle Pill",
+            "explanation": "relieves fire toxin, swelling and pain esp severe sore throat/chronic hepatitis (has toad venom)"
+          },
+          {
+            "name": "Qing Wen Bai Du Yin",
+            "english": "Clear Epidemics and Overcome Toxicity Decoction",
+            "explanation": "epidemic toxin pathogen with severe heat in blood/qi levels with stabbing headache"
+          },
+           {
+            "name": "Fang Feng Tong Sheng Pian",
+            "english": "Weitalite™",
+            "explanation": "patents: general detox - cooling and purging"
+          },
+          {
+            "name": "Huang Lian Shang Qing Pian",
+            "english": "CoptisClear™",
+            "explanation": "patent: toxic heat - mouth,eyes,nose,gums,lips"
+          },
+           {
+            "name": "Xiang Yin Pian",
+            "english": "VoiceGold™",
+            "explanation": "patent: voice loss and throat discomfort, especially in singers, speakers, and those who rely on vocal strength"
+          },
+          {
+            "name": "Zhen Zhu An Chuang Pian",
+            "english": "AcniPearl™",
+            "explanation": "patent: for acne and other skin eruptions caused by heat and toxin accumulation"
+          }
+        ]
+      },
+      {
+        "title": "Formulas That Clear Heat from the Organs",
+        "formulas": [
+          {
+            "name": "Qing Wei San",
+            "english": "Clear the Stomach Powder",
+            "explanation": "clears ST channel heat such as bleeding gums, toothache, dry mouth"
+          },
+          {
+            "name": "Dao Chi San",
+            "english": "Guide Out the Red Powder",
+            "explanation": "excess or deficient HT heat w/ UB symptoms and mouth/tongue sores"
+          },
+          {
+            "name": "Long Dan Xie Gan Tang",
+            "english": "Gentiana Decoction to Drain the Liver",
+            "explanation": "excess LIV/GB fire; all 3 jiaos"
+          },
+          {
+            "name": "Bai Tou Weng Tang",
+            "english": "Pulsatilla Decoction",
+            "explanation": "hot dysenteric disorders due to damp heat toxin in LI (more blood than pus)"
+          },
+          {
+            "name": "Yin Qiao Ma Bo San",
+            "english": "Honeysuckle, Forsythia and Puffball Powder",
+            "explanation": "clears toxic heat from the LU, esp sore throat (does not release the exterior, so more for interior)"
+          },
+          {
+            "name": "Ma Xing Shi Gan Tang",
+            "english": "Ephedra, Apricot Kernel, Gypsum and Licorice Decoction",
+            "explanation": "clears heat from LU, for excess hot cough, interior conditions. Formula is colder than ma huang tang"
+          },
+          {
+            "name": "Xie Bai San",
+            "english": "Drain the White Powder",
+            "explanation": "for children w/ yin def. LU heat and a chronic cough"
+          },
+          {
+            "name": "Yu Nu Jian",
+            "english": "Jade Woman Decoction",
+            "explanation": "drains heat from ST and nourishes yin. Fire starts in the ST and damages KID"
+          },
+          {
+            "name": "Xie Huang San",
+            "english": "Drain the Yellow Powder",
+            "explanation": "dispenses/lifts hidden smoldering fire from the SP, then clears it from the qi level (mouth ulcers, heart burn, gastritis)"
+          },
+          {
+            "name": "Zuo Jin Wan",
+            "english": "Left Metal Pill",
+            "explanation": "clears LIV fire and prevents LIV overacting on ST (nausea, vomit, groin area heat, hernia/teste pain)"
+          },
+          {
+            "name": "Dun Sou San",
+            "english": "Morus and Platycodon Formula",
+            "explanation": "Clears heat from the Lung and relieves cough and wheezing, transforms phlegm, and soothes the chest"
+          },
+          {
+            "name": "Li Niao Pai Shi Pian",
+            "english": "Stone Away-Kidney™",
+            "explanation": "patent: kidney stones, gallstones, urinary tract infection, acute polynephritis, vesical calcular"
+          },
+          {
+            "name": "Ma Xing Zhi Ke Pian",
+            "english": "Great White Lung Formula™",
+            "explanation": "patent: wind heat invading the lung/UJ, redirects rebellious Lung Qi downward, resolves Phlegm, regulates Qi, vents Heat to the Exterior"
+          },
+          {
+            "name": "Qing Fei Tang",
+            "english": "Clear the Lungs Decoction",
+            "explanation": "patent: Clears heat from the lungs, transforms phlegm, stops cough, nourishes Yin"
+          }
+        ]
+      },
+      {
+        "title": "Formulas That Clear Heat from Deficiency",
+        "formulas": [
+          {
+            "name": "Qing Hao Bie Jia Tang",
+            "english": "Artemisia Annua and Soft-Shelled Turtle Decoction",
+            "explanation": "clears yin deficiency heat from late stage febrile disease and unremitting fevers"
+          },
+          {
+            "name": "Qing Gu San",
+            "english": "Clear the Bones Powder",
+            "explanation": "clears severe heat from yin deficiency with steaming bone sensation"
+          }
+        ]
+      },
+      {
+        "title": "Formulas That Relieve Summerheat",
+        "formulas": [
+          {
+            "name": "Liu Yi San",
+            "english": "Six-to-One Powder",
+            "explanation": "promotes urination for mild summerheat with dampness"
+          },
+          {
+            "name": "Gui Ling Gan Lu Yin",
+            "english": "Cinnamon and Poria Sweet Dew Decoction",
+            "explanation": "sudden turmoil in summer: diarrhea + vomiting, heat and damp; more heat than Liu Yi San"
+          },
+          {
+            "name": "Qing Luo Yin",
+            "english": "Clear the Collaterals Decoction",
+            "explanation": "prevents and treats summerheat, especially when it affects LU (all fresh ingredients)"
+          },
+          {
+            "name": "Qing Shu Yi Qi Tang",
+            "english": "Clear Summerheat and Augment the Qi Decoction",
+            "explanation": "clears summerheat, boosts qi, generates fluids (for dehydration/sweat depletion/yin deficiency)"
+          },
+          {
+            "name": "Bi Yu San",
+            "english": "Jasper Powder",
+            "explanation": "clears summerheat w/ constrained heat in the LIV/GB"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "category": "Formulas that Drain Downward",
+    "subcategories": [
+      {
+        "title": "Formulas That Drain Downward: Purge Heat Accumulation",
+        "formulas": [
+          {
+            "name": "Da Cheng Qi Tang",
+            "english": "Major Order the Qi Decoction",
+            "explanation": "strongest formula for yang ming fu syndrome excess heat constipation (like from opiate drugs, postpartum)"
+          },
+          {
+            "name": "Xiao Cheng Qi Tang",
+            "english": "Minor Order the Qi Decoction",
+            "explanation": "milder yang ming fu constipation syndrome than Da Cheng Qi Tang"
+          },
+          {
+            "name": "Tiao Wei Cheng Qi Tang",
+            "english": "Regulate the Stomach and Order the Qi Decoction",
+            "explanation": "mildest of the 3 (vs Da Cheng Qi Tang and Xiao Cheng Qi Tang), symptoms include hardness but less distention, therefore the qi regulators are omitted"
+          },
+          {
+            "name": "Liang Ge San",
+            "english": "Cool the Diaphragm Powder",
+            "explanation": "fire in the MJ/UJ with constipation"
+          },
+          {
+            "name": "Da Huang Mu Dan Tang",
+            "english": "Rhubarb and Moutan Decoction",
+            "explanation": "damp heat in LJ/MJ (i.e. LI), for things like early stage intestinal abscess (appendicitis), damp heat leukorrhea, bladder mass, ovarian cysts, postpartum infections"
+          },
+          {
+            "name": "Da Xian Xiong Tang",
+            "english": "Major Sinking into the Chest Decoction",
+            "explanation": "heat and water stagnation in chest, such as pleurisy, or in the middle such as cirrhosis of LIV"
+          },
+          {
+            "name": "Huang Long Tang",
+            "english": "Yellow Dragon Decoction",
+            "explanation": "purges and tonifies; purges while supporting normal qi (ren shen+3sweets)"
+          },
+          {
+            "name": "Zeng Ye Cheng Qi Tang",
+            "english": "Increase the Fluids and Order the Qi Decoction",
+            "explanation": "gentle for severe constipation due to depletion of fluids, often after high fever or prolonged illness"
+          }
+        ]
+      },
+      {
+        "title": "Formulas That Drain Downward: Moist Laxatives",
+        "formulas": [
+          {
+            "name": "Ma Zi Ren Wan",
+            "english": "Hemp Seed Pill",
+            "explanation": "treats constipation due to dryness and blood deficiency and heat. formula is cool (vs run chang wan)"
+          },
+          {
+            "name": "Run Chang Wan",
+            "english": "Moisten the Intestines Pill from Master Chen's Book",
+            "explanation": "more for blood deficiency dry constipation than heat, compared to Ma Zi Ren Wan. formula is warmer than that"
+          },
+          {
+            "name": "Ji Chuan Jian",
+            "english": "Benefit the River Decoction",
+            "explanation": "more warming than run chang wan and ma zi ren wan, but also moistening; for constipation due to yang deficiency (low back pain etc)"
+          },
+          {
+            "name": "Tong Chang Pian",
+            "english": "Constipass™",
+            "explanation": "patent: constipation, especially in elderly or deficient individuals, and supports gentle, regular elimination"
+          }
+        ]
+      },
+      {
+        "title": "Formulas That Drain Downward: Warm the Yang and Guide Out Accumulation",
+        "formulas": [
+          {
+            "name": "Da Huang Fu Zi Tang",
+            "english": "Rhubarb and Prepared Aconite Decoction",
+            "explanation": "warms the interior and purges constipation (vs ji chuan jian is more about moistening)"
+          },
+          {
+            "name": "Wen Pi Tang",
+            "english": "Warm the Spleen Decoction",
+            "explanation": "MJ qi and yang deficiency causing constipation; focus here is on tonifying; sources differ on the chiefs: Bensky says fu zi and da huang are chiefs"
+          },
+          {
+            "name": "San Wu Bei Ji Wan",
+            "english": "Three-Substance Pill for Emergencies",
+            "explanation": "sudden severe cold blockage, such as intestinal obstruction"
+          }
+        ]
+      },
+      {
+        "title": "Formulas That Drain Downward: Drive Out Excess Water",
+        "formulas": [
+          {
+            "name": "Shi Zao Tang",
+            "english": "Ten-Jujube Decoction",
+            "explanation": "purges excess water accumulation from the chest"
+          },
+          {
+            "name": "Zhou Che Wan",
+            "english": "Vessel and Vehicle Pill",
+            "explanation": "heat and fluid accumulation and qi stagnation; mostly middle jiao"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "category": "Formulas that Harmonize",
+    "subcategories": [
+      {
+        "title": "Formulas That Harmonize: Harmonize Lesser Yang-stage Disorders (Shao Yang)",
+        "formulas": [
+          {
+            "name": "Xiao Chai Hu Tang",
+            "english": "Minor Bupleurum Decoction",
+            "explanation": "typical shao yang pattern: fullness, GB heat, bitter taste, alternating chills/fever; pathogen is in \"midstage\""
+          },
+          {
+            "name": "Da Chai Hu Tang",
+            "english": "Major Bupleurum Decoction",
+            "explanation": "a more purging version of Xiao Chai Hu Tang; this has shao yang (alt. c/f, bitter taste) and yang ming features (constipation)"
+          },
+          {
+            "name": "Hao Qin Qing Dan Tang",
+            "english": "Artemisia Annua and Scutellaria Decoction to Clear the Gallbladder Decoction",
+            "explanation": "damp heat and turbid phlegm in shao yang channels (distention in flank and chest); GB and ST heat; drains damp through urine"
+          },
+          {
+            "name": "Chai Hu Gui Zhi Tang",
+            "english": "Bupleurum and Cinnamon Twig Decoction",
+            "explanation": "complex presentations with liver qi contraint or liver-stomach dysharmony with a background of spleen qi deficiency and dampness"
+          }
+        ]
+      },
+      {
+        "title": "Formulas That Harmonize: Harmonize Liver and Spleen",
+        "formulas": [
+          {
+            "name": "Si Ni San",
+            "english": "Frigid Extremities Powder",
+            "explanation": "cold extremities due to LIV qi stagnation, LIV invading ST with heat"
+          },
+          {
+            "name": "Xiao Yao San",
+            "english": "Rambling Powder",
+            "explanation": "LIV Qi Stagnation with underlying Spleen and Blood Deficiency"
+          },
+          {
+            "name": "Jia Wei Xiao Yao San",
+            "english": "Augmented Rambling Powder",
+            "explanation": "LIV Qi Stagnation turning to Heat with underlying Spleen and Blood Deficiency "
+          },
+          {
+            "name": "Tong Xie Yao Fang",
+            "english": "Important Formula for Painful Diarrhea",
+            "explanation": "painful diarrhea due to LIV overacting on SP; worse with stress"
+          },
+          {
+            "name": "Chai Hu Shu Gan San",
+            "english": "Bupleurum Powder to Spread the Liver",
+            "explanation": "severe LIV qi stagnation affecting ST/SP. si ni san + 2 qi regulators"
+          },
+          {
+            "name": "Shao Yao Gan Cao Tang",
+            "english": "Peony and Licorice Decoction",
+            "explanation": "LIV/SP blood deficiency, injury to fluids, and painful spasms"
+          },
+          {
+            "name": "Chai Hu Shu Gan Pian",
+            "english": "Bupleuri LiverSoothe™",
+            "explanation": "patent: spreads liver qi for pms, dysmenorrhea etc"
+          },
+           {
+            "name": "Shu Gan Tang",
+            "english": "Dredge the Liver Decoction",
+            "explanation": "patent: Soothes the Liver, regulates Qi, dispels blood stasis, alleviates pain, harmonizes the middle Jiao"
+          },
+          {
+            "name": "Xiang Sha Yang Wei Pian",
+            "english": "StomachVigor™",
+            "explanation": "patent: Tonifies and strengthens the Spleen and Stomach, regulates Qi, relieves bloating and discomfort, supports digestion"
+          },
+          {
+            "name": "Yi Gan San",
+            "english": "Restrain the Liver Powder",
+            "explanation": "patent: Liver Qi constraint manifesting as emotional or behavioral issues, especially in children, and for mild digestive weakness"
+          }
+        ]
+      },
+      {
+        "title": "Formulas That Harmonize: Harmonize Stomach and Intestines",
+        "formulas": [
+          {
+            "name": "Ban Xia Xie Xin Tang",
+            "english": "Pinellia Decoction to Drain the Epigastrium",
+            "explanation": "mixed pattern of cold/heat, excess/def, ST rebellious qi and internal clumping. Good for complex MJ issues"
+          },
+          {
+            "name": "Huang Lian Tang",
+            "english": "Coptis Decoction",
+            "explanation": "heat in chest and cold in ST, possibly some exterior pathogen (hence gui zhi)"
+          },
+          {
+            "name": "Kang Ning Wan",
+            "english": "Curing Pills",
+            "explanation": "patent: any kind of MJ upset; nausea, motion sickness, bloating, diarrhea, vomit, overeating, food poisoning etc"
+          },
+          {
+            "name": "Mu Xiang Shun Qi Pian",
+            "english": "BloatEase™",
+            "explanation": "patent: Regulates Qi, relieves abdominal bloating and discomfort, harmonizes the stomach and intestines, supports digestion"
+          },
+          {
+            "name": "Sheng Yang Qi Wei Tang",
+            "english": "Raise the Yang and Augment the Stomach Decoction",
+            "explanation": "patent: Raises Yang Qi, augments Stomach and Spleen Qi, harmonizes the Middle Jiao, dispels wind damp"
+          }
+        ]
+      }
+    ]
+  },
+
+  {
+    "category": "Formulas that Expel Dampness",
+    "subcategories": [
+      {
+        "title": "Formulas That Expel Dampness: Promote Urination and Leach Out Dampness",
+        "formulas": [
+          {
+            "name": "Wu Ling San",
+            "english": "Five-Ingredient Powder with Poria",
+            "explanation": "edema due to deficiency and water accumulation (just the dampness - no infection present)"
+          },
+          {
+            "name": "Zhu Ling Tang",
+            "english": "Polyporus Decoction",
+            "explanation": "lin syndrome w/ yin deficiency damp-heat"
+          },
+          {
+            "name": "Wu Pi San",
+            "english": "Five-Peel Powder",
+            "explanation": "edema due to dampness and qi stagnation (urine is not flowing properly causing edema)"
+          },
+          {
+            "name": "Fang Ji Huang Qi Tang",
+            "english": "Stephania and Astragalus Decoction",
+            "explanation": "wind-damp bi pain with exterior wei deficiency - this is more tonifying than wu pi san"
+          },
+          {
+            "name": "Wu Pi Yin",
+            "english": "Five Peel Decoction",
+            "explanation": "for Spleen/Kidney Deficiency with vigorous Dampness and Qi Stagnation"
+          },
+          {
+            "name": "Wu Pi Yin",
+            "english": "Instant Lysimachiae Beverage",
+            "explanation": "patent: Clears damp-heat, promotes urination, unblocks painful urinary dribbling, dissolves stones"
+          }
+        ]
+      },
+      {
+        "title": "Formulas That Expel Dampness: Transform Damp Turbidity",
+        "formulas": [
+          {
+            "name": "Ping Wei San",
+            "english": "Calm the Stomach Powder",
+            "explanation": "dries damp, strengthens SP, moves qi (mostly MJ symptoms of damp)"
+          },
+          {
+            "name": "Huo Xiang Zheng Qi San",
+            "english": "Agastache Powder to Rectify the Qi",
+            "explanation": "exterior invasion with qi/damp stagnation (i.e. ST flu)"
+          }
+        ]
+      },
+      {
+        "title": "Formulas That Expel Dampness: Clear Damp Heat",
+        "formulas": [
+          {
+            "name": "Ba Zheng San",
+            "english": "Eight-Herb Powder for Rectification",
+            "explanation": "UTI, heat and blood Lin syndrome (promotes urination and makes urinary tract smooth)"
+          },
+          {
+            "name": "Yin Chen Hao Tang",
+            "english": "Artemisia Yinchenhao Decoction",
+            "explanation": "clears yang type damp heat jaundice"
+          },
+          {
+            "name": "Shao Yao Tang",
+            "english": "Peony Decoction",
+            "explanation": "damp-heat dysentery with qi and blood stagnation (should be equal parts blood and pus in stool)"
+          },
+          {
+            "name": "Er Miao San",
+            "english": "Two-Marvel Powder",
+            "explanation": "LJ damp-heat, especially legs and feet (can be from unknown causes). Originally meant for gout"
+          },
+          {
+            "name": "San Ren Tang",
+            "english": "Three-Nut Decoction",
+            "explanation": "clears damp-heat in all 3 jiaos, moves qi, promotes urination to move damp (more for water retention)"
+          },
+          {
+            "name": "Qian Lie Shu Pian",
+            "english": "ProstateSure™",
+            "explanation": "patent: Clears heat, promotes urination, supports prostate health, relieves discomfort and swelling"
+          },
+          {
+            "name": "Si Miao Pian",
+            "english": "Dampclear™",
+            "explanation": "patent: damp-heat conditions affecting the lower body, including joint pain and swelling"
+          },
+          {
+            "name": "Yu Dai Pian",
+            "english": "Feminclean™",
+            "explanation": "patent: for abnormal damp heat vaginal discharge and related discomfort, supporting gynecological health"
+          }
+        ]
+      },
+      {
+        "title": "Formulas That Expel Dampness: Warm and Transform Water",
+        "formulas": [
+          {
+            "name": "Zhen Wu Tang",
+            "english": "True Warrior Decoction",
+            "explanation": "edema due for SP and KID yang deficiency"
+          },
+          {
+            "name": "Shi Pi Yin",
+            "english": "Bolster the Spleen Decoction",
+            "explanation": "edema below waist w/ SP yang deficiency and lots of qi stagnation (more moving than Zhen Wu Tang)"
+          },
+          {
+            "name": "Bi Xie Fen Qing Yin",
+            "english": "Dioscorea Decoction to Separate the Clear",
+            "explanation": "cloudy lin syndrome caused by cold and damp (don't use for damp-heat because it's warm)"
+          }
+        ]
+      },
+      {
+        "title": "Formulas That Expel Dampness: Dispel Wind-Damp",
+        "formulas": [
+          {
+            "name": "Juan Bi Tang",
+            "english": "Remove Painful Obstruction Decoction",
+            "explanation": "wind cold bi pain w/ focus on upper body w/ qi deficiency (shoulder, neck, arm)"
+          },
+          {
+            "name": "Qiang Huo Sheng Shi Tang",
+            "english": "Notopterygium Decoction to Overcome Dampness",
+            "explanation": "for mild exterior wind-cold invasion of upper body (tai yang) w/ muscle aches and headache of a wind-cold-damp type"
+          },
+          {
+            "name": "Du Huo Ji Sheng Tang",
+            "english": "Angelica Pubescens and Sangjisheng Decoction",
+            "explanation": "chronic bi pain of wind-cold-damp type w/ kid/liver and qi/blood deficiency. Focus is on the lower body"
+          },
+          {
+            "name": "Gui Zhi Shao Yao Zhi Mu Tang",
+            "english": "Cinnamon Twig, Peony, and Anemarrhena Decoction",
+            "explanation": "w-c-d bi pain with localized heat in joints due to stagnation"
+          },
+          {
+            "name": "Feng Shi Xiao Tong Pian",
+            "english": "EzJoint™",
+            "explanation": "patent: Warm Wind Damp Disperse Pain Pill"
+          },
+          {
+            "name": "Jian Zhou Tong Pian",
+            "english": "ShoulderEZ™",
+            "explanation": "patent: treats shoulder pain"
+          },
+          {
+            "name": "Jing Fang Bai Du San",
+            "english": "Schizonepeta and Siler Formula",
+            "explanation": "patent: Warms wind-cold-damp all over the body, stop pain, warms channels"
+          },
+          {
+            "name": "Te Xiao Jing Zhui Tong Pian",
+            "english": "Neckinder™",
+            "explanation": "patent: pain and stiffness in the neck due to blood stasis, wind-damp, and deficiency"
+          },
+          {
+            "name": "Xi Guan Jie Tong Pian",
+            "english": "KneeKinder™",
+            "explanation": "patent: knee and joint pain, especially due to wind-damp, blood stasis, and deficiency"
+          },
+           {
+            "name": "Zuo Gu Shen Jing Tong Pian",
+            "english": "Sciaticlear™",
+            "explanation": "patent: to relieve sciatic nerve pain and lower limb discomfort by invigorating blood and clearing obstructions in the channels"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "category": "Formulas that Warm Interior Cold",
+    "subcategories": [
+      {
+        "title": "Formulas That Warm Interior Cold",
+        "formulas": [
+          {
+            "name": "Li Zhong Wan",
+            "english": "Regulate the Middle Pill",
+            "explanation": "SP deficiency with cold, no thirst/appetite, abdominal pain, pale tongue"
+          },
+          {
+            "name": "Wu Zhu Yu Tang",
+            "english": "Evodia Decoction",
+            "explanation": "vomiting due to cold MJ and liver/stomach disharmony (warms interior). Should involve vomiting unlike Li Zhong Wang"
+          },
+          {
+            "name": "Xiao Jian Zhong Tang",
+            "english": "Minor Construct the Middle Decoction",
+            "explanation": "warms MJ, replenishes qi, relieves abdominal spasms"
+          },
+          {
+            "name": "Da Jian Zhong Tang",
+            "english": "Major Construct the Middle Decoction",
+            "explanation": "severe cold pain in MJ with vomiting"
+          },
+          {
+            "name": "Si Ni Tang",
+            "english": "Frigid Extremities Decoction",
+            "explanation": "true extreme cold from yang deficiency with yang collapse"
+          },
+          {
+            "name": "Shen Fu Tang",
+            "english": "Ginseng and Aconite Accessory Root Decoction",
+            "explanation": "yang collapse with qi deficiency with cold phlegm. only for acute conditions"
+          },
+          {
+            "name": "Dang Gui Si Ni Tang",
+            "english": "Tangkuei Decoction for Frigid Extremities",
+            "explanation": "cold in channels with blood deficiency"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "category": "Formulas that Treat Dryness",
+    "subcategories": [
+      {
+        "title": "Formulas That Treat Dryness: Gently Disperse and Moisten",
+        "formulas": [
+          {
+            "name": "Xing Su San",
+            "english": "Apricot Kernel and Perilla Leaf Powder",
+            "explanation": "disperses cool dryness, stops cough, transforms mucus"
+          },
+          {
+            "name": "Sang Xing Tang",
+            "english": "Mulberry Leaf and Apricot Kernel Decoction",
+            "explanation": "disperses warm dryness, moistens a dry cough. contraindicated in yin damage because Zhi Zi is too drying"
+          },
+          {
+            "name": "Qing Zao Jiu Fei Tang",
+            "english": "Eliminate Dryness and Rescue the Lungs Decoction",
+            "explanation": "more serious LU def. and more severe heat than Sang Xing Tang (has sang ye AND shi gao)"
+          }
+        ]
+      },
+      {
+        "title": "Formulas That Treat Dryness: Enrich Yin and Moisten Dryness",
+        "formulas": [
+          {
+            "name": "Bai He Gu Jin Tang",
+            "english": "Lily Bulb Decoction to Preserve the Metal",
+            "explanation": "KID and LU def. w/ hot dryness and phlegm-cough (emphasis on the dryness)"
+          },
+          {
+            "name": "Mai Men Dong Tang",
+            "english": "Ophiopogonis Decoction",
+            "explanation": "LU/ST yin def. w/ rebellious qi"
+          },
+          {
+            "name": "Zeng Ye Tang",
+            "english": "Increase Fluids Decoction",
+            "explanation": "LI dryness from injury to fluids. Will \"float the boat\" and expel hard dry stool"
+          },
+          {
+            "name": "Bu Fei E Jiao Tang",
+            "english": "Tonify the Lungs Decoction with Ass-Hide Gelatin",
+            "explanation": "LU yin def. w/ reckless bleeding from heat (less severe than Bai He Gu Ji Tang)"
+          },
+          {
+            "name": "Yang Yin Qing Fei Tang",
+            "english": "Nourish the Yin and Clear the Lungs Decoction",
+            "explanation": "toxic swelling in throat; i.e. diptheria infection"
+          }
+        ]
+      }
+    ]
+  },
+
+  {
+    "category": "Formulas that Tonify",
+    "subcategories": [
+      {
+        "title": "Formulas That Tonify: Tonify the Qi",
+        "formulas": [
+          {
+            "name": "Si Jun Zi Tang",
+            "english": "Four-Gentleman Decoction",
+            "explanation": "base formula for SP qi deficiency"
+          },
+          {
+            "name": "Shen Ling Bai Zhu San",
+            "english": "Ginseng, Poria and Atractylodes Macrocephala Powder",
+            "explanation": "SP qi def w/ cold damp and diarrhea. Chief complaint is diarrhea/loose stools w/ SP qi def symptoms"
+          },
+          {
+            "name": "Bu Zhong Yi Qi Tang",
+            "english": "Tonify the Middle and Augment the Qi Decoction",
+            "explanation": "sinking, prolapse, debility after a long illness (can be physical or emotional). Severe fatigue or organ prolapse. Warm formula so dont use if existing heat symptoms"
+          },
+          {
+            "name": "Sheng Mai San",
+            "english": "Generate the Pulse Powder",
+            "explanation": "LU qi and yin def. w/ palpatations and shortness of breath. Only use after pathogens have been completely expelled first"
+          },
+          {
+            "name": "Liu Jun Zi Tang",
+            "english": "Six-Gentleman Decoction",
+            "explanation": "SP qi def. w/ damp (feel bloating and \"sloshy\" like edema in middle, worse after eating)"
+          },
+          {
+            "name": "Xiang Sha Liu Jun Zi Tang",
+            "english": "Six-Gentleman Decoction with Aucklandia and Amomum",
+            "explanation": "Sp def. w/ qi stagnation and pain (bloating, indigestion, stomache ache)"
+          },
+          {
+            "name": "Ren Shen Ge Jie San",
+            "english": "Ginseng and Gecko Powder",
+            "explanation": "chronic cough w/ def, heat, and phlegm. a mixed pattern"
+          }
+        ]
+      },
+      {
+        "title": "Formulas That Tonify: Tonify the Blood",
+        "formulas": [
+          {
+            "name": "Si Wu Tang",
+            "english": "Four-Substance Decoction",
+            "explanation": "basic blood tonic formula"
+          },
+          {
+            "name": "Tao Hong Si Wu Tang",
+            "english": "Four-Substance Decoction with Safflower and Peach Pit",
+            "explanation": "blood def. and blood stagnation. Good for amenorrhea"
+          },
+          {
+            "name": "Wu Ji Bai Feng Wan",
+            "english": "LadiesTonic™",
+            "explanation": "patent: women's health, especially for menstrual irregularities, postpartum weakness, and general tonification"
+          }
+        ]
+      },
+      {
+        "title": "Formulas That Tonify: Tonify the Qi and Blood Together",
+        "formulas": [
+          {
+            "name": "Dang Gui Bu Xue Tang",
+            "english": "Tangkuei Decoction to Tonify the Blood",
+            "explanation": "qi and blood depletion, blood loss. Jumpstarts severe blood loss after things like surgery/trauma"
+          },
+          {
+            "name": "Gui Pi Tang",
+            "english": "Restore the Spleen Decoction",
+            "explanation": "tonifies SP qi and HT blood"
+          },
+          {
+            "name": "Ba Zhen Tang",
+            "english": "Eight-Treasure Decoction",
+            "explanation": "qi and blood def (LU, SP, LIV)"
+          },
+          {
+            "name": "Shi Quan Da Bu Tang",
+            "english": "All-Inclusive Great Tonifying Decoction",
+            "explanation": "further tonifies qi and blood for more pronounced cold symptoms (vs Ba Zhen Tang)"
+          },
+          {
+            "name": "Zhi Gan Cao Tang",
+            "english": "Honey-Fried Licorice Decoction",
+            "explanation": "tonifies qi, blood, and yin for irregular heart rate"
+          },
+          {
+            "name": "Ren Shen Yang Ying Tang",
+            "english": "Ginseng Decoction to Nourish the Nutritive Qi",
+            "explanation": "tonifies qi and blood, calms the shen (compare to gui pi tang)"
+          },
+          {
+            "name": "Tai Shan Pan Shi San",
+            "english": "Powder that Gives the Stability of Mount Tai",
+            "explanation": "habitual miscarriage due to qi and blood def."
+          }
+        ]
+      },
+      {
+        "title": "Formulas That Tonify: Tonify the Yin",
+        "formulas": [
+          {
+            "name": "Liu Wei Di Huang Wan",
+            "english": "Six-Ingredient Pill with Rehmannia",
+            "explanation": "nourish KID yin, drain fire. Basic yin def module"
+          },
+          {
+            "name": "Zuo Gui Wan",
+            "english": "Restore the Left [Kidney] Pill",
+            "explanation": "tonifies KID yin, jing and marrow. Does not clear heat"
+          },
+          {
+            "name": "Qi Ju Di Huang Wan",
+            "english": "Lycium Fruit, Chrysanthemum and Rehmannia Pill",
+            "explanation": "nourish yin and blood to nourish eyes (focus is on the eyes)"
+          },
+          {
+            "name": "Zhi Bai Di Huang Wan",
+            "english": "Anemarrhena, Phellodendron and Rehmannia Pill",
+            "explanation": "clears heat and KID fire more strongly than Liu Wei Di Huang Wan"
+          },
+          {
+            "name": "Er Long Zuo Ci Wan",
+            "english": "Pill for Deafness that is Kind to the Left [Kidney] Pill",
+            "explanation": "nourishes KID yin to benefit hearing"
+          },
+          {
+            "name": "Ming Mu Di Huang Wan",
+            "english": "Improve Vision Pill with Rehmannia",
+            "explanation": "nourishes KID yin and LIV blood to improve vision"
+          },
+          {
+            "name": "Da Bu Yin Wan",
+            "english": "Great Tonify the Yin Pill",
+            "explanation": "enriches yin and descends KID fire. Unlike Zhi Bai Di Huang Wan in that this one has a sinking action with the gui ban"
+          },
+          {
+            "name": "Yi Guan Jian",
+            "english": "Linking Decoction",
+            "explanation": "nourishes LIV and KID yin to relieve LIV qi constraint"
+          },
+          {
+            "name": "Er Zhi Wan",
+            "english": "Two-Ultimate Pill",
+            "explanation": "nourish KID yin to treat problems of aging"
+          },
+          {
+            "name": "Zuo Gui Yin",
+            "english": "Restore the Left [Kidney] Decoction",
+            "explanation": "nourishes KID yin, SP qi and LIV blood. Does not clear heat; formula is overall warming"
+          },
+          {
+            "name": "Hu Qian Wan",
+            "english": "Hidden Tiger Pill",
+            "explanation": "eniches yin, descends fire, strenghtns sinews and bones (like for menopausal atrophy/osteoporosis, arthritis, MS)"
+          },
+          {
+            "name": "Sha Shen Mai Men Dong Tang",
+            "english": "Glehnia and Ophiopogonis Decoction",
+            "explanation": "Nourishes Lung and Stomach Yin, moistens dryness, clears heat, stops dry cough"
+          },
+          {
+            "name": "Zhu Jing Wan",
+            "english": "Preserve Vistas Pill",
+            "explanation": "for declining essence affecting vision (w/ also a lil damp)"
+          },
+          {
+            "name": "Shi Hu Ye Guang Wan",
+            "english": "Dendrobium Pill for Night Vision",
+            "explanation": "enriches yin, calms LIV wind, improves eyes"
+          },
+          {
+            "name": "Qi Bao Mei Ran Dan",
+            "english": "Seven-Treasure Special Pill for Beautiful Whiskers",
+            "explanation": "nourish KID yin and LIV blood to stop premature greying and other aging symptoms"
+          },
+          {
+            "name": "Du Qi Wan",
+            "english": "Capital Qi Pill",
+            "explanation": "liu wei di huang wan variation when chief complaint is chronic wheezing"
+          },
+          {
+            "name": "Er Long Zuo Ci Pian",
+            "english": "YinVive Hearing™",
+            "explanation": "patent: nourishes kidney yin to treat hearing issues"
+          },
+          {
+            "name": "Er Xian Pian",
+            "english": "Menofine™",
+            "explanation": "patent: treats menopause by harmonizing both yin and yang"
+          },
+          {
+            "name": "Geng Nian An Pian",
+            "english": "Menoplease™",
+            "explanation": "patent: Menopause Comfort Pill, balance yin & yang, stop sweat"
+          },
+          {
+            "name": "Jian Tang Pian",
+            "english": "GlucoAssure™",
+            "explanation": "patent: Nourishes KD Qi & Yin, clears heat, generates fluids, maintains glucose"
+          },
+          {
+            "name": "Nuan Gong Yun Zi Pian",
+            "english": "FertiAssist™",
+            "explanation": "patent: Warms the uterus, tonifies Kidney and Yang, nourishes Blood, regulates menstruation, supports fertility"
+          },
+          {
+            "name": "Qi Bao Mei Zan Dan",
+            "english": "Seven Treasures for Beautiful Beard Pill",
+            "explanation": "patent: for nourishing the Liver and Kidney, promoting hair health, and supporting overall vitality"
+          },
+          {
+            "name": "Qi Ju Di Huang Pian",
+            "english": "YinVive Eyes™",
+            "explanation": "patent: eye discomfort associated with Liver and Kidney Yin deficiency"
+          },
+          {
+            "name": "Shou Wu Pian",
+            "english": "Polygonum Pill",
+            "explanation": "patent: Nourishes Liver and Kidney, strengthens essence, supports hair growth, replenishes blood"
+          },
+          {
+            "name": "Wu Zi Yan Zong Pian",
+            "english": "Fertifruits™",
+            "explanation": "patent: male and female reproductive health, strengthening Kidney function and supporting fertility"
+          },
+          {
+            "name": "Zan Yu Dan",
+            "english": "Special Pill to Aid Fertility",
+            "explanation": "patent: support fertility and reproductive health, especially for women with Kidney and Liver deficiency patterns"
+          }
+        ]
+      },
+      {
+        "title": "Formulas That Tonify: Tonify the Yang",
+        "formulas": [
+          {
+            "name": "Jin Gui Shen Qi Wan",
+            "english": "Kidney Qi Pill from the Golden Cabinet",
+            "explanation": "warms and tonifies KID yang"
+          },
+          {
+            "name": "You Gui Wan",
+            "english": "Restore the Right [Kidney] Pill",
+            "explanation": "wams and tonifies KID yang, essence, and blood; no draining elements"
+          },
+          {
+            "name": "You Gui Yin",
+            "english": "Restore the Right [Kidney] Decoction",
+            "explanation": "warms KID essence but weaker than You Gui wan"
+          },
+          {
+            "name": "Er Xian Tang",
+            "english": "Two-Immortal Decoction",
+            "explanation": "tonifies yin, yang, blood, essence; perfectly suited for menopause"
+          },
+                    {
+            "name": "Ba Wei Di Huang Wan",
+            "english": "Eight-Ingredient Pill with Rehmannia",
+            "explanation": "patent: tonifies kidney, warms the limbs and lower body, supports fertility, balances yin and yang, strengthens the back"
+          },
+                 {
+            "name": "Fu Zi Li Zhong Pian",
+            "english": "Midwarmer™",
+            "explanation": "patent: warms and tonifies spleen and stomach yang"
+          },
+               {
+            "name": "Zhuang Gu Gu Ben Pian",
+            "english": "BoneVigor™",
+            "explanation": "patent: for strengthening bones and joints, and supporting recovery in cases of osteoporosis and chronic musculoskeletal weakness"
+          },
+            {
+            "name": "Huan Shao Zhuang Yang Pian",
+            "english": "VigorRenew™",
+            "explanation": "patent: to invigorate Kidney yang, enhance vitality, and combat symptoms of yang deficiency such as fatigue and coldness"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "category": "Formulas that Regulate Qi",
+    "subcategories": [
+      {
+        "title": "Formulas That Regulate the Qi: Promote the Movement of Qi",
+        "formulas": [
+          {
+            "name": "Yue Ju Wan",
+            "english": "Escape Restraint Pill",
+            "explanation": "five stagnations pill; blood, heat, qi, food, damp"
+          },
+          {
+            "name": "Ban Xia Hou Po Tang",
+            "english": "Pinellia and Magnolia Bark Decoction",
+            "explanation": "plum pit qi sensation in throat"
+          },
+          {
+            "name": "Gua Lou Xie Bai Bai Jiu Tang",
+            "english": "Trichosanthes Fruit, Chinese Chive, and Wine Decoction",
+            "explanation": "chest Bi (angina- qi constraint in chest causing pain), LU phlegm (yang def, not transforming fluids)"
+          },
+          {
+            "name": "Hou Po Wen Zhong Tang",
+            "english": "Magnolia Bark Decoction for Warming the Middle",
+            "explanation": "warms the middle, dries damp, moves qi (for damp-cold in SP/ST)"
+          },
+          {
+            "name": "Liang Fu Wan",
+            "english": "Galangal and Cyperus Pill",
+            "explanation": "warms ST, moves LIV qi (good for cold menstruation pain)"
+          },
+          {
+            "name": "Jin Ling Zi San",
+            "english": "Melia Toosendan Powder",
+            "explanation": "pain and heat and LIV qi stagnation that is worse with heat (so epigastric/hypochondriac burning pain)"
+          },
+          {
+            "name": "Nuan Gan Jian",
+            "english": "Warm the Liver Decoction",
+            "explanation": "hernia w/ cold from deficient KID yang and blood deficiency"
+          },
+          {
+            "name": "Ju He Wan",
+            "english": "Tangerine Seed Pill",
+            "explanation": "hernia w/ swelling or abscess (protuberant bulging disorder, ectopic pregnancy after medical treatment)"
+          },
+          {
+            "name": "Gua Lou Xie Bai Ban Xia Tang",
+            "english": "Trichosanthes Fruit, Chinese Chive, Pinellia Decoction",
+            "explanation": "same as Gua Lou Xie Bai Bai Jiu Tang but w/ Ban Xia added for chest Bi and cold LU phlegm"
+          },
+          {
+            "name": "Tian Tai Wu Yao San",
+            "english": "Top-Quality Lindera Powder",
+            "explanation": "hernia w/ excess cold, qi blockage"
+          }
+        ]
+      },
+      {
+        "title": "Formulas That Regulate the Qi: Direct Rebellious Qi Downward",
+        "formulas": [
+          {
+            "name": "Su Zi Jiang Qi Tang",
+            "english": "Perilla Fruit Decoction for Directing Qi Downward",
+            "explanation": "LU/KID disharmony (excess phlegm above and deficient KID below), for chronic conditions"
+          },
+          {
+            "name": "Ju Pi Zhu Ru Tang",
+            "english": "Tangerine Peel and Bamboo Shavings Decoction",
+            "explanation": "ST heat w/ both rebellion and deficiency; hot hiccups/functional vomiting (vomiting w/o and illness, usually due to emotional event)"
+          },
+          {
+            "name": "Xuan Fu Dai Zhe Tang",
+            "english": "Inula and Haematite Decoction",
+            "explanation": "cold phlegm obstruction w/ def. ST qi (rebellious qi)"
+          },
+          {
+            "name": "Ding Xiang Shi Di Tang",
+            "english": "Clove and Persimmon Calyx Decoction",
+            "explanation": "cold deficient ST w/ rebellious qi; cold hiccups. Ding xiang (clove) and shi di (persimmon calyx)"
+          },
+          {
+            "name": "Ding Chuan Tang",
+            "english": "Arrest Wheezing Decoction",
+            "explanation": "w-c invasion w/ phlegm heat obstructing the LU in interior. Bai Guo (ginko semen), Ma Huang, Su Zi, Huang Qin"
+          },
+          {
+            "name": "Si Mo Tang",
+            "english": "Four Milled-Herb Decoction",
+            "explanation": "LIV qi attacking LU; cough worse with stress"
+          }
+        ]
+      }
+    ]
+  },
+
+  {
+    "category": "Formulas that Invigorate Blood",
+    "subcategories": [
+      {
+        "title": "Formulas That Invigorate the Blood: Dispel Blood Stasis",
+        "formulas": [
+          {
+            "name": "Tao He Cheng Qi Tang",
+            "english": "Peach Pit Decoction to Order the Qi",
+            "explanation": "blood stasis in the LJ due to heat"
+          },
+          {
+            "name": "Xue Fu Zhu Yu Tang",
+            "english": "Drive Out Blood Stasis in the Mansion of Blood Decoction",
+            "explanation": "blood stasis in chest with LIV qi stagnation"
+          },
+          {
+            "name": "Dan Shen Yin",
+            "english": "Salvia Decoction",
+            "explanation": "invigorates blood and qi, esp epigastric or chest (compare to mansion of blood formula)"
+          },
+          {
+            "name": "Tong Qiao Huo Xue Tang",
+            "english": "Unblock Orifices and Invigorate the Blood Decoction",
+            "explanation": "mod. of Xue Fu Zhu Yu Tang (plus sheng jiang, she xiang, and wine) for facial pain/headache/vertigo/concussion"
+          },
+          {
+            "name": "Ge Xia Zhu Yu Tang",
+            "english": "Drive Out Blood Stasis Below the Diaphragm Decoction",
+            "explanation": "mod. of Xue Fu Zhu Yu Tang (plus Wu Yao, Yan Hu Suo, Xiang Fu, Zhi Ke, Wu Ling Zhi) for blood stasis below diaphragm, menstrual clots, hepatitis, splenomegaly"
+          },
+          {
+            "name": "Shao Fu Zhu Yu Tang",
+            "english": "Drive Out Blood Stasis in the Lower Abdomen Decoction",
+            "explanation": "mod. of Xue Fu Zhu Yu Tang (plus Xiao Hui Xiang, Gan Jiang, Rou Gui, Yan Hu Suo, Pu Huang, Wu Ling Zhi, Mo Yao) for low abd fixed cold pain, deficiency cold w/ blood stasis"
+          },
+          {
+            "name": "Shen Tong Zhu Yu Tang",
+            "english": "Drive Out Blood Stasis from a Painful Body Decoction",
+            "explanation": "mod. of Xue Fu Zhu Yu Tang (plus Qin Jiao, Qiang Huo, Chuan Niu Xi, Di Long, Wu Ling Zhi) for painful arthritis in whole body, shoulder/arm/back/feet, chronic pain"
+          },
+          {
+            "name": "Shi Xiao San",
+            "english": "Sudden Smile Powder",
+            "explanation": "core module for severe pain, menstrual or post-partum"
+          },
+          {
+            "name": "Da Huang Zhe Chong Wan",
+            "english": "Rhubarb and Eupolyphaga Pill",
+            "explanation": "dry blood due to LIV blood stasis, esp alcoholics. Emaciation/abd fullness"
+          },
+          {
+            "name": "Bu Yang Huan Wu Tang",
+            "english": "Tonify the Yang to Restore Five [Tenths] Decoction",
+            "explanation": "qi deficient paralysis, atrophy syndrome"
+          },
+          {
+            "name": "Fu Fang Dan Shen Pian",
+            "english": "Cardiovigor™",
+            "explanation": "patent: Chest distress and angina pectoris"
+          },
+          {
+            "name": "Huo Xue Tong Mai Pian",
+            "english": "CircuFine™",
+            "explanation": "patent: generally promotes blood circulation to remove blood stasis"
+          },
+           {
+            "name": "Jin Gu Die Da Pian",
+            "english": "Bruise Mender™",
+            "explanation": "patent: Healing bones, reduce swelling, stop pain"
+          },
+          {
+            "name": "Kai Kit Wan",
+            "english": "Prostate Gland Pills",
+            "explanation": "patent: Clears heat, invigorates blood, supports prostate health, relieves discomfort and swelling"
+          },
+          {
+            "name": "Shao Fu Zhu Yu Pian",
+            "english": "Abdo StasisClear™",
+            "explanation": "patent: Invigorates blood, dispels stasis, warms the lower abdomen, alleviates pain"
+          },
+          {
+            "name": "Yan Hu Suo Pian",
+            "english": "Corydalis Relaxe™",
+            "explanation": "patent: pain management, especially for musculoskeletal, menstrual, and abdominal pain due to stagnation"
+          }
+        ]
+      },
+      {
+        "title": "Formulas That Invigorate the Blood: Warm Menses, Dispel Stasis",
+        "formulas": [
+          {
+            "name": "Gui Zhi Fu Ling Wan",
+            "english": "Cinnamon Twig and Poria Pill",
+            "explanation": "blood stasis in uterus, such as fibroids (or anywhere in lower abd). For mild bleeding due to masses i.e. ovarian cysts"
+          },
+          {
+            "name": "Sheng Hua Tang",
+            "english": "Generation and Transformation Decoction",
+            "explanation": "post partum cold abdomen; use for one month after giving birth or for any kind of cold blood stasis in LJ"
+          },
+          {
+            "name": "Wen Jing Tang",
+            "english": "Warm the Menses Decoction",
+            "explanation": "irregular menstruation w/ cold/heat and blood deficiency/excess stagnation, complex patterns"
+          }
+        ]
+      },
+      {
+        "title": "Formulas That Invigorate the Blood: Treat Traumatic Injury",
+        "formulas": [
+          {
+            "name": "Fu Yuan Huo Xue Tang",
+            "english": "Revive Health by Invigorating the Blood Decoction",
+            "explanation": "trunk pain, injury to GB/LIV area"
+          },
+          {
+            "name": "Qi Li San",
+            "english": "Seven-Thousandths of a Tael Powder",
+            "explanation": "external injury w/ bleeding, swelling. Used topically"
+          },
+          {
+            "name": "Die Da Wan",
+            "english": "Trauma Pill",
+            "explanation": "sprain, injury, similar to Qi Li San, but used internally"
+          },
+          {
+            "name": "Huo Luo Xiao Ling Dan",
+            "english": "Fantastically Effective Pill to Invigorate the Channels",
+            "explanation": "a strong blood-moving formula, basic and flexible, needs to be modified"
+          },
+          {
+            "name": "Yunnan Baiyao",
+            "english": "Yunnan White Medicine",
+            "explanation": "famous Chinese patent medicine used for emergencies involving bleeding and trauma. It can be used internally or applied externally"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "category": "Formulas that Stop Bleeding",
+    "subcategories": [
+      {
+        "title": "Formulas That Stop Bleeding: Clear Heat and Stop Bleeding",
+        "formulas": [
+          {
+            "name": "Huai Hua San",
+            "english": "Sophora Japonica Flower Powder",
+            "explanation": "ulcerative colitis and other GI bleeding"
+          },
+          {
+            "name": "Shi Hui San",
+            "english": "Ten Partially-Charred Substances Powder",
+            "explanation": "stops bleeding in upper jiao, conducts heat downward; excess heat only"
+          },
+          {
+            "name": "Xiao Ji Yin Zi",
+            "english": "Small Thistle Decoction; Cephanoplos Decoction",
+            "explanation": "clears heat and stops bleeding in urinary tract"
+          },
+          {
+            "name": "Si Sheng Wan",
+            "english": "Four-Fresh Pill",
+            "explanation": "stronger to cool, less strong to stop bleeding compared to Shi Nui San"
+          },
+          {
+            "name": "Ke Xue Fang",
+            "english": "Coughing of Blood Formula",
+            "explanation": "LIV fire as root causing LU bleeding"
+          },
+          {
+            "name": "Qing Re Zhi Beng Tang",
+            "english": "Clear Heat and Stop Excessive Uterine Bleeding Decoction (Modern Formula, ~1900)",
+            "explanation": "excessive uterine bleeding due to heat in the blood; a completely cold modern formula w/ little balance"
+          },
+          {
+            "name": "Huai Jiao Wan",
+            "english": "Sophora Fruit Pills™",
+            "explanation": "patent: Hemorrhoids, bleeding due to heat in the intestines, rectal bleeding, blood in stool"
+          }
+        ]
+      },
+      {
+        "title": "Formulas That Stop Bleeding: Tonify and Stop Bleeding",
+        "formulas": [
+          {
+            "name": "Jiao Ai Tang",
+            "english": "Ass-Hide Gelatin and Mugwort Decoction",
+            "explanation": "stops uterine bleeding due to blood deficiency w/ cold"
+          },
+          {
+            "name": "Huang Tu Tang",
+            "english": "Yellow Earth Decoction",
+            "explanation": "SP yang deficiency and SP not holding blood (can be blood anywhere in body, but it should be due to deficiency)"
+          },
+          {
+            "name": "Bai Ye Tang",
+            "english": "Biota Twig Decoction",
+            "explanation": "bleeding in UJ due to cold and deficiency (yang deficiency causing upward movement of blood)"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "category": "Formulas that Stabilize and Bind",
+    "subcategories": [
+      {
+        "title": "Formulas That Stabilize and Bind: Stabilize Exterior and Lungs",
+        "formulas": [
+          {
+            "name": "Yu Ping Feng San",
+            "english": "Jade Windscreen Powder",
+            "explanation": "boosts wei qi, stabilizes exterior, stops spontaneous sweat; good for prevention i.e. while travelling/during flu season"
+          },
+          {
+            "name": "Dang Gui Liu Huang Tang",
+            "english": "Tangkuei and Six-Yellow Decoction",
+            "explanation": "nourishes yin, clears fire, stabilizes exterior, stops sweating; KID yin not nourishing HT fire"
+          },
+          {
+            "name": "Mu Li San",
+            "english": "Oyster Shell Powder",
+            "explanation": "stops sweating and preserves HT yin"
+          },
+          {
+            "name": "Jiu Xian San",
+            "english": "Nine-Immortal Powder",
+            "explanation": "astringes LU, stops cough, tonifies LU qi and yin"
+          }
+        ]
+      },
+      {
+        "title": "Formulas That Stabilize and Bind: Stabilize and Bind Intestines",
+        "formulas": [
+          {
+            "name": "Si Shen Wan",
+            "english": "Four-Miracle Pill",
+            "explanation": "stops daybreak diarrhea due to KID/SP yang deficiency"
+          },
+          {
+            "name": "Zhen Ren Yang Zang Tang",
+            "english": "True Man's Decoction to Nourish the Organs",
+            "explanation": "binds up intestines, warms middle, tonifies SP and ST"
+          },
+          {
+            "name": "Tao Hua Tang",
+            "english": "Peach Blossom Decoction",
+            "explanation": "binds up chronic diarrhea due to deficiency cold; mostly treats the symptoms, not root cause"
+          }
+        ]
+      },
+      {
+        "title": "Formulas That Stabilize and Bind: Stabilize Kidneys",
+        "formulas": [
+          {
+            "name": "Jin Suo Gu Jing Wan",
+            "english": "Metal Lock Pill to Stabilize the Essence",
+            "explanation": "leakage due to KID deficiency; used for men's and women's leakages; i.e. autoimmune muscle weakness, premature ejaculation)"
+          },
+          {
+            "name": "Sang Piao Xiao San",
+            "english": "Mantis Egg-Case Powder",
+            "explanation": "incontinence with dual KID and HT deficiency"
+          },
+          {
+            "name": "Suo Quan Wan",
+            "english": "Shut the Sluice Pill",
+            "explanation": "chronic mild urinary incontinence due to cold KID; useful for children"
+          },
+          {
+            "name": "Gui Zhi Jia Long Gu Mu Li San",
+            "english": "Cinnamon Twig Decoction plus Dragon Bone and Oyster Shell",
+            "explanation": "yin/yang deficiency, KID/HT disharmony, consumptive disorder, loss of essence"
+          },
+          {
+            "name": "Shou Tai Wan",
+            "english": "Fetus Longevity Pill",
+            "explanation": "tonifies yang, stabilizes pregnancy"
+          }
+        ]
+      },
+      {
+        "title": "Formulas That Stabilize and Bind: Stabilize the Womb",
+        "formulas": [
+          {
+            "name": "Gu Jing Wan",
+            "english": "Stabilize the Menses Pill",
+            "explanation": "clears heat and nourishes yin, stops excessive bleeding due to heat"
+          },
+          {
+            "name": "Wan Dai Tang",
+            "english": "End Discharge Decoction",
+            "explanation": "vaginal discharge due to cold damp/SP qi deficiency and LIV constraint"
+          },
+          {
+            "name": "Gu Chong Tang",
+            "english": "Stabilize Gushing Decoction",
+            "explanation": "chronic SP deficiency not holding blood; this addresses root and branch; \"chong\" meaning chong meridian"
+          },
+          {
+            "name": "Yi Huang Tang",
+            "english": "Change Yellow [Discharge] Decoction",
+            "explanation": "SP qi deficiency leading to damp leading to constraint leading to damp heat"
+          },
+          {
+            "name": "Zhen Ling Dan",
+            "english": "Rouse the Spirit Special Pill",
+            "explanation": "stabilizes uterine bleeding, transforms cold blood stasis"
+          }
+        ]
+      }
+    ]
+  },
+
+  {
+    "category": "Formulas that Calm the Spirit",
+    "subcategories": [
+      {
+        "title": "Formulas That Calm the Spirit: Nourish the Heart",
+        "formulas": [
+          {
+            "name": "Suan Zao Ren Tang",
+            "english": "Sour Jujube Decoction",
+            "explanation": "insomnia related to LIV blood deficiency (a go-to for this); also anxiety"
+          },
+          {
+            "name": "Huang Lian E Jiao Tang",
+            "english": "Coptis and Ass-Hide Gelatin Decoction",
+            "explanation": "qi level and HT heat with yin deficiency causing shen disturbance. Compared to Tian Wang Bu Xin Dan: more about heat, less about nourishing yin. NO sedating herbs; akathisia"
+          },
+          {
+            "name": "Gan Mai Da Zao Tang",
+            "english": "Licorice, Wheat and Jujube Decoction",
+            "explanation": "restless organ (uterus) syndrome with constant crying and hysteria"
+          },
+          {
+            "name": "Tian Wang Bu Xin Wan",
+            "english": "Emperor of Heaven’s Special Pill",
+            "explanation": "classic KID/HT disharmony with heat; i.e. sad, worried, can't sleep, constant crying; can possibly help grief"
+          },
+          {
+            "name": "Ding Zhi Wan",
+            "english": "Settle the Emotions Pill",
+            "explanation": "anxiety due to qi deficiency and phlegm"
+          },
+          {
+            "name": "An Shen Bu Xin Pian",
+            "english": "Calm the Spirit, Supplement the Heart Tablets",
+            "explanation": "modern patent formula designed to address insomnia and agitation from Heart and Kidney deficiency"
+          },
+          {
+            "name": "Bu Nao Yang Shen Pian",
+            "english": "BrainNew™",
+            "explanation": "patent: nourishes the heart to calm the mind, tonifies the kidneys to benefit the brain"
+          },
+          {
+            "name": "Te Xiao Zao Ren An Mian Pian",
+            "english": "Sleepeace™",
+            "explanation": "patent: Nourishes Heart and calms spirit, supports restful sleep, alleviates anxiety, replenishes Yin"
+          }
+        ]
+      },
+      {
+        "title": "Formulas That Calm the Spirit: Sedate and Calm the Shen",
+        "formulas": [
+          {
+            "name": "Chai Hu Jia Long Gu Mu Li Tang",
+            "english": "Bupleurum plus Dragon Bone and Oyster Shell Decoction",
+            "explanation": "go to for shen disturbed with heat in MJ; unblocks 3 yang levels, sedates/calms HT; sedates yang and rising LIV"
+          },
+          {
+            "name": "Zhu Sha An Shen Wan",
+            "english": "Cinnabar Pill to Calm the Spirit",
+            "explanation": "extreme shen disturbance due to fire and HT yang excess; \"kid-1 of formulas\""
+          },
+          {
+            "name": "Ci Zhu Wan",
+            "english": "Magnetite and Cinnabar Pill",
+            "explanation": "sedates HT and improves vision and hearing"
+          },
+          {
+            "name": "Sheng Tie Luo Yin",
+            "english": "Iron Filings Decoction",
+            "explanation": "resolves phlegm fire agitating HT"
+          },
+          {
+            "name": "Jian Ya Pian",
+            "english": "BPSure™",
+            "explanation": "patent: Lower blood pressure by anchoring liver yang and nourishing yin"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "category": "Formulas that Treat Phlegm",
+    "subcategories": [
+      {
+        "title": "Formulas That Treat Phlegm: Dry Dampness and Expel Phlegm",
+        "formulas": [
+          {
+            "name": "Er Chen Tang",
+            "english": "Two-Cured Decoction",
+            "explanation": "basic formula for damp of cold type (caution: formula can be very drying)"
+          },
+          {
+            "name": "Xiang Fu Xuan Fu Hua Tang",
+            "english": "Cyperus and Inula Decoction",
+            "explanation": "dampness, LIV qi stag., SP def."
+          },
+          {
+            "name": "Er Chen He San Zi Yang Qin Pian",
+            "english": "Mucusolve™",
+            "explanation": "patent: dries dampness, transforms phlegm, regulates Qi and harmonizes the Middle Energizer"
+          },
+          {
+            "name": "Jian Dan Gu Chun Pian",
+            "english": "CholestAssure™",
+            "explanation": "patent: Lower Cholesterol, internal phlegm and blood stasis"
+          }
+        ]
+      },
+      {
+        "title": "Formulas That Treat Phlegm: Clear Heat and Transform Phlegm",
+        "formulas": [
+          {
+            "name": "Wen Dan Tang",
+            "english": "Warm the Gallbladder Decoction",
+            "explanation": "damp heat in GB affecting ST; famous base formula for many conditions of dampness and heat"
+          },
+          {
+            "name": "Qing Qi Hua Tan Wan",
+            "english": "Clear the Qi and Transform Phlegm Pill",
+            "explanation": "cough due to phlegm heat w/ qi stag.; emphasis is lung phlegm vs Xiao Xian Xiong which is more about chest stagnation"
+          },
+          {
+            "name": "Xiao Xian Xiong Tang",
+            "english": "Minor Sinking into the Chest Decoction",
+            "explanation": "phlegm heat stag. in chest; emphasis is on unbinding chest vs Qing Qi Hua Tan Wan is more about clearing lung phlegm"
+          },
+          {
+            "name": "Qing Dan Hua Jie Pian",
+            "english": "GallbladClear™",
+            "explanation": "patent: Clears heat, transforms phlegm, promotes bile flow, dissolves gallstones, relieves pain"
+          }
+        ]
+      },
+      {
+        "title": "Formulas That Treat Phlegm: Moisten Dryness and Transform Phlegm",
+        "formulas": [
+          {
+            "name": "Bei Mu Gua Lou San",
+            "english": "Fritillaria and Trichosanthes Fruit Powder",
+            "explanation": "main and best formula for DRY phlegm"
+          }
+        ]
+      },
+      {
+        "title": "Formulas That Treat Phlegm: Dissipate Nodules",
+        "formulas": [
+          {
+            "name": "Xiao Luo Wan",
+            "english": "Reduce Scrofula Pill",
+            "explanation": "dissipates chronic throat/neck nodules due to phlegm stagnation and heat"
+          },
+          {
+            "name": "Hai Zao Yu Hu Tang",
+            "english": "Sargassum Decoction for the Jade Flask",
+            "explanation": "thyroid enlargement, rocklike goiter; stagnation of qi, damp, phlegm and blood. takes 2-3 months to work"
+          },
+          {
+            "name": "Nei Xiao Luo Li Pian",
+            "english": "NoduleClear™",
+            "explanation": "patent: Supports the softening and dispersal of nodules anywhere in the body, regulates Qi, clears heat, transforms phlegm"
+          }
+        ]
+      },
+      {
+        "title": "Formulas That Treat Phlegm: Warm and Transform Cold Phlegm",
+        "formulas": [
+          {
+            "name": "Ling Gan Wu Wei Jiang Xin Tang",
+            "english": "Poria, Licorice, Schisandra, Ginger and Asarum Decoction",
+            "explanation": "cold phlegm obstructing LU due to deficiency, LU leakage"
+          },
+          {
+            "name": "San Zi Yang Qin Tang",
+            "english": "Three-Seed Decoction to Nourish One's Parents",
+            "explanation": "cold LU phlegm with food stagnation"
+          },
+          {
+            "name": "Ling Gui Zhu Gan Tang",
+            "english": "Poria, Cinnamon Twig, Atractylodis and Ginseng Decoction",
+            "explanation": "resolves and prevents damp, LU phlegm, and epigastric congested fluids; compare to Er Chen Tang"
+          }
+        ]
+      },
+      {
+        "title": "Formulas That Treat Phlegm: Transform Phlegm and Extinguish Wind",
+        "formulas": [
+          {
+            "name": "Zhi Sou San",
+            "english": "Stop Coughing Powder",
+            "explanation": "basic cough remedy for post ext. wind-cold"
+          },
+          {
+            "name": "Ban Xia Bai Zhu Tian Ma Tang",
+            "english": "Pinellia, Atractylodes Macrocephala, and Gastrodia Decoction",
+            "explanation": "vertigo/dizziness/hypertension w/ internal wind and phlegm"
+          },
+          {
+            "name": "Ding Xian Wan",
+            "english": "Arrest Seizures Pill",
+            "explanation": "seizure due to LIV wind and phlegm; for acute symptoms and use as needed"
+          }
+        ]
+      },
+      {
+        "title": "Formulas That Treat Phlegm: Induce Vomiting to Discharge Phlegm",
+        "formulas": [
+          {
+            "name": "Gua Di San",
+            "english": "Melon Pedicle Powder",
+            "explanation": "induces vomit to treat food stagnation"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "category": "Formulas that Open the Orifices",
+    "subcategories": [
+      {
+        "title": "Formulas That Open the Orifices: Clear Heat and Open Orifices",
+        "formulas": [
+          {
+            "name": "An Gong Niu Huang Wan",
+            "english": "Calm the Palace Pill with Cattle Gallstone",
+            "explanation": "for heat w/ windstroke and phlegm. Basic first choice for extreme hot closed disorders"
+          },
+          {
+            "name": "Zhi Bao Dan",
+            "english": "Greatest Treasure Special Pill",
+            "explanation": "focus on opening orifices, less on clearing heat compared to An Gong Niu Huang Wan"
+          },
+          {
+            "name": "Zi Xue Dan",
+            "english": "Purple Snow Special Pill",
+            "explanation": "relaxes spasms, convulsions, and internal LIV wind"
+          },
+          {
+            "name": "Hui Chun Dan",
+            "english": "Return of Spring Special Pill",
+            "explanation": "pediatric heat, phlegm, wind, convulsions, acutely due to excess heat in pericardium"
+          }
+        ]
+      },
+      {
+        "title": "Formulas That Open the Orifices: Warm and Open Orifices",
+        "formulas": [
+          {
+            "name": "Su He Xiang Wan",
+            "english": "Liquid Styrax Pill",
+            "explanation": "for cold wind-stroke closed disorders"
+          }
+        ]
+      },
+      {
+        "title": "Formulas That Open the Orifices: Scour Phlegm and Open Orifices",
+        "formulas": [
+          {
+            "name": "Di Tan Tang",
+            "english": "Scour Phlegm Decoction",
+            "explanation": "severe phlegm blocking tongue and heart (muddled thinking, confusion, due to phlegm, motor aphasia)"
+          },
+          {
+            "name": "Gun Tan Wan",
+            "english": "Vaporize Phlegm Pill",
+            "explanation": "fire and phlegm causing manic mental disorders (strongly purges/clears heat; can substitute duan meng shi for any other herb that strongly drives out phlegm)"
+          },
+          {
+            "name": "Tong Guan San",
+            "english": "Open the Gate Powder",
+            "explanation": "unblocks jaw, restores consciousness for cold closed disorders (blow into nose to induce sneezing to open the \"phlegm collapse\")"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "category": "Formulas that Expel Wind",
+    "subcategories": [
+      {
+        "title": "Formulas That Expel Wind: From Skin and Channels",
+        "formulas": [
+          {
+            "name": "Xiao Feng San",
+            "english": "Eliminate Wind Powder from True Lineage",
+            "explanation": "basic formula for damp heat wind itching skin conditions"
+          },
+          {
+            "name": "Xiao Huo Luo Dan",
+            "english": "Minor Invigorate the Collaterals Special Pill",
+            "explanation": "wind cold damp bi pain after a wind strike; lifeless blood obstructing channels; go to for post stroke/arthritis; no tonic herbs, mainly invigorates blood"
+          },
+          {
+            "name": "Qian Zheng San",
+            "english": "Lead to Symmetry Powder",
+            "explanation": "bells palsy, facial deviation, and other superficial channel stroke conditions NOT due to heat (formula is warming)"
+          },
+          {
+            "name": "Yu Zhen San",
+            "english": "True Jade Powder",
+            "explanation": "lockjaw/acute phase muscular tetany/tremor; formula is toxic so use short term"
+          },
+          {
+            "name": "Zhi Jing San",
+            "english": "Stop Spasms Powder",
+            "explanation": "spasms; formula is toxic"
+          },
+          {
+            "name": "Xiao Xu Ming Tang",
+            "english": "Minor Prolong Life Decoction",
+            "explanation": "post channel stroke due to exterior wind invasion w/ underlying qi/blood deficiency"
+          }
+        ]
+      },
+      {
+        "title": "Formulas That Expel Wind: Extinguish Internal Wind",
+        "formulas": [
+          {
+            "name": "Zhen Gan Xi Feng Tang",
+            "english": "Sedate the Liver and Extinguish Wind Decoction",
+            "explanation": "deficiency of liver/kid yin leading to yang rising and internal wind. emphasis on yin deficiency"
+          },
+          {
+            "name": "Tian Ma Gou Teng Yin",
+            "english": "Gastrodia and Uncaria Decoction",
+            "explanation": "classic formula for hypertension due to LIV yang rising and liver wind. emphasis on wind"
+          },
+          {
+            "name": "Ling Jiao Gou Teng Tang",
+            "english": "Antelope Horn and Uncaria Decoction",
+            "explanation": "excess heat in liv channel causing tetanic collapse: wind syndrome due to extreme heat"
+          },
+          {
+            "name": "E Jiao Ji Zi Huang Tang",
+            "english": "Ass-Hide Gelatin and Egg Yolk Decoction",
+            "explanation": "deficiency of blood and yin causing dizziness and spasms. directs qi downward"
+          },
+          {
+            "name": "Di Huang Yin Zi",
+            "english": "Rehmannia Decoction",
+            "explanation": "turbid phlegm, mute paraplegia, kid yin and yang deficiency, post wind stroke (movement problems due to kid yin/yang deficiency with closed orifices)"
+          },
+          {
+            "name": "San Jia Fu Mai Tang",
+            "english": "Three-Shell Decoction to Restore the Pulse",
+            "explanation": "injury to yin in later stage febrile disease and/or internally generated liv yang rising with yin deficiency"
+          },
+          {
+            "name": "Da Ding Feng Zhu",
+            "english": "Major Arrest Wind Pearl",
+            "explanation": "severe injury to yin and fluids causing internal wind"
+          },
+          {
+            "name": "Bu Yang Huan Wu Pian",
+            "english": "Strocontrol™",
+            "explanation": "patent: warms and invigorates to treat post wind stroke"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "category": "Formulas that Reduce Food Stagnation",
+    "subcategories": [
+      {
+        "title": "Formulas That Reduce Food Stagnation",
+        "formulas": [
+          {
+            "name": "Bao He Wan",
+            "english": "Preserve Harmony Pill",
+            "explanation": "basic formula for food stagnation; some similar formulations add more qi regulators"
+          },
+          {
+            "name": "Jian Pi Wan",
+            "english": "Strengthen the Spleen Pill",
+            "explanation": "sp/st deficiency with food stagnation"
+          },
+          {
+            "name": "Zhi Zhu Wan",
+            "english": "Immature Bitter Orange and Atractylodes Macrocephala Pill",
+            "explanation": "strengthens sp, reduces food stagnation"
+          },
+          {
+            "name": "Mu Xiang Bing Lang Wan",
+            "english": "Aucklandia and Betel Nut Pill",
+            "explanation": "damp heat, food stagnation, NO deficiency of normal qi"
+          },
+          {
+            "name": "Zhi Shi Xiao Pi Wan",
+            "english": "Immature Bitter Orange Pill to Reduce Focal Distention",
+            "explanation": "qi stagnation and sp qi deficiency"
+          },
+          {
+            "name": "Jiang Zhi Jian Fei Tang",
+            "english": "Keep Fit Pills",
+            "explanation": "patent for obesity due to Spleen Deficiency with Food, Qi and Blood Stagnation and Damp Heat"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "category": "Formulas that Expel Parasites",
+    "subcategories": [
+      {
+        "title": "Formulas That Expel Parasites",
+        "formulas": [
+          {
+            "name": "Wu Mei Wan",
+            "english": "Mume Pill",
+            "explanation": "standard formula for roundworms; heat above, cold below"
+          },
+          {
+            "name": "Hua Chong Wan",
+            "english": "Dissolve Parasites Pill",
+            "explanation": "strong and toxic formula for parasites, not tonifying"
+          },
+          {
+            "name": "Fei Er Wan",
+            "english": "Fat Baby Pill",
+            "explanation": "strengthen sp and kills parasites; good for children"
+          }
+        ]
+      }
+    ]
+  },
+   {
+    "category": "Yo San stock Topical Patents for External Use",
+    "subcategories": [
+      {
+        "title": "Topical Patents for External Use",
+        "formulas": [
+          {
+            "name": "A Cream",
+            "english": "",
+            "explanation": "Clear Heat, Detox: Acne, carbuncles, rosacea, folliculitis"
+          },
+          {
+            "name": "B cream",
+            "english": "",
+            "explanation": "Promotes blood circulation; nourish & maintain skin"
+          },
+          {
+            "name": "Bai Hua You",
+            "english": "",
+            "explanation": "Cooling- Relieves pain esp. good for acute injuries, headache"
+          },
+          {
+            "name": "Bao Xin An You",
+            "english": "",
+            "explanation": "Warming- Relieves pain, treats cough and congestion"
+          },
+          {
+            "name": "Ba Du Sheng Ji Gao",
+            "english": "",
+            "explanation": "General skin disorders"
+          },
+          {
+            "name": "Bai Zhi Suan Tong Gao Herbal Poultice(3 Piece)",
+            "english": "",
+            "explanation": "Cooling patch- effective for chronic pain & inflammation"
+          },
+          {
+            "name": "Bai Zhi Suan Tong Gao Warm (2 Piece)",
+            "english": "",
+            "explanation": "Warming patch- effective for  pain & inflammation"
+          },
+          {
+            "name": "D cream",
+            "english": "",
+            "explanation": "Chronic dry skin- moistens & nourishes"
+          },
+          {
+            "name": "Die Da Wan Hua You",
+            "english": "",
+            "explanation": "Invigorates blood; disperses swelling; relieves pain"
+          },
+          {
+            "name": "Er Yan Ling",
+            "english": "",
+            "explanation": "Impacted cerumen; externl otitis; acute/chronic otitis media"
+          },
+          {
+            "name": "E Cream",
+            "english": "",
+            "explanation": "Eczema, skin rash, psoriasis, Insect bite, dermatitis"
+          },
+          {
+            "name": "F cream (L)",
+            "english": "",
+            "explanation": "Expel wind/damp; stop itch"
+          },
+          {
+            "name": "Hua Tuo Gao",
+            "english": "",
+            "explanation": "Skin fungus"
+          },
+          {
+            "name": "Huo Luo You  (Hai Shan )",
+            "english": "",
+            "explanation": "Wood Lock Oil"
+          },
+          {
+            "name": "Ji Yan Gao",
+            "english": "",
+            "explanation": "Plantar warts"
+          },
+           {
+            "name": "Jing Wang Hung",
+            "english": "",
+            "explanation": "1st -3rd degree burns; psoriasis, eczema, rash"
+          },
+          {
+            "name": "Ma Yin Long Zhi Chuang Gao",
+            "english": "",
+            "explanation": "Hemorrhoids"
+          },
+          {
+            "name": "Pain Terminator Herbal Patch or Cream",
+            "english": "",
+            "explanation": "Pain- neck/shoulders/back; sore muscles/joints; arthritis; bruises"
+          },
+          {
+            "name": "Qing Dai San",
+            "english": "",
+            "explanation": "Resolve hot, open sores & lesions"
+          },
+          {
+            "name": "Shao Lin Die Da Jiu",
+            "english": "",
+            "explanation": "Topical liniment for contusions & bruises"
+          },
+          {
+            "name": "Sheng Fa Shui",
+            "english": "",
+            "explanation": "Hair tonic"
+          },
+          {
+            "name": "Shuang Yang Gao",
+            "english": "",
+            "explanation": "Itching; ulcerations; boils; scabies; bites; burns"
+          },
+          {
+            "name": "Tu Jin Pi Ding",
+            "english": "",
+            "explanation": "Nail fungus"
+          },
+          {
+            "name": "Wu Bi Gao (Mopico Ointment)",
+            "english": "",
+            "explanation": "Soothes pain; stops itching"
+          },
+          {
+            "name": "W cream",
+            "english": "",
+            "explanation": "Wrinkle cream"
+          },
+          {
+            "name": "Wen Tong Gao Cream",
+            "english": "",
+            "explanation": "Pain- neck/shoulders/back; sore muscles/joints; arthritis; bruises"
+          },
+          {
+            "name": "Yin Care (external)",
+            "english": "",
+            "explanation": "Wind-type damp, damp/heat, heat/toxin"
+          },
+          {
+            "name": "Yin Care (mouth wash)",
+            "english": "",
+            "explanation": "Oral/throat damp, damp/heat, heat/toxin"
+          },
+          {
+            "name": "Yin Care (applicator)",
+            "english": "",
+            "explanation": "Holds 100ml for gynecological use"
+          },
+          {
+            "name": "Yunnan Bai Yao (plaster)",
+            "english": "",
+            "explanation": "Minor joint or muscle aches & pains"
+          },
+          {
+            "name": "Yunnan Bai Yao (powder)",
+            "english": "",
+            "explanation": "Stops bleeding; disperses blood stasis; reduces swelling & pain"
+          },
+          {
+            "name": "Yunnan Bai Yao (spray)",
+            "english": "",
+            "explanation": "Stops bleeding; disperses blood stasis; reduces swelling & pain"
+          },
+          {
+            "name": "Yunnan Bai Yao (tincture-S)",
+            "english": "",
+            "explanation": "Stops bleeding; disperses blood stasis; reduces swelling & pain"
+          },
+          {
+            "name": "Zhen Gu Shui (liquid-S)",
+            "english": "",
+            "explanation": "Heal bone, sprain, bruising; ease muscle & joint pain "
+          },
+          {
+            "name": "Zhen Gu Shui (liquid-L)",
+            "english": "",
+            "explanation": "Heal bone, sprain, bruising; ease muscle & joint pain "
+          },
+          {
+            "name": "Zhi Yang Gao",
+            "english": "",
+            "explanation": "Stop itching cream"
+          },
+          {
+            "name": "Zi Cao (oil)",
+            "english": "",
+            "explanation": "Rash/diaper rash; burns, blisters, herpes sores"
+          }
+        ]
+      }
+    ]
+  }
+]

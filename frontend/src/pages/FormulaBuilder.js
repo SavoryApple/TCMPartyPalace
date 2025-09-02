@@ -1,57 +1,28 @@
 import React, { useState, useEffect, useMemo, useRef } from "react";
-import { Link, useLocation } from "react-router-dom";
+import { useLocation, Link } from "react-router-dom";
 import FormulaSearchBar from "../components/formulaBuilderSearchBar";
 import WhatFormulaMakesUpThoseHerbs from "../components/whatFormulaMakesUpThoseHerbs";
-import FormulaBuilderHerbList from "../components/formulaBuilderHerbList";
 import HerbListCopyToClipboard from "../components/herbListCopyToClipboard";
-import Logo from "../components/Logo";
+import NavBar from "../components/NavBar";
+import FooterCard from "../components/FooterCard";
+import BackToTopButton from "../components/BackToTopButton";
 
 const COLORS = {
-  vanilla: "#FFF7E3",
-  violet: "#7C5CD3",
-  carolina: "#68C5E6",
-  claret: "#A52439",
-  seal: "#3B4461",
-  highlight: "#ffe066",
+  backgroundRed: "#9A2D1F",
+  backgroundGold: "#F9E8C2",
+  accentGold: "#D4AF37",
+  accentDarkGold: "#B38E3F",
+  accentBlack: "#44210A",
+  accentCrimson: "#C0392B",
+  accentIvory: "#FCF5E5",
+  accentEmerald: "#438C3B",
+  accentBlue: "#2176AE",
+  accentGray: "#D9C8B4",
+  shadow: "#B38E3F88",
+  shadowStrong: "#B38E3FCC",
 };
 
-const API_BASE_URL = process.env.REACT_APP_API_URL || "https://thetcmatlas.fly.dev";
-
-function BackToTopButton() {
-  const [show, setShow] = useState(false);
-
-  useEffect(() => {
-    function onScroll() {
-      setShow(window.scrollY > 400);
-    }
-    window.addEventListener("scroll", onScroll, { passive: true });
-    return () => window.removeEventListener("scroll", onScroll);
-  }, []);
-
-  function handleClick() {
-    window.scrollTo({ top: 0, behavior: "smooth" });
-  }
-  if (!show) return null;
-  return (
-    <button
-      type="button"
-      onClick={handleClick}
-      className="fixed right-8 bottom-8 px-4 py-3 rounded-full font-bold shadow-2xl animate-bounceIn z-50"
-      style={{
-        background: COLORS.violet,
-        color: COLORS.vanilla,
-        fontSize: "1.35rem",
-        border: `2px solid ${COLORS.carolina}`,
-        boxShadow: `0 2px 14px 0 ${COLORS.violet}66`,
-        transition: "background 0.22s, transform 0.17s",
-      }}
-      aria-label="Back to top"
-      title="Back to top"
-    >
-      ↑ Top
-    </button>
-  );
-}
+const NAVBAR_HEIGHT = 74;
 
 function parseHerbPinyinNameVariants(ingredientStr) {
   let base = ingredientStr
@@ -83,12 +54,9 @@ function normalize(str) {
         .replace(/[\u0300-\u036f]/g, "")
     : "";
 }
-
 function getHerbDisplayName(herb) {
   if (herb.pinyinName) {
-    return Array.isArray(herb.pinyinName)
-      ? herb.pinyinName[0]
-      : herb.pinyinName;
+    return Array.isArray(herb.pinyinName) ? herb.pinyinName[0] : herb.pinyinName;
   }
   if (herb.name) {
     return Array.isArray(herb.name) ? herb.name[0] : herb.name;
@@ -113,6 +81,7 @@ function getHerbUniqueKey(herb) {
   return herb.id || "";
 }
 
+// --- Formula badge ---
 function getFormulaBadge(formula) {
   if (formula.caleAndNccaom === "yes" || formula.origin === "CALE") {
     return { label: "NCCAOM/CALE", color: "bg-green-200 text-green-700" };
@@ -125,7 +94,6 @@ function getFormulaBadge(formula) {
   }
   return null;
 }
-
 function Badge({ badge }) {
   if (!badge) return null;
   return (
@@ -135,6 +103,7 @@ function Badge({ badge }) {
   );
 }
 
+// --- FormulaCard component ---
 function FormulaCard({
   formula,
   onTransferHerbs,
@@ -143,7 +112,7 @@ function FormulaCard({
   herbs,
   getTransferHerbObjectByPinyin,
   onAddIndividualHerb,
-  cardRef, // <-- Accept a ref
+  cardRef,
 }) {
   const [exiting, setExiting] = useState(false);
   const handleRemove = () => {
@@ -152,21 +121,21 @@ function FormulaCard({
   };
 
   const SHARED_STYLE = {
-    background: COLORS.violet,
-    color: COLORS.vanilla,
+    background: COLORS.accentEmerald,
+    color: COLORS.accentIvory,
     borderRadius: "6px",
     fontWeight: "bold",
     padding: "2px 8px",
-    boxShadow: `0 0 2px 1px ${COLORS.violet}55`,
+    boxShadow: `0 0 2px 1px ${COLORS.accentEmerald}55`,
   };
 
   const PRESENT_STYLE = {
-    background: COLORS.highlight,
-    color: COLORS.seal,
+    background: COLORS.accentGold,
+    color: COLORS.backgroundRed,
     borderRadius: "6px",
     fontWeight: "bold",
     padding: "2px 8px",
-    boxShadow: `0 0 2px 1px ${COLORS.seal}30`,
+    boxShadow: `0 0 2px 1px ${COLORS.accentGold}30`,
   };
 
   const herbKeys = useMemo(() => new Set(herbs.map(getHerbUniqueKey)), [herbs]);
@@ -210,17 +179,20 @@ function FormulaCard({
 
   return (
     <div
-      ref={cardRef} // <-- Attach ref
-      className={`bg-white/80 border-2 border-[${COLORS.violet}] rounded-xl p-7 mb-6 flex flex-col shadow-2xl relative w-full max-w-xl mx-auto animate-fadeIn transition-all duration-300 hover:border-[${COLORS.claret}] backdrop-blur-lg hover:scale-[1.03] ${
+      ref={cardRef}
+      className={`bg-white/80 border-2 rounded-xl p-7 mb-6 flex flex-col shadow-2xl relative w-full max-w-xl mx-auto animate-fadeIn transition-all duration-300 hover:border-[${COLORS.accentCrimson}] backdrop-blur-lg hover:scale-[1.03] ${
         exiting ? "animate-slideOut" : ""
       }`}
-      style={{ minWidth: "340px" }}
+      style={{
+        minWidth: "340px",
+        borderColor: COLORS.accentGold,
+      }}
     >
       <button
         className="absolute top-2 right-2 px-3 py-1"
         style={{
-          background: COLORS.claret,
-          color: COLORS.vanilla,
+          background: COLORS.accentCrimson,
+          color: COLORS.backgroundGold,
           borderRadius: "9999px",
           fontWeight: "bold",
           fontSize: "0.85rem",
@@ -232,17 +204,17 @@ function FormulaCard({
         ×
       </button>
       <div className="flex flex-wrap items-center justify-between mb-2">
-        <span className="font-bold text-xl" style={{ color: COLORS.violet }}>
+        <span className="font-bold text-xl" style={{ color: COLORS.accentGold }}>
           {formula.pinyinName}
           <Badge badge={badge} />
         </span>
         <span
           className="ml-4 font-normal text-md"
-          style={{ color: COLORS.seal, fontSize: "0.95rem" }}
+          style={{ color: COLORS.backgroundRed, fontSize: "0.95rem" }}
         >
           {formula.englishName}
         </span>
-        <span className="ml-4" style={{ color: "#666", fontSize: "0.95rem" }}>
+        <span className="ml-4" style={{ color: COLORS.accentBlue, fontSize: "0.95rem" }}>
           {formula.chineseCharacters}
         </span>
       </div>
@@ -313,10 +285,12 @@ function FormulaCard({
                   {onAddIndividualHerb && individualHerbObj && (
                     <div style={{ flex: "none", marginLeft: "auto" }}>
                       <button
-                        className="ml-3 px-2 py-1 rounded-full text-xs font-bold bg-violet text-vanilla shadow hover:scale-105 transition"
+                        className="ml-3 px-2 py-1 rounded-full text-xs font-bold shadow hover:scale-105 transition"
                         style={{
                           cursor: "pointer",
                           fontSize: "0.92rem",
+                          background: COLORS.accentBlue,
+                          color: COLORS.accentIvory,
                         }}
                         onClick={() => onAddIndividualHerb(individualHerbObj)}
                       >
@@ -336,8 +310,8 @@ function FormulaCard({
         <button
           className="mt-2 px-4 py-2 font-bold rounded-full transition-all duration-150 shadow"
           style={{
-            background: "#aaa",
-            color: "#FFF7E3",
+            background: COLORS.accentGray,
+            color: COLORS.backgroundRed,
             fontSize: "0.92rem",
             cursor: "not-allowed",
           }}
@@ -349,8 +323,8 @@ function FormulaCard({
         <button
           className="mt-2 px-4 py-2 font-bold rounded-full transition-all duration-150 shadow hover:scale-105 animate-pulse"
           style={{
-            background: COLORS.violet,
-            color: COLORS.vanilla,
+            background: COLORS.accentGold,
+            color: COLORS.backgroundRed,
             fontSize: "0.92rem",
           }}
           onClick={() => onTransferHerbs(missingCount)}
@@ -363,6 +337,25 @@ function FormulaCard({
     </div>
   );
 }
+
+const API_BASE_URL = process.env.REACT_APP_API_URL || "https://thetcmatlas.fly.dev";
+
+const BlankFormulaCard = ({ idx }) => (
+  <div
+    className="bg-white/60 rounded-xl p-7 mb-6 flex flex-col shadow-xl border-2 border-dashed w-full max-w-xl mx-auto min-h-[400px] items-center justify-center"
+    style={{ borderColor: COLORS.accentGold }}
+  >
+    <span
+      className="font-bold mb-4"
+      style={{ color: COLORS.accentGold }}
+    >
+      {`Select formula ${idx + 1} for side-by-side comparison`}
+    </span>
+    <span className="text-seal text-base text-center" style={{ color: COLORS.accentBlack }}>
+      Use the search bar above to add a formula.
+    </span>
+  </div>
+);
 
 export default function FormulaBuilder() {
   const [herbs, setHerbs] = useState([]);
@@ -380,7 +373,6 @@ export default function FormulaBuilder() {
     return params.get("formula");
   }, [location.search]);
 
-  // --- Added: Store refs for formula cards ---
   const formulaCardRefs = useRef([]);
 
   useEffect(() => {
@@ -480,45 +472,66 @@ export default function FormulaBuilder() {
     };
   }, [herbSources]);
 
-  const getFormulaObjectByPinyin = useMemo(() => {
-    return (pinyinNameOrVariants) => {
-      const variants = Array.isArray(pinyinNameOrVariants)
-        ? pinyinNameOrVariants
-        : [pinyinNameOrVariants];
-      const normalizedVariants = variants.map(normalize);
-      return formulas.find((f) => {
-        let allNames = [];
-        if (f.pinyinName) {
-          if (Array.isArray(f.pinyinName)) allNames.push(...f.pinyinName);
-          else allNames.push(f.pinyinName);
-        }
-        if (f.englishName) allNames.push(f.englishName);
-        if (f.chineseCharacters) allNames.push(f.chineseCharacters);
-        return allNames.some((n) => {
-          const nNorm = normalize(n);
-          return normalizedVariants.some(
-            (v) =>
-              nNorm === v ||
-              nNorm.replace(/\s+/g, "") === v.replace(/\s+/g, "")
-          );
-        });
-      });
-    };
-  }, [formulas]);
+  function extractFormulaDosage(ingredientStr, herbObj) {
+    const dosageMatch = ingredientStr.match(/(\d+(\.\d+)?(-\d+(\.\d+)?)?)\s*(g|mg|ml|pieces?)/i);
+    if (dosageMatch) {
+      return dosageMatch[0].trim();
+    }
+    if (herbObj && herbObj.dosage) return herbObj.dosage;
+    return "";
+  }
 
-  if (loading) {
-    return (
-      <div
-        className="min-h-screen flex items-center justify-center"
-        style={{
-          background: `linear-gradient(135deg, ${COLORS.vanilla} 0%, ${COLORS.carolina} 50%, ${COLORS.violet} 100%)`
-        }}
-      >
-        <span className="text-2xl font-bold" style={{ color: COLORS.violet }}>
-          Loading herbal data...
-        </span>
-      </div>
+  function handleTransferHerbsFromFormula(formulaIdx, customMissingCount) {
+    const scrollY = window.scrollY;
+    const selectedFormula = selectedFormulas[formulaIdx];
+    if (!selectedFormula) return;
+    const formulaHerbs = selectedFormula.ingredientsAndDosages
+      .map((ingredientStr, i) => {
+        const pinyinVariants = parseHerbPinyinNameVariants(ingredientStr);
+        const herbObj = getTransferHerbObjectByPinyin(pinyinVariants);
+        if (herbObj) {
+          let dosage = extractFormulaDosage(ingredientStr, herbObj);
+          return {
+            ...herbObj,
+            id: `formula-${normalize(getHerbDisplayName(herbObj))}-${formulaIdx}-${i}`,
+            dosage,
+            originalString: ingredientStr
+          };
+        }
+        return {
+          error: true,
+          id: `formula-error-${pinyinVariants[0]}-${formulaIdx}-${i}`,
+          name: pinyinVariants[0],
+          originalString: ingredientStr,
+          pinyin: pinyinVariants[0],
+        };
+      });
+
+    const currentKeys = new Set(herbs.map(getHerbUniqueKey));
+    const newHerbsToAdd = formulaHerbs.filter(
+      (h) => !h.error && !currentKeys.has(getHerbUniqueKey(h))
     );
+    const newHerbs = [...herbs, ...newHerbsToAdd].slice(0, maxHerbs);
+
+    setHerbs(newHerbs);
+    if (newHerbsToAdd.length > 0) {
+      setHerbWarning(
+        `${newHerbsToAdd.length} herb${newHerbsToAdd.length > 1 ? "s" : ""} from the formula were transferred to the herb list!`
+      );
+    } else {
+      setHerbWarning("Your formula already contains that/those herb(s)!");
+    }
+    setTimeout(() => setHerbWarning(""), 1800);
+
+    const missing = formulaHerbs.filter(h => h.error);
+    if (missing.length > 0) {
+      setHerbWarning(`Could not find: ${missing.map(h => h.name).join(', ')}`);
+      setTimeout(() => setHerbWarning(""), 1800);
+    }
+
+    setTimeout(() => {
+      window.scrollTo({ top: scrollY });
+    }, 0);
   }
 
   function handleAddHerbOrFormula(item, type) {
@@ -551,63 +564,6 @@ export default function FormulaBuilder() {
   }
   function handleRemoveFormula(idx) {
     setSelectedFormulas(selectedFormulas.filter((_, i) => i !== idx));
-  }
-
-  // --- Modified handler to preserve scroll position ---
-  function handleTransferHerbsFromFormula(formulaIdx, customMissingCount) {
-    // Store current scroll position
-    const scrollY = window.scrollY;
-
-    const selectedFormula = selectedFormulas[formulaIdx];
-    if (!selectedFormula) return;
-    const formulaHerbs = selectedFormula.ingredientsAndDosages
-      .map((ingredientStr, i) => {
-        const pinyinVariants = parseHerbPinyinNameVariants(ingredientStr);
-        const herbObj = getTransferHerbObjectByPinyin(pinyinVariants);
-        if (herbObj) {
-          return {
-            ...herbObj,
-            id: `formula-${normalize(
-              getHerbDisplayName(herbObj)
-            )}-${formulaIdx}-${i}`,
-            dosage:
-              ingredientStr.match(/(\d[\d\-.]*g)/)?.[0] ||
-              ingredientStr.match(/(\d[\d\-.]*\s*pieces)/)?.[0] ||
-              herbObj.dosage ||
-              "",
-          };
-        }
-        return {
-          error: true,
-          id: `formula-error-${pinyinVariants[0]}-${formulaIdx}-${i}`,
-          name: pinyinVariants[0],
-          originalString: ingredientStr,
-          pinyin: pinyinVariants[0],
-        };
-      })
-      .filter((herbObj) => {
-        const key = getHerbUniqueKey(herbObj);
-        const exists = herbs.find((h) => getHerbUniqueKey(h) === key);
-        return !exists || herbObj.error;
-      });
-
-    const filteredHerbs = formulaHerbs.filter((h) => !h.error);
-    const newHerbs = [...herbs, ...filteredHerbs].slice(0, maxHerbs);
-
-    setHerbs(newHerbs);
-    if (filteredHerbs.length > 0) {
-      setHerbWarning(
-        `${filteredHerbs.length} herb${filteredHerbs.length > 1 ? "s" : ""} from the formula were transferred to the herb list!`
-      );
-    } else {
-      setHerbWarning("Your formula already contains that/those herb(s)!");
-    }
-    setTimeout(() => setHerbWarning(""), 1800);
-
-    // Restore scroll position after update
-    setTimeout(() => {
-      window.scrollTo({ top: scrollY });
-    }, 0);
   }
 
   function handleAddIndividualHerbFromFormula(herbObj) {
@@ -645,19 +601,90 @@ export default function FormulaBuilder() {
 
   function handleAddOtherHerbsToList(herbsToAdd) {
     const currentKeys = new Set(herbs.map(getHerbUniqueKey));
-    const filtered = herbsToAdd.filter(
-      (h) => !currentKeys.has(getHerbUniqueKey(h))
+    const processed = herbsToAdd
+      .filter((h) => !currentKeys.has(getHerbUniqueKey(h)) && !h.error)
+      .map((herb) => {
+        let dosage = "";
+        if (herb.originalString) {
+          dosage = extractFormulaDosage(herb.originalString, herb);
+        } else if (herb.dosage) {
+          dosage = herb.dosage;
+        }
+        return { ...herb, dosage };
+      });
+
+    setHerbs([...herbs, ...processed]);
+  }
+
+  // Highlight all herbs in the list by passing as array to mainHerbObj
+  // whatFormulaMakesUpThoseHerbs.js should support this (see previous responses)
+  const mainHerbObj = herbs.length > 0 ? herbs : null;
+  const highlightMainHerb = herbs.length > 0;
+
+  const backToHomeButton = (
+    <div
+      style={{
+        position: "fixed",
+        top: NAVBAR_HEIGHT + 12,
+        right: 32,
+        zIndex: 101,
+        display: "flex",
+        justifyContent: "flex-end",
+      }}
+      className="back-to-home-btn"
+    >
+      <Link
+        to="/"
+        className="px-5 py-2 rounded-full font-bold shadow-xl transition-all duration-200 hover:scale-105 active:scale-95 focus:ring-2 focus:ring-accentEmerald"
+        style={{
+          background: COLORS.accentGold,
+          color: COLORS.backgroundRed,
+          border: `2px solid ${COLORS.accentBlack}`,
+          textShadow: `0 1px 0 ${COLORS.backgroundGold}`,
+        }}
+        tabIndex={0}
+      >
+        Back to Home
+      </Link>
+    </div>
+  );
+
+  if (loading) {
+    return (
+      <div
+        className="min-h-screen flex items-center justify-center"
+        style={{
+          background: `linear-gradient(120deg, ${COLORS.backgroundGold} 0%, ${COLORS.accentEmerald} 65%, ${COLORS.accentGold} 100%)`
+        }}
+      >
+        <span className="text-2xl font-bold" style={{ color: COLORS.accentGold }}>
+          Loading herbal data...
+        </span>
+      </div>
     );
-    setHerbs([...herbs, ...filtered]);
   }
 
   return (
     <div
-      className="min-h-screen pb-12 flex flex-col items-center relative"
+      className="min-h-screen flex flex-col"
       style={{
-        background: `linear-gradient(135deg, ${COLORS.vanilla} 0%, ${COLORS.carolina} 50%, ${COLORS.violet} 100%)`,
+        background: `linear-gradient(120deg, ${COLORS.backgroundGold} 0%, ${COLORS.accentEmerald} 65%, ${COLORS.accentGold} 100%)`,
+        fontFamily: '"Noto Serif SC", "Songti SC", "KaiTi", serif',
+        minHeight: "100vh",
+        width: "100vw",
+        position: "relative"
       }}
     >
+      <NavBar
+        showBackToHome={false}
+        showLogo={true}
+        fixed={true}
+        showReportError={true}
+        showAbout={true}
+        showAdminButtons={true}
+        backToHomeOutsideMenu={false}
+      />
+      {backToHomeButton}
       <style>
         {`
           @keyframes fadeIn {
@@ -679,18 +706,6 @@ export default function FormulaBuilder() {
           .animate-bounceIn { animation: bounceIn 0.45s cubic-bezier(.36,1.29,.45,1.01);}
         `}
       </style>
-      <div
-        style={{
-          width: "100%",
-          display: "flex",
-          justifyContent: "center",
-          alignItems: "center",
-          marginTop: "1.1em",
-          marginBottom: "0.2em"
-        }}
-      >
-        <Logo size={56} showBeta={true} />
-      </div>
       {herbWarning && (
         <div
           style={{
@@ -704,32 +719,29 @@ export default function FormulaBuilder() {
             textAlign: "center",
             pointerEvents: "none",
             opacity: 1,
+            background: COLORS.accentGold,
+            color: COLORS.backgroundRed,
+            borderRadius: "2em",
+            fontWeight: 700,
+            fontSize: "1.25em",
+            boxShadow: `0 4px 18px -8px ${COLORS.shadowStrong}`,
+            fontFamily: '"Noto Serif SC", "Songti SC", "KaiTi", serif',
           }}
-          className="px-8 py-4 rounded-2xl bg-yellow-300 text-claret font-bold shadow-2xl text-2xl transition-all"
+          className="px-8 py-4 shadow-2xl transition-all"
         >
           {herbWarning}
         </div>
       )}
-      <div className="fixed top-6 right-8 z-40">
-        <Link
-          to="/"
-          className="px-5 py-2 rounded-full font-bold shadow-xl transition-all duration-200 hover:scale-105"
-          style={{
-            background: COLORS.violet,
-            color: COLORS.vanilla,
-          }}
-        >
-          Back to Home
-        </Link>
-      </div>
-      <BackToTopButton />
-      <div className="w-full max-w-7xl mx-auto px-2 py-12">
+      <BackToTopButton right={32} />
+      <div style={{ height: NAVBAR_HEIGHT + 24, minHeight: NAVBAR_HEIGHT + 24 }} />
+      <div className="w-full max-w-7xl mx-auto px-2 py-12 flex-1">
         <div className="flex flex-col items-center mb-10">
           <h2
             className="font-bold text-center mb-4 tracking-tight drop-shadow-lg"
             style={{
               fontSize: "2.5rem",
-              color: COLORS.claret,
+              color: COLORS.backgroundRed,
+              fontFamily: '"Noto Serif SC", "Songti SC", "KaiTi", serif',
             }}
           >
             Create Herbal Formula
@@ -752,28 +764,13 @@ export default function FormulaBuilder() {
                 onResetHerbs={handleResetHerbs}
               />
             </div>
-            <div style={{ width: "100%", marginTop: -24 }}>
-              <FormulaBuilderHerbList
-                herbs={herbs}
-                onRemoveHerb={handleRemoveHerb}
-                onResetHerbs={handleResetHerbs}
-                maxHerbs={maxHerbs}
-              />
-            </div>
           </div>
           <div className="md:col-span-2 flex flex-col md:flex-row gap-8 items-start justify-center">
             {selectedFormulas.length === 0 ? (
-              <div className="flex flex-col items-center justify-center h-full text-center mt-16 w-full">
-                <span
-                  className="text-xl font-semibold mb-3"
-                  style={{ color: COLORS.violet }}
-                >
-                  No formula selected
-                </span>
-                <span className="text-seal text-base">
-                  Search and select a formula to view details here.
-                </span>
-              </div>
+              <>
+                <BlankFormulaCard idx={0} />
+                <BlankFormulaCard idx={1} />
+              </>
             ) : (
               <>
                 {selectedFormulas.map((formula, idx) => (
@@ -788,26 +785,13 @@ export default function FormulaBuilder() {
                       herbs={herbs}
                       getTransferHerbObjectByPinyin={getTransferHerbObjectByPinyin}
                       onAddIndividualHerb={handleAddIndividualHerbFromFormula}
-                      cardRef={el => formulaCardRefs.current[idx] = el} // <-- Pass ref
+                      cardRef={el => formulaCardRefs.current[idx] = el}
                     />
                   </div>
                 ))}
                 {selectedFormulas.length === 1 && (
                   <div className="flex-1 flex items-center justify-center">
-                    <div
-                      className="bg-white/60 rounded-xl p-7 mb-6 flex flex-col shadow-xl border-2 border-dashed w-full max-w-xl mx-auto min-h-[400px] items-center justify-center"
-                      style={{ borderColor: COLORS.violet }}
-                    >
-                      <span
-                        className="font-bold mb-4"
-                        style={{ color: COLORS.violet }}
-                      >
-                        Select a second formula for side-by-side comparison
-                      </span>
-                      <span className="text-seal text-base text-center">
-                        Use the search bar above to add another formula.
-                      </span>
-                    </div>
+                    <BlankFormulaCard idx={1} />
                   </div>
                 )}
               </>
@@ -821,7 +805,11 @@ export default function FormulaBuilder() {
         onAddFormula={handleAddOtherHerbsToList}
         showIndividualAddButtons={true}
         onAddIndividualHerb={handleAddIndividualHerbFromFormula}
+        mainHerbObj={mainHerbObj}
+        highlightMainHerb={highlightMainHerb}
+        onlyShowAddToFormulaButton={true} // <-- Only show "Add X Herbs to Formula"
       />
+      <FooterCard />
     </div>
   );
 }

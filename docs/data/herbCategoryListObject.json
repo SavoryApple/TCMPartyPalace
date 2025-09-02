@@ -1,0 +1,2632 @@
+{
+  "categories": [
+    {
+      "name": "Release the Exterior",
+      "subcategories": [
+        {
+          "name": "Release the Exterior - Warming Herbs",
+          "herbs": [
+            {
+              "name": "Gui Zhi",
+              "pharmaceutical": "Cinnamomi Ramulus",
+              "keyActions": "for def. sweat (clammy sweat), assists HT/unblocks yang qi in chest, warms channels/middle"
+            },
+            {
+              "name": "Zi Su Ye",
+              "pharmaceutical": "Perillae Folium",
+              "keyActions": "seafood poisoning, moves qi, expands chest, calms fetus (morning sickness)"
+            },
+            {
+              "name": "Jing Jie",
+              "pharmaceutical": "Schizonepetae Herba",
+              "keyActions": "less drying, for w-h or w-c, releases rash/stops itch, stops bleeding"
+            },
+            {
+              "name": "Fang Feng",
+              "pharmaceutical": "Saposhnikoviae Radix",
+              "keyActions": "less drying, for w-h, w-c, w-c-d, expels LIV wind, painful diarrhea, migraine headache"
+            },
+            {
+              "name": "Qiang Huo",
+              "pharmaceutical": "Notopterygii Rhizoma seu Radix",
+              "keyActions": "tai yang headache (occipital), expels w-c-d in upper body"
+            },
+            {
+              "name": "Gao Ben",
+              "pharmaceutical": "Ligustici Rhizoma",
+              "keyActions": "jue yin headache (vertex), dries w-c-d"
+            },
+            {
+              "name": "Bai Zhi",
+              "pharmaceutical": "Angelicae Dahuricae Radix",
+              "keyActions": "yang mind headache (frontal), reduce swelling, opens nose"
+            },
+            {
+              "name": "Sheng Jiang",
+              "pharmaceutical": "Zingiberis Rhizomatis Recens",
+              "keyActions": "seafood poisoning, warms LU/MJ"
+            },
+            {
+              "name": "Xiang Ru",
+              "pharmaceutical": "Moslae Herba",
+              "keyActions": "expels summer heat, promotes urination, reduces swelling, \"summer ma huang\""
+            },
+            {
+              "name": "Cang Er Zi",
+              "pharmaceutical": "Xanthii Fructus",
+              "keyActions": "expels w-c-d, opens the nose"
+            },
+            {
+              "name": "Xin Yi Hua",
+              "pharmaceutical": "Magnoliae Flos",
+              "keyActions": "for nasal discharge, lack of smell, opens nose"
+            },
+            {
+              "name": "Sheng Jiang Pi",
+              "pharmaceutical": "Zingiberis Rhizomatis Cortex",
+              "keyActions": "Milder than fresh ginger; mainly used for superficial edema and to harmonize surface in mild conditions"
+            },
+            {
+              "name": "Ma Huang",
+              "pharmaceutical": "Ephedrae Herba",
+              "keyActions": "for excess cold (absence of sweat), opens LU for asthma/wheeze, promotes urination"
+            },
+            {
+              "name": "Xi Xin",
+              "pharmaceutical": "Asari Herba",
+              "keyActions": "shao yin headache (toothache), warms LU, good analgesic, opens nose"
+            },
+            {
+              "name": "Cong Bai",
+              "pharmaceutical": "Allii Fistulosi Bulbus",
+              "keyActions": "gently releases exterior, warms/opens LU"
+            }
+          ]
+        },
+        {
+          "name": "Release the Exterior - Cooling Herbs",
+          "herbs": [
+            {
+              "name": "Bo He",
+              "pharmaceutical": "Menthae Haplocalycis Herba",
+              "keyActions": "benefits throat, vents rashes, clears eyes, soothes LIV qi"
+            },
+            {
+              "name": "Niu Bang Zi",
+              "pharmaceutical": "Arctii Fructus",
+              "keyActions": "benefits throat, vents rashes, clears toxic heat, moistens intestines"
+            },
+            {
+              "name": "Chan Tui",
+              "pharmaceutical": "Cicadae Periostracum",
+              "keyActions": "benefits throat, vents rashes, clears eyes, stops itch/clears LIV wind/stops spasms"
+            },
+            {
+              "name": "Sang Ye",
+              "pharmaceutical": "Mori Folium",
+              "keyActions": "clears eyes, clears LU heat, moistens dryness, cools blood, stops bleeding"
+            },
+            {
+              "name": "Ju Hua",
+              "pharmaceutical": "Chrysanthemi Flos",
+              "keyActions": "clears eyes, clears toxic heat"
+            },
+            {
+              "name": "Man Jing Zi",
+              "pharmaceutical": "Viticis Fructus",
+              "keyActions": "clears eyes, clears head, expels w-d Bi"
+            },
+            {
+              "name": "Dan Dou Chi",
+              "pharmaceutical": "Sojae Semen Preparatum",
+              "keyActions": "eliminates irritability (is cool/warm depending on preparation)"
+            },
+            {
+              "name": "Mu Zei",
+              "pharmaceutical": "Equiseti Hiemalis Herba",
+              "keyActions": "clears eyes, removes visual obstruction, stops bleeding"
+            },
+            {
+              "name": "Ge Gen",
+              "pharmaceutical": "Puerariae Radix",
+              "keyActions": "raises yang qi (diarrhea), vents rash, releases muscles, nourishes fluids, hypertension"
+            },
+            {
+              "name": "Chai Hu",
+              "pharmaceutical": "Bupleuri Radix",
+              "keyActions": "raises yang qi (MJ sinking), resolves shao yang disorders, soothes LIV qi"
+            },
+            {
+              "name": "Sheng Ma",
+              "pharmaceutical": "Cimicifugae Rhizoma",
+              "keyActions": "raises yang qi (MJ sinking), vents rash, clears toxic heat"
+            },
+            {
+              "name": "Fu Ping",
+              "pharmaceutical": "Spirodelae Herba",
+              "keyActions": "vents rash, pushes water in both directions, expels w-d Bi"
+            },
+            {
+              "name": "Da Dou Juan",
+              "pharmaceutical": "Semen Sojae Germinatum",
+              "keyActions": "Relieve food stagnation, harmonize stomach, reduce jaundice, clears summerheat, raises yang qi, regulates qi and blood"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "Clear Heat",
+      "subcategories": [
+        {
+          "name": "Clear Heat Drain Fire",
+          "herbs": [
+            {
+              "name": "Shi Gao",
+              "pharmaceutical": "Gypsum Fibrosum",
+              "keyActions": "clears LU heat, blazing ST heat, calcined topically absorbs exudation/ulcerated sores"
+            },
+            {
+              "name": "Zhi Mu",
+              "pharmaceutical": "Anemarrhenae Rhizoma",
+              "keyActions": "generates fluids/moistens dryness for LU/KID yin def. heat, enriches yin"
+            },
+            {
+              "name": "Zhi Zi",
+              "pharmaceutical": "Gardeniae Fructus",
+              "keyActions": "eliminates irritability, drains d-h UTI, cools blood, reduces swelling, moves blood stasis (topical)"
+            },
+            {
+              "name": "Dan Zhu Ye",
+              "pharmaceutical": "Lophatheri Herba",
+              "keyActions": "eliminates irritability, promotes urination, clears d-h (esp SI channel)"
+            },
+            {
+              "name": "Xia Ku Cao",
+              "pharmaceutical": "Prunellae Spica",
+              "keyActions": "clears LIV/eyes, treats hypertension (LIV fire/yang rising), dissipates nodules"
+            },
+            {
+              "name": "Lu Gen",
+              "pharmaceutical": "Phragmitis Rhizoma",
+              "keyActions": "promotes urination, moistens dryness, vents rash, clears ST/LU heat"
+            },
+            {
+              "name": "Tian Hua Fen",
+              "pharmaceutical": "Trichosanthis Radix",
+              "keyActions": "generates fluids, drains/moistens LU heat, clears toxin, used for xiao ke"
+            },
+            {
+              "name": "Jue Ming Zi",
+              "pharmaceutical": "Cassiae Semen",
+              "keyActions": "clears LIV/eyes, treats hypertension (LIV fire/yang rising), moistens intestines, lowers cholesterol"
+            },
+            {
+              "name": "Qing Xiang Zi",
+              "pharmaceutical": "Celosiae Semen",
+              "keyActions": "clears eyes, clears w-h, lowers hypertension"
+            },
+            {
+              "name": "Mi Meng Hua",
+              "pharmaceutical": "Buddlejae Flos",
+              "keyActions": "clears LIV/eye heat, sweet so tonifies yin"
+            },
+            {
+              "name": "Xi Gua",
+              "pharmaceutical": "Citrulli Fructus",
+              "keyActions": "Summerheat, thirst, irritability, dark urine, jaundice"
+            },
+            {
+              "name": "Lian Geng",
+              "pharmaceutical": "Nelumbinis Caulis",
+              "keyActions": "Clears heat, stops bleeding, calms restlessness, alleviates thirst"
+            },
+            {
+              "name": "Han Shui Shi",
+              "pharmaceutical": "Glauberitum",
+              "keyActions": "clears HT fire, topically clears sores/burns"
+            },
+            {
+              "name": "Lian Zi Xin",
+              "pharmaceutical": "Nelumbinis Plumula",
+              "keyActions": "drains HT fire, astringes jing, balances HT/KID"
+            },
+            {
+              "name": "Chao Zhi Zi",
+              "pharmaceutical": "Gardeniae Fructus (dry-fried)",
+              "keyActions": "Clear heat, drain fire, eliminate irritability, cool blood, stop bleeding, dry-fried for mildness"
+            },
+            {
+              "name": "Gu Jing Cao",
+              "pharmaceutical": "Flos Eriocauli",
+              "keyActions": "Dispel wind-heat in liver channel, brighten eyes, clear vision, relieve headache"
+            },
+            {
+              "name": "Ye Ming Sha",
+              "pharmaceutical": "Faeces Vespertilionis",
+              "keyActions": "Bat poop: Breaks up blood stasis, improves vision, disperses accumulations, alleviates pain"
+            }
+          ]
+        },
+        {
+          "name": "Clear Heat and Cool Blood",
+          "herbs": [
+            {
+              "name": "Shui Niu Jiao",
+              "pharmaceutical": "Bubali Cornu (substitute for Rhino Horn)",
+              "keyActions": "clears toxic heat, arrests tremors/wind"
+            },
+            {
+              "name": "Sheng Di Huang",
+              "pharmaceutical": "Rehmanniae Radix",
+              "keyActions": "nourishes yin, used for xiao ke, cools upward HT fire"
+            },
+            {
+              "name": "Xuan Shen",
+              "pharmaceutical": "Scrophulariae Radix",
+              "keyActions": "nourishes yin, clears toxic sore throat, softens hardness, dissipates nodules"
+            },
+            {
+              "name": "Mu Dan Pi",
+              "pharmaceutical": "Moutan Cortex",
+              "keyActions": "clears def. fire (w/o sweat), moves blood, dispels stasis, clears LIV fire, reduces swelling"
+            },
+            {
+              "name": "Lu Dou",
+              "pharmaceutical": "Phaseoli Radiata Semen",
+              "keyActions": "(mung bean) clears summerheat, promotes urination, clears turbid damp from LJ"
+            },
+            {
+              "name": "Zi Cao",
+              "pharmaceutical": "Arnebiae/Lithospermi Radix",
+              "keyActions": "moves blood, vents rash, clears toxic fire, clears d-h in skin (topically)"
+            },
+            {
+              "name": "Qing Yan",
+              "pharmaceutical": "Halitum",
+              "keyActions": "clears heat, cools blood, improves eyesight, moistens dryness"
+            }
+          ]
+        },
+        {
+          "name": "Clear Heat from Deficiency",
+          "herbs": [
+            {
+              "name": "Qing Hao",
+              "pharmaceutical": "Artemisiae Annuae Herba",
+              "keyActions": "clears summerheat, stops bleeding, checks malarial disorders"
+            },
+            {
+              "name": "Di Gu Pi",
+              "pharmaceutical": "Lycii Cortex",
+              "keyActions": "clears KID yin def heat (w/ sweat), clears LU/stops cough, drains KID fire in channel (toothache)"
+            },
+            {
+              "name": "Bai Wei",
+              "pharmaceutical": "Cynanchi Atrati Radix",
+              "keyActions": "promotes urination, clears toxic heat"
+            },
+            {
+              "name": "Yin Chai Hu",
+              "pharmaceutical": "Stellariae Radix",
+              "keyActions": "treats childhood malnutrition, cools blood, stops bleeding"
+            },
+            {
+              "name": "Hu Huang Lian",
+              "pharmaceutical": "Picrorrhizae Rhizoma",
+              "keyActions": "treats childhood malnutrition, harsh and dry"
+            }
+          ]
+        },
+        {
+          "name": "Clear Heat and Dry Dampness",
+          "herbs": [
+            {
+              "name": "Huang Qin",
+              "pharmaceutical": "Scutellariae Radix",
+              "keyActions": "clears toxin, esp UJ, LU heat, shao yang syndrome, calms fetus due to heat, sedates LIV yang"
+            },
+            {
+              "name": "Huang Lian",
+              "pharmaceutical": "Coptidis Rhizoma",
+              "keyActions": "clears toxin, esp MJ, d-h dysentery/diarrhea, HT/ST fire"
+            },
+            {
+              "name": "Huang Bai",
+              "pharmaceutical": "Phellodendri Cortex",
+              "keyActions": "clears toxin, esp LJ, drains def. KID fire"
+            },
+            {
+              "name": "Long Dan Cao",
+              "pharmaceutical": "Gentianae Radix",
+              "keyActions": "genital itching, jaundice, drains d-h LIV/GB (eyes/genitals), drains LIV fire"
+            },
+            {
+              "name": "Ku Shen",
+              "pharmaceutical": "Sophorae Flavescentis Radix",
+              "keyActions": "genital itching, jaundice, disperses wind, kills parasites, stops itching (LJ), promotes urination"
+            },
+            {
+              "name": "Qin Pi",
+              "pharmaceutical": "Fraxini Cortex",
+              "keyActions": "clears d-h diarrhea, clears LIV/eyes"
+            },
+            {
+              "name": "Bian Dou Hua",
+              "pharmaceutical": "Lablab Flos",
+              "keyActions": "Summerheat, diarrhea, vomiting, thirst, dampness, exterior syndrome"
+            }
+          ]
+        },
+        {
+          "name": "Clear Heat and Resolve Toxicity",
+          "herbs": [
+            {
+              "name": "Jin Yin Hua",
+              "pharmaceutical": "Lonicerae Flos",
+              "keyActions": "expels ext. w-h, clears d-h in LJ"
+            },
+            {
+              "name": "Lian Qiao",
+              "pharmaceutical": "Forsythiae Fructus",
+              "keyActions": "expels ext. w-h, reduces abscess, dissipates clumps, clears HT heat"
+            },
+            {
+              "name": "Ban Lan Gen",
+              "pharmaceutical": "Isatidis Radix",
+              "keyActions": "benefits throat, clears d-h jaundice, cools blood, prevents epidemic"
+            },
+            {
+              "name": "Pu Gong Ying",
+              "pharmaceutical": "Taraxaci Herba",
+              "keyActions": "reduces abscess, mastitis, promotes lactation, clears LIV/eyes, used for painful urinary dribbling"
+            },
+            {
+              "name": "Bai Jiang Cao",
+              "pharmaceutical": "Patriniae Herba",
+              "keyActions": "treats intestinal abscess, useful in gynecology (endometriosis) and other masses, dispels blood stasis"
+            },
+            {
+              "name": "Bai Tou Weng",
+              "pharmaceutical": "Pulsatillae Radix",
+              "keyActions": "toxic heat dysentery, LJ inflammation"
+            },
+            {
+              "name": "He Ye",
+              "pharmaceutical": "Folium Nelumbinis Nuciferae",
+              "keyActions": "clears summerheat, raises yang (diarrhea), stops bleeding"
+            },
+            {
+              "name": "Tu Fu Ling",
+              "pharmaceutical": "Smilacis Glabrae Rhizoma",
+              "keyActions": "relieves toxicity (esp skin), treats hot Bi pain, clears d-h jaundice, UTI"
+            },
+            {
+              "name": "Shan Dou Gen",
+              "pharmaceutical": "Sophorae Tonkinensis Radix",
+              "keyActions": "clears toxic hot sore throat, almost always used with she gan"
+            },
+            {
+              "name": "She Gan",
+              "pharmaceutical": "Belamcandae Rhizoma",
+              "keyActions": "clears toxic hot sore throat, clears phlegm strongly, almost always used with shan dou gen"
+            },
+            {
+              "name": "Yu Xing Cao",
+              "pharmaceutical": "Houttuyniae Herba",
+              "keyActions": "75% LU abscess/toxin, 25% LI toxin/urinary d-h"
+            },
+            {
+              "name": "Bai Hua She She Cao",
+              "pharmaceutical": "Hedyotis Diffusae Herba",
+              "keyActions": "clears toxic heat, jaundice, snakebite, stops bleeding, modern use in cancer (esophageal/prostate/leukemia)"
+            },
+            {
+              "name": "Bai Xian Pi",
+              "pharmaceutical": "Dictamni Cortex",
+              "keyActions": "treats toxic skin lesions, expels hot Bi pain, topical antifungal"
+            },
+            {
+              "name": "Ma Bo",
+              "pharmaceutical": "Lasiosphaera/Calvatia",
+              "keyActions": "clears toxic sore throat, stops bleeding in mouth and nose"
+            },
+            {
+              "name": "Xiao Shi",
+              "pharmaceutical": "Niter",
+              "keyActions": "toxic mineral: Clear heat, resolve toxicity, soften hardness"
+            },
+            {
+              "name": "Da Qing Ye",
+              "pharmaceutical": "Isatidis Folium",
+              "keyActions": "cools blood, reduces rash"
+            },
+            {
+              "name": "Qing Dai",
+              "pharmaceutical": "Indigo Naturalis",
+              "keyActions": "mostly used topically for sores/burns"
+            },
+            {
+              "name": "Zi Hua Di Ding",
+              "pharmaceutical": "Violae Herba",
+              "keyActions": "used with pu gong ying, for abscesses/hot sores"
+            },
+            {
+              "name": "Ye Ju Hua",
+              "pharmaceutical": "Chrysanthemi Indici Flos",
+              "keyActions": "clears w-h like ju hua, but is stronger for clearing toxic heat, esp eyes"
+            },
+            {
+              "name": "Si Gua Lou",
+              "pharmaceutical": "Luffa Fructus Retinervus",
+              "keyActions": "relieves toxic swellings, esp breast, unblocks channels/Bi pain, invigorates blood"
+            },
+            {
+              "name": "Chuan Xin Lian",
+              "pharmaceutical": "Andrographitis Herba",
+              "keyActions": "treats and prevents common cold"
+            },
+            {
+              "name": "Ban Zhi Lian",
+              "pharmaceutical": "Scutellariae Barbatae Herba",
+              "keyActions": "clears toxic swellings, boils, cancer, promotes urination, reduces edema"
+            },
+            {
+              "name": "Chao Lou",
+              "pharmaceutical": "Rhizoma Paridis (dry-fried)",
+              "keyActions": "Clear heat, resolve toxicity, reduce swelling, alleviate pain"
+            },
+            {
+              "name": "Zhen Zhu Cao",
+              "pharmaceutical": "Herba Phyllanthi Urinariae",
+              "keyActions": "Clear heat, calm liver, resolve toxicity, promote urination, reduce jaundice"
+            },
+            {
+              "name": "Huang Yao Zi",
+              "pharmaceutical": "Rhizoma Dioscoreae Bulbiferae",
+              "keyActions": "Resolves toxicity, reduces nodules, treats goiter and scrofula, clears heat"
+            },
+            {
+              "name": "Hong Teng",
+              "pharmaceutical": "Caulis Sargentodoxae",
+              "keyActions": "Clears heat and resolves toxicity, invigorates blood, reduces swelling, relieves pain"
+            },
+            {
+              "name": "Ma Chi Xian",
+              "pharmaceutical": "Herba Portulacae",
+              "keyActions": "Clears heat and resolves toxicity, cools the blood, stops dysentery, reduces abscesses"
+            },
+            {
+              "name": "Ya Dan Zi",
+              "pharmaceutical": "Fructus Bruceae",
+              "keyActions": "Clears heat, resolves toxicity, treats cancer, stops dysentery, treats malaria"
+            },
+            {
+              "name": "Qian Li Guang",
+              "pharmaceutical": "Herba Senecionis Scandens",
+              "keyActions": "Clear heat, resolve toxicity, kill parasites, reduce swelling, benefit eyes"
+            },
+            {
+              "name": "Shan Ci Gu",
+              "pharmaceutical": "Pseudobulbus Cremastrae/Pleiones",
+              "keyActions": "Scrofula, goiter, toxic swellings, abscesses, tumors"
+            },
+            {
+              "name": "Tian Kui Zi",
+              "pharmaceutical": "Semiaquilegiae Radix",
+              "keyActions": "Abscesses, sores, carbuncles, scrofula, mumps, breast abscess"
+            },
+            {
+              "name": "Long Kui",
+              "pharmaceutical": "Solani Nigri Herba",
+              "keyActions": "Sores, abscesses, swelling, skin infections, toxic swellings, snakebite, sore throat"
+            },
+            {
+              "name": "Gang Mei Gen",
+              "pharmaceutical": "Radix Ilex Asprellae",
+              "keyActions": "Clears heat, resolves toxicity, relieves sore throat, reduces swelling, benefits throat"
+            },
+            {
+              "name": "San Cha Ku",
+              "pharmaceutical": "Herba Evodiae Leptae",
+              "keyActions": "Clears heat and toxins, reduces swelling, relieves sore throat, supports detoxification"
+            },
+            {
+              "name": "Ren Dong Teng",
+              "pharmaceutical": "Caulis Lonicerae",
+              "keyActions": "cool heat, resolve toxicity, and relieve pain, particularly for joint and skin conditions"
+            },
+            {
+              "name": "Bai Lian",
+              "pharmaceutical": "Ampelopsis Radix",
+              "keyActions": "Abscesses, sores, swellings, carbuncles, toxic skin lesions, ulcers, breast abscess"
+            },
+            {
+              "name": "Shi Shang Bai",
+              "pharmaceutical": "Selaginellae Doederleinii Herba",
+              "keyActions": "Clears heat and resolves toxicity, disperses masses and nodules, reduces swelling, supports anti-cancer therapy"
+            },
+            {
+              "name": "Shi Shang Bai",
+              "pharmaceutical": "Herba Allii Macrostemonis",
+              "keyActions": "Clears heat and resolves toxicity, reduces swelling, disperses nodules, relieves inflammation"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "Downward Draining Herbs",
+      "subcategories": [
+        {
+          "name": "Purgatives",
+          "herbs": [
+            {
+              "name": "Da Huang",
+              "pharmaceutical": "Rhei Radix/Rhizoma",
+              "keyActions": "astringes after purging, invigorates/cools blood, clears d-h from LIV/GB, eliminates skin toxins, cook <5min"
+            },
+            {
+              "name": "Mang Xiao",
+              "pharmaceutical": "Natrii Sulfas",
+              "keyActions": "softens stool, usually combined with da huang, stir into hot decoction, dont cook"
+            },
+            {
+              "name": "Lu Hui",
+              "pharmaceutical": "Aloe",
+              "keyActions": "used in pills, not decoction, made from thick yellow sap at base of leaves, NOT the gel inside"
+            },
+            {
+              "name": "Fan Xie Ye",
+              "pharmaceutical": "Sennae Folium",
+              "keyActions": "causes cramping and irritation, just use da huang instead"
+            }
+          ]
+        },
+        {
+          "name": "Moist Laxatives",
+          "herbs": [
+            {
+              "name": "Huo Ma Ren",
+              "pharmaceutical": "Cannabis Semen",
+              "keyActions": "moistens intestines, nourishes yin"
+            },
+            {
+              "name": "Yu Li Ren",
+              "pharmaceutical": "Pruni Semen",
+              "keyActions": "moistens intestine, promotes qi movement, promotes urination"
+            }
+          ]
+        },
+        {
+          "name": "Harsh Expellents",
+          "herbs": [
+            {
+              "name": "Jing Da Ji",
+              "pharmaceutical": "Euphorbiae Pekinensis Radix",
+              "keyActions": "drives out water accumulation, a little weaker than gan sui"
+            },
+            {
+              "name": "Qian Niu Zi",
+              "pharmaceutical": "Pharbitidis Semen",
+              "keyActions": "strongly purges water, unblocks bowel, expels phlegm"
+            },
+            {
+              "name": "Gan Sui",
+              "pharmaceutical": "Kansui Radix",
+              "keyActions": "harshly expels water, clears d-h topically"
+            },
+            {
+              "name": "Yuan Hua",
+              "pharmaceutical": "Genkwa Flos",
+              "keyActions": "drives out water, kills parasites"
+            },
+            {
+              "name": "Ba Dou",
+              "pharmaceutical": "Crotonis Fructus",
+              "keyActions": "extremely toxic, 1 seed can cause extreme purging, handle with gloves"
+            },
+            {
+              "name": "Shang Lu",
+              "pharmaceutical": "Radix Phytolaccae",
+              "keyActions": "Drives out water by drastic means, reduces edema, resolves phlegm, disperses nodules"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "Drain Dampness",
+      "subcategories": [
+        {
+          "name": "Drain Dampness",
+          "herbs": [
+            {
+              "name": "Fu Ling",
+              "pharmaceutical": "Poria Cocos Sclerotium",
+              "keyActions": "promotes urination, strengthens spleen, dries phlegm, calms shen"
+            },
+            {
+              "name": "Zhu Ling",
+              "pharmaceutical": "Polyporus",
+              "keyActions": "promotes urination, used in yin def heat lin, not tonifying, edible/food"
+            },
+            {
+              "name": "Hua Shi",
+              "pharmaceutical": "Talcum",
+              "keyActions": "promotes urination, drains heat, clears summerheat, topically absorbs dampness and promotes healing"
+            },
+            {
+              "name": "Yi Yi Ren",
+              "pharmaceutical": "Coicis Semen",
+              "keyActions": "promotes urination, strengthens SP, clears heat, expels w-d Bi, resolves pus, edible/food"
+            },
+            {
+              "name": "Dong Gua Zi",
+              "pharmaceutical": "Benincasae Semen",
+              "keyActions": "clears heat, drains damp, resolves abscess (LU/LI), expels phlegm, promotes pus discharge"
+            },
+            {
+              "name": "Mu Tong",
+              "pharmaceutical": "Akebia Caulis",
+              "keyActions": "promotes urination, drains heat from HT/LI/UB, calms shen, promotes lactation, activates blood"
+            },
+            {
+              "name": "Deng Xin Cao",
+              "pharmaceutical": "Junci Medulla",
+              "keyActions": "mild diuretic, calms the shen, used in children for night frights"
+            },
+            {
+              "name": "Qu Mai",
+              "pharmaceutical": "Dianthi Herba",
+              "keyActions": "drains d-h, breaks up blood stasis, bitter/cold/slippery"
+            },
+            {
+              "name": "Di Fu Zi",
+              "pharmaceutical": "Kochiae Fructus",
+              "keyActions": "drains damp heat, esp juandice, main use is topically for itching, use with bian xu and bai xian pi"
+            },
+            {
+              "name": "Bian Xu",
+              "pharmaceutical": "Polygoni Avicularis Herba",
+              "keyActions": "clears d-h from BL, THE herb for genital itch, use with di fu zi"
+            },
+            {
+              "name": "Shi Wei",
+              "pharmaceutical": "Pyrrosiae Folium",
+              "keyActions": "used for heat, stone, blood lin, stops cough and phlegm, stops bleeding"
+            },
+            {
+              "name": "Che Qian Zi",
+              "pharmaceutical": "Plantaginis Semen",
+              "keyActions": "clears heat, resolves damp, clears heat from LIV/eyes, regulates bowel movement"
+            },
+            {
+              "name": "Dong Kui Zi",
+              "pharmaceutical": "Malvae Fructus",
+              "keyActions": "promotes urination, unblocks breast abscess, moistens intestines"
+            },
+            {
+              "name": "Bi Xie",
+              "pharmaceutical": "Dioscoreae Hypoglaucae Rhizoma",
+              "keyActions": "separates clear from turbid, treats cloudy lin, expels Bi pain"
+            },
+            {
+              "name": "Ze Xie",
+              "pharmaceutical": "Alismatis Rhizoma",
+              "keyActions": "promotes urination, clears LJ d-h, drains KID fire, used for yin def fire"
+            },
+            {
+              "name": "Yin Chen Hao",
+              "pharmaceutical": "Artemisiae Scopariae Herba",
+              "keyActions": "treats d-h jaundice, clears heat and releases exterior"
+            },
+            {
+              "name": "Han Fang Ji",
+              "pharmaceutical": "Stephaniae Tetrandrae Radix",
+              "keyActions": "promotes urination, esp lower body edema, expels hot w-d Bi pain"
+            },
+            {
+              "name": "Chuan Mu Tong",
+              "pharmaceutical": "Clematidis Armandii, Caulis",
+              "keyActions": "same as mu tong"
+            },
+            {
+              "name": "Tong Cao",
+              "pharmaceutical": "Tetrapanacis Medulla",
+              "keyActions": "promotes urination, clears damp heat, promotes lactation"
+            },
+            {
+              "name": "Jin Qian Cao",
+              "pharmaceutical": "Lysimachiae Herba",
+              "keyActions": "dissolves or expels stones, both urinary and gallstones, drains d-h from LIV/GB"
+            },
+            {
+              "name": "Chi Xiao Dou",
+              "pharmaceutical": "Phaseoli Semen",
+              "keyActions": "(adzuki bean) clears damp heat, promotes urination, disperses blood stasis"
+            },
+            {
+              "name": "Chi Fu Ling",
+              "pharmaceutical": "Poria Rubra",
+              "keyActions": "promotes urination more strongly than fu ling, mildly strengthens spleen"
+            },
+            {
+              "name": "Hai Jin Sha",
+              "pharmaceutical": "Spora Lygodii",
+              "keyActions": "promotes urination, expels stones, unblocks urination"
+            },
+            {
+              "name": "Yu Mi Xu",
+              "pharmaceutical": "Stigma Maydis",
+              "keyActions": "Promotes urination, reduces edema, alleviates jaundice, lowers blood pressure"
+            },
+            {
+              "name": "Che Qian Cao",
+              "pharmaceutical": "Plantaginis Herba",
+              "keyActions": "Damp-heat in lower burner, edema, painful urinary dysfunction, cough with phlegm, eye problems due to heat"
+            },
+            {
+              "name": "Bai Bian Lian",
+              "pharmaceutical": "Herba Lobeliae Chinensis",
+              "keyActions": "edema, abscesses, and toxic swellings. It is also used for snakebite and jaundice. Can be used internally or topically"
+            },
+            {
+              "name": "Li Zhi Ke",
+              "pharmaceutical": "Lychee Exocarp",
+              "keyActions": "pain due to heat or Qi stagnation in the lower abdomen and for menstrual or testicular pain"
+            }
+          ]
+        },
+        {
+          "name": "Aromatically Transform Dampness",
+          "herbs": [
+            {
+              "name": "Cang Zhu",
+              "pharmaceutical": "Atractylodis Rhizoma",
+              "keyActions": "strongly dries damp in MJ, releases ext w-c-d, clears damp in lower body such as edema/leukorrhea/gout"
+            },
+            {
+              "name": "Hou Po",
+              "pharmaceutical": "Magnoliae Officinalis Cortex",
+              "keyActions": "strongly regulates qi, transforms cold phlegm in the LU"
+            },
+            {
+              "name": "Huo Xiang",
+              "pharmaceutical": "Pogostemonis Herba (also Agastaches Herba)",
+              "keyActions": "settles the ST, releases exterior for w-c w/ internal damp, compare to zi su ye"
+            },
+            {
+              "name": "Sha Ren",
+              "pharmaceutical": "Amomi Fructus",
+              "keyActions": "MJ damp, no action on LU, prevents stagnation of tonic herbs (similar to chen pi), calms fetus"
+            },
+            {
+              "name": "Bai Dou Kou",
+              "pharmaceutical": "Amomi Fructus Rotundus",
+              "keyActions": "transforms damp phlegm (LU), warms MJ/lowers rebellious qi, regulates qi (so UJ and MJ actions)"
+            },
+            {
+              "name": "Cao Dou Kou",
+              "pharmaceutical": "Alpiniae Katsumadai Semen",
+              "keyActions": "dries damp, warms MJ, almost identical to Cao Guo"
+            },
+            {
+              "name": "Cao Guo",
+              "pharmaceutical": "Tsaoko Fructus",
+              "keyActions": "dries damp, relieves food stagnation, similar to cao dou kou"
+            },
+            {
+              "name": "Pei Lan",
+              "pharmaceutical": "Eupatorii Herba",
+              "keyActions": "transforms d-h, treats damp spleen w/ sticky saliva, mildly releases exterior"
+            }
+          ]
+        },
+        {
+          "name": "Dispel Wind-Dampness",
+          "herbs": [
+            {
+              "name": "Du Huo",
+              "pharmaceutical": "Angelicae Pubescentis Radix",
+              "keyActions": "most important herb for Bi pain of the lower body w/ KID/LIV def., releases exterior for w-c-d invasion"
+            },
+            {
+              "name": "Wei Ling Xian",
+              "pharmaceutical": "Clematidis Radix",
+              "keyActions": "main Bi pain symptom is STIFFNESS, enters all 12 channels, dissolves fishbone in throat"
+            },
+            {
+              "name": "Hai Tong Pi",
+              "pharmaceutical": "Erythrinae Cortex",
+              "keyActions": "dispels w-d esp in lower back, promotes urination, treats scabies topically"
+            },
+            {
+              "name": "Mu Gua",
+              "pharmaceutical": "Chaenomelis Fructus",
+              "keyActions": "relaxes sinews for cramping pain, transforms damp, relieves food stagnation"
+            },
+            {
+              "name": "Sang Ji Sheng",
+              "pharmaceutical": "Taxilli Herba",
+              "keyActions": "tonifies KID/LIV yin for chronic Bi pain, calms fetus for spotting during pregnancy, lowers hypertension"
+            },
+            {
+              "name": "Wu Jia Pi",
+              "pharmaceutical": "Acanthopanacis Cortex",
+              "keyActions": "dispels w-d, esp in weak chronic patients, promotes urination, drains damp, adaptogenic"
+            },
+            {
+              "name": "Qin Jiao",
+              "pharmaceutical": "Gentianae Macrophyllae Radix",
+              "keyActions": "expels hot Bi pain, moistens intestines, clears yin def heat, resolves jaundice"
+            },
+            {
+              "name": "Sang Zhi",
+              "pharmaceutical": "Mori Ramulus",
+              "keyActions": "treats Bi pain in upper extremity, lowers hypertension, acts cooling"
+            },
+            {
+              "name": "Xi Xian Cao",
+              "pharmaceutical": "Siegesbeckiae Herba",
+              "keyActions": "clears hot Bi pain, pacifies LIV yang, calms shen"
+            },
+            {
+              "name": "Bai Hua She",
+              "pharmaceutical": "Bungarus/Agkistradon Parvus",
+              "keyActions": "strongly extinguishes internal wind, topically removes wind from skin (rash, itch)"
+            },
+            {
+              "name": "Luo Shi Teng",
+              "pharmaceutical": "Trachelospermi Caulis",
+              "keyActions": "Dispel wind-dampness, open channels, relieve pain, reduce swelling"
+            },
+            {
+              "name": "Song Hua Fen",
+              "pharmaceutical": "Pollen Pini",
+              "keyActions": "Expels Wind, promotes the movement of Qi, dries Dampness, stops bleeding, generates flesh"
+            },
+            {
+              "name": "Can Sha",
+              "pharmaceutical": "Bombycis Faeces",
+              "keyActions": "Expel wind-damp, harmonize stomach, relieve itching"
+            },
+            {
+              "name": "Shen Jin Cao",
+              "pharmaceutical": "Herba Lycopodii",
+              "keyActions": "Relax sinews, dispel wind-dampness, relieve pain"
+            },
+            {
+              "name": "Tou Gu Cao",
+              "pharmaceutical": "Caulis Impatientis",
+              "keyActions": "Dispels wind-dampness, unblocks channels, relieves pain, strengthens bones and sinews"
+            },
+            {
+              "name": "Hai Feng Teng",
+              "pharmaceutical": "Caulis Piperis Kadsurae",
+              "keyActions": "Dispels wind-dampness, warms and opens the channels and collaterals, relieves pain"
+            },
+            {
+              "name": "Qian Nian Jian",
+              "pharmaceutical": "Rhizoma Homalomenae",
+              "keyActions": "Dispels wind-dampness, strengthens tendons and bones, invigorates Qi and blood"
+            },
+            {
+              "name": "Xu Chang Qing",
+              "pharmaceutical": "Radix Cynanchi Paniculati",
+              "keyActions": "Eliminates wind, eases pain and spasms, soothes itching, resolves toxins, supports joint mobility"
+            },
+            {
+              "name": "Xu Chang Qing",
+              "pharmaceutical": "Rhizoma Dioscoreae Nipponicae",
+              "keyActions": "Invigorates blood, dispels wind-damp, relieves pain, reduces swelling and inflammation"
+            },
+            {
+              "name": "Lao Guan Cao",
+              "pharmaceutical": "Herba Erodii/Geranii",
+              "keyActions": "Geranium: Dispels wind-damp, clears heat and resolves toxicity, stops pain, reduces swelling and inflammation"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "categories": [
+        {
+          "name": "Transform Phlegm",
+          "subcategories": [
+            {
+              "name": "Cooling to Transform Phlegm-Heat",
+              "herbs": [
+                {
+                  "name": "Qian Hu",
+                  "pharmaceutical": "Peucedani Radix",
+                  "keyActions": "descends LU qi, releases exterior (only one in this category)"
+                },
+                {
+                  "name": "Hai Zao",
+                  "pharmaceutical": "Sargassum",
+                  "keyActions": "promotes urination, treats thyroid conditions with Kun Bu, relieves pain from hernia and other bulging disorders"
+                },
+                {
+                  "name": "Gua Lou Pi",
+                  "pharmaceutical": "Trichosanthis Pericarpium",
+                  "keyActions": "unbinds chest, does not moisten intestines"
+                },
+                {
+                  "name": "Gua Lou Ren",
+                  "pharmaceutical": "Trichosanthis Semen",
+                  "keyActions": "moistens intestines/LU, dissipates nodules"
+                },
+                {
+                  "name": "Zhu Ru",
+                  "pharmaceutical": "Bambusae Caulis in Taeniam",
+                  "keyActions": "clears heat from ST/GB, lowers rebellious qi of LU/ST, cools blood, stops bleeding"
+                },
+                {
+                  "name": "Chuan Bei Mu",
+                  "pharmaceutical": "Fritillariae Cirrhosae Bulbus",
+                  "keyActions": "moistens LU, best for chronic dry cough, dissipates nodules, edible"
+                },
+                {
+                  "name": "Zhe Bei Mu",
+                  "pharmaceutical": "Fritillariae Thunbergii Bulbus",
+                  "keyActions": "not as tonifying as chuan bei mu, more useful for acute conditions, dissipates nodules"
+                },
+                {
+                  "name": "Gua Lou",
+                  "pharmaceutical": "Trichosanthis Fructus",
+                  "keyActions": "unbinds chest, moistens intestines"
+                },
+                {
+                  "name": "Tian Zhu Huang",
+                  "pharmaceutical": "Bambusae Silicea Concretio",
+                  "keyActions": "Bamboo sugar: Clears heat, transforms phlegm, settles convulsions, and calms the spirit."
+                },
+                {
+                  "name": "Fu Hai Shi",
+                  "pharmaceutical": "Pumex (Costazia Os)",
+                  "keyActions": "softens hardness, promotes urination, volcanic stone"
+                },
+                {
+                  "name": "Meng Shi",
+                  "pharmaceutical": "Chloriti Lapis",
+                  "keyActions": "directs qi down, calms LIV, sedates yang, resolves food stagnation"
+                },
+                {
+                  "name": "Ge Qiao",
+                  "pharmaceutical": "Meretricis/Cyclinae Concha",
+                  "keyActions": "directs LU qi down, softens phlegm-fire lumps, promotes urination, reduces ST acid"
+                },
+                {
+                  "name": "Kun Bu",
+                  "pharmaceutical": "Eckloniae Thallus",
+                  "keyActions": "softens hardness, promotes urination, use with Hai Zao for any thyroid problem"
+                },
+                {
+                  "name": "Zhu Li",
+                  "pharmaceutical": "Bambusae Succus",
+                  "keyActions": "awakes closed conditions such as coma/epilepsy"
+                },
+                {
+                  "name": "Tian Gua Zi",
+                  "pharmaceutical": "Semen Cucumeris Melo",
+                  "keyActions": "clears lung fire, moistens intestines, dispels stasis, expels pus, promotes wound healing, alleviates pain"
+                }
+              ]
+            },
+            {
+              "name": "Warming to Transform Phlegm-Cold",
+              "herbs": [
+                {
+                  "name": "Ban Xia",
+                  "pharmaceutical": "Pinelliae Rhizoma Preparatum",
+                  "keyActions": "lowers rebellious qi of LU/ST, dissipates nodules, compare to Zhu Ru, toxic if raw"
+                },
+                {
+                  "name": "Tian Nan Xing",
+                  "pharmaceutical": "Arisaematis Rhizoma Preparatum",
+                  "keyActions": "dries damp and stubborn phlegm, expels wind-phlegm in channels, toxic if raw"
+                },
+                {
+                  "name": "Dan Nan Xing",
+                  "pharmaceutical": "Arisaemae cum Bile",
+                  "keyActions": "clears HOT phlegm - is Tian Nan Xing prepared in bile"
+                },
+                {
+                  "name": "Bai Jie Zi",
+                  "pharmaceutical": "Sinapis Semen",
+                  "keyActions": "warms LU, regulates qi of LU, dissipates nodules"
+                },
+                {
+                  "name": "Jie Geng",
+                  "pharmaceutical": "Platycodi Radix",
+                  "keyActions": "opens LU, expels hot/cold phlegm, benefits voice and throat, guides other herbs to chest/throat"
+                },
+                {
+                  "name": "Xuan Fu Hua",
+                  "pharmaceutical": "Inulae Flos",
+                  "keyActions": "lowers rebellious qi of ST, similar to Ban Xia in lowering"
+                },
+                {
+                  "name": "Bai Qian",
+                  "pharmaceutical": "Cynanchi Stauntonii Rhizoma",
+                  "keyActions": "stops cough, disperses LU qi. Like Ma Huang, but milder"
+                },
+                {
+                  "name": "Zao Jiao",
+                  "pharmaceutical": "Gleditsiae Fructus",
+                  "keyActions": "dissipates swelling, expels roundworms, used for 1000s of years as a detergent, due to saponins"
+                },
+                {
+                  "name": "Zao Jiao Ci",
+                  "pharmaceutical": "Gleditsiae Spina",
+                  "keyActions": "used in early stage of swollen sores, used for mastitis"
+                },
+                {
+                  "name": "Bai Fu Zi",
+                  "pharmaceutical": "Typhonii Rhizoma Preparatum",
+                  "keyActions": "main use is wind-phlegm in channels, relieves headache, facial paralysis, expels w-c-d Bi pain, dissipates nodules"
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "categories": [
+        {
+          "name": "Relieve Cough and Wheeze",
+          "subcategories": [
+            {
+              "name": "Relieve Cough and Wheeze",
+              "herbs": [
+                {
+                  "name": "Xing Ren",
+                  "pharmaceutical": "Armeniacae Semen",
+                  "keyActions": "drains LU, moistens LU/intestines, potentially toxic"
+                },
+                {
+                  "name": "Zi Wan",
+                  "pharmaceutical": "Asteris Radix",
+                  "keyActions": "stops many kinds of cough, esp ones with phlegm, used a lot with Bai Bu"
+                },
+                {
+                  "name": "Zi Su Zi",
+                  "pharmaceutical": "Perillae Fructus",
+                  "keyActions": "dissolves phlegm, moistens intestines"
+                },
+                {
+                  "name": "Pi Pa Ye",
+                  "pharmaceutical": "Eriobotryae Folium",
+                  "keyActions": "lowers rebellious qi of LU/ST, like a cool version of Ban Xia"
+                },
+                {
+                  "name": "Bai Bu",
+                  "pharmaceutical": "Stemonae Radix",
+                  "keyActions": "moistens LU, treats parasites (topical or internal), good for scalp itch"
+                },
+                {
+                  "name": "Sang Bai Pi",
+                  "pharmaceutical": "Mori Cortex",
+                  "keyActions": "best herb for excess hot cough, promotes urination, lowers hypertension, relieves diaper rash"
+                },
+                {
+                  "name": "Kuan Dong Hua",
+                  "pharmaceutical": "Farfarae Flos",
+                  "keyActions": "stops cold cough, dont use long term, contraindicated in pregnancy/lactation, possibly carcinogenic"
+                },
+                {
+                  "name": "Ting Li Zi",
+                  "pharmaceutical": "Lepidii/Descurainiae Semen",
+                  "keyActions": "drains LU, harshly expels water, can treat pleurisy/congestive heart failure, but use w/ extreme caution"
+                },
+                {
+                  "name": "Mu Hu Die",
+                  "pharmaceutical": "Oroxyli Semen",
+                  "keyActions": "moistens LU, clears voice, relieves stuck LIV qi"
+                },
+                {
+                  "name": "Hai Dai",
+                  "pharmaceutical": "Laminariae Herba",
+                  "keyActions": "interchangable with kun bu. Soften hardness, dissipate nodules, promote urination, reduce swelling, phlegm"
+                },
+                {
+                  "name": "Li Pi",
+                  "pharmaceutical": "Pyri Fructus",
+                  "keyActions": "Moisten Lung, clear heat, transform phlegm, relieve cough"
+                },
+                {
+                  "name": "Pang Da Hai",
+                  "pharmaceutical": "Sterculiae Lychnophorae Semen",
+                  "keyActions": "mostly used to soothe the throat (for speakers/singers)"
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "categories": [
+        {
+          "name": "Emetics",
+          "subcategories": [
+            {
+              "name": "Emetics",
+              "herbs": [
+                {
+                  "name": "Gua Di",
+                  "pharmaceutical": "Melo Pedicellus",
+                  "keyActions": "induces vomiting"
+                },
+                {
+                  "name": "Li Lu",
+                  "pharmaceutical": "Veratri Nigri Radix et Rhizoma",
+                  "keyActions": "induces vomiting"
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "categories": [
+        {
+          "name": "Relieve Food Stagnation",
+          "subcategories": [
+            {
+              "name": "Relieve Food Stagnation",
+              "herbs": [
+                {
+                  "name": "Shan Zha",
+                  "pharmaceutical": "Crataegi Fructus",
+                  "keyActions": "treats fat/protein food stag, breaks up blood stasis, charred stops diarrhea, benefits cardiovascular system"
+                },
+                {
+                  "name": "Shen Qu",
+                  "pharmaceutical": "Massa Medicata Fermentata",
+                  "keyActions": "promotes ST qi going down, treats heavy formula digestion like minerals"
+                },
+                {
+                  "name": "Mai Ya",
+                  "pharmaceutical": "Hordei Fructus Germinatus",
+                  "keyActions": "reduces starchy food stag, moves qi, STOPS lactation"
+                },
+                {
+                  "name": "Gu Ya",
+                  "pharmaceutical": "Setariae (Oryzae) Fructus Germinatus",
+                  "keyActions": "reduces starchy food stag, does not move qi or stop lactation"
+                },
+                {
+                  "name": "Lai Fu Zi",
+                  "pharmaceutical": "Raphani Semen",
+                  "keyActions": "descends rebellious LU qi/phlegm, like Bai Jie Zi but + added MJ actions"
+                },
+                {
+                  "name": "Ji Nei Jin",
+                  "pharmaceutical": "Gigeriae Galli Endothelium Corneum",
+                  "keyActions": "increases enzymes, secures jing, dissolves KID/gall stones"
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "categories": [
+        {
+          "name": "Regulate the Qi",
+          "subcategories": [
+            {
+              "name": "Regulate the Qi",
+              "herbs": [
+                {
+                  "name": "Chen Pi",
+                  "pharmaceutical": "Citri Reticulatae Pericarpium",
+                  "keyActions": "lowers LU/ST qi (similar to ban xia), dries damp and phlegm, aids in digestion of rich formulas"
+                },
+                {
+                  "name": "Ju Hong",
+                  "pharmaceutical": "Citri Reticulatae Exocarpium Rubrum",
+                  "keyActions": "dries phlegm more strongly than chen pi, but less action on the MJ"
+                },
+                {
+                  "name": "Qing Pi",
+                  "pharmaceutical": "Citri Reticulatae Viride Pericarpium",
+                  "keyActions": "regulates qi of LIV channel and ST, dries damp/phlegm, no actions on LU"
+                },
+                {
+                  "name": "Zhi Shi",
+                  "pharmaceutical": "Aurantii Fructus Immaturus",
+                  "keyActions": "breaks up stagnant qi, transforms phlegm in chest"
+                },
+                {
+                  "name": "Zhi Ke",
+                  "pharmaceutical": "Aurantii Fructus (State Board calls this Zhi Qiao)",
+                  "keyActions": "moves qi of MJ, weaker than Zhi Shi. descends qi"
+                },
+                {
+                  "name": "Da Fu Pi",
+                  "pharmaceutical": "Arecae Pericarpium",
+                  "keyActions": "directs rebellious qi down from MJ, promotes urination, relieves edema, name is \"big abdomen peel\""
+                },
+                {
+                  "name": "Xiang Fu",
+                  "pharmaceutical": "Cyperi Rhizoma",
+                  "keyActions": "regulates qi of LIV, for PMS/flank pain, regulates menstruation"
+                },
+                {
+                  "name": "Mu Xiang",
+                  "pharmaceutical": "Aucklandiae Radix",
+                  "keyActions": "aromatically moves MJ qi, relieves trapped gas, strengthens SP"
+                },
+                {
+                  "name": "Wu Yao",
+                  "pharmaceutical": "Linderae Radix",
+                  "keyActions": "warms and moves lower jiao qi, alleviates pain in flank/abdomen/chest"
+                },
+                {
+                  "name": "Chen Xiang",
+                  "pharmaceutical": "Aquilariae Lignum Resinatum",
+                  "keyActions": "relieves qi stag in MJ, and between KID/LU (asthma)"
+                },
+                {
+                  "name": "Tan Xiang",
+                  "pharmaceutical": "Santali Albi Lignum",
+                  "keyActions": "moves qi thru chest and abd, can be used for heart disease"
+                },
+                {
+                  "name": "Mei Gui Hua",
+                  "pharmaceutical": "Rosae Rugosae Flos",
+                  "keyActions": "harmonizes LIV/SP/ST qi, moves blood/relieves pain, calms shen"
+                },
+                {
+                  "name": "Chuan Lian Zi",
+                  "pharmaceutical": "Meliae Toosendan Fructus",
+                  "keyActions": "moves qi stop pain, cold to clear heat, bitter to dry damp, kills parasites"
+                },
+                {
+                  "name": "Xie Bai",
+                  "pharmaceutical": "Allii Macrostemi Bulbus",
+                  "keyActions": "moves and warms qi of chest, moves qi and blood to treat abd and chest pain"
+                },
+                {
+                  "name": "Fo Shou",
+                  "pharmaceutical": "Citri Sarcodactylis Fructus",
+                  "keyActions": "regulates LIV qi, dries phlegm, esp \"dog froth\" drool"
+                },
+                {
+                  "name": "Shi Di",
+                  "pharmaceutical": "Kaki Calyx",
+                  "keyActions": "persimmon calyx: Stops hiccup, descends rebellious qi"
+                },
+                {
+                  "name": "Ba Yue Zha",
+                  "pharmaceutical": "Akebiae Fructus",
+                  "keyActions": "Regulate qi and blood, relieve pain, kill parasites, treat abdominal distention"
+                },
+                {
+                  "name": "Zi Su Geng",
+                  "pharmaceutical": "Caulis Perillae",
+                  "keyActions": "Chest congestion, abdominal distention, morning sickness, restless fetus"
+                },
+                {
+                  "name": "Ju He",
+                  "pharmaceutical": "Citrus aurantium",
+                  "keyActions": "Hernia pain, testicular swelling and pain, abdominal masses, qi stagnation"
+                },
+                {
+                  "name": "Li Zhi He",
+                  "pharmaceutical": "Semen Litchi",
+                  "keyActions": "hernia and lower abdominal pain from cold and qi stagnation"
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "categories": [
+        {
+          "name": "Regulate the Blood",
+          "subcategories": [
+            {
+              "name": "Stop Bleeding",
+              "herbs": [
+                {
+                  "name": "San Qi",
+                  "pharmaceutical": "Notoginseng Radix",
+                  "keyActions": "invigorates blood, top herb for trauma w/ bleeding, lowers hypertension and blood stasis in heart"
+                },
+                {
+                  "name": "Pu Huang",
+                  "pharmaceutical": "Typhae Pollen",
+                  "keyActions": "charred stops bleeding, raw invigorates blood, promotes urination"
+                },
+                {
+                  "name": "Qian Cao",
+                  "pharmaceutical": "Rubiae Radix",
+                  "keyActions": "cools blood to stop bleeding, invigorates blood to remove stasis"
+                },
+                {
+                  "name": "Da Ji",
+                  "pharmaceutical": "Cirsii Japonici Herba sive Radix",
+                  "keyActions": "cools blood to stop bleeding, reduces swelling, generates flesh"
+                },
+                {
+                  "name": "Di Yu",
+                  "pharmaceutical": "Sanguisorbae Radix",
+                  "keyActions": "cools blood to stop bleed, astringes, always used w/ hua mi for blood in stool, generates flesh/promotes healing"
+                },
+                {
+                  "name": "Huai Hua",
+                  "pharmaceutical": "Sophorae Flos Immaturus",
+                  "keyActions": "cools blood, stops bleeding, always used with di yu for blood in stool, clears heat from LIV"
+                },
+                {
+                  "name": "Ce Bai Ye",
+                  "pharmaceutical": "Platycladi Cacumen",
+                  "keyActions": "astringes to stop bleeding, cools blood to stop bleeding"
+                },
+                {
+                  "name": "Bai Mao Gen",
+                  "pharmaceutical": "Imperatae Rhizoma",
+                  "keyActions": "cools blood, stops bleeding from LU/ST, treats blood lin syndrome in UB"
+                },
+                {
+                  "name": "Xian He Cao",
+                  "pharmaceutical": "Agrimoniae Herba",
+                  "keyActions": "astringes all kind of bleeding, used for dysentery w/ blood and pus"
+                },
+                {
+                  "name": "Ai Ye",
+                  "pharmaceutical": "Artemisiae Argyi Folium",
+                  "keyActions": "warms channels to stop bleed, warms/calms fetus"
+                },
+                {
+                  "name": "Bai Ji",
+                  "pharmaceutical": "Bletilla Rhizoma",
+                  "keyActions": "astringes any bleeding, use topically for sores/ulcers, has a 'sticky' property that heals"
+                },
+                {
+                  "name": "Ou Jie",
+                  "pharmaceutical": "Nelumbinis Nodus Rhizomatis",
+                  "keyActions": "astringes to stop bleed, invigorates blood, breaks up stasis"
+                },
+                {
+                  "name": "Xiao Ji",
+                  "pharmaceutical": "Cirsii/Cephalanoplos Herba",
+                  "keyActions": "cools blood, stops bleeding, disperses stasis, clears damp heat in MJ"
+                },
+                {
+                  "name": "Lian Fang",
+                  "pharmaceutical": "Nelumbinis Receptaculum",
+                  "keyActions": "astringes to stop bleed, dispels blood stasis, calms fetus, dispels summerheat"
+                },
+                {
+                  "name": "Zao Xin Tu",
+                  "pharmaceutical": "Tu Terra Flava Usta",
+                  "keyActions": "warms womb to stop bleed, warms MJ to stop vomit and diarrhea"
+                },
+                {
+                  "name": "Zong Lu",
+                  "pharmaceutical": "Petiolus Trachycarpi",
+                  "keyActions": "astringes leakage, stops bleeding"
+                },
+                {
+                  "name": "Xue Yu Tan",
+                  "pharmaceutical": "Crinis Carbonisatus",
+                  "keyActions": "astringes to stop bleed, powder inserted in nose can stop nosebleed"
+                },
+                {
+                  "name": "Ge Hua",
+                  "pharmaceutical": "Flos Puerariae",
+                  "keyActions": "Relieve toxicity, treat alcohol intoxication, harmonize stomach"
+                },
+                {
+                  "name": "Huai Jiao",
+                  "pharmaceutical": "Sophorae Fructus",
+                  "keyActions": "Cools the blood, drains liver fire, stops bleeding, clears intestinal heat, reduces swelling"
+                },
+                {
+                  "name": "Chao Pu Huang",
+                  "pharmaceutical": "Typhae Pollen (charred)",
+                  "keyActions": "Use raw Pu Huang to stop bleeding, toasted (Chao Pu Huang) is better at moving blood"
+                }
+              ]
+            },
+            {
+              "name": "Invigorate the Blood",
+              "herbs": [
+                {
+                  "name": "Chuan Xiong",
+                  "pharmaceutical": "Chuanxiong Radix",
+                  "keyActions": "invigorates blood/qi, expels exterior w-c, treats all headaches except yang rising ones"
+                },
+                {
+                  "name": "Dan Shen",
+                  "pharmaceutical": "Salviae Miltiorrhizae Radix",
+                  "keyActions": "decreases platelet formation/dilates vessels around heart, removes stasis, organ inflammation, hot stag chest blood"
+                },
+                {
+                  "name": "Yan Hu Suo",
+                  "pharmaceutical": "Corydalis Rhizoma",
+                  "keyActions": "stops pain anywhere, invigorates blood, reduces ST acid"
+                },
+                {
+                  "name": "Yu Jin",
+                  "pharmaceutical": "Curcumae Radix",
+                  "keyActions": "clears heat, cools blood, stimulates the gallbladder"
+                },
+                {
+                  "name": "Jiang Huang",
+                  "pharmaceutical": "Curcumae Longae Rhizoma",
+                  "keyActions": "unblocks Bi pain, especially in shoulder"
+                },
+                {
+                  "name": "Yi Mu Cao",
+                  "pharmaceutical": "Leonuri Herba",
+                  "keyActions": "clears heat, promotes urination, used a lot for women"
+                },
+                {
+                  "name": "Ze Lan",
+                  "pharmaceutical": "Lycopi Herba",
+                  "keyActions": "promotes urination, like yi mu cao but warm and weaker, (use both together)"
+                },
+                {
+                  "name": "Chi Shao",
+                  "pharmaceutical": "Paeoniae Radix Rubra",
+                  "keyActions": "dispels stasis, cools blood, like mu dan pi, clears LIV fire"
+                },
+                {
+                  "name": "Tao Ren",
+                  "pharmaceutical": "Persicae Semen",
+                  "keyActions": "breaks blood stasis, moistens intestines, use with hong hua to enhance invigorating action"
+                },
+                {
+                  "name": "Hong Hua",
+                  "pharmaceutical": "Carthami Flos",
+                  "keyActions": "strongly breaks blood stasis, moves blood in skin conditions, use extreme caution in dosing"
+                },
+                {
+                  "name": "E Zhu",
+                  "pharmaceutical": "Curcumae Rhizoma",
+                  "keyActions": "strongest for breaking blood stasis, use with san leng all the time, reduces masses, organ enlargement"
+                },
+                {
+                  "name": "San Leng",
+                  "pharmaceutical": "Sparganii Rhizoma",
+                  "keyActions": "use with e zhu always, strongest blood breaking action"
+                },
+                {
+                  "name": "Ru Xiang",
+                  "pharmaceutical": "Olibanum",
+                  "keyActions": "generates flesh, heals tissue trauma, most often used topically"
+                },
+                {
+                  "name": "Mo Yao",
+                  "pharmaceutical": "Myrrha",
+                  "keyActions": "heals tissue trauma, used with ru xiang, mostly used topically"
+                },
+                {
+                  "name": "Huai Niu Xi",
+                  "pharmaceutical": "Acyranthis Bidentatae Radix",
+                  "keyActions": "guides to lower back/knees, stops pain, tonifies KID/LIV, clears d-h in LJ, moves reckless blood downward, esp hypertension"
+                },
+                {
+                  "name": "Chuan Niu Xi",
+                  "pharmaceutical": "Cyathulae Radix",
+                  "keyActions": "expels w-d Bi pain, not tonifying like huai niu xi"
+                },
+                {
+                  "name": "Wang Bu Liu Xing",
+                  "pharmaceutical": "Vaccariae Semen",
+                  "keyActions": "THE herb for prostatitis, also moves blood strongly in mastitis, orchitis, breast swelling"
+                },
+                {
+                  "name": "Ji Xue Teng",
+                  "pharmaceutical": "Spatholobi Caulis",
+                  "keyActions": "nourishes blood, invigorates channels for Bi pain, builds blood for cancer patients"
+                },
+                {
+                  "name": "Lu Lu Tong",
+                  "pharmaceutical": "Liquidambaris Fructus",
+                  "keyActions": "unblocks channels for Bi pain, promotes urination"
+                },
+                {
+                  "name": "Zi Ran Tong",
+                  "pharmaceutical": "Tong Pyritum",
+                  "keyActions": "reduces swelling, heals fractures"
+                },
+                {
+                  "name": "Wu Ling Zhi",
+                  "pharmaceutical": "Trogopterori Faeces",
+                  "keyActions": "transforms blood stasis, treats childhood nutrional impairment, eliminates toxins"
+                },
+                {
+                  "name": "Chuan Shan Jia",
+                  "pharmaceutical": "Squama Manitis",
+                  "keyActions": "endangered anteater pangolin scales, promotes lactation, unblocks menses, discharges pus, expels wind-damp"
+                },
+                {
+                  "name": "Bai Jiu",
+                  "pharmaceutical": "Vini Alba",
+                  "keyActions": "'white wine', similar to vodka; Guides herbs, invigorates blood, unblocks channels, disperses cold"
+                },
+                {
+                  "name": "Tu Bie Chong",
+                  "pharmaceutical": "Eupolyphaga/Steleophaga",
+                  "keyActions": "wingless cockroach: Break up blood stasis, promote healing, reduce masses"
+                },
+                {
+                  "name": "Gan Qi",
+                  "pharmaceutical": "Toxicodendri Resina",
+                  "keyActions": "toxic: Break up blood stasis, kills parasites"
+                },
+                {
+                  "name": "Qi Cao",
+                  "pharmaceutical": "Holotrichia",
+                  "keyActions": "May beetle: Break up blood stasis, masses, amenorrhea, trauma, promotes lactation"
+                },
+                {
+                  "name": "Shui Zhi",
+                  "pharmaceutical": "Hirudo",
+                  "keyActions": "Leech: Break up blood stasis, masses, amenorrhea, trauma"
+                },
+                {
+                  "name": "Meng Chong",
+                  "pharmaceutical": "Tabanus",
+                  "keyActions": "Horsefly: Break up blood stasis, masses, amenorrhea, trauma"
+                },
+                {
+                  "name": "Xue Jie",
+                  "pharmaceutical": "Suinguis Draconis",
+                  "keyActions": "dragons blood: Stops bleeding, invigorates blood, promotes tissue regeneration, alleviates pain"
+                },
+                {
+                  "name": "Mao Dong Qing",
+                  "pharmaceutical": "Radix Ilicis Pubescentis",
+                  "keyActions": "Clear heat, resolve toxicity, cool blood, invigorate blood"
+                },
+                {
+                  "name": "Tu Niu Xi",
+                  "pharmaceutical": "Achyranthes Aspera",
+                  "keyActions": "Invigorate blood, promote urination, guide blood downwar (milder version of chuan niu xi)"
+                },
+                {
+                  "name": "Wa Leng Zi",
+                  "pharmaceutical": "Concha Arcae",
+                  "keyActions": "Dissolve phlegm, soften hardness, dissipate nodules, absorb stomach acid"
+                },
+                {
+                  "name": "Hu Zhang",
+                  "pharmaceutical": "Rhizoma Polygoni Cuspidati",
+                  "keyActions": "Invigorates blood, dispels stasis, clears heat, resolves toxicity, drains dampness, reduces jaundice"
+                },
+                {
+                  "name": "Chong Wei Zi",
+                  "pharmaceutical": "Leonuri Fructus",
+                  "keyActions": "eye problems due to Liver heat, as well as menstrual disorders"
+                },
+                {
+                  "name": "Su Mu",
+                  "pharmaceutical": "Lignum Sappan",
+                  "keyActions": "gentle in action and often included in formulas for abdominal pain and menstrual disorders"
+                },
+                {
+                  "name": "Liu Ji Nu",
+                  "pharmaceutical": "Herba Artemisiae Anomalae",
+                  "keyActions": "Promotes blood circulation, resolves blood stasis, alleviates pain, assists tissue repair"
+                },
+                {
+                  "name": "Jiang Xiang",
+                  "pharmaceutical": "Dalbergiae odoriferae Lignum",
+                  "keyActions": "Blood stasis, traumatic injury, pain in chest or abdomen, bleeding due to blood stasis"
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "categories": [
+        {
+          "name": "Warm the Interior",
+          "subcategories": [
+            {
+              "name": "Warm the Interior",
+              "herbs": [
+                {
+                  "name": "Fu Zi",
+                  "pharmaceutical": "Aconiti Radix Lateralis Praeparata",
+                  "keyActions": "Side root of aconite. rescues yang, esp KID, warms interior, warms channels/stops pain, potentially very toxic"
+                },
+                {
+                  "name": "Gan Jiang",
+                  "pharmaceutical": "Zingiberis Rhizoma (Dried ginger)",
+                  "keyActions": "warms KID/SP/LU/channels, dispels cold phlegm, stops bleeding (like ai ye)"
+                },
+                {
+                  "name": "Pao Jiang",
+                  "pharmaceutical": "Zingiberis Rhizomatis (fried)",
+                  "keyActions": "Prepared ginger for bleeding due to cold."
+                },
+                {
+                  "name": "Rou Gui",
+                  "pharmaceutical": "Cinnamomi Cortex (Cinnamon bark)",
+                  "keyActions": "warms kid yang/SP/channels, dysmenorrhea, tonifies qi/blood"
+                },
+                {
+                  "name": "Wu Zhu Yu",
+                  "pharmaceutical": "Evodiae Fructus",
+                  "keyActions": "stops pain, stops vomit, warms cold extremities, useful in dermatology"
+                },
+                {
+                  "name": "Hua Jiao",
+                  "pharmaceutical": "Xanthoxyli Pericarpium (Szechuan Pepper)",
+                  "keyActions": "stops pain, in dermatology: cold, non healing sores, kills parasites"
+                },
+                {
+                  "name": "Gao Liang Jiang",
+                  "pharmaceutical": "Alpiniae Officinarum Rhizoma (Galangal)",
+                  "keyActions": "mainly covers MJ, dispels cold pain in abd, treats acute alcohol overdose"
+                },
+                {
+                  "name": "Ding Xiang",
+                  "pharmaceutical": "Caryophylli Flos (Clove)",
+                  "keyActions": "stops pain, benefits KID/MJ, detoxifies poisons in food"
+                },
+                {
+                  "name": "Xiao Hui Xiang",
+                  "pharmaceutical": "Foeniculi Fructus (Fennel Seed)",
+                  "keyActions": "warms LIV for hernia/dysmenorrhea, aids digestion/regulates qi, use w/ rou gui/gan jiang for a flavorful powerful int warming"
+                },
+                {
+                  "name": "Bi Ba",
+                  "pharmaceutical": "Piperis Longi Fructus - Long pepper",
+                  "keyActions": "stops tooth pain, like clove, lowers rebellious qi as in hiccup"
+                },
+                {
+                  "name": "Hu Jiao",
+                  "pharmaceutical": "Piperis Fructus (Black pepper)",
+                  "keyActions": "a typical pepper, warms interior generally"
+                },
+                {
+                  "name": "Cao Wu",
+                  "pharmaceutical": "Aconiti Kusnezoffi Praeparata Radix",
+                  "keyActions": "Use fu zi instead. dispels wind, disperses cold, relieves pain, reduces swelling/abscesses, is the most toxic of aconite family"
+                },
+                {
+                  "name": "Chuan Wu",
+                  "pharmaceutical": "Aconiti Radix preparata",
+                  "keyActions": "Use fu zi instead. Main root of aconite. Rarely used: Dispel wind-dampness, alleviate pain, reduce swelling, relieve cold"
+                },
+                {
+                  "name": "Sha Jiang",
+                  "pharmaceutical": "Kaempferia galanga",
+                  "keyActions": "Warm interior, dispel cold, relieve pain"
+                },
+                {
+                  "name": "Da Hui Xiang",
+                  "pharmaceutical": "Rhizoma Alpiniae Officinarum",
+                  "keyActions": "Chinese star anise: Cold in middle burner, abdominal pain, indigestion, hernia pain"
+                },
+                {
+                  "name": "Ku Liang Jiang",
+                  "pharmaceutical": "Fructus Anisi Stellati",
+                  "keyActions": "Warms the middle, dispels cold, alleviates pain, harmonizes the stomach, stops vomiting"
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "categories": [
+        {
+          "name": "Tonify the Qi",
+          "subcategories": [
+            {
+              "name": "Tonify the Qi",
+              "herbs": [
+                {
+                  "name": "Ren Shen",
+                  "pharmaceutical": "Ginseng Radix",
+                  "keyActions": "tonifies source qi, generates fluids, calms shen, enters all 12 channels, caution in hypertension"
+                },
+                {
+                  "name": "Dang Shen",
+                  "pharmaceutical": "Codonopsis Radix",
+                  "keyActions": "tonifies LU/SP qi, does not tonify KID, nourishes fluids, can substitute for ren shen at 2-3x the dose"
+                },
+                {
+                  "name": "Huang Qi",
+                  "pharmaceutical": "Astragali Radix",
+                  "keyActions": "raises yang qi for prolapse/bleeding, tonifies LU/SP qi, boosts wei qi, promotes urination for edema"
+                },
+                {
+                  "name": "Shan Yao",
+                  "pharmaceutical": "Dioscoreae Radix",
+                  "keyActions": "tonifies LU/SP/KID, astringes jing/diarrhea for SP qi def. w/o damp"
+                },
+                {
+                  "name": "Bai Zhu",
+                  "pharmaceutical": "Atractylodis Macrocephalae Rhizoma",
+                  "keyActions": "strongly dries damp, tonifies SP, stabilizes exterior to stop sweat, calms fetus, only use on RLY damp ppl b/c drying"
+                },
+                {
+                  "name": "Da Zao",
+                  "pharmaceutical": "Jujubae Fructus",
+                  "keyActions": "tonifies SP, nourishes blood, calms the shen, harmonizes/detoxifies"
+                },
+                {
+                  "name": "Gan Cao",
+                  "pharmaceutical": "Glycyrrhizae Radix",
+                  "keyActions": "tonifies SP, detoxifies herbal/drug side effects, moistens LU, relieves muscle spasm (w/ bai shao)"
+                },
+                {
+                  "name": "Zhi Gan Cao",
+                  "pharmaceutical": "Glycyrrhizae Radix Preparata",
+                  "keyActions": "tonifies SP more than gan cao, detoxifies herbal/drug side effects, moistens LU, relieves muscle spasm (w/ bai shao)"
+                },
+                {
+                  "name": "Yi Tang",
+                  "pharmaceutical": "Maltosum",
+                  "keyActions": "tonifies SP, moistens LU"
+                },
+                {
+                  "name": "Jing Mi",
+                  "pharmaceutical": "Oryza Sativa",
+                  "keyActions": "tonifies SP, stops diarrhea, is used to protect SP from harsh herbs"
+                },
+                {
+                  "name": "Bai Bian Dou",
+                  "pharmaceutical": "Dolichoris Semen",
+                  "keyActions": "strengthens SP, clears damp, clears summerheat, relieves toxins (food, alcohol, poisons)"
+                },
+                {
+                  "name": "Huang Jing",
+                  "pharmaceutical": "Polygonati Rhizoma",
+                  "keyActions": "tonifies SP, nourishes yin, esp LU, tonifies KID essence"
+                },
+                {
+                  "name": "Tai Zi Shen",
+                  "pharmaceutical": "Pseudostellariae Radix",
+                  "keyActions": "tonifies qi and yin, good substitute for children; milder than dang shen/ren shen"
+                },
+                {
+                  "name": "Feng Mi",
+                  "pharmaceutical": "Mel (Honey)",
+                  "keyActions": "tonifies SP, moistens intestines, used to stir fry a lot of herbs"
+                },
+                {
+                  "name": "Bai Ren Shen",
+                  "pharmaceutical": "Panacis Ginseng Radix Alba",
+                  "keyActions": "Processed white ginseng: Tonify qi, strengthen spleen/lung, generate fluids, calm spirit"
+                },
+                {
+                  "name": "Ci Wu Jia",
+                  "pharmaceutical": "Radix et Caulis Acanthopanacis Senticosi",
+                  "keyActions": "Tonifies spleen and kidney, calms the spirit, invigorates blood, aids fatigue and poor appetite"
+                },
+                {
+                  "name": "Jiao Gu Lan",
+                  "pharmaceutical": "Rhizoma seu Herba Gynostemmatis",
+                  "keyActions": "Tonifies Qi, clears heat and toxins, resolves phlegm, calms the spirit, promotes cardiovascular health"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "name": "Tonify the Blood",
+          "subcategories": [
+            {
+              "name": "Tonify the Blood",
+              "herbs": [
+                {
+                  "name": "Shu Di Huang",
+                  "pharmaceutical": "Rehmanniae Radix Preparata",
+                  "keyActions": "nourishes blood/yin/jing, very heavy; combine w/ aromatics like shen pi/sha ren, essential in GYN"
+                },
+                {
+                  "name": "He Shou Wu",
+                  "pharmaceutical": "Polygoni Multiflori Radix",
+                  "keyActions": "nourishes KID/LIV/blood/jing, restrains jing, moistens intestines, relieves fire toxins (int/ext), replenishes thin hair, lowers cholesterol"
+                },
+                {
+                  "name": "Dang Gui",
+                  "pharmaceutical": "Angelicae Sinensis Radix",
+                  "keyActions": "nourishes blood, invigorates blood, moistens intestines, reduces swelling, heavy; might cause bloat/diarrhea"
+                },
+                {
+                  "name": "Bai Shao",
+                  "pharmaceutical": "Paeoniae Alba Radix",
+                  "keyActions": "nourishes blood but is not heavy/greasy, smoothes LIV qi, stops spasms (w/ gan cao), preserves the yin with sour flavor"
+                },
+                {
+                  "name": "E Jiao",
+                  "pharmaceutical": "Asini Corii Colla",
+                  "keyActions": "nourishes LIV blood, KID/LU yin, moistens LU and stops bleeding, stops bleeding from def., calms fetus, dissolve only"
+                },
+                {
+                  "name": "Gou Qi Zi",
+                  "pharmaceutical": "Lycii Fructus",
+                  "keyActions": "nourishes LIV/KID/LU/eyes blood, enriches yin to treat dry cough, combine w/ wu wei zi for 'empress tea'; longevity tea"
+                },
+                {
+                  "name": "Sang Shen",
+                  "pharmaceutical": "Mori Fructus",
+                  "keyActions": "tonifies blood/yin, supplements KID/LIV, treats tinnitus, eyesight problems"
+                },
+                {
+                  "name": "Long Yan Rou",
+                  "pharmaceutical": "Longan Arillus",
+                  "keyActions": "tonifies HT blood/SP qi, calms the shen, very sticky/sweet"
+                },
+                {
+                  "name": "Hong Jing Tian",
+                  "pharmaceutical": "Radix Rhodiolae Crenulatae",
+                  "keyActions": "tonifies qi and blood, adaptogenic effects, especially for fatigue, altitude sickness, and improving physical endurance"
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "categories": [
+        {
+          "name": "Tonify the Yin",
+          "subcategories": [
+            {
+              "name": "Tonify the Yin",
+              "herbs": [
+                {
+                  "name": "Bei Sha Shen",
+                  "pharmaceutical": "Glehniae Radix",
+                  "keyActions": "cools serious yin def. w/ fire blazing, nourishes yin of LU/ST, moistens exterior (skin), is heavy so can exacerbate damp"
+                },
+                {
+                  "name": "Nan Sha Shen",
+                  "pharmaceutical": "Adenophorae Tetraphyllae Radix",
+                  "keyActions": "southern version of bei sha shen"
+                },
+                {
+                  "name": "Mai Men Dong",
+                  "pharmaceutical": "Ophiopogonis Radix",
+                  "keyActions": "nourishes yin of LU, clears HT heat, moistens intestines"
+                },
+                {
+                  "name": "Tian Men Dong",
+                  "pharmaceutical": "Asparagi Radix",
+                  "keyActions": "coldest yin tonic, nourishes KID/LU yin, generates fluids, moistens intestines"
+                },
+                {
+                  "name": "Bai He",
+                  "pharmaceutical": "Lilii Bulbus",
+                  "keyActions": "nourishes yin of LU/HT, calms shen, clears heat, can be used as a food"
+                },
+                {
+                  "name": "Nu Zhen Zi",
+                  "pharmaceutical": "Ligustri Lucidi Fructus",
+                  "keyActions": "nourishes KID/LIV yin, use with mo han lian for issues aging, enhances immune system (builds white blood cells)"
+                },
+                {
+                  "name": "Hei Zhi Ma",
+                  "pharmaceutical": "Sesami Semen Nigrum",
+                  "keyActions": "nourishes KID/LIV/blood, extinguishes wind, moistens intestines, a food herb; black foods benefit kid"
+                },
+                {
+                  "name": "Gui Ban",
+                  "pharmaceutical": "Testudinis Plastrum",
+                  "keyActions": "sedates yang, nourishes yin, benefits kid, strengthens bones, cools blood/stops bleed, nourishes yin"
+                },
+                {
+                  "name": "Gui Ban Jiao",
+                  "pharmaceutical": "Testudinis Gelatinum Plastrum",
+                  "keyActions": ""
+                },
+                {
+                  "name": "Bie Jia",
+                  "pharmaceutical": "Trionycis Carapax",
+                  "keyActions": "sedates yang, nourishes yin, softens lumps, treats organomegaly, invigorates blood (a more yang function)"
+                },
+                {
+                  "name": "Ji Zi Huang",
+                  "pharmaceutical": "Galli Vitellus",
+                  "keyActions": "nourishes HT/KID yin/blood, moistens dryness, subdues wind (internal)"
+                },
+                {
+                  "name": "Shi Hu",
+                  "pharmaceutical": "Dendrobii Herba",
+                  "keyActions": "nourishes yin of KID/ST, healer's tea: shi hu+gan cao, honeymoon syndrome: replaces jing fluids, light and not greasy"
+                },
+                {
+                  "name": "Mo Han Lian",
+                  "pharmaceutical": "Ecliptae Herba",
+                  "keyActions": "nourishes KID/LIV yin/ess, cools blood, stops bleeding, non-greasy, use with nu zhen zi for problems with aging"
+                },
+                {
+                  "name": "Xi Yang Shen",
+                  "pharmaceutical": "Panacis Quinquefolii Radix",
+                  "keyActions": "american ginseng: nourishes yin, tonifies qi, cooler/milder than ren shen"
+                },
+                {
+                  "name": "Yin Er",
+                  "pharmaceutical": "Tremella",
+                  "keyActions": "nourishes yin of ST/LU (dry cough), immunostimulant (like all mushrooms)"
+                },
+                {
+                  "name": "Yu Zhu",
+                  "pharmaceutical": "Polygonati Odorati Rhizoma",
+                  "keyActions": "nourishes yin of LU/ST, nourishes HT, calms shen, extinguishes wind"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "name": "Tonify the Yang",
+          "subcategories": [
+            {
+              "name": "Tonify the Yang",
+              "herbs": [
+                {
+                  "name": "Lu Rong",
+                  "pharmaceutical": "Cervi Cornu Pantotrichum",
+                  "keyActions": "restores yin/yang/blood/jing/du channel/bones/tendons, tonifies chong/ren/dai, boosts fertility/sexual functions"
+                },
+                {
+                  "name": "Lu Jiao Jiao",
+                  "pharmaceutical": "Deer antler gelatin",
+                  "keyActions": ""
+                },
+                {
+                  "name": "Suo Yang",
+                  "pharmaceutical": "Cynomorii Herba",
+                  "keyActions": "tonifies kid yang/blood/ess/bones/tendons, moistens intestines but less so than rou cong rong"
+                },
+                {
+                  "name": "Yin Yang Huo",
+                  "pharmaceutical": "Epimedii Herba",
+                  "keyActions": "tonifies kid yang, boosts libido/sexual function, expels w-c-d Bi pain (kid/liv), benefits yin as well but more yang"
+                },
+                {
+                  "name": "Ba Ji Tian",
+                  "pharmaceutical": "Morindae Officinalis Radix",
+                  "keyActions": "tonifies kid yang (infertility/sexual dysfunction), expels w-c-d Bi pain, strengthens sinews/bones"
+                },
+                {
+                  "name": "Hu Tao Ren",
+                  "pharmaceutical": "Juglandis Semen",
+                  "keyActions": "tonifies KID/back/knees, warms LU/KID relationship, moistens intestines"
+                },
+                {
+                  "name": "Bu Gu Zhi",
+                  "pharmaceutical": "Psoraleae Fructus",
+                  "keyActions": "tonifies kid/sp yang, astringes jing, tonifies KID/LU relationship, used topically for vitiligo/alopecia, treats hepatotoxicity"
+                },
+                {
+                  "name": "Yi Zhi Ren",
+                  "pharmaceutical": "Alpiniae Oxyphyllae Fructus",
+                  "keyActions": "warms kid, astringes jing, warms SP, stops diarrhea, dries damp/sticky saliva"
+                },
+                {
+                  "name": "Xian Mao",
+                  "pharmaceutical": "Curculiginis Rhizoma",
+                  "keyActions": "hotly tonifies kid yang, harshly expels w-d Bi pain, warms SP to treat daybreak diarrhea"
+                },
+                {
+                  "name": "Du Zhong",
+                  "pharmaceutical": "Eucommiae Cortex",
+                  "keyActions": "tonifies kid/liv yang for Bi pain, invigorates blood, calms the fetus, lowers hypertension"
+                },
+                {
+                  "name": "Gou Ji",
+                  "pharmaceutical": "Cibotii Rhizoma",
+                  "keyActions": "tonifies LIV/KID, MAJOR herb for back pain due to KID problems, 'dog spine', minorly astringes kid"
+                },
+                {
+                  "name": "Xu Duan",
+                  "pharmaceutical": "Dipsaci Radix",
+                  "keyActions": "tonifies kid/liv/tendons/bones, stops Bi pain, stops bleeding, calms fetus, invigorates blood, always pair w/ gu sui bu"
+                },
+                {
+                  "name": "Gu Sui Bu",
+                  "pharmaceutical": "Drynariae Rhizoma",
+                  "keyActions": "tonifies kid/liv, repairs bones, astringent for generating flesh, stimulates hair growth, always pair w/ xu duan for fractures"
+                },
+                {
+                  "name": "Tu Si Zi",
+                  "pharmaceutical": "Cuscutae Semen",
+                  "keyActions": "typical yang tonic but is NEUTRAL, tonifies KID yang/yin, astringes jing, warms SP, calms fetus, improves vision"
+                },
+                {
+                  "name": "Sha Yuan Zi",
+                  "pharmaceutical": "Astragali Complanati Semen",
+                  "keyActions": "tonifies kid yang, astringes ess, strengthens kid/liv/tendons/bones, improves vision/tinnitus/dizziness thru kid action"
+                },
+                {
+                  "name": "Dong Chong Xia Cao",
+                  "pharmaceutical": "Cordyceps",
+                  "keyActions": "tonifies KID/sexual function/LU/endurance, is rare/expensive"
+                },
+                {
+                  "name": "Rou Cong Rong",
+                  "pharmaceutical": "Cistanches Herba",
+                  "keyActions": "boosts KID/improves fertility, treats male sexual dysfunction, moistens intestines, very expensive"
+                },
+                {
+                  "name": "Hu Lu Ba",
+                  "pharmaceutical": "Trigonellae Semen",
+                  "keyActions": "warms KID, disperses damp, warms SP, stops pain, warms LIV for hernia-like disorders"
+                },
+                {
+                  "name": "Ge Jie",
+                  "pharmaceutical": "Gecko",
+                  "keyActions": "relieves cough/asthma by tonifying KID/LU relationship, tonifies kid/jing/blood"
+                },
+                {
+                  "name": "Lu Jiao",
+                  "pharmaceutical": "Older ossified deer antler",
+                  "keyActions": "similar to lu jiao jiao"
+                },
+                {
+                  "name": "Lu Jiao Shuang",
+                  "pharmaceutical": "Deglued antler powder",
+                  "keyActions": "similar to lu jiao jiao"
+                },
+                {
+                  "name": "Yang Qi Shi",
+                  "pharmaceutical": "Actinolitum",
+                  "keyActions": "Warms kidney yang, treats impotence and infertility due to cold deficiency"
+                },
+                {
+                  "name": "Zi He Che",
+                  "pharmaceutical": "Hominis Placenta",
+                  "keyActions": "Human placenta: Deficiency of qi, blood, and essence; fatigue; impotence; infertility; chronic cough and wheezing"
+                },
+                {
+                  "name": "Jiu Cai Zi",
+                  "pharmaceutical": "Semen Allii Tuberosi",
+                  "keyActions": "Tonifies the Kidneys and strengthens Yang, secures essence, warms the lower back and knees, supports fertility"
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "categories": [
+        {
+          "name": "Stabilize and Bind",
+          "subcategories": [
+            {
+              "name": "Stabilize and Bind",
+              "herbs": [
+                {
+                  "name": "Shan Zhu Yu",
+                  "pharmaceutical": "Corni Fructus",
+                  "keyActions": "astringes kid essence, strengthens kid for low back pain, stabilizes menses, calms shen, good for men"
+                },
+                {
+                  "name": "Wu Wei Zi",
+                  "pharmaceutical": "Schisandrae Fructus",
+                  "keyActions": "astringes 3 jiaos: LU/HT/MJ/LJ, enters 12 channels, generates fluids, longevity (w/ gou qi zi), improves LIV function, adaptogenic"
+                },
+                {
+                  "name": "Wu Mei",
+                  "pharmaceutical": "Mume Fructus",
+                  "keyActions": "expels parasites, astringes all 3 jiaos, clears ying-stage heat by holding in fluids"
+                },
+                {
+                  "name": "He Zi",
+                  "pharmaceutical": "Chebulae Fructus",
+                  "keyActions": "astringes LU qi/stops cough, binds LI/stops diarrhea"
+                },
+                {
+                  "name": "Rou Dou Kou",
+                  "pharmaceutical": "Myristicae Semen",
+                  "keyActions": "stops diarrhea at 20 ft, warms MJ, stops pain in MJ, binds/warms/moves, a most important MJ herb"
+                },
+                {
+                  "name": "Chun Pi",
+                  "pharmaceutical": "Ailanthi Cortex",
+                  "keyActions": "clears/astringes d-h, esp used for d-h leukorrhea or excess menstrual bleeding with heat"
+                },
+                {
+                  "name": "Chi Shi Zhi",
+                  "pharmaceutical": "Halloysitum Rubrum",
+                  "keyActions": "astringes topically for sores/ulcers, astringes diarrhea/LJ from cold/prolapse/abnormal bleeding"
+                },
+                {
+                  "name": "Lian Zi",
+                  "pharmaceutical": "Nelumbinis Semen",
+                  "keyActions": "astringes MJ/LJ, stops diarrhea, strengthens KID/HT relationship"
+                },
+                {
+                  "name": "Lian Xu",
+                  "pharmaceutical": "Nelumbinis Stamen",
+                  "keyActions": "sweet astringent, neutral, HT/KID/LIV, stabilizes KID/jing, clears HT heat, stops bleeding"
+                },
+                {
+                  "name": "Qian Shi",
+                  "pharmaceutical": "Euryales Semen",
+                  "keyActions": "mainly strengthens SP, stops diarrhea, good food herb, astringes LJ for kid/damp leukorrhea"
+                },
+                {
+                  "name": "Jin Ying Zi",
+                  "pharmaceutical": "Rosae Laevigatae Fructus",
+                  "keyActions": "astringes LJ/MJ, lifts prolapse"
+                },
+                {
+                  "name": "Fu Pen Zi",
+                  "pharmaceutical": "Rubi Fructus",
+                  "keyActions": "main use is male leakage: urinary incontinence/premature ejaculation, good for vision/tinnitus, like gou qi zi/tu si zi"
+                },
+                {
+                  "name": "Bai Guo",
+                  "pharmaceutical": "Gingko Semen",
+                  "keyActions": "astringes LU for deficiency asthma, astringes KID/leukorrhea, the leaves are popular and invigorate blood"
+                },
+                {
+                  "name": "Fu Xiao Mai",
+                  "pharmaceutical": "Tritici Fructus Levis",
+                  "keyActions": "mainly stops sweating, calms shen, treats 'restless organ syndrome' (can't stop crying/uterus), stops bedwetting"
+                },
+                {
+                  "name": "Hai Piao Xiao",
+                  "pharmaceutical": "Sepiae Endoconcha",
+                  "keyActions": "lowers ST acid, stops bleeding, astringes LJ, heals sores topically, can reduce absorption of medication (like all acid reducers)"
+                },
+                {
+                  "name": "Sang Piao Xiao",
+                  "pharmaceutical": "Mantidis Oötheca",
+                  "keyActions": "astringes kid/ess, treats childhood bedwetting"
+                },
+                {
+                  "name": "Ma Huang Gen",
+                  "pharmaceutical": "Ephedrae Radix",
+                  "keyActions": "mainly stops sweating, good for menopausal sweats, combine with fu xiao mai"
+                },
+                {
+                  "name": "Nuo Mi",
+                  "pharmaceutical": "Oryzae Glutinosae Semen",
+                  "keyActions": "sticky rice: Tonify qi, stop diarrhea, nourish yin, generate fluids, harmonize middle jiao"
+                },
+                {
+                  "name": "Yu Yu Liang",
+                  "pharmaceutical": "Limonitum",
+                  "keyActions": "Astringe intestines, stop diarrhea, bind, stop bleeding"
+                },
+                {
+                  "name": "Wu Bei Zi",
+                  "pharmaceutical": "Galla Chinensis",
+                  "keyActions": "main use is astringes intestines for diarrhea, topically for nonhealing ulcers/boils/sores"
+                },
+                {
+                  "name": "Shi Liu Pi",
+                  "pharmaceutical": "Granati Pericarpium",
+                  "keyActions": "binds intestines/diarrhea, kills parasites, stops uterine bleed"
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "categories": [
+        {
+          "name": "Calm the Shen",
+          "subcategories": [
+            {
+              "name": "Anchor/Settle/Sedate",
+              "herbs": [
+                {
+                  "name": "Long Gu",
+                  "pharmaceutical": "Fossilia Ossis Mastodi",
+                  "keyActions": "calms spirit, settles yang, sedates liver; when calcined: astringes leakages and non healing sores"
+                },
+                {
+                  "name": "Mu Li",
+                  "pharmaceutical": "Ostreae Concha",
+                  "keyActions": "same as long gu but ALSO softens hard lumps, absorbs excess ST acid"
+                },
+                {
+                  "name": "Ci Shi",
+                  "pharmaceutical": "Magnetitum",
+                  "keyActions": "anchors/calms shen, tonifies kidney (hearing/vision), helps kidney grasp lung qi"
+                },
+                {
+                  "name": "Zhen Zhu",
+                  "pharmaceutical": "Margarita",
+                  "keyActions": "pearl: calms liver/heart, anchors yang, benefits vision, promotes skin healing, brightens/softens skin (cosmetic)"
+                },
+                {
+                  "name": "Zhen Zhu Mu",
+                  "pharmaceutical": "Margaritaferae Concha Usta",
+                  "keyActions": "same as zhen zhu but less"
+                },
+                {
+                  "name": "Hu Po",
+                  "pharmaceutical": "Succinum",
+                  "keyActions": "calms shen, invigorates blood, promotes urination"
+                },
+                {
+                  "name": "Zi Shi Ying",
+                  "pharmaceutical": "Fluorite",
+                  "keyActions": "sedates heart, warms lung, warms womb to stop bleeding, very affordable (unlike pearl/cinnabar)"
+                }
+              ]
+            },
+            {
+              "name": "Nourish Heart",
+              "herbs": [
+                {
+                  "name": "Suan Zao Ren",
+                  "pharmaceutical": "Zizyphi Spinosae Semen",
+                  "keyActions": "nourishes heart, calms shen, nourishes liver blood, prevents abnormal sweating, good for insomnia"
+                },
+                {
+                  "name": "Bai Zi Ren",
+                  "pharmaceutical": "Platycladi Semen",
+                  "keyActions": "nourishes heart yin, moistens intestines, astringes night sweats"
+                },
+                {
+                  "name": "Yuan Zhi",
+                  "pharmaceutical": "Polygalae Radix",
+                  "keyActions": "calms shen, expels phlegm to calm heart, expels phlegm from lung (expectorant)"
+                },
+                {
+                  "name": "He Huan Pi",
+                  "pharmaceutical": "Albiziae Cortex",
+                  "keyActions": "calms shen by relieving liver constraint, invigorates blood, use whenever liver is disturbing shen"
+                },
+                {
+                  "name": "Ye Jiao Teng",
+                  "pharmaceutical": "Polygoni Multiflori Caulis",
+                  "keyActions": "nourishes heart and blood, calms shen, unblocks channels (HT/LIV: for pain/numbness)"
+                },
+                {
+                  "name": "Fu Shen",
+                  "pharmaceutical": "Poria (center)",
+                  "keyActions": "calms shen more strongly than fu ling but otherwise is the same"
+                },
+                {
+                  "name": "Ling Zhi",
+                  "pharmaceutical": "Ganoderma",
+                  "keyActions": "nourishes heart, calms shen, nourishes qi/blood, stops cough/wheeze, promotes immune system for cancer, strong tonic"
+                },
+                {
+                  "name": "He Huan Hua",
+                  "pharmaceutical": "Albiziae Flos",
+                  "keyActions": "use with he huan pi: same actions but is even more liver freeing"
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "categories": [
+        {
+          "name": "Open Orifices",
+          "subcategories": [
+            {
+              "name": "Open Orifices",
+              "herbs": [
+                {
+                  "name": "Niu Huang",
+                  "pharmaceutical": "Bovis Calculus",
+                  "keyActions": "opens orifices, clears heart and liver wind, extinguishes wind"
+                },
+                {
+                  "name": "Shi Chang Pu",
+                  "pharmaceutical": "Acori Tartarinowii Rhizoma",
+                  "keyActions": "opens orifices, vaporizes phlegm, sedating to calm agitation (confused mumbling), illegal in some countries"
+                },
+                {
+                  "name": "She Xiang",
+                  "pharmaceutical": "Moschus",
+                  "keyActions": "closed conditions: intensely opens orifices, invigorates blood/reduces swelling/pain, do not cook, mostly used topically"
+                },
+                {
+                  "name": "Su He Xiang",
+                  "pharmaceutical": "Styrax",
+                  "keyActions": "opens orifices for cold closed disorders, resolves cold phlegm blocking heart"
+                },
+                {
+                  "name": "Bing Pian",
+                  "pharmaceutical": "Borneolum",
+                  "keyActions": "opens orifices for hot closed conditions, used topically, clears itch/herpes sores, combine with qing dai (50/50) for topical use"
+                },
+                {
+                  "name": "An Xi Xiang",
+                  "pharmaceutical": "Benzoinum",
+                  "keyActions": "Open orifices for hot or cold conditions, awaken spirit, move qi, relieve pain"
+                },
+                {
+                  "name": "Chan Su",
+                  "pharmaceutical": "Bufonis Venenum",
+                  "keyActions": "Toxic: treats toxicity, swelling, sore throat, coma, phlegm, convulsions"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "name": "Extinguish Wind/Stop Tremors",
+          "subcategories": [
+            {
+              "name": "Extinguish Wind/Stop Tremors",
+              "herbs": [
+                {
+                  "name": "Dai Zhe Shi",
+                  "pharmaceutical": "Haematite",
+                  "keyActions": "sedates liver/heart, cools blood, stops bleeding, lowers rebellious qi of LU (asthma)"
+                },
+                {
+                  "name": "Gou Teng",
+                  "pharmaceutical": "Uncariae Ramulus cum Uncis",
+                  "keyActions": "extinguishes wind/spasms, clears heat from liver (thru PC), releases exterior wind-heat, treats hypertension (10min cook only)"
+                },
+                {
+                  "name": "Bai Ji Li",
+                  "pharmaceutical": "Tribuli Fructus",
+                  "keyActions": "calms liver (clears heat/brightens eyes), releases wind-damp (LU), stops itching, relieves pain from liver qi stagnation"
+                },
+                {
+                  "name": "Shi Jue Ming",
+                  "pharmaceutical": "Haliotidis Concha",
+                  "keyActions": "sinks yang, improves vision, like zhen zhu"
+                },
+                {
+                  "name": "Di Long",
+                  "pharmaceutical": "Lumbricus",
+                  "keyActions": "stops spasms (liver), calms wheezing, lowers hypertension, clears heat in channels"
+                },
+                {
+                  "name": "Tian Ma",
+                  "pharmaceutical": "Gastrodiae Rhizoma",
+                  "keyActions": "calms liver, extinguishes wind, stops headache, stops Bi pain, used with gou teng a lot"
+                },
+                {
+                  "name": "Quan Xie",
+                  "pharmaceutical": "Scorpion",
+                  "keyActions": "extinguishes wind, stops spasm, relieves toxin (i.e. snakebite), unblocks channels, stops pain"
+                },
+                {
+                  "name": "Wu Gong",
+                  "pharmaceutical": "Scolopendra",
+                  "keyActions": "stops spasms, treats toxin, unblocks channels"
+                },
+                {
+                  "name": "Jiang Can",
+                  "pharmaceutical": "Bombyx Batryticatus",
+                  "keyActions": "mainly treats hypertension with internal wind phlegm, transforms phlegm and nodules"
+                },
+                {
+                  "name": "Huang Jin",
+                  "pharmaceutical": "Aurum",
+                  "keyActions": "Gold: Calm spirit, clear heat, settle convulsions"
+                },
+                {
+                  "name": "Ling Yang Jiao",
+                  "pharmaceutical": "Saigae Tataricae Cornu",
+                  "keyActions": "extinguishes wind, calms liver, clears heat from PC/HT/LIV (delirium/manic behavior), use Shan Yang Jiao (goat horn) + Gou Teng instead"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "name": "Expel Parasites",
+          "subcategories": [
+            {
+              "name": "Expel Parasites",
+              "herbs": [
+                {
+                  "name": "Shi Jun Zi",
+                  "pharmaceutical": "Quisqualis Fructus",
+                  "keyActions": "kills roundworms, pinworms, tonifies SP, treats childhood malnutrition"
+                },
+                {
+                  "name": "Bing Lang",
+                  "pharmaceutical": "Arecae Semen",
+                  "keyActions": "kills tapeworm/pinworm/roundworm/blood flukes, excellent MJ qi regulator, promotes bowel movement/urination, unblocks leg edema"
+                },
+                {
+                  "name": "Guan Zhong",
+                  "pharmaceutical": "Cyrtomii Rhizoma",
+                  "keyActions": "kills tapeworm/roundworm/hookworm/liver fluke, clears heat/toxin, cools blood, rarely used due to toxicity but POWERFUL"
+                },
+                {
+                  "name": "He Shi",
+                  "pharmaceutical": "Carpesii abrotanoidis Fructus",
+                  "keyActions": "kills roundworms/pinworms/hookworms/tapeworms"
+                },
+                {
+                  "name": "Ku Lian Pi",
+                  "pharmaceutical": "Meliae Cortex",
+                  "keyActions": "Eliminate parasites, relieve itching, treat tinea"
+                },
+                {
+                  "name": "Wu Yi",
+                  "pharmaceutical": "Fructus Ulmi Macrocarpae",
+                  "keyActions": "Kills parasites, topical for tinea infection"
+                },
+                {
+                  "name": "Guan Zhong",
+                  "pharmaceutical": "Rhizoma Dryopteris",
+                  "keyActions": "Expels parasites, clears heat and toxicity, cools the blood, resolves epidemic toxicity"
+                },
+                {
+                  "name": "Chang Shan",
+                  "pharmaceutical": "Rhizoma Dichroae",
+                  "keyActions": "Expels parasites and treats malaria, induces sweating"
+                },
+                {
+                  "name": "Lei Wan",
+                  "pharmaceutical": "Omphalia",
+                  "keyActions": "Expels parasites (especially roundworms), relieves food stagnation"
+                },
+                {
+                  "name": "Fei Zi",
+                  "pharmaceutical": "Semen Torreyae",
+                  "keyActions": "Expels parasites (especially roundworms), moistens intestines to relieve constipation, stops cough"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "name": "Topicals",
+          "subcategories": [
+            {
+              "name": "Topicals",
+              "herbs": [
+                {
+                  "name": "She Chuang Zi",
+                  "pharmaceutical": "Cnidii Fructus",
+                  "keyActions": "kills parasites, stops itch, works as yang tonic to dispel cold, most clinical use is genital itching (w/ bian xu)"
+                },
+                {
+                  "name": "Ming Fan",
+                  "pharmaceutical": "Alumen",
+                  "keyActions": "relieves fire toxin, generates flesh, stops bleeding, clears heat, expels phlegm"
+                },
+                {
+                  "name": "Lu Gan Shi",
+                  "pharmaceutical": "Calamina",
+                  "keyActions": "sedates liver fire rising, dries damp, generates flesh, stops itch, heals sores/boils/ulcers/wounds"
+                },
+                {
+                  "name": "Liu Huang",
+                  "pharmaceutical": "Sulfur",
+                  "keyActions": "topical mainly: stops itch, soothes skin, tonifies yang, laxative"
+                },
+                {
+                  "name": "Chan Su",
+                  "pharmaceutical": "Bufonis Venenum",
+                  "keyActions": "relieves toxicity, mostly used for sore throat, toxic (may be banned)"
+                },
+                {
+                  "name": "Er Cha",
+                  "pharmaceutical": "Catechu",
+                  "keyActions": "Stops bleeding, astringes, generates flesh, reduces swelling"
+                },
+                {
+                  "name": "Zao Fan",
+                  "pharmaceutical": "Melanteritum",
+                  "keyActions": "Resolve toxicity, kill parasites, treat skin disorders"
+                },
+                {
+                  "name": "Tu Jing Pi",
+                  "pharmaceutical": "Cortex Pseudolaricis",
+                  "keyActions": "Clear heat, resolve toxicity, kill parasites, relieve itching"
+                },
+                {
+                  "name": "Da Feng Zi",
+                  "pharmaceutical": "Semen Hydnocarpi",
+                  "keyActions": "Resolves toxicity, expels wind, treats chronic skin conditions, especially leprosy"
+                },
+                {
+                  "name": "Lu Feng Fang",
+                  "pharmaceutical": "Nidus Vespae",
+                  "keyActions": "Expels wind, relieves pain, resolves toxicity, dispels phlegm, stops itching, treats tumors, treats parasites"
+                },
+                {
+                  "name": "Ban Mao",
+                  "pharmaceutical": "Mylabris",
+                  "keyActions": "Chinese blister beetle: Breaks up accumulation, resolves toxicity, eliminates carbuncles, removes phlegm and opens channels"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "name": "Obsolete Substances",
+          "subcategories": [
+            {
+              "name": "Obsolete Substances",
+              "herbs": [
+                {
+                  "name": "Ying Su Ke",
+                  "pharmaceutical": "Papaveris Pericarpium",
+                  "keyActions": "opium husk: Astringe Lung, stop cough, bind intestines, control pain"
+                },
+                {
+                  "name": "Xiong Huang",
+                  "pharmaceutical": "Realgar",
+                  "keyActions": "obsolete/toxic, kills parasites, relieves toxicity, expels phlegm, settles wind, stops malarial orders"
+                },
+                {
+                  "name": "Qing Fen",
+                  "pharmaceutical": "Calomelas",
+                  "keyActions": "obsolete/toxic, kills parasites, generates flesh, promotes healing, expels water, unblocks the bowels and bladder"
+                },
+                {
+                  "name": "Zhu Sha",
+                  "pharmaceutical": "Cinnabaris",
+                  "keyActions": "obsolete: cools fire, sedates heart, calms shen, expels phlegm, relieves toxins (sores/boils/sore throat)"
+                },
+                {
+                  "name": "Ma Dou Ling",
+                  "pharmaceutical": "Aristolochiae Fructus",
+                  "keyActions": "toxic: Clears the Lung, transforms phlegm, stops cough and wheezing, drains heat, and relieves swelling and pain"
+                },
+                {
+                  "name": "Qian Dan",
+                  "pharmaceutical": "Minium (lead tetroxide)",
+                  "keyActions": "lead tetroxide: expels toxin, generates flesh, resolves phlegm, use with great caution internally"
+                },
+                {
+                  "name": "Sheng Tie Luo",
+                  "pharmaceutical": "Ferri Frusta",
+                  "keyActions": "iron filings: Calm spirit, anchor yang, settle fright (historical use)"
+                },
+                {
+                  "name": "Dai Mao",
+                  "pharmaceutical": "Eretmochelydis Carapax",
+                  "keyActions": "Endangered turtle: Clear heat, open orifices, calm the spirit, relieve toxicity"
+                },
+                {
+                  "name": "Guang Fang Ji",
+                  "pharmaceutical": "Aristolochiae Fangji Radix",
+                  "keyActions": "Toxic: expel wind-dampness, relieve pain, promote urination, reduce edema"
+                },
+                {
+                  "name": "Hu Gu",
+                  "pharmaceutical": "Tigris Os",
+                  "keyActions": "tiger bone, endangered; Strengthen bones and sinews, relieve pain, dispel wind-damp, support yang, address deficiency"
+                },
+                {
+                  "name": "Ma Qian Zi",
+                  "pharmaceutical": "Strychni Semen",
+                  "keyActions": "Contains strychnine: Unblocks channels and collaterals, reduces swelling, alleviates pain, resolves toxicity"
+                },
+                {
+                  "name": "Peng Sha",
+                  "pharmaceutical": "Borax",
+                  "keyActions": "Clears heat, resolves toxicity, reduces swelling, especially for oral and throat disorders; used topically"
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

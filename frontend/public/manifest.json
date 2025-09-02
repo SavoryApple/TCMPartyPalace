@@ -1,6 +1,7 @@
 {
-  "short_name": "React App",
-  "name": "Create React App Sample",
+  "short_name": "TCM Atlas",
+  "name": "The TCM Atlas - Build, Learn, and Practice Chinese Medicine",
+  "description": "Interactively explore Chinese medicine formulas, herbs, and treatment strategies. Build your own formulas, compare classic remedies, and much more.",
   "icons": [
     {
       "src": "favicon.ico",
@@ -18,7 +19,8 @@
       "sizes": "512x512"
     }
   ],
-  "start_url": ".",
+  "start_url": "/",
+  "scope": "/",
   "display": "standalone",
   "theme_color": "#000000",
   "background_color": "#ffffff"

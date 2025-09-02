@@ -19,9 +19,11 @@ import LoginPage from "./pages/LoginPage";
 import RegisterPage from "./pages/RegisterPage";
 import AdminDashboard from "./pages/AdminDashboard";
 import About from "./pages/About";
-import Logo from "./components/Logo";
+import FooterCard from "./components/FooterCard";
+import NavBar from "./components/NavBar";
+import ComingSoon from "./pages/ComingSoon"; // import ComingSoon page
 
-// Chinese/Oriental theme colors
+// Theme colors
 const COLORS = {
   backgroundRed: "#9A2D1F",
   backgroundGold: "#F9E8C2",
@@ -37,6 +39,7 @@ const COLORS = {
   shadowStrong: "#B38E3FCC",
 };
 
+// Only cards that are NOT coming soon
 const CARD_DATA = [
   {
     title: "Create Formula",
@@ -45,7 +48,6 @@ const CARD_DATA = [
     color: COLORS.accentGold,
     textColor: COLORS.accentBlack,
     route: "formulabuilder",
-    comingSoon: false,
   },
   {
     title: "Formulas Listed by Category",
@@ -55,7 +57,6 @@ const CARD_DATA = [
     color: COLORS.backgroundGold,
     textColor: COLORS.backgroundRed,
     route: "formulacategorylist",
-    comingSoon: false,
   },
   {
     title: "Herbs Listed by Category",
@@ -65,7 +66,6 @@ const CARD_DATA = [
     color: COLORS.accentEmerald,
     textColor: COLORS.accentIvory,
     route: "herbcategorylist",
-    comingSoon: false,
   },
   {
     title: "Common Herb Combinations",
@@ -74,90 +74,6 @@ const CARD_DATA = [
     color: COLORS.accentGold,
     textColor: COLORS.accentBlack,
     route: "herbgroups",
-    comingSoon: false,
-  },
-  {
-    title: "Dui Yao Herb Pairs (coming soon)",
-    description: "Classic synergistic herb pairs used in Chinese medicine.",
-    icon: "👬",
-    color: COLORS.backgroundRed,
-    textColor: COLORS.accentIvory,
-    route: "",
-    comingSoon: true,
-  },
-  {
-    title: "Wen Bing Formulas (coming soon)",
-    description: "Formulas from the Wen Bing (Warm Disease) school.",
-    icon: "🔥",
-    color: COLORS.accentCrimson,
-    textColor: COLORS.accentIvory,
-    route: "",
-    comingSoon: true,
-  },
-  {
-    title: "Shang Han Lun Formulas (coming soon)",
-    description: "Formulas from the Shang Han Lun (Cold Damage) school.",
-    icon: "❄️",
-    color: COLORS.accentBlue,
-    textColor: COLORS.backgroundGold,
-    route: "",
-    comingSoon: true,
-  },
-  {
-    title: "Formulas Listed by Symptom (coming soon)",
-    description: "Find formulas based on presenting symptoms.",
-    icon: "🤒",
-    color: COLORS.backgroundRed,
-    textColor: COLORS.accentIvory,
-    route: "",
-    comingSoon: true,
-  },
-  {
-    title: "Formulas Listed by TCM Syndrome (coming soon)",
-    description: "Browse formulas by TCM syndrome or pattern.",
-    icon: "🩺",
-    color: COLORS.accentEmerald,
-    textColor: COLORS.accentIvory,
-    route: "",
-    comingSoon: true,
-  },
-  {
-    title: "Formulas by TCM Diagnosis (coming soon)",
-    description: "Find formulas based on TCM patterns and diagnoses.",
-    icon: "📋",
-    color: COLORS.backgroundGold,
-    textColor: COLORS.backgroundRed,
-    route: "",
-    comingSoon: true,
-  },
-  {
-    title: "Acupuncture Points (coming soon)",
-    description:
-      "Look up acupuncture point locations, functions, and indications.",
-    icon: "🧷",
-    color: COLORS.accentBlue,
-    textColor: COLORS.backgroundGold,
-    route: "",
-    comingSoon: true,
-  },
-  {
-    title: "Treatment Plans by Syndrome (coming soon)",
-    description: "Treatment strategies based on TCM syndromes and patterns.",
-    icon: "🩺",
-    color: COLORS.accentEmerald,
-    textColor: COLORS.accentIvory,
-    route: "",
-    comingSoon: true,
-  },
-  {
-    title: "TCM Games (coming soon)",
-    description:
-      "Test your skills and knowledge with interactive learning games.",
-    icon: "🎮",
-    color: COLORS.accentBlue,
-    textColor: COLORS.backgroundGold,
-    route: "",
-    comingSoon: true,
   },
 ];
 
@@ -179,49 +95,90 @@ function useResponsiveBgImage() {
   return bgImage;
 }
 
+// Global animations and responsive fixes
 const GlobalAnimations = () => (
   <style>
     {`
       body { margin: 0; padding: 0; }
-      @keyframes fadeInScaleUp {
-        0% { opacity: 0; transform: scale(0.97) translateY(14px);}
-        50% { opacity: 0.7; transform: scale(1.03) translateY(-6px);}
-        100% { opacity: 1; transform: scale(1) translateY(0);}
+      .navbar-fixed {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100vw;
+        z-index: 100;
+        background: ${COLORS.backgroundRed};
+        box-shadow: 0 2px 16px -6px ${COLORS.shadowStrong};
+        height: 84px;
+        min-height: 84px;
       }
-      .animate-fadeInScaleUp { animation: fadeInScaleUp 0.7s cubic-bezier(.36,1.29,.45,1.01); }
-      @keyframes cardPulse {
-        0% { box-shadow: 0 6px 40px -8px ${COLORS.shadowStrong}; border-color: ${COLORS.accentGold}; }
-        50% { box-shadow: 0 12px 48px -8px ${COLORS.shadowStrong}; border-color: ${COLORS.accentDarkGold}; }
-        100% { box-shadow: 0 6px 40px -8px ${COLORS.shadowStrong}; border-color: ${COLORS.accentGold}; }
+      .navbar-spacer {
+        width: 100vw;
+        min-width: 100vw;
+        height: 84px;
       }
-      .animate-cardPulse:hover { animation: cardPulse 1.2s cubic-bezier(.36,1.29,.45,1.01) infinite; }
-      @keyframes shimmerText {
-        0% { background-position: 0% 50%; }
-        50% { background-position: 100% 50%; }
-        100% { background-position: 0% 50%; }
+      @media (max-width: 700px) {
+        .navbar-fixed {
+          height: 74px !important;
+          min-height: 74px !important;
+        }
+        .navbar-spacer { height: 74px !important; }
       }
-      .animate-shimmerText {
-        background: linear-gradient(90deg, ${COLORS.accentGold}, ${COLORS.backgroundRed}, ${COLORS.accentEmerald}, ${COLORS.backgroundGold});
-        background-size: 400% 400%;
-        -webkit-background-clip: text;
-        -webkit-text-fill-color: transparent;
-        background-clip: text;
-        text-fill-color: transparent;
-        animation: shimmerText 3.2s ease-in-out infinite;
+      @media (max-width: 500px) {
+        .navbar-fixed {
+          height: 74px !important;
+          min-height: 74px !important;
+        }
+        .navbar-spacer { height: 74px !important; }
       }
-      @keyframes iconBounce {
-        0% { transform: scale(1) translateY(0);}
-        30% { transform: scale(1.15) translateY(-8px);}
-        50% { transform: scale(0.96) translateY(5px);}
-        80% { transform: scale(1.08) translateY(-3px);}
-        100% { transform: scale(1) translateY(0);}
+      .main-content {
+        position: relative;
+        z-index: 1;
+        width: 100vw;
+        background: ${COLORS.backgroundGold};
       }
-      .animate-iconBounce { animation: iconBounce 1.7s infinite; }
-      @keyframes cardTextFade {
-        0% { opacity: 0; }
-        100% { opacity: 1; }
+      .hero-section {
+        width: 100vw;
+        min-height: 220px;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: flex-end;
+        position: relative;
+        background-size: cover;
+        background-repeat: no-repeat;
+        background-position: center;
+        border-bottom: 5px double ${COLORS.accentGold};
+        box-sizing: border-box;
+        margin-top: 0 !important;
       }
-      .animate-cardTextFade { animation: cardTextFade 0.9s cubic-bezier(.36,1.29,.45,1.01); }
+      @media (min-width: 700px) {
+        .hero-section { min-height: 330px; }
+      }
+      .hero-content {
+        width: 100%;
+        max-width: 720px;
+        margin: 0 auto;
+        z-index: 2;
+        padding: 24px 1vw;
+        position: relative;
+      }
+      @media (max-width: 500px) {
+        .hero-content { padding: 8px 2vw; }
+      }
+      .home-cards {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: center;
+        gap: 28px;
+        margin-top: 24px;
+        padding: 0 8px 32px 8px;
+      }
+      @media (max-width: 700px) {
+        .home-cards { gap: 14px; margin-top: 10px; padding-bottom: 18px; }
+      }
+      @media (max-width: 500px) {
+        .home-cards { gap: 8px; }
+      }
       .card-shadow {
         box-shadow: 0 6px 40px -8px ${COLORS.shadowStrong};
         min-width: 270px;
@@ -233,9 +190,6 @@ const GlobalAnimations = () => (
         border: 2.5px solid ${COLORS.accentGold};
       }
       @media (max-width: 900px) {
-        .max-w-2xl {
-          max-width: 98vw !important;
-        }
         .card-shadow {
           min-width: 98vw !important;
           max-width: 99vw !important;
@@ -244,19 +198,34 @@ const GlobalAnimations = () => (
         }
       }
       @media (max-width: 600px) {
-        .max-w-2xl {
-          max-width: 99vw !important;
-        }
         .card-shadow {
           min-width: 99vw !important;
         }
       }
       @media (max-width: 500px) {
-        header { flex-direction: column !important; padding: 10px 2px !important; }
-        .max-w-2xl { max-width: 100vw !important; }
         .card-shadow { min-width: 100vw !important; max-width: 100vw !important; padding: 20px 2px 12px 2px !important; }
-        .tutorial-btn { padding: 12px 8vw !important; font-size: 1em; }
-        .hero-top { padding: 8px 2vw !important; }
+      }
+      @keyframes fadeInScaleUp {
+        0% { opacity: 0; transform: scale(0.97) translateY(14px);}
+        50% { opacity: 0.7; transform: scale(1.03) translateY(-6px);}
+        100% { opacity: 1; transform: scale(1) translateY(0);}
+      }
+      .animate-fadeInScaleUp { animation: fadeInScaleUp 0.7s cubic-bezier(.36,1.29,.45,1.01); }
+      @keyframes shimmerText {
+        0% { background-position: 0% 50%; }
+        50% { background-position: 100% 50%; }
+        100% { background-position: 0% 50%; }
+      }
+      @keyframes iconBounce {
+        0% { transform: scale(1) translateY(0);}
+        30% { transform: scale(1.15) translateY(-8px);}
+        50% { transform: scale(0.96) translateY(5px);}
+        80% { transform: scale(1.08) translateY(-3px);}
+        100% { transform: scale(1) translateY(0);}
+      }
+      @keyframes cardTextFade {
+        0% { opacity: 0; }
+        100% { opacity: 1; }
       }
       .tutorial-btn {
         background: linear-gradient(92deg, #D4AF37 0%, #B38E3F 100%);
@@ -269,16 +238,14 @@ const GlobalAnimations = () => (
         box-shadow: 0 6px 24px -8px #B38E3FCC, 0 2px 8px #E3BC6F33;
         margin-bottom: 1.1em;
         cursor: pointer;
-        transition: background 0.18s, transform 0.13s, box-shadow 0.18s;
-        position: relative;
-        z-index: 2;
-        outline: none;
         letter-spacing: -0.01em;
         display: inline-flex;
         align-items: center;
         gap: 0.7em;
         user-select: none;
         font-family: "Noto Serif SC", "Songti SC", "KaiTi", serif;
+        outline: none;
+        z-index: 2;
       }
       .tutorial-btn:hover, .tutorial-btn:focus {
         background: linear-gradient(92deg, #B38E3F 0%, #D4AF37 100%);
@@ -286,27 +253,11 @@ const GlobalAnimations = () => (
         transform: scale(1.04) translateY(-2px);
         box-shadow: 0 12px 32px -10px #B38E3FCC;
       }
-      .tutorial-btn-icon {
-        font-size: 1.8em;
-        filter: drop-shadow(0 2px 8px #44210A);
-        animation: iconBounce 1.7s infinite;
-      }
-      .tutorial-btn-label {
-        font-size: 1.08em;
-        font-weight: 900;
-        background: linear-gradient(90deg, #D4AF37 20%, #9A2D1F 80%);
-        -webkit-background-clip: text;
-        -webkit-text-fill-color: transparent;
-        background-clip: text;
-        text-fill-color: transparent;
-        text-shadow: 0 1px 6px #B38E3F44;
-        letter-spacing: -0.01em;
-        font-family: "Noto Serif SC", "Songti SC", "KaiTi", serif;
-      }
     `}
   </style>
 );
 
+// Scroll to top on route change (fixes mobile page start position)
 function ScrollToTop() {
   const { pathname } = useLocation();
   useEffect(() => {
@@ -321,23 +272,52 @@ function TutorialModal({ open, onClose }) {
   const youtubeEmbedUrl = `https://www.youtube.com/embed/${youtubeVideoId}?rel=0&modestbranding=1`;
 
   return (
-    <div className="tutorial-modal-backdrop" tabIndex={-1} onClick={onClose}>
+    <div
+      style={{
+        position: "fixed",
+        zIndex: 9999,
+        top: 0, left: 0, width: "100vw", height: "100vh",
+        background: "rgba(0,0,0,0.45)",
+        display: "flex", alignItems: "center", justifyContent: "center",
+      }}
+      tabIndex={-1}
+      onClick={onClose}
+    >
       <div
-        className="tutorial-modal-content"
+        style={{
+          background: COLORS.accentIvory,
+          borderRadius: "1.4em",
+          boxShadow: `0 8px 32px -10px ${COLORS.shadowStrong}`,
+          border: `2px solid ${COLORS.accentGold}`,
+          padding: "22px 22px 14px 22px",
+          maxWidth: 440,
+          width: "90vw",
+          position: "relative"
+        }}
         onClick={e => e.stopPropagation()}
         role="dialog"
         aria-modal="true"
       >
         <button
-          className="tutorial-modal-close-btn"
           onClick={onClose}
           aria-label="Close tutorial"
           title="Close"
+          style={{
+            position: "absolute",
+            top: 8,
+            right: 16,
+            background: "none",
+            border: "none",
+            fontSize: "1.7em",
+            color: COLORS.accentGold,
+            cursor: "pointer",
+            fontWeight: 700,
+          }}
         >
           ×
         </button>
-        <div className="tutorial-video-title">Site Tutorial</div>
-        <div className="tutorial-video-description">
+        <div style={{fontSize: "1.3em", fontWeight: 700, marginBottom: 10, color: COLORS.backgroundRed}}>Site Tutorial</div>
+        <div style={{marginBottom: 8, fontWeight: 500}}>
           Watch this walkthrough to learn how to use the TCM Atlas website.<br />
           <span style={{ fontSize: "0.95em", color: COLORS.accentGold }}>
             (You can pause, adjust volume, or scrub the timeline.)
@@ -346,7 +326,6 @@ function TutorialModal({ open, onClose }) {
         <div style={{ width: "100%", maxWidth: 420 }}>
           <div style={{ position: "relative", paddingBottom: "56.25%", height: 0, width: "100%" }}>
             <iframe
-              className="tutorial-modal-video"
               src={youtubeEmbedUrl}
               title="TCM Atlas Tutorial"
               allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
@@ -388,10 +367,11 @@ function VisitorCounter() {
   }, []);
   return (
     <div
-      className="flex flex-col items-center justify-center w-full"
       style={{
         minHeight: "40px",
         padding: "10px 0",
+        textAlign: "center",
+        width: "100%",
       }}
     >
       <div
@@ -406,6 +386,7 @@ function VisitorCounter() {
           boxShadow: `0 4px 18px -8px ${COLORS.shadowStrong}`,
           marginBottom: "0.2em",
           fontFamily: '"Noto Serif SC", "Songti SC", "KaiTi", serif',
+          display: "inline-block",
         }}
       >
         You are visitor number <span style={{ color: COLORS.accentGold, fontWeight: 900, fontSize: "1.22em" }}>
@@ -419,7 +400,6 @@ function VisitorCounter() {
 function AnimatedBuildLearnPractice() {
   return (
     <div
-      className="animate-shimmerText"
       style={{
         fontWeight: 900,
         fontSize: "2.2rem",
@@ -441,7 +421,14 @@ function AnimatedBuildLearnPractice() {
         position: "relative",
         zIndex: 2,
         display: "block",
-        textAlign: "center"
+        textAlign: "center",
+        background: `linear-gradient(90deg, ${COLORS.accentGold}, ${COLORS.backgroundRed}, ${COLORS.accentEmerald}, ${COLORS.backgroundGold})`,
+        backgroundSize: "400% 400%",
+        WebkitBackgroundClip: "text",
+        WebkitTextFillColor: "transparent",
+        backgroundClip: "text",
+        textFillColor: "transparent",
+        animation: "shimmerText 3.2s ease-in-out infinite",
       }}
     >
       Build · Learn · Practice
@@ -449,72 +436,11 @@ function AnimatedBuildLearnPractice() {
   );
 }
 
-function ScrollDownHint() {
-  const [visible, setVisible] = useState(false);
-  useEffect(() => {
-    const hasDismissed = document.cookie
-      .split("; ")
-      .find((row) => row.startsWith("tcmpartypalace_scrollhint="));
-    if (!hasDismissed) setVisible(true);
-    function onScroll() {
-      if (window.scrollY > 50 && visible) {
-        setVisible(false);
-        const expires = new Date();
-        expires.setFullYear(expires.getFullYear() + 1);
-        document.cookie = `tcmpartypalace_scrollhint=true; expires=${expires.toUTCString()}; path=/`;
-      }
-    }
-    if (visible) {
-      window.addEventListener("scroll", onScroll, { passive: true });
-    }
-    return () => window.removeEventListener("scroll", onScroll);
-  }, [visible]);
-  if (!visible) return null;
-  return (
-    <div
-      style={{
-        position: "fixed",
-        left: "50%",
-        transform: "translateX(-50%)",
-        bottom: 20,
-        zIndex: 9999,
-        padding: "13px 30px 13px 30px",
-        background: COLORS.backgroundRed,
-        color: COLORS.accentGold,
-        borderRadius: "2em",
-        fontWeight: 700,
-        fontSize: "1.13em",
-        boxShadow: `0 6px 28px -8px ${COLORS.shadowStrong}`,
-        border: `2px double ${COLORS.accentGold}`,
-        display: "flex",
-        alignItems: "center",
-        gap: "1em",
-        pointerEvents: "none",
-        opacity: 0.96,
-        userSelect: "none",
-        transition: "opacity 0.2s",
-        fontFamily: '"Noto Serif SC", "Songti SC", "KaiTi", serif',
-      }}
-      className="animate-fadeInScaleUp"
-    >
-      <span>Scroll down for more!</span>
-      <span
-        style={{
-          fontSize: "2em",
-          lineHeight: "1em",
-          display: "inline-block",
-        }}
-        className="animate-arrowBounce"
-      >
-        ↓
-      </span>
-    </div>
-  );
-}
+// --- Coming Soon Page ---
+// Remove the FUTURE_CARDS logic. Just route to ComingSoon.js when the card is pressed.
 
 function Home() {
   const navigate = useNavigate();
-  const isAdmin = localStorage.getItem("role") === "admin" && localStorage.getItem("token");
   const [tutorialOpen, setTutorialOpen] = useState(false);
   const bgImage = useResponsiveBgImage();
 
@@ -531,294 +457,242 @@ function Home() {
       className="flex flex-col"
     >
       <GlobalAnimations />
-      <ScrollDownHint />
-      <TutorialModal open={tutorialOpen} onClose={() => setTutorialOpen(false)} />
-      {/* NAV BAR */}
-      <header
-        className="py-5 px-5 flex justify-between items-center shadow-lg animate-fadeInScaleUp"
-        style={{
-          background: "rgba(166,44,26,0.92)",
-          borderBottom: `5px double ${COLORS.accentGold}`,
-          display: "flex",
-          flexDirection: window.innerWidth < 600 ? "column" : "row",
-          flexWrap: "wrap",
-          position: "sticky",
-          top: 0,
-          zIndex: 10,
-        }}
-      >
-        <Logo size={window.innerWidth < 600 ? 44 : 60} showBeta={true} style={{ marginRight: "1em", filter: "drop-shadow(0 2px 7px #C9A052)" }} />
-        <nav style={{ display: "flex", alignItems: "center", gap: "2em", flexWrap: "wrap" }}>
-          <ul
-            className="flex gap-7 font-semibold"
-            style={{ margin: 0, padding: 0, flexWrap: "wrap", fontFamily: '"Noto Serif SC", "Songti SC", "KaiTi", serif' }}
-          >
-            <li>
-              <button
-                style={{
-                  color: COLORS.accentGold,
-                  background: "none",
-                  border: "none",
-                  cursor: "pointer",
-                  font: "inherit",
-                  padding: 0,
-                  fontFamily: '"Noto Serif SC", "Songti SC", "KaiTi", serif'
-                }}
-                onClick={() => navigate("report")}
-              >
-                Report an Error
-              </button>
-            </li>
-            <li>
-              <button
-                style={{
-                  color: COLORS.accentGold,
-                  background: "none",
-                  border: "none",
-                  cursor: "pointer",
-                  font: "inherit",
-                  padding: 0,
-                  fontFamily: '"Noto Serif SC", "Songti SC", "KaiTi", serif'
-                }}
-                onClick={() => navigate("about")}
-              >
-                About
-              </button>
-            </li>
-          </ul>
-          {!isAdmin ? (
-            <>
-              <button
-                style={{
-                  marginLeft: "2em",
-                  background: COLORS.accentGold,
-                  color: COLORS.backgroundRed,
-                  border: "none",
-                  borderRadius: "1.3em",
-                  fontWeight: 700,
-                  fontSize: "1em",
-                  padding: "8px 26px",
-                  cursor: "pointer",
-                  boxShadow: `0 3px 8px -2px ${COLORS.shadowStrong}`,
-                }}
-                className="hover:bg-accentDarkGold"
-                onClick={() => navigate("login")}
-              >
-                Admin Login
-              </button>
-              <button
-                style={{
-                  marginLeft: "0.5em",
-                  background: COLORS.accentBlack,
-                  color: COLORS.accentGold,
-                  border: "none",
-                  borderRadius: "1.3em",
-                  fontWeight: 700,
-                  fontSize: "1em",
-                  padding: "8px 26px",
-                  cursor: "pointer",
-                  boxShadow: `0 3px 8px -2px ${COLORS.shadowStrong}`,
-                }}
-                className="hover:bg-backgroundRed"
-                onClick={() => navigate("register")}
-              >
-                Register Admin
-              </button>
-            </>
-          ) : (
-            <button
-              style={{
-                marginLeft: "2em",
-                background: COLORS.accentEmerald,
-                color: COLORS.accentIvory,
-                border: "none",
-                borderRadius: "1.3em",
-                fontWeight: 700,
-                fontSize: "1em",
-                padding: "8px 26px",
-                cursor: "pointer",
-                boxShadow: `0 3px 8px -2px ${COLORS.shadowStrong}`,
-              }}
-              className="hover:bg-backgroundRed"
-              onClick={() => navigate("admin")}
-            >
-              Admin Dashboard
-            </button>
-          )}
-        </nav>
-      </header>
-      {/* HERO SECTION */}
-      <div
-        style={{
-          width: "100%",
-          minHeight: window.innerWidth < 700 ? "220px" : "330px",
-          background: `url('${bgImage}') center center / cover no-repeat`,
-          borderBottom: `5px double ${COLORS.accentGold}`,
-          display: "flex",
-          flexDirection: "column",
-          alignItems: "center",
-          justifyContent: "flex-end",
-          position: "relative",
-        }}
-      >
-        <div className="hero-top" style={{
-          width: "100%",
-          maxWidth: 720,
-          margin: "0 auto",
-          zIndex: 2,
-          padding: window.innerWidth < 500 ? "8px 2vw" : "24px 1vw",
-          position: "relative"
-        }}>
-          <HomePageSearchBar />
-        </div>
-        <div className="animate-fadeInScaleUp" style={{
-          width: "100%",
-          maxWidth: window.innerWidth < 900 ? "99vw" : "700px",
-          margin: "0 auto",
-          position: "relative",
-          zIndex: 2,
-          padding: window.innerWidth < 500 ? "0 2vw" : "0",
-        }}>
-          <section
-            className="flex flex-col justify-center items-center text-center px-4 animate-fadeInScaleUp"
+
+      {/* Fixed Navbar */}
+      <div className="navbar-fixed">
+        <NavBar
+          showReportError={true}
+          showAbout={true}
+          showAdminButtons={true}
+          showLogo={true}
+          fixed={true}
+        />
+      </div>
+      <div className="navbar-spacer"></div>
+      <div className="main-content">
+        <TutorialModal open={tutorialOpen} onClose={() => setTutorialOpen(false)} />
+        <div
+          className="hero-section"
+          style={{
+            backgroundImage: `url('${bgImage}')`
+          }}
+        >
+          <div className="hero-content">
+            <HomePageSearchBar />
+          </div>
+          <div
+            className="animate-fadeInScaleUp"
             style={{
-              background: "rgba(252,245,229,0.93)",
-              borderRadius: "1.4em",
-              boxShadow: `0 2px 18px 0 ${COLORS.shadowStrong}`,
-              border: `2px solid ${COLORS.accentGold}`,
+              width: "100%",
+              maxWidth: "700px",
               margin: "0 auto",
-              marginBottom: window.innerWidth < 700 ? "12px" : "32px",
-              pointerEvents: "all",
-              paddingTop: "32px" // <--- extra padding above Watch Tutorial button
+              position: "relative",
+              zIndex: 2,
+              padding: window.innerWidth < 500 ? "0 2vw" : "0",
             }}
           >
-            <button
-              onClick={() => setTutorialOpen(true)}
-              className="tutorial-btn animate-fadeInScaleUp"
-              aria-label="Open site tutorial"
-            >
-              <span className="tutorial-btn-icon" aria-hidden="true">📺</span>
-              <span className="tutorial-btn-label">Watch Tutorial</span>
-            </button>
-            <AnimatedBuildLearnPractice />
-            <VisitorCounter />
-            <p
-              className="text-xl mb-7 animate-cardTextFade"
+            <section
+              className="flex flex-col justify-center items-center text-center px-4 animate-fadeInScaleUp"
               style={{
-                color: COLORS.accentBlack,
-                fontFamily: '"Noto Serif SC", "Songti SC", "KaiTi", serif',
-                fontWeight: 500,
-                marginTop: 12
+                background: "rgba(252,245,229,0.93)",
+                borderRadius: "1.4em",
+                boxShadow: `0 2px 18px 0 ${COLORS.shadowStrong}`,
+                border: `2px solid ${COLORS.accentGold}`,
+                margin: "0 auto",
+                marginBottom: window.innerWidth < 700 ? "12px" : "32px",
+                pointerEvents: "all",
+                paddingTop: "32px"
               }}
             >
-              Interactive clinical and educational tool for Chinese Medicine
-            </p>
-          </section>
+              <button
+                onClick={() => setTutorialOpen(true)}
+                className="tutorial-btn"
+                aria-label="Open site tutorial"
+              >
+                <span
+                  style={{
+                    fontSize: "1.8em",
+                    filter: "drop-shadow(0 2px 8px #44210A)",
+                    animation: "iconBounce 1.7s infinite",
+                  }}
+                  aria-hidden="true"
+                >
+                  📺
+                </span>
+                <span
+                  style={{
+                    fontSize: "1.08em",
+                    fontWeight: 900,
+                    background: "linear-gradient(90deg, #D4AF37 20%, #9A2D1F 80%)",
+                    WebkitBackgroundClip: "text",
+                    WebkitTextFillColor: "transparent",
+                    backgroundClip: "text",
+                    textFillColor: "transparent",
+                    textShadow: "0 1px 6px #B38E3F44",
+                    letterSpacing: "-0.01em",
+                    fontFamily: '"Noto Serif SC", "Songti SC", "KaiTi", serif',
+                  }}
+                >
+                  Watch Tutorial
+                </span>
+              </button>
+              <AnimatedBuildLearnPractice />
+              <VisitorCounter />
+              <p
+                style={{
+                  color: COLORS.accentBlack,
+                  fontFamily: '"Noto Serif SC", "Songti SC", "KaiTi", serif',
+                  fontWeight: 500,
+                  marginTop: 12,
+                  fontSize: "1.25em",
+                  marginBottom: "1em"
+                }}
+              >
+                Interactive clinical and educational tool for Chinese Medicine
+              </p>
+            </section>
+          </div>
         </div>
-      </div>
-      {/* CARD BUTTONS */}
-      <section
-        className="w-full flex flex-wrap justify-center gap-10 px-8 pb-12 mt-2"
-        style={{
-          display: "flex",
-          flexWrap: "wrap",
-          justifyContent: "center",
-          gap: window.innerWidth < 600 ? "14px" : "28px",
-          marginTop: window.innerWidth < 700 ? "10px" : "24px"
-        }}
-      >
-        {CARD_DATA.map((card, i) => (
+        <section className="home-cards">
+          {CARD_DATA.map((card) => (
+            <button
+              key={card.title}
+              className="card-shadow animate-fadeInScaleUp animate-cardPulse transition hover:scale-105 flex flex-col items-center"
+              style={{
+                background: card.color,
+                color: card.textColor,
+                borderRadius: "1.2em",
+                minWidth: 270,
+                maxWidth: 340,
+                width: "100%",
+                padding: window.innerWidth < 600 ? "30px 10px 20px 10px" : "40px 24px 30px 24px",
+                fontWeight: 700,
+                fontFamily: '"Noto Serif SC", "Songti SC", "KaiTi", serif',
+                fontSize: "1.12rem",
+                border: `2.5px solid ${COLORS.accentGold}`,
+                marginBottom: 10,
+                cursor: "pointer",
+                position: "relative",
+                boxShadow: `0 6px 40px -8px ${COLORS.shadowStrong}`,
+                textAlign: "center",
+                transition: "box-shadow 0.2s, transform 0.2s",
+              }}
+              onClick={() => {
+                if (card.route) {
+                  navigate(card.route);
+                }
+              }}
+            >
+              <span
+                style={{
+                  fontSize: "2.5em",
+                  marginBottom: "0.13em",
+                  textShadow: `0 2px 7px ${COLORS.accentGold}, 0 0 10px ${COLORS.backgroundRed}`,
+                  display: "block",
+                  animation: "iconBounce 1.7s infinite",
+                }}
+              >
+                {card.icon}
+              </span>
+              <span
+                style={{
+                  fontSize: "1.22em",
+                  fontWeight: 900,
+                  letterSpacing: "-.01em",
+                  marginBottom: 7,
+                  color: card.textColor,
+                  textShadow: `0 1px 0 ${COLORS.backgroundGold}, 0 1.5px 8px ${COLORS.accentGold}18`,
+                  fontFamily: '"Noto Serif SC", "Songti SC", "KaiTi", serif',
+                  animation: "cardTextFade 0.9s cubic-bezier(.36,1.29,.45,1.01)",
+                }}
+              >
+                {card.title}
+              </span>
+              <span
+                style={{
+                  fontWeight: 500,
+                  fontSize: "1.03em",
+                  color: card.textColor,
+                  opacity: 0.93,
+                  textShadow: `0 1px 0 ${COLORS.backgroundGold}`,
+                  marginBottom: 2,
+                  fontFamily: '"Noto Serif SC", "Songti SC", "KaiTi", serif',
+                  animation: "cardTextFade 0.9s cubic-bezier(.36,1.29,.45,1.01)",
+                }}
+              >
+                {card.description}
+              </span>
+            </button>
+          ))}
+          {/* --- Coming Soon Button/Card --- */}
           <button
-            key={card.title}
-            className="card-shadow animate-fadeInScaleUp animate-cardPulse transition hover:scale-105 flex flex-col items-center"
+            className="card-shadow animate-fadeInScaleUp transition hover:scale-105 flex flex-col items-center"
             style={{
-              background: card.color,
-              color: card.textColor,
+              background: COLORS.backgroundRed,
+              color: COLORS.accentIvory,
               borderRadius: "1.2em",
               minWidth: 270,
               maxWidth: 340,
               width: "100%",
               padding: window.innerWidth < 600 ? "30px 10px 20px 10px" : "40px 24px 30px 24px",
-              fontWeight: 700,
+              fontWeight: 900,
               fontFamily: '"Noto Serif SC", "Songti SC", "KaiTi", serif',
-              fontSize: "1.12rem",
+              fontSize: "1.15rem",
               border: `2.5px solid ${COLORS.accentGold}`,
               marginBottom: 10,
-              cursor: card.comingSoon ? "not-allowed" : "pointer",
+              cursor: "pointer",
               position: "relative",
               boxShadow: `0 6px 40px -8px ${COLORS.shadowStrong}`,
-              opacity: card.comingSoon ? 0.55 : 1,
-              filter: card.comingSoon ? "grayscale(0.35)" : "none",
               textAlign: "center",
+              transition: "box-shadow 0.2s, transform 0.2s",
             }}
-            onClick={() => {
-              if (!card.comingSoon && card.route) {
-                navigate(card.route);
-              }
-            }}
-            disabled={card.comingSoon}
-            aria-disabled={card.comingSoon}
-            title={card.comingSoon ? "Coming soon!" : ""}
+            onClick={() => navigate('/comingsoon')}
+            aria-label="View coming soon features"
           >
             <span
-              className="animate-iconBounce"
               style={{
                 fontSize: "2.5em",
                 marginBottom: "0.13em",
                 textShadow: `0 2px 7px ${COLORS.accentGold}, 0 0 10px ${COLORS.backgroundRed}`,
                 display: "block",
+                animation: "iconBounce 1.7s infinite",
               }}
+              aria-hidden="true"
             >
-              {card.icon}
+              🚧
             </span>
             <span
-              className="animate-cardTextFade"
               style={{
                 fontSize: "1.22em",
                 fontWeight: 900,
                 letterSpacing: "-.01em",
                 marginBottom: 7,
-                color: card.textColor,
+                color: COLORS.accentIvory,
                 textShadow: `0 1px 0 ${COLORS.backgroundGold}, 0 1.5px 8px ${COLORS.accentGold}18`,
                 fontFamily: '"Noto Serif SC", "Songti SC", "KaiTi", serif',
+                animation: "cardTextFade 0.9s cubic-bezier(.36,1.29,.45,1.01)",
               }}
             >
-              {card.title}
+              Coming Soon
             </span>
             <span
-              className="animate-cardTextFade"
               style={{
                 fontWeight: 500,
                 fontSize: "1.03em",
-                color: card.textColor,
-                opacity: 0.93,
+                color: COLORS.accentIvory,
+                opacity: 0.98,
                 textShadow: `0 1px 0 ${COLORS.backgroundGold}`,
                 marginBottom: 2,
                 fontFamily: '"Noto Serif SC", "Songti SC", "KaiTi", serif',
+                animation: "cardTextFade 0.9s cubic-bezier(.36,1.29,.45,1.01)",
               }}
             >
-              {card.description}
+              Click to see all future features planned for TCM Atlas!
             </span>
           </button>
-        ))}
-      </section>
-      {/* FOOTER */}
-      <footer
-        className="p-6 text-center animate-cardTextFade"
-        style={{
-          background: COLORS.backgroundRed,
-          color: COLORS.accentGold,
-          fontFamily: '"Noto Serif SC", "Songti SC", "KaiTi", serif',
-          borderTop: `5px double ${COLORS.accentGold}`,
-          fontWeight: 700,
-          letterSpacing: "0.02em",
-          marginTop: window.innerWidth < 700 ? "10px" : "24px"
-        }}
-      >
-        <p>
-          &copy; {new Date().getFullYear()} The TCM Atlas · Made with passion for Chinese Medicine
-        </p>
-      </footer>
+        </section>
+        <FooterCard />
+      </div>
     </div>
   );
 }
@@ -845,6 +719,7 @@ export default function App() {
           <Route path="register" element={<RegisterPage />} />
           <Route path="admin" element={<AdminDashboard />} />
           <Route path="about" element={<About />} />
+          <Route path="comingsoon" element={<ComingSoon />} />
         </Routes>
       </Router>
     </HerbCartProvider>

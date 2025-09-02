@@ -1,20 +1,26 @@
-import React from "react";
+import React, { useRef, useLayoutEffect, useState } from "react";
 import { Link } from "react-router-dom";
+import NavBar from "../components/NavBar";
+import FooterCard from "../components/FooterCard";
+import BackToTopButton from "../components/BackToTopButton";
 
-// --- Color scheme (copied from App.js) ---
 const COLORS = {
-  vanilla: "#FFF7E3",
-  violet: "#7C5CD3",
-  carolina: "#68C5E6",
-  claret: "#A52439",
-  seal: "#3B4461",
-  highlight: "#ffe066",
-  shadow: "#7C5CD344",
-  shadowStrong: "#7C5CD399",
-  accent: "#fff0f0",
+  backgroundRed: "#9A2D1F",
+  backgroundGold: "#F9E8C2",
+  accentGold: "#D4AF37",
+  accentDarkGold: "#B38E3F",
+  accentBlack: "#44210A",
+  accentCrimson: "#C0392B",
+  accentIvory: "#FCF5E5",
+  accentEmerald: "#438C3B",
+  accentBlue: "#2176AE",
+  accentGray: "#D9C8B4",
+  shadow: "#B38E3F88",
+  shadowStrong: "#B38E3FCC",
 };
 
-// --- Animations copied from App.js ---
+const NAVBAR_HEIGHT = 74;
+
 const GlobalAnimations = () => (
   <style>
     {`
@@ -30,7 +36,7 @@ const GlobalAnimations = () => (
         100% { background-position: 0% 50%; }
       }
       .animate-shimmerText {
-        background: linear-gradient(90deg, ${COLORS.violet}, ${COLORS.carolina}, ${COLORS.claret}, ${COLORS.vanilla}, ${COLORS.highlight});
+        background: linear-gradient(90deg, ${COLORS.accentGold}, ${COLORS.backgroundRed}, ${COLORS.accentEmerald}, ${COLORS.backgroundGold}, ${COLORS.accentGold});
         background-size: 400% 400%;
         -webkit-background-clip: text;
         -webkit-text-fill-color: transparent;
@@ -38,142 +44,179 @@ const GlobalAnimations = () => (
         text-fill-color: transparent;
         animation: shimmerText 3.2s ease-in-out infinite;
       }
-      @keyframes pulseGlow {
-        0% { box-shadow: 0 0 0 0 ${COLORS.violet}33; }
-        50% { box-shadow: 0 0 16px 8px ${COLORS.violet}88; }
-        100% { box-shadow: 0 0 0 0 ${COLORS.violet}33; }
-      }
-      /* Only animate the message oval, not the container */
-      .animate-pulseGlow-message { animation: pulseGlow 2s infinite; }
-      @keyframes bounceIn {
-        0% { opacity: 0; transform: scale(0.7);}
-        70% { opacity: 1; transform: scale(1.05);}
-        100% { opacity: 1; transform: scale(1);}
-      }
-      .animate-bounceIn { animation: bounceIn 0.7s cubic-bezier(.36,1.29,.45,1.01); }
     `}
   </style>
 );
 
-// --- TCMPARTYZONE Logo ---
-function TcmPartyZoneHeader() {
-  return (
-    <div
-      className="animate-shimmerText animate-fadeInScaleUp"
-      style={{
-        fontWeight: 900,
-        fontSize: "2.5rem",
-        letterSpacing: "-2px",
-        textAlign: "center",
-        fontFamily: "inherit",
-        lineHeight: 1.18,
-        userSelect: "none",
-        margin: "0.8em auto 0.3em auto",
-        padding: "0.14em 0",
-        textShadow: `0 3px 16px ${COLORS.shadowStrong}`,
-        borderRadius: "1em",
-        maxWidth: 660,
-      }}
-    >
-      TCM Party Palace (BETA) 🎉
-    </div>
-  );
-}
+export default function ReportBug() {
+  const navBarRef = useRef();
+  const [navBarHeight, setNavBarHeight] = useState(NAVBAR_HEIGHT);
 
-// --- Back to Home Button (copied from HerbCard.js/About.js) ---
-function BackToHomeButton() {
-  return (
-    <div className="fixed top-8 right-10 z-40">
+  useLayoutEffect(() => {
+    function updateHeight() {
+      if (navBarRef.current) {
+        setNavBarHeight(navBarRef.current.offsetHeight || NAVBAR_HEIGHT);
+      }
+    }
+    updateHeight();
+    window.addEventListener("resize", updateHeight);
+    return () => window.removeEventListener("resize", updateHeight);
+  }, []);
+
+  // Move button further down by increasing top offset (e.g., +12px)
+  const backToHomeButton = (
+    <div
+      style={{
+        position: "fixed",
+        top: navBarHeight + 12,  // Moved down by 12px for clear separation
+        right: 32,
+        zIndex: 101,
+        display: "flex",
+        justifyContent: "flex-end",
+      }}
+      className="back-to-home-btn"
+    >
       <Link
         to="/"
-        className="px-5 py-2 rounded-full font-bold shadow-xl transition-all duration-200 hover:scale-105 animate-bounceIn"
+        className="px-5 py-2 rounded-full font-bold shadow-xl transition-all duration-200 hover:scale-105 active:scale-95 focus:ring-2 focus:ring-accentEmerald"
         style={{
-          background: COLORS.violet,
-          color: COLORS.vanilla,
-          border: `2.5px solid ${COLORS.seal}`,
-          boxShadow: `0 6px 40px -8px ${COLORS.shadowStrong}`,
+          background: COLORS.accentGold,
+          color: COLORS.backgroundRed,
+          border: `2px solid ${COLORS.accentBlack}`,
+          textShadow: `0 1px 0 ${COLORS.backgroundGold}`,
         }}
+        tabIndex={0}
       >
         Back to Home
       </Link>
     </div>
   );
-}
 
-export default function ReportBug() {
+  const reservedTopHeight = navBarHeight;
+
   return (
     <div
-      className="min-h-screen flex flex-col items-center justify-center px-4"
       style={{
-        background: `linear-gradient(120deg, ${COLORS.vanilla} 0%, ${COLORS.carolina} 55%, ${COLORS.violet} 100%)`,
-        minHeight: "100vh"
+        background: `linear-gradient(120deg, ${COLORS.backgroundGold} 0%, ${COLORS.accentGold} 55%, ${COLORS.backgroundRed} 100%)`,
+        minHeight: "100vh",
+        width: "100vw",
+        position: "relative",
+        overflow: "hidden",
+        fontFamily: '"Noto Serif SC", "Songti SC", "KaiTi", serif',
+        display: "flex",
+        flexDirection: "column"
       }}
     >
       <GlobalAnimations />
-      <TcmPartyZoneHeader />
-      {/* Back to Home Button */}
-      <BackToHomeButton />
+      {/* Fixed NavBar */}
       <div
-        className="rounded-2xl p-8 flex flex-col items-center shadow-2xl animate-fadeInScaleUp card-shadow"
+        ref={navBarRef}
         style={{
-          background: `linear-gradient(120deg, ${COLORS.vanilla} 80%, ${COLORS.carolina} 100%)`,
-          border: `2.5px solid ${COLORS.violet}`,
-          maxWidth: "520px",
           width: "100%",
-          textAlign: "center",
-          boxShadow: `0 6px 40px -8px ${COLORS.shadowStrong}`,
-          marginTop: "32px",
+          position: "fixed",
+          top: 0,
+          left: 0,
+          zIndex: 99,
         }}
       >
-        <div className="flex items-center mb-4 animate-bounceIn">
-          <span className="text-4xl mr-3">🐞</span>
-          <h2 className="font-bold text-3xl" style={{ color: COLORS.claret, textAlign: "center" }}>
-            Report a Bug or Error
-          </h2>
-        </div>
-        <p className="mb-2" style={{ color: COLORS.seal, fontSize: "1.24em", fontWeight: 600 }}>
-          If you find an error or bug on this website,<br />
-          please contact me at:
-        </p>
-        <a
-          href="mailto:seannavery@gmail.com"
+        <NavBar
+          showBackToHome={false} // hide in-menu button, use fixed instead
+          showLogo={true}
+          fixed={true}
+          showReportError={false}
+          showAbout={true}
+          showAdminButtons={true}
+        />
+      </div>
+      {backToHomeButton}
+      {/* Spacer to avoid content under navbar */}
+      <div style={{ height: reservedTopHeight, minHeight: reservedTopHeight }} />
+      {/* Main content and footer in a flex column */}
+      <div
+        style={{
+          flex: 1,
+          width: "100%",
+          display: "flex",
+          flexDirection: "column",
+          alignItems: "center",
+          justifyContent: "flex-start",
+        }}
+      >
+        <BackToTopButton />
+        <div
+          className="report-bug-main-card rounded-2xl p-8 flex flex-col items-center shadow-2xl animate-fadeInScaleUp card-shadow"
           style={{
-            color: COLORS.violet,
-            background: COLORS.highlight,
-            padding: "8px 22px",
-            borderRadius: "2em",
-            fontWeight: 700,
-            fontSize: "1.18em",
-            marginBottom: "1em",
-            textShadow: `0 1px 0 ${COLORS.vanilla}`,
-            boxShadow: `0 2px 16px -8px ${COLORS.shadowStrong}`,
-            transition: "background 0.17s, color 0.19s"
+            background: `linear-gradient(120deg, ${COLORS.backgroundGold} 80%, ${COLORS.accentGold} 100%)`,
+            border: `2.5px solid ${COLORS.accentGold}`,
+            textAlign: "center",
+            boxShadow: `0 6px 40px -8px ${COLORS.shadowStrong}`,
+            margin: "32px auto",
+            maxWidth: "520px",
+            width: "100%",
           }}
         >
-          seannavery@gmail.com
-        </a>
-        <p style={{ color: COLORS.seal, fontSize: "1.01em", marginTop: "1em" }}>
-          Please include details about what happened and which page you found the issue on.
-        </p>
-        <div className="mt-7">
-          <span
-            className="animate-pulseGlow-message"
+          <div className="flex items-center mb-4 animate-bounceIn">
+            <span className="text-4xl mr-3">🐞</span>
+            <h2 className="font-bold text-3xl animate-shimmerText" style={{ color: COLORS.backgroundRed, textAlign: "center" }}>
+              Report a Bug or Error
+            </h2>
+          </div>
+          <p className="mb-2" style={{ color: COLORS.accentBlack, fontSize: "1.24em", fontWeight: 600 }}>
+            If you find an error or bug on this website,<br />
+            please contact me at:
+          </p>
+          <a
+            href="mailto:seannavery@gmail.com"
             style={{
-              display: "inline-block",
-              background: COLORS.violet,
-              color: COLORS.vanilla,
-              padding: "12px 24px",
+              color: COLORS.backgroundRed,
+              background: COLORS.accentGold,
+              padding: "8px 22px",
               borderRadius: "2em",
-              fontWeight: 600,
-              fontSize: "1.1em",
-              boxShadow: `0 6px 40px -8px ${COLORS.shadowStrong}`,
-              border: `2px solid ${COLORS.carolina}`,
-              marginTop: "2em",
-              marginBottom: "0.8em"
+              fontWeight: 700,
+              fontSize: "1.18em",
+              marginBottom: "1em",
+              textShadow: `0 1px 0 ${COLORS.backgroundGold}`,
+              boxShadow: `0 2px 16px -8px ${COLORS.shadowStrong}`,
+              transition: "background 0.17s, color 0.19s"
             }}
           >
-            Thank you for helping improve The TCM Atlas!
-          </span>
+            seannavery@gmail.com
+          </a>
+          <p style={{ color: COLORS.accentBlack, fontSize: "1.01em", marginTop: "1em" }}>
+            Please include details about what happened and which page you found the issue on.
+          </p>
+          <div className="mt-7">
+            <span
+              className="animate-pulseGlow-message"
+              style={{
+                display: "inline-block",
+                background: COLORS.backgroundRed,
+                color: COLORS.backgroundGold,
+                padding: "12px 24px",
+                borderRadius: "2em",
+                fontWeight: 600,
+                fontSize: "1.1em",
+                boxShadow: `0 6px 40px -8px ${COLORS.shadowStrong}`,
+                border: `2px solid ${COLORS.accentGold}`,
+                marginTop: "2em",
+                marginBottom: "0.8em"
+              }}
+            >
+              Thank you for helping improve The TCM Atlas!
+            </span>
+          </div>
+        </div>
+        {/* Footer always at bottom for all screen sizes */}
+        <div
+          style={{
+            width: "100vw",
+            marginTop: "auto",
+            display: "flex",
+            justifyContent: "center",
+            alignItems: "flex-end",
+          }}
+        >
+          <FooterCard />
         </div>
       </div>
     </div>

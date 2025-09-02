@@ -1,19 +1,26 @@
-import React from "react";
+import React, { useRef, useLayoutEffect, useState } from "react";
 import { Link } from "react-router-dom";
+import NavBar from "../components/NavBar";
+import FooterCard from "../components/FooterCard";
+import BackToTopButton from "../components/BackToTopButton";
 
 const COLORS = {
-  vanilla: "#FFF7E3",
-  violet: "#7C5CD3",
-  carolina: "#68C5E6",
-  claret: "#A52439",
-  seal: "#3B4461",
-  highlight: "#ffe066",
-  shadow: "#7C5CD344",
-  shadowStrong: "#7C5CD399",
-  accent: "#fff0f0",
+  backgroundRed: "#9A2D1F",
+  backgroundGold: "#F9E8C2",
+  accentGold: "#D4AF37",
+  accentDarkGold: "#B38E3F",
+  accentBlack: "#44210A",
+  accentCrimson: "#C0392B",
+  accentIvory: "#FCF5E5",
+  accentEmerald: "#438C3B",
+  accentBlue: "#2176AE",
+  accentGray: "#D9C8B4",
+  shadow: "#B38E3F88",
+  shadowStrong: "#B38E3FCC",
 };
 
-// --- Animations (matches herbCard.js) ---
+const NAVBAR_HEIGHT = 74;
+
 const GlobalAnimations = () => (
   <style>
     {`
@@ -29,7 +36,7 @@ const GlobalAnimations = () => (
         100% { background-position: 0% 50%; }
       }
       .animate-shimmerText {
-        background: linear-gradient(90deg, ${COLORS.violet}, ${COLORS.carolina}, ${COLORS.claret}, ${COLORS.vanilla}, ${COLORS.highlight});
+        background: linear-gradient(90deg, ${COLORS.accentGold}, ${COLORS.backgroundRed}, ${COLORS.accentEmerald}, ${COLORS.backgroundGold}, ${COLORS.accentGold});
         background-size: 400% 400%;
         -webkit-background-clip: text;
         -webkit-text-fill-color: transparent;
@@ -41,140 +48,197 @@ const GlobalAnimations = () => (
   </style>
 );
 
-// --- Animated Logo Header (matches herbCard.js) ---
-function TcmPartyZoneHeader() {
-  return (
-    <div
-      className="animate-shimmerText animate-fadeInScaleUp"
-      style={{
-        fontWeight: 900,
-        fontSize: "2.5rem",
-        letterSpacing: "-2px",
-        textAlign: "center",
-        fontFamily: "inherit",
-        lineHeight: 1.18,
-        userSelect: "none",
-        marginBottom: "0.3em",
-        padding: "0.14em 0",
-        textShadow: `0 3px 16px ${COLORS.shadowStrong}`,
-        borderRadius: "1em",
-        display: "inline-block"
-      }}
-    >
-      The TCM Atlas (BETA) 🗺️
-    </div>
-  );
-}
+export default function About() {
+  const navBarRef = useRef();
+  const [navBarHeight, setNavBarHeight] = useState(NAVBAR_HEIGHT);
 
-// --- Back to Home Button ---
-function BackToHomeButton() {
-  return (
-    <div className="fixed top-8 right-10 z-40">
+  useLayoutEffect(() => {
+    function updateHeight() {
+      if (navBarRef.current) {
+        setNavBarHeight(navBarRef.current.offsetHeight || NAVBAR_HEIGHT);
+      }
+    }
+    updateHeight();
+    window.addEventListener("resize", updateHeight);
+    return () => window.removeEventListener("resize", updateHeight);
+  }, []);
+
+  // Move button further down by increasing top offset (e.g., +12px)
+  const backToHomeButton = (
+    <div
+      style={{
+        position: "fixed",
+        top: navBarHeight + 12,  // Moved down by 12px for clear separation
+        right: 32,
+        zIndex: 101,
+        display: "flex",
+        justifyContent: "flex-end",
+      }}
+      className="back-to-home-btn"
+    >
       <Link
         to="/"
-        className="px-5 py-2 rounded-full font-bold shadow-xl transition-all duration-200 hover:scale-105 animate-fadeInScaleUp"
+        className="px-5 py-2 rounded-full font-bold shadow-xl transition-all duration-200 hover:scale-105 active:scale-95 focus:ring-2 focus:ring-accentEmerald"
         style={{
-          background: COLORS.violet,
-          color: COLORS.vanilla,
-          border: `2.5px solid ${COLORS.seal}`,
-          boxShadow: `0 6px 40px -8px ${COLORS.shadowStrong}`,
+          background: COLORS.accentGold,
+          color: COLORS.backgroundRed,
+          border: `2px solid ${COLORS.accentBlack}`,
+          textShadow: `0 1px 0 ${COLORS.backgroundGold}`,
         }}
+        tabIndex={0}
       >
         Back to Home
       </Link>
     </div>
   );
-}
 
-export default function About() {
+  const reservedTopHeight = navBarHeight;
+
   return (
     <div
       style={{
         minHeight: "100vh",
-        background: `linear-gradient(120deg, ${COLORS.vanilla} 0%, ${COLORS.carolina} 50%, ${COLORS.violet} 100%)`,
-        padding: "48px 0",
-        fontFamily: "inherit",
+        width: "100vw",
+        background: `linear-gradient(120deg, ${COLORS.backgroundGold} 0%, ${COLORS.accentGold} 50%, ${COLORS.backgroundRed} 100%)`,
+        position: "relative",
+        overflow: "hidden",
+        fontFamily: '"Noto Serif SC", "Songti SC", "KaiTi", serif',
+        display: "flex",
+        flexDirection: "column"
       }}
     >
       <GlobalAnimations />
-      {/* Back to Home Button */}
-      <BackToHomeButton />
+      {/* Fixed NavBar */}
       <div
+        ref={navBarRef}
         style={{
-          maxWidth: "720px",
-          margin: "0 auto",
-          background: "#fff",
-          borderRadius: "2.2em",
-          boxShadow: `0 6px 40px -8px ${COLORS.violet}55`,
-          padding: "38px 38px 28px 38px",
-          color: COLORS.seal,
+          width: "100%",
+          position: "fixed",
+          top: 0,
+          left: 0,
+          zIndex: 99,
         }}
       >
-        <h1
+        <NavBar
+          showBackToHome={false} // hide in-menu button, use fixed instead
+          showLogo={true}
+          fixed={true}
+          showReportError={true}
+          showAbout={false}
+          showAdminButtons={true}
+        />
+      </div>
+      {backToHomeButton}
+      {/* Spacer to avoid content under navbar */}
+      <div style={{ height: reservedTopHeight, minHeight: reservedTopHeight }} />
+      {/* Main content and footer in a flex column */}
+      <div
+        style={{
+          flex: 1,
+          width: "100%",
+          display: "flex",
+          flexDirection: "column",
+          alignItems: "center",
+          justifyContent: "flex-start",
+        }}
+      >
+        <BackToTopButton />
+        <div
+          className="about-main-card rounded-2xl p-8 flex flex-col items-center shadow-2xl animate-fadeInScaleUp card-shadow"
           style={{
-            fontWeight: 900,
-            fontSize: "2.6rem",
-            letterSpacing: "-2px",
+            background: `linear-gradient(120deg, ${COLORS.backgroundGold} 80%, ${COLORS.accentGold} 100%)`,
+            border: `2.5px solid ${COLORS.accentGold}`,
             textAlign: "center",
-            marginBottom: "0.15em",
-            color: COLORS.violet,
-            textShadow: `0 1px 0 ${COLORS.vanilla}, 0 2px 12px ${COLORS.carolina}33`,
+            boxShadow: `0 6px 40px -8px ${COLORS.shadowStrong}`,
+            margin: "32px auto",
+            maxWidth: "720px",
+            width: "100%",
           }}
         >
-          About <br />
-          <TcmPartyZoneHeader />
-        </h1>
-        <p
-          style={{
-            fontSize: "1.18rem",
-            lineHeight: 1.66,
-            marginBottom: "1.2em",
-            fontWeight: 500,
-          }}
-        >
-          The TCM Atlas was born from a real need in the clinic: I wanted a practical tool to effortlessly and quickly look up Chinese herbal formulas and single herbs. I found myself wishing for the ability to copy and paste herbs and dosages directly into my charting platform (like Jane), rather than wasting time flipping through books or searching scattered resources. To my surprise, I couldn't find anything online that truly fit these needs—so I set out to fill that gap!
-        </p>
+          <div className="flex items-center mb-4 animate-fadeInScaleUp">
+            <span className="text-4xl mr-3">🗺️</span>
+            <h2 className="font-bold text-3xl animate-shimmerText" style={{
+              color: COLORS.backgroundRed,
+              textAlign: "center",
+              fontWeight: 900,
+              letterSpacing: "-2px",
+            }}>
+              About
+            </h2>
+          </div>
+          <p
+            style={{
+              fontSize: "1.18rem",
+              lineHeight: 1.66,
+              marginBottom: "1.2em",
+              fontWeight: 500,
+              color: COLORS.accentBlack,
+            }}
+          >
+            The TCM Atlas was born from a real need in the clinic: I wanted a practical tool to effortlessly and quickly look up Chinese herbal formulas and single herbs. I found myself wishing for the ability to copy and paste herbs and dosages directly into my charting platform (like Jane), rather than wasting time flipping through books or searching scattered resources. To my surprise, I couldn't find anything online that truly fit these needs—so I set out to fill that gap!
+          </p>
+          <div
+            style={{
+              fontSize: "1.18rem",
+              lineHeight: 1.66,
+              marginBottom: "1.2em",
+              fontWeight: 500,
+              color: COLORS.accentBlack,
+              textAlign: "left",
+              width: "100%",
+              maxWidth: "650px",
+              margin: "0 auto 1.2em auto"
+            }}
+          >
+            This site lets you:
+            <ul style={{ marginTop: ".7em", marginBottom: ".7em", paddingLeft: "1.3em" }}>
+              <li>🔍 <strong>Look up formulas and herbs</strong> in seconds</li>
+              <li>📋 <strong>Copy and paste herbs & dosages</strong> to third-party platforms like Jane</li>
+              <li>🟰 <strong>Compare formula ingredients side by side</strong></li>
+              <li>🌱 <strong>Find all formulas containing specific herbs</strong></li>
+              <li>🏫 <strong>See which formulas, patents, and herbs Yo San University carries</strong></li>
+            </ul>
+          </div>
+          <p
+            style={{
+              fontSize: "1.18rem",
+              lineHeight: 1.66,
+              marginBottom: "1.2em",
+              fontWeight: 500,
+              color: COLORS.accentBlack,
+            }}
+          >
+            I'm genuinely thrilled to share this resource with you, and I truly hope it serves you in your clinical practice or studies. If it saves you a little time, helps you make a better herbal recommendation, or just makes your clinic workflow easier, then it's done its job!
+          </p>
+          <p
+            style={{
+              fontSize: "1.1rem",
+              color: COLORS.accentCrimson,
+              background: COLORS.accentGold,
+              borderRadius: "1.2em",
+              padding: "0.7em 1.2em",
+              fontWeight: 700,
+              textAlign: "center",
+              boxShadow: `0 2px 12px -6px ${COLORS.accentCrimson}44`,
+              marginBottom: "1.2em",
+              marginTop: "0.2em"
+            }}
+          >
+            Thank you for visiting, and enjoy exploring!
+          </p>
+        </div>
+        {/* Footer always at bottom for all screen sizes */}
         <div
           style={{
-            fontSize: "1.18rem",
-            lineHeight: 1.66,
-            marginBottom: "1.2em",
-            fontWeight: 500,
+            width: "100vw",
+            marginTop: "auto",
+            display: "flex",
+            justifyContent: "center",
+            alignItems: "flex-end",
           }}
         >
-          This site lets you:
-          <ul style={{ marginTop: ".7em", marginBottom: ".7em", paddingLeft: "1.3em" }}>
-            <li>🔍 <strong>Look up formulas and herbs</strong> in seconds</li>
-            <li>📋 <strong>Copy and paste herbs & dosages</strong> to third-party platforms like Jane</li>
-            <li>🟰 <strong>Compare formula ingredients side by side</strong></li>
-            <li>🌱 <strong>Find all formulas containing specific herbs</strong></li>
-            <li>🏫 <strong>See which formulas, patents, and herbs Yo San University carries</strong> (except, apparently, human placenta—which they used to sell!)</li>
-          </ul>
+          <FooterCard />
         </div>
-        <p
-          style={{
-            fontSize: "1.18rem",
-            lineHeight: 1.66,
-            marginBottom: "1.2em",
-            fontWeight: 500,
-          }}
-        >
-          I'm genuinely thrilled to share this resource with you, and I truly hope it serves you in your clinical practice or studies. If it saves you a little time, helps you make a better herbal recommendation, or just makes your clinic workflow easier, then it's done its job!
-        </p>
-        <p
-          style={{
-            fontSize: "1.1rem",
-            color: COLORS.claret,
-            background: COLORS.highlight,
-            borderRadius: "1.2em",
-            padding: "0.7em 1.2em",
-            fontWeight: 700,
-            textAlign: "center",
-            boxShadow: `0 2px 12px -6px ${COLORS.claret}44`,
-          }}
-        >
-          Thank you for visiting, and enjoy exploring!
-        </p>
       </div>
     </div>
   );

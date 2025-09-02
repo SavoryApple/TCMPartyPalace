@@ -1,0 +1,934 @@
+[
+  {
+    "category": "Support Eye Health",
+    "herbs": [
+      "Bo He",
+      "Sang Ye",
+      "Ju Hua",
+      "Mu Zei",
+      "Man Jing Zi",
+      "Jue Ming Zi",
+      "Xia Ku Cao",
+      "Che Qian Zi",
+      "Cang Zhu",
+      "Gou Qi Zi",
+      "Tu Si Zi",
+      "Nu Zhen Zi",
+      "Zhen Zhu",
+      "Bai Ji Li",
+      "Shi Jue Ming"
+    ]
+  },
+  {
+    "category": "Promote Healthy Hair",
+    "herbs": [
+      "Huai Niu Xi",
+      "Da Zao",
+      "He Shou Wu",
+      "Gou Qi Zi",
+      "Dang Gui",
+      "Tu Si Zi",
+      "Nu Zhen Zi",
+      "Hei Zhi Ma",
+      "Mo Han Lian"
+    ]
+  },
+  {
+    "category": "Soothe Throat",
+    "herbs": [
+      "Bo He",
+      "Niu Bang Zi",
+      "Chan Tui",
+      "Xuan Shen",
+      "Lian Qiao",
+      "Ban Lan Gen",
+      "She Gan",
+      "Shan Dou Gen",
+      "Jie Geng",
+      "Chen Pi",
+      "Gan Cao",
+      "He Zi"
+    ]
+  },
+  {
+    "category": "Enhance Voice (like for public speakers/singers)",
+    "herbs": [
+      "Ma Huang",
+      "Chan Tui",
+      "Xing Ren",
+      "Gan Cao",
+      "Mai Men Dong",
+      "Bei Sha Shen",
+      "He Zi",
+      "Pang Da Hai"
+    ]
+  },
+  {
+    "category": "Stabilize Pregnancy",
+    "herbs": [
+      "Zi Su Ye",
+      "Huang Qin",
+      "Sang Ji Sheng",
+      "Zhu Ru",
+      "Sha Ren",
+      "Ai Ye",
+      "Bai Zhu",
+      "E Jiao",
+      "Du Zhong",
+      "Xu Duan",
+      "Tu Si Zi"
+    ]
+  },
+  {
+    "category": "Calm Mind/Spirit/Shen",
+    "herbs": [
+      "Fu Ling",
+      "Xi Xian Cao",
+      "Zhu Ru",
+      "Dan Shen",
+      "Ren Shen",
+      "Da Zao",
+      "Long Yan Rou",
+      "Bai He",
+      "Lian Zi",
+      "Wu Wei Zi",
+      "Fu Xiao Mai"
+    ]
+  },
+  {
+    "category": "Reduce Heart Fire though Small Intestine",
+    "herbs": ["Dan Zhu Ye", "Deng Xin Cao", "Mu Tong"]
+  },
+  {
+    "category": "Alleviate Summer Heat",
+    "herbs": [
+      "Xiang Ru",
+      "He Ye",
+      "Qing Hao",
+      "Hua Shi",
+      "Huo Xiang",
+      "Bai Bian Dou",
+      "Gan Cao"
+    ]
+  },
+  {
+    "category": "Relieve Yin Deficiency Heat",
+    "herbs": ["Zhi Mu", "Mu Dan Pi", "Qin Jiao"]
+  },
+  {
+    "category": "Disperse Lumps/Clumps/Nodules",
+    "herbs": [
+      "Tian Hua Fen",
+      "Xia Ku Cao",
+      "Xuan Shen",
+      "Lian Qiao",
+      "Pu Gong Ying",
+      "Yi Yi Ren",
+      "Dong Kui Zi",
+      "Zhe Bei Mu (or Chuan Bei Mu)",
+      "Gua Lou",
+      "Hai Zao",
+      "Ban Xia",
+      "Bai Jie Zi",
+      "Jie Geng",
+      "Bie Jia",
+      "Mu Li",
+      "Yuan Zhi"
+    ]
+  },
+  {
+    "category": "Eliminate Parasites",
+    "herbs": [
+      "Ku Shen",
+      "Lu Hui",
+      "Bian Xu",
+      "Hai Tong Pi",
+      "Bai Bu",
+      "Chuan Lian Zi",
+      "Xian He Cao",
+      "Hua Jiao",
+      "She Chuang Zi"
+    ]
+  },
+  {
+    "category": "Discharge Pus",
+    "herbs": [
+      "Bai Zhi",
+      "Tian Hua Fen",
+      "Pu Gong Ying",
+      "Bai Jiang Cao",
+      "Yi Yi Ren",
+      "Dong Gua Ren",
+      "Zhe Bei Mu (or Chuan Bei Mu)",
+      "Gua Lou",
+      "Jie Geng",
+      "Zao Jiao Ci",
+      "Ru Xiang",
+      "Mo Yao",
+      "Huang Qi",
+      "Dang Gui",
+      "Chuan Shan Jia"
+    ]
+  },
+  {
+    "category": "Increase Fluids",
+    "herbs": [
+      "Ge Gen",
+      "Zhi Mu",
+      "Tian Hua Fen",
+      "Lu Gen",
+      "Sheng Di Huang",
+      "Xuan Shen",
+      "Ren Shen",
+      "Dang Shen",
+      "Shan Yao",
+      "Tian Men Dong",
+      "Mai Men Dong",
+      "Bei Sha Shen",
+      "Shi Hu",
+      "Wu Wei Zi",
+      "Wu Mei"
+    ]
+  },
+  {
+    "category": "Tai Yin Herbs that guide to the Lung",
+    "herbs": ["Bai Zhi", "Sheng Ma", "Jie Geng"]
+  },
+  {
+    "category": "Tai Yin Herbs that guide to the Spleen",
+    "herbs": ["Sheng Ma", "Ge Gen", "Bai Shao"]
+  },
+  {
+    "category": "Yang Ming Herbs that guide to the Large Intestine/Stomach",
+    "herbs": ["Bai Zhi", "SHeng Ma", "Shi Gao"]
+  },
+  {
+    "category": "Shao Yin Herbs that guide to the Heart",
+    "herbs": ["Xi Xin", "Huang Lian"]
+  },
+  {
+    "category": "Shao Yin Herbs that guide to the Kidney",
+    "herbs": ["Xi Xin", "Zhi Mu", "Du Huo", "Rou Gui"]
+  },
+  {
+    "category": "Tai Yang herbs that guide to the Small Intestine",
+    "herbs": ["Gao Ben", "Huang Bai"]
+  },
+  {
+    "category": "Shao Yin Herbs that guide to the Bladder",
+    "herbs": ["Qiang Huo"]
+  },
+  {
+    "category": "Jue Yin Herbs that guide to the Pericardium",
+    "herbs": ["Chai Hu", "Mu Dan Pi"]
+  },
+  {
+    "category": "Jue Yin Herbs that guide to the Liver",
+    "herbs": ["Chai Hu", "Qing Pi", "Chuan Xiong", "Wu Zhu Yu"]
+  },
+  {
+    "category": "Shao Yang Herbs that guide to the all 3 jiaos (San Jiao)",
+    "herbs": ["Chai Hu", "Lian Qiao"]
+  },
+  {
+    "category": "Shao Yang Herbs that guide to the upper jiao (San Jiao)",
+    "herbs": ["Di Gu Pi"]
+  },
+  {
+    "category": "Shao Yang Herbs that guide to the middle jiao (San Jiao)",
+    "herbs": ["Qing Pi"]
+  },
+  {
+    "category": "Shao Yang Herbs that guide to the lower jiao (San Jiao)",
+    "herbs": ["Fu Zi"]
+  },
+  {
+    "category": "Shao Yang Herbs that guide to the Gallbladder",
+    "herbs": ["Chai Hu", "Qing Pi"]
+  },
+  {
+    "category": "Guiding herbs",
+    "herbs": [
+      "Jie Geng (throat)",
+      "Sang Zhi (upper limbs)",
+      "Gui Zhi (upper limbs)",
+      "Xiang Fu (chest)",
+      "Chen Pi (middle jiao)",
+      "Chen Xiang (lower jiao)",
+      "Deng Xin Cao (lower jiao)",
+      "Chai Hu (side/flanks)",
+      "Xiao Hui Xiang (groin)",
+      "Chuan Lian Zi (groin)",
+      "Han Fang Ji (knee)",
+      "Niu Xi (knee)"
+    ]
+  },
+  {
+    "category": "Suppress Lactation",
+    "herbs": ["Mai Ya"]
+  },
+  {
+    "category": "Increase Lactation",
+    "herbs": [
+      "Pu Gong Ying",
+      "Dong Kui Zi",
+      "Mu Tong",
+      "Wang Bu Liu Xing",
+      "Hei Zhi Ma",
+      "Chuan Sha Jia"
+    ]
+  },
+  {
+    "category": "Lower Blood Lipids",
+    "herbs": [
+      "Ge Gen",
+      "Jue Ming Zi",
+      "Ye Ju Hua",
+      "Da Huang",
+      "Ze Xie",
+      "Shan Zha",
+      "San Qi",
+      "Jiang Huang",
+      "Hu Zhang",
+      "Huang Jing",
+      "He Shou Wu",
+      "Nu Zhen Zi",
+      "Yu Zhu",
+      "Tian Ma"
+    ]
+  },
+  {
+    "category": "Lubricate Intestines",
+    "herbs": [
+      "Niu Bang Zi",
+      "Jue Ming Zi",
+      "Zi Cao",
+      "Dong Kui Zi",
+      "Qu Mai",
+      "Qin Jiao",
+      "Gua Lou Ren",
+      "Xing Ren",
+      "Su ZI",
+      "Zhi Shi",
+      "Tao Ren",
+      "Feng Mi",
+      "Dang Gui",
+      "Sang Shen",
+      "Rou Cong Rong",
+      "Suo Yang",
+      "Hu Tao Ren",
+      "Tian Men Dong",
+      "Mai Men Dong",
+      "Hei Zhi Ma",
+      "Bai Zi Ren"
+    ]
+  },
+  {
+    "category": "Move and Cool Blood",
+    "herbs": ["MU Dan Pi", "Zi Cao", "Chi Shai", "Dan Shen", "Yu Jin"]
+  },
+  {
+    "category": "Move and Nourish Blood",
+    "herbs": ["Dan Shen", "Hong Hua", "Ji Xue Teng", "Dang Gui"]
+  },
+  {
+    "category": "Circulate Blood",
+    "herbs": [
+      "Mu Dan Pi",
+      "Da Huang",
+      "Qu Mai",
+      "Pu Huang",
+      "San Qi",
+      "Qian Cao Gen",
+      "Dang Gui",
+      "Xu Duan",
+      "Bie Jia"
+    ]
+  },
+  {
+    "category": "Regulate Qi",
+    "herbs": [
+      "Hou Po",
+      "Bai Dou Kou",
+      "Sha Ren",
+      "Cao Dou Kou",
+      "Lai Fu ZI",
+      "Chuan Xiong",
+      "Yan Hu Suo",
+      "Yu Jin",
+      "Ru Xiang",
+      "San Leng",
+      "E Zhu"
+    ]
+  },
+  {
+    "category": "Open Heart Orifice",
+    "herbs": ["Yu Jin", "Yuan Zhi", "Shi Chang Pu"]
+  },
+  {
+    "category": "Open Nasal Passage",
+    "herbs": ["Bai Zhi", "Xi Xin", "Xin Yi Hua", "Cang Er Zi", "Bo He"]
+  },
+  {
+    "category": "Prevent Stagnation from Tonifying/Cloying Herbs",
+    "herbs": ["Sha Ren", "Chen Pi", "Mu Xiang"]
+  },
+  {
+    "category": "Aid Recovery & Generate Flesh",
+    "herbs": [
+      "Bai Ji",
+      "Di Yu",
+      "Mo Yao",
+      "Ru Xiang",
+      "Huang Qi",
+      "Dang Gui",
+      "Gui Ban",
+      "Chi Shi Zhi",
+      "Long Gu",
+      "Zhen Zhu"
+    ]
+  },
+  {
+    "category": "Promote Urination",
+    "herbs": [
+      "Xiang Ru",
+      "Zhi Zi",
+      "Dan Zhu Ye",
+      "Lu Gen",
+      "Ku Shen",
+      "Bai Wei",
+      "Hai Tong Pi",
+      "Wu Jia Pi",
+      "Sang Bai Pi",
+      "Da Fu Pi",
+      "Pu Huang",
+      "Bai Mao Gen",
+      "Yi Mu Cao",
+      "Ze Lan",
+      "Huai Niu Xi",
+      "Huang Qi",
+      "Di Long",
+      "Sheng Jiang Pi",
+      "Ma Huang",
+      "Bing Lang"
+    ]
+  },
+  {
+    "category": "Raise Yang Qi",
+    "herbs": ["Chai Hu", "Sheng Ma", "Huang Qi", "Ge Gen"]
+  },
+  {
+    "category": "Ease Food Stagnation",
+    "herbs": [
+      "Da Huang",
+      "Ban Xia",
+      "Cang Zhu",
+      "San Leng",
+      "E Zhu",
+      "Wu Zhu Yu",
+      "Rou Dou Kou",
+      "Bing Lang"
+    ]
+  },
+  {
+    "category": "Counteract Toxins",
+    "herbs": [
+      "Sheng Jiang (poisoning from raw ban xia, tian nan xing, aconite family, seafood)",
+      "Zi Su Ye (seafood)",
+      "Fang Feng (arsenic and aconite family herbs)",
+      "Tu Fu Ling (mercury)",
+      "Gan Cao (all poisonings)",
+      "Gu Sui Bu (streptomycin)",
+      "Lu Dou (all poisonings)",
+      "Zi Cao (from raw chan su)"
+    ]
+  },
+  {
+    "category": "Regulate Menstrual Cycle",
+    "herbs": ["Xiang Fu", "Yi Mu Cao", "Ze Lan", "Bai Shao", "Dang Gui"]
+  },
+  {
+    "category": "Release Exterior Wind",
+    "herbs": [
+      "Jin Yin Hua",
+      "Lian Qiao",
+      "Qing Hao",
+      "Du Huo",
+      "Qian Hu",
+      "Huo Xiang",
+      "Cang Zhu",
+      "Gou Teng",
+      "Bai Ji Li"
+    ]
+  },
+  {
+    "category": "Clear Jaundice",
+    "herbs": [
+      "Zhi Zi",
+      "Huang Qin",
+      "Huang Lian",
+      "Huang Bai",
+      "Ban Lan Gen",
+      "Pu Gong Ying",
+      "Shan Dou Gen",
+      "Tu Fu Ling",
+      "Da Huang",
+      "Yin Chen Hao",
+      "Qin Jiao",
+      "Yu Jin"
+    ]
+  },
+  {
+    "category": "Smooth Liver Qi",
+    "herbs": [
+      "Bo He",
+      "Chai Hu",
+      "Mai Ya",
+      "Qing Pi",
+      "Xiang Fu",
+      "Chuan Lian Zi",
+      "Yu Jin",
+      "Wu Zhu Yu",
+      "Xiao Hui Xiang",
+      "Bai Ji Li"
+    ]
+  },
+  {
+    "category": "Stop Bleeding",
+    "herbs": [
+      " Jing Jie",
+      "Sang Ye",
+      "Mu Zei",
+      "Zhi ZI",
+      "Huang Qin",
+      "Huang Lian",
+      "He Ye",
+      "Qing Hao",
+      "Shi Wei",
+      "Zhu Ru",
+      "Huai Niu Xi",
+      "E Jiao",
+      "Xu Duan",
+      "Gui Ban",
+      "Shan Zhu Yu",
+      "Hai Piao Xiao",
+      "Wu Mei",
+      "Chi Shi Zhi",
+      "Dai Zhe Shi"
+    ]
+  },
+  {
+    "category": "Suppress Cough and Wheeze",
+    "herbs": [
+      "Sheng Jiang",
+      "Sang Ye",
+      "Di Gu Pi",
+      "Shi Wei",
+      "Che Qian Zi",
+      "Hou Po",
+      "Ce Bai Ye",
+      "E Jiao",
+      "Dang Gui",
+      "Hu Tao Ren",
+      "Bai He"
+    ]
+  },
+  {
+    "category": "Control Diarrhea",
+    "herbs": [
+      "Ge Gen",
+      "He Ye",
+      "Fu Ling",
+      "Yi Yi Ren",
+      "Che Qian Zi",
+      "Cao Dou Kou",
+      "Cao Guo",
+      "Sha Ren",
+      "Wu Zhu Yu",
+      "Bai Zhu",
+      "Bai Bian Dou",
+      "Shan Yao",
+      "Bu Gu Zhi",
+      "Yi Zhi Ren",
+      "Wu Wei Zi",
+      "Lian Zi",
+      "Qian Shi",
+      "Chi Shi Zhi",
+      "Chun Pi",
+      "He Zi",
+      "Jin Ying Zi",
+      "Rou Dou Kou",
+      "Wu Mei",
+      "Bing Lang"
+    ]
+  },
+  {
+    "category": "Alleviate Dysentery",
+    "herbs": [
+      "Jin Yin Hua",
+      "Bai Tou Weng",
+      "Da Huang",
+      "Huang Qin",
+      "Huang Bai",
+      "Huang Lian",
+      "Ku Shen",
+      "Cang Zhu",
+      "Hou Po",
+      "Xian He Cao"
+    ]
+  },
+  {
+    "category": "Ease Headaches",
+    "herbs": [
+      "Chai Hu (shay yang)",
+      "Qiang Huo (tai yang)",
+      "Bai Zhi (yang ming)",
+      "Ge Gen (yang ming)",
+      "Gao Ben (jue yin)",
+      "Wu Zhu Yu (jue yin)",
+      "Du Huo (shao yin)",
+      "Ban Xia (tai yin)",
+      "Cang Zhu (tai yin)",
+      "Chuan Xiong (all types)",
+      "Xi Xin (shao yin)"
+    ]
+  },
+  {
+    "category": "Soothe Itching",
+    "herbs": [
+      "Jing Jie",
+      "Ku Shen",
+      "Di Fu Zi",
+      "Hai Tong Pi",
+      "Xian He Cao",
+      "Bai Ji Li",
+      "She Chuang Zi",
+      "Bai Xian Pi",
+      "Zi Cao"
+    ]
+  },
+  {
+    "category": "Relieve Nausea/Vomiting/Hiccup",
+    "herbs": [
+      "Zi Su Ye",
+      "Sheng Jiang",
+      "Lu Gen",
+      "Zhu Ru",
+      "Ban Xia",
+      "Xuan Fu Hua",
+      "Pi Pa Ye",
+      "Huo Xiang",
+      "Bai Dou Kou",
+      "Cao Dou Kou",
+      "Sha Ren",
+      "Chen Pi",
+      "Chen Xiang",
+      "Wu Zhu Yu",
+      "Xiao Hui Xiang",
+      "Ding Xiang",
+      "Dai Zhe Shi"
+    ]
+  },
+  {
+    "category": "Alleviate Pain",
+    "herbs": [
+      "Fang Feng",
+      "Gao Ben",
+      "Bai Zhi",
+      "Ge Gen",
+      "Wei Ling Xian",
+      "Tian Nan Xing",
+      "San Qi",
+      "Di Yu",
+      "Yan Hu Suo",
+      "Ru Xiang",
+      "Mo Yao",
+      "Chuan Xiong",
+      "Cao Wu",
+      "Hua Jiao",
+      "Gao Liang Jiang",
+      "Yi Tang",
+      "Bai Shao",
+      "Xi Xin",
+      "Chuan Wu"
+    ]
+  },
+  {
+    "category": "Reduce Sweating",
+    "herbs": [
+      "Shi Gao",
+      "Zhi Mu",
+      "Di Gu Pi",
+      "Fu Zi",
+      "Huang Qi",
+      "Bai Zhu",
+      "Shan Zhu Yu",
+      "Wu Wei Zi",
+      "Fu Xiao Mai",
+      "Wu Mei",
+      "Long Gu",
+      "Mu Li",
+      "Suan Zao Ren",
+      "Ma Huang Gen"
+    ]
+  },
+  {
+    "category": "Relieve Toothache",
+    "herbs": [
+      "Bai Zhi",
+      "Gao Ben",
+      "Sheng Ma",
+      "Shi Gao",
+      "Huang Lian",
+      "Da Huang",
+      "Bi Ba",
+      "Hu Jiao",
+      "Huai Niu Xi",
+      "Gu Sui Bu",
+      "Xi Xin"
+    ]
+  },
+  {
+    "category": "Strengthen Muscles/Bones",
+    "herbs": [
+      "Wu Jia Pi",
+      "Sang Ji Sheng",
+      "Huai Niu Xi",
+      "Du Zhong",
+      "Xu Duan",
+      "Gu Sui Bu",
+      "Gou Ji"
+    ]
+  },
+  {
+    "category": "Dissolve Stones",
+    "herbs": [
+      "Yu Jin (gb)",
+      "Ji Nei Jin (gb and kid)",
+      "Shi Wei (kid)",
+            "Jin Qian Cao (gb and kid)",
+      "Hai Jin Sha (kid)"
+    ]
+  },
+  {
+    "category": "Support Burn Recovery",
+    "herbs": [
+      "Bai Zhi",
+      "Huang Lian",
+      "Huang Bai",
+      "Di Yu",
+      "Ce Bai Ye",
+      "Bai Ji",
+      "Zi Cao"
+    ]
+  },
+  {
+    "category": "Address Cancer",
+    "herbs": [
+      "Shan Dou Gen (throat)",
+      "E Zhu (cervical)",
+      "Huang Jing (rectal)",
+      "Bai Hua She She Cao (lu/st)",
+      "Shan Ci Gu (breast)",
+      "Tian Kui Zi (ub/breast/cervical/lymph)",
+      "Long Kui (st/cervical)",
+      "Lu Feng Fang (breast)",
+      "Ban Mao (liv)",
+      "Er Cha (rectal)",
+      "Ma Qian Zi (liv)",
+      "Peng Sha (rectal)",
+    "Ban Zhi Lian (liv/lu)"
+    ]
+  },
+  {
+    "category": "Diabetes (xiao ke)",
+    "herbs": [
+      "Ge Gen",
+      "Zhi Mu",
+      "Tian Hua Fen",
+      "Sheng Di Huang",
+      "Ren Shen",
+      "Huang Qi",
+      "Shan Yao",
+      "Shu Di Huang",
+      "Mai Men Dong",
+      "Tian Men Dong",
+      "Wu Wei Zi",
+      "Wu Mei",
+      "Shan Zhu Yu",
+      "Shi Hu"
+    ]
+  },
+  {
+    "category": "Hepatitis",
+    "herbs": [
+      "Chai Hu",
+      "Xia Ku Cao",
+      "Ban Lan Gen",
+      "Shan Dou Gen",
+      "Lu Hui",
+      "Yi Yi Ren",
+      "Yin Chen Hao",
+      "Mu Gua",
+      "Qin Jiao",
+      "Huo Xiang",
+      "Shan Zha",
+      "Da Ji",
+      "Dan Shen",
+      "Chi Shao",
+      "Shan Yao",
+      "Bai Shao",
+      "Dang Gui",
+      "Gou Qi Zi",
+      "Nu Zhen Zi",
+      "Wu Wei Zi",
+      "Wu Mei",
+      "Xiao Ji"
+    ]
+  },
+  {
+    "category": "Hernia",
+    "herbs": [
+      "Chuan Lian Zi",
+      "Qing Pi",
+      "Wu Yao",
+      "Wu Zhu Yu",
+      "Xiao Hui Xiang"
+    ]
+  },
+  {
+    "category": "High Blood Pressure",
+    "herbs": [
+      "Ge Gen",
+      "Zhi Zi",
+      "Xia Ku Cao",
+      "Jue Ming Zi",
+      "Huang Qin",
+      "Long Dan Cao",
+      "Sang Ji Sheng",
+      "Sang Bai Pi",
+      "Shan Zha",
+      "Huai Hua",
+      "Yi Mu Cao",
+      "Du Zhong",
+      "Gou Teng",
+      "Bai Ji Li",
+      "Shi Jue Ming",
+      "Di Long",
+      "Tian Ma",
+      "Ma Dou Ling",
+      "Chong Wei Zi"
+    ]
+  },
+  {
+    "category": "Leukorrhea",
+    "herbs": [
+      "Bai Zhi",
+      "Huang Lian",
+      "Huang Bai",
+      "Long Dan Cao",
+      "Ku Shen",
+      "Ze Xie",
+      "Di Fu Zi",
+      "Bai Bu",
+      "Cang Zhu",
+      "Xian He Cao",
+      "Hua Jiao",
+      "Ai Ye",
+      "Bai Zhu",
+      "Tu Si Zi",
+      "Gou Ji",
+      "Hai Piao Xiao",
+      "Jin Ying Zi",
+      "Lian Zi",
+      "Qian Shi",
+      "Long Gu",
+      "Mu Li",
+      "She Chuang Zi",
+      "Bai Xian Pi",
+      "Sang Piao Xiao"
+    ]
+  },
+  {
+    "category": "Back Pain",
+    "herbs": [
+      "Sang Ji Sheng",
+      "Du ZHong",
+      "Xu Duan",
+      "Gou Ji",
+      "Bu Gu Zhi",
+      "Gu Sui Bu",
+      "Hu Tao Ren",
+      "Tu Si Zi"
+    ]
+  },
+  {
+    "category": "Malaria",
+    "herbs": ["Zhi Mu", "Qing Hao", "Cao Guo", "Bing Lang", "Chang Shan"]
+  },
+  {
+    "category": "Spermatorrhea",
+    "herbs": [
+      "Shan Yao",
+      "Lu Rong",
+      "Xian Mao",
+      "Yin Yang Huo",
+      "Yi Zhi Ren",
+      "Ba Ji Tian",
+      "Bu Gu Zhi",
+      "Xu Duan",
+      "Gou Ji",
+      "Tu Si Zi",
+      "Shan Zhu Yu",
+      "Hai Piao Xiao",
+      "Qian Shi",
+      "Lian Zi",
+      "Bai Guo",
+      "Wu Wei Zi",
+      "Long Gu",
+      "Mu Li",
+      "Yuan Zhi",
+      "Rou Cong Rong"
+    ]
+  },
+  {
+    "category": "Trauma/Injury",
+    "herbs": [
+      "Mu Dan Pi",
+      "San Qi",
+      "Hong Hua",
+      "Tao Ren",
+      "Ru Xiang",
+      "Mo Yao",
+      "Chi Shao",
+      "Huai Niu Xi",
+      "Ze Lan",
+      "Dang Gui",
+      "Xu Duan"
+    ]
+  },
+  {
+    "category": "Trichomoniasis",
+    "herbs": [
+      "Ku Shen",
+      "Bai Bu",
+      "Xian He Cao",
+      "Bu Gu Zhi",
+      "Yuan Zhi",
+      "She Chuang Zi"
+    ]
+  },
+  {
+    "category": "Vent Rash",
+    "herbs": [
+      "Jing Jie",
+      "Bo He",
+      "Niu Bang Zi",
+      "Chan Tui",
+      "Ge Gen",
+      "Sheng Ma",
+      "Lu Gen",
+      "Zi Cao"
+    ]
+  }
+]

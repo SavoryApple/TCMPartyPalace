@@ -3,21 +3,45 @@ import { useParams, useNavigate, Link, useLocation } from "react-router-dom";
 import WhatFormulaMakesUpThoseHerbs from "../components/whatFormulaMakesUpThoseHerbs";
 import { useHerbCart } from "../context/HerbCartContext";
 import HerbCart from "../components/HerbCart";
+import HerbCategoryInfo from "../components/HerbCategoryInfo";
+import FooterCard from "../components/FooterCard";
+import Logo from "../components/Logo";
+import NavBar from "../components/NavBar";
+import BackToTopButton from "../components/BackToTopButton";
 
-// --- Color scheme ---
 const COLORS = {
+  backgroundRed: "#9A2D1F",
+  backgroundGold: "#F9E8C2",
+  accentGold: "#D4AF37",
+  accentDarkGold: "#B38E3F",
+  accentBlack: "#44210A",
+  accentCrimson: "#C0392B",
+  accentIvory: "#FCF5E5",
+  accentEmerald: "#438C3B",
+  accentBlue: "#2176AE",
+  accentGray: "#D9C8B4",
   vanilla: "#FFF7E3",
   violet: "#7C5CD3",
   carolina: "#68C5E6",
   claret: "#A52439",
   seal: "#3B4461",
   highlight: "#ffe066",
-  shadow: "#7C5CD344",
-  shadowStrong: "#7C5CD399",
+  shadow: "#B38E3F88",
+  shadowStrong: "#B38E3FCC",
   accent: "#fff0f0",
+  propertyBubble: "#438C3B",
+  propertyBubbleText: "#FCF5E5",
+  channelBubble: "#E6F4FF",
+  channelBubbleText: "#2176AE",
+  yoSanBubble: "#2E3551",
+  yoSanBubbleText: "#F9E8C2",
+  formatsBubble: "#B38E3F",
+  formatsBubbleText: "#FCF5E5",
 };
 
-// --- Animations ---
+const NAVBAR_HEIGHT = 84;
+const CARD_MAX_WIDTH = 650;
+
 const GlobalAnimations = () => (
   <style>
     {`
@@ -33,77 +57,146 @@ const GlobalAnimations = () => (
         100% { opacity: 1; transform: scale(1) translateY(0);}
       }
       .animate-fadeInScaleUp { animation: fadeInScaleUp 0.7s cubic-bezier(.36,1.29,.45,1.01); }
-      @keyframes shimmerText {
-        0% { background-position: 0% 50%; }
-        50% { background-position: 100% 50%; }
-        100% { background-position: 0% 50%; }
-      }
-      .animate-shimmerText {
-        background: linear-gradient(90deg, ${COLORS.violet}, ${COLORS.carolina}, ${COLORS.claret}, ${COLORS.vanilla}, ${COLORS.highlight});
-        background-size: 400% 400%;
-        -webkit-background-clip: text;
-        -webkit-text-fill-color: transparent;
-        background-clip: text;
-        text-fill-color: transparent;
-        animation: shimmerText 3.2s ease-in-out infinite;
-      }
-      @keyframes pulseGlow {
-        0% { box-shadow: 0 0 0 0 ${COLORS.violet}33; }
-        50% { box-shadow: 0 0 16px 8px ${COLORS.violet}88; }
-        100% { box-shadow: 0 0 0 0 ${COLORS.violet}33; }
-      }
-      .animate-pulseGlow { animation: pulseGlow 2s infinite; }
-      @keyframes bounceIn {
-        0% { opacity: 0; transform: scale(0.7);}
-        70% { opacity: 1; transform: scale(1.05);}
-        100% { opacity: 1; transform: scale(1);}
-      }
-      .animate-bounceIn { animation: bounceIn 0.7s cubic-bezier(.36,1.29,.45,1.01); }
-      @keyframes fadeInScale {
-        0% { opacity: 0; transform: scale(0.92);}
-        100% { opacity: 1; transform: scale(1);}
-      }
-      .animate-fadeInScale { animation: fadeInScale 0.4s cubic-bezier(.36,1.29,.45,1.01);}
-      @keyframes imgPop {
-        0% { opacity: 0; transform: scale(0.7);}
-        80% { opacity: 1; transform: scale(1.04);}
-        100% { opacity: 1; transform: scale(1);}
-      }
-      .animate-imgPop { animation: imgPop 0.3s cubic-bezier(.36,1.29,.45,1.01);}
-      /* Flex container for floating buttons */
-      .floating-btns-container {
+      .back-to-home-btn {
         position: fixed;
-        right: 18px;
-        bottom: 28px;
-        z-index: 80;
+        top: ${NAVBAR_HEIGHT + 12}px;
+        right: 32px;
+        z-index: 101;
         display: flex;
-        align-items: center;
-        gap: 10px;
+        justify-content: flex-end;
+      }
+      @media (max-width: 500px) {
+        .back-to-home-btn {
+          right: 2px !important;
+        }
       }
     `}
   </style>
 );
 
-function TcmPartyZoneHeader() {
+function useIsMobile() {
+  const [isMobile, setIsMobile] = useState(window.innerWidth < 700);
+  useEffect(() => {
+    function onResize() {
+      setIsMobile(window.innerWidth < 700);
+    }
+    window.addEventListener("resize", onResize);
+    return () => window.removeEventListener("resize", onResize);
+  }, []);
+  return isMobile;
+}
+
+function PropertyBubble({ value, uniqueKey, isMobile }) {
+  if (!value) return null;
   return (
-    <div
-      className="animate-shimmerText animate-fadeInScaleUp"
+    <span
+      key={uniqueKey}
+      className="inline-block rounded-full text-xs font-bold mr-1 mb-1 max-w-[80px] text-center whitespace-nowrap align-middle"
       style={{
-        fontWeight: 900,
-        fontSize: "2.5rem",
-        letterSpacing: "-2px",
-        textAlign: "center",
-        fontFamily: "inherit",
-        lineHeight: 1.18,
-        userSelect: "none",
-        marginBottom: "0.3em",
-        padding: "0.14em 0",
-        textShadow: `0 3px 16px ${COLORS.shadowStrong}`,
-        borderRadius: "1em",
+        background: COLORS.propertyBubble,
+        color: COLORS.propertyBubbleText,
+        lineHeight: "1.4",
+        verticalAlign: "middle",
+        fontWeight: 700,
+        letterSpacing: "0.01em",
+        fontSize: isMobile ? "0.74em" : "0.8em",
+        padding: isMobile ? "2px 8px" : "2.5px 10px",
+        minWidth: isMobile ? 38 : 50,
+        boxShadow: `0 1px 6px -3px ${COLORS.accentGold}44`,
+        border: `1.1px solid ${COLORS.accentGold}`,
       }}
     >
-      The TCM Atlas (BETA) 🗺️
-    </div>
+      {value}
+    </span>
+  );
+}
+
+function ChannelBubble({ value, uniqueKey, isMobile }) {
+  if (!value) return null;
+  return (
+    <span
+      key={uniqueKey}
+      className="inline-block rounded-full text-xs font-bold mr-1 mb-1 max-w-[120px] text-center whitespace-nowrap align-middle"
+      style={{
+        background: COLORS.channelBubble,
+        color: COLORS.channelBubbleText,
+        fontWeight: 700,
+        fontSize: isMobile ? "0.74em" : "0.8em",
+        padding: isMobile ? "2px 8px" : "2.5px 10px",
+        minWidth: isMobile ? 38 : 50,
+        boxShadow: `0 1px 6px -3px ${COLORS.accentBlue}33`,
+        border: `1.1px solid ${COLORS.accentBlue}`,
+        letterSpacing: "0.01em",
+      }}
+    >
+      {value}
+    </span>
+  );
+}
+
+function YoSanCarriesAndFormatsBubble({ herb, isMobile }) {
+  let yoSanCarries;
+  if (herb.yoSanCarries === true) {
+    yoSanCarries = "Yes";
+  } else if (herb.yoSanCarries === false || herb.yoSanCarries === undefined || herb.yoSanCarries === null) {
+    yoSanCarries = "No";
+  } else {
+    yoSanCarries = String(herb.yoSanCarries);
+  }
+  const formats =
+    Array.isArray(herb.formats) && herb.formats.length > 0
+      ? herb.formats.join(", ")
+      : typeof herb.formats === "string" && herb.formats
+      ? herb.formats
+      : null;
+
+  const bubbleSize = isMobile
+    ? { fontSize: "0.63em", padding: "1px 6px", minWidth: 25, marginRight: 2 }
+    : { fontSize: "0.7em", padding: "1.5px 8px", minWidth: 32, marginRight: 5 };
+
+  return (
+    <span
+      style={{
+        display: "inline-flex",
+        flexDirection: "row",
+        gap: isMobile ? "0.2em" : "0.4em",
+        alignItems: "center",
+        marginTop: 0,
+        marginBottom: 0,
+        fontWeight: 600,
+      }}
+    >
+      <span
+        style={{
+          ...bubbleSize,
+          background: COLORS.yoSanBubble,
+          color: COLORS.yoSanBubbleText,
+          borderRadius: "999px",
+          textAlign: "center",
+          boxShadow: `0 1px 5px -2px ${COLORS.yoSanBubble}55`,
+          border: `1px solid ${COLORS.accentGold}`,
+          letterSpacing: "0.01em",
+        }}
+      >
+        Yo San: {yoSanCarries}
+      </span>
+      {formats && (
+        <span
+          style={{
+            ...bubbleSize,
+            background: COLORS.formatsBubble,
+            color: COLORS.formatsBubbleText,
+            borderRadius: "999px",
+            textAlign: "center",
+            boxShadow: `0 1px 5px -2px ${COLORS.formatsBubble}55`,
+            border: `1px solid ${COLORS.accentGold}`,
+            letterSpacing: "0.01em",
+          }}
+        >
+          Formats: {formats}
+        </span>
+      )}
+    </span>
   );
 }
 
@@ -140,44 +233,8 @@ function getHerbKey(herb) {
   return undefined;
 }
 
-function BackToTopButton({ show }) {
-  function handleClick() {
-    window.scrollTo({ top: 0, behavior: "smooth" });
-  }
-  return (
-    <button
-      onClick={handleClick}
-      style={{
-        background: COLORS.violet,
-        color: COLORS.vanilla,
-        borderRadius: "50%",
-        width: 49,
-        height: 49,
-        border: `2.5px solid ${COLORS.vanilla}`,
-        boxShadow: `0 6px 40px -8px ${COLORS.shadowStrong}`,
-        fontWeight: 900,
-        fontSize: "2rem",
-        display: show ? "flex" : "none",
-        alignItems: "center",
-        justifyContent: "center",
-        transition: "background 0.2s, scale 0.15s",
-        cursor: "pointer",
-        outline: "none"
-      }}
-      aria-label="Back to top"
-      title="Back to top"
-      className="animate-fadeInScaleUp"
-    >
-      ↑
-    </button>
-  );
-}
-
-// --- Herb Image Component ---
-function HerbImage({ url, alt }) {
+function HerbImage({ url, alt, isMobile }) {
   const [expanded, setExpanded] = useState(false);
-
-  // Handle click outside the expanded image to close
   useEffect(() => {
     if (!expanded) return;
     function handleClick(e) {
@@ -188,29 +245,28 @@ function HerbImage({ url, alt }) {
     window.addEventListener("mousedown", handleClick);
     return () => window.removeEventListener("mousedown", handleClick);
   }, [expanded]);
-
-  // If image URL is missing, show placeholder border and text
   if (!url) {
     return (
       <div
         style={{
-          position: "absolute",
-          top: 18,
-          right: 18,
+          position: isMobile ? "static" : "absolute",
+          top: isMobile ? undefined : 18,
+          right: isMobile ? undefined : 18,
           zIndex: 99,
-          width: 120,
-          height: 120,
-          border: "2.5px dashed #7C5CD3",
+          width: isMobile ? "130px" : 120,
+          height: isMobile ? "130px" : 120,
+          border: `2.5px dashed ${COLORS.violet}`,
           borderRadius: "1em",
-          background: "#FFF7E3",
+          background: COLORS.backgroundGold,
           display: "flex",
           alignItems: "center",
           justifyContent: "center",
-          color: "#A52439",
+          color: COLORS.accentCrimson,
           fontWeight: 700,
           fontSize: "1.1em",
           textAlign: "center",
-          boxShadow: "0 4px 18px -3px #7C5CD399",
+          boxShadow: "0 4px 18px -3px " + COLORS.shadowStrong,
+          margin: isMobile ? "0 auto 18px auto" : undefined,
         }}
         aria-label="Image coming soon"
       >
@@ -218,25 +274,25 @@ function HerbImage({ url, alt }) {
       </div>
     );
   }
-
-  // If image URL is present, show clickable image
   return (
     <>
       <div
         style={{
-          position: "absolute",
-          top: 18,
-          right: 18,
+          position: isMobile ? "static" : "absolute",
+          top: isMobile ? undefined : 18,
+          right: isMobile ? undefined : 18,
           zIndex: 99,
           cursor: "pointer",
           borderRadius: "1em",
           overflow: "hidden",
           boxShadow: `0 4px 18px -3px ${COLORS.shadowStrong}`,
           border: `2.5px solid ${COLORS.violet}`,
-          background: COLORS.vanilla,
-          width: 120,
-          height: 120,
+          background: COLORS.backgroundGold,
+          width: isMobile ? "130px" : 120,
+          height: isMobile ? "130px" : 120,
           transition: "box-shadow 0.2s",
+          margin: isMobile ? "0 auto 18px auto" : undefined,
+          display: isMobile ? "block" : "block"
         }}
         title="Click to expand"
         onClick={() => setExpanded(true)}
@@ -276,7 +332,7 @@ function HerbImage({ url, alt }) {
               borderRadius: "2em",
               boxShadow: `0 10px 60px -8px ${COLORS.shadowStrong}`,
               border: `4px solid ${COLORS.violet}`,
-              background: COLORS.vanilla,
+              background: COLORS.backgroundGold,
               objectFit: "contain",
               transition: "box-shadow 0.18s",
             }}
@@ -288,6 +344,34 @@ function HerbImage({ url, alt }) {
   );
 }
 
+function getPropertiesArr(herb) {
+  if (!herb) return [];
+  let val = herb.properties;
+  if (!val) return [];
+  if (Array.isArray(val)) return val.filter(Boolean);
+  if (typeof val === "string") {
+    return val
+      .split(/[,;/]+/)
+      .map((s) => s.trim())
+      .filter(Boolean);
+  }
+  return [];
+}
+
+function getChannelsArr(herb) {
+  if (!herb) return [];
+  let val = herb.channelsEntered;
+  if (!val) return [];
+  if (Array.isArray(val)) return val.filter(Boolean);
+  if (typeof val === "string") {
+    return val
+      .split(/[,;/]+/)
+      .map((s) => s.trim())
+      .filter(Boolean);
+  }
+  return [];
+}
+
 export default function HerbCard() {
   const location = useLocation();
   const params = new URLSearchParams(location.search);
@@ -295,15 +379,41 @@ export default function HerbCard() {
   const { id } = useParams();
   const navigate = useNavigate();
 
-  // Shared context cart
   const { cart, addHerb, removeHerb, clearCart } = useHerbCart();
   const [showCart, setShowCart] = useState(false);
 
   const [herb, setHerb] = useState(null);
   const [loading, setLoading] = useState(true);
 
-  // Backend API base URL
   const API_URL = process.env.REACT_APP_API_URL || "https://thetcmatlas.fly.dev";
+  const isMobile = useIsMobile();
+
+  const bgStyle = {
+    minHeight: "100vh",
+    width: "100vw",
+    background: COLORS.backgroundGold,
+    position: "relative",
+    fontFamily: '"Noto Serif SC", "Songti SC", "KaiTi", serif',
+    overflowX: "hidden",
+  };
+
+  const backToHomeButton = (
+    <div className="back-to-home-btn">
+      <Link
+        to="/"
+        className="px-5 py-2 rounded-full font-bold shadow-xl transition-all duration-200 hover:scale-105 active:scale-95 focus:ring-2 focus:ring-accentEmerald"
+        style={{
+          background: COLORS.accentGold,
+          color: COLORS.backgroundRed,
+          border: `2px solid ${COLORS.accentBlack}`,
+          textShadow: `0 1px 0 ${COLORS.backgroundGold}`,
+        }}
+        tabIndex={0}
+      >
+        Back to Home
+      </Link>
+    </div>
+  );
 
   useEffect(() => {
     setLoading(true);
@@ -345,7 +455,7 @@ export default function HerbCard() {
 
   function handleAddToCart() {
     addHerb(herb);
-    setShowCart(true); // Show cart drawer after adding
+    setShowCart(true);
   }
 
   function handleRemoveFromCart() {
@@ -360,92 +470,81 @@ export default function HerbCard() {
     }
   }
 
-  // For floating buttons
-  const [showBackToTop, setShowBackToTop] = useState(false);
-  useEffect(() => {
-    function onScroll() {
-      setShowBackToTop(window.scrollY > 180);
-    }
-    window.addEventListener("scroll", onScroll, { passive: true });
-    return () => window.removeEventListener("scroll", onScroll);
-  }, []);
+  // This function is used for "Add To Formula Builder" button in formulas list
+  function handleAddFormulaBuilder(formula) {
+    const formulaName = Array.isArray(formula.pinyinName)
+      ? formula.pinyinName[0]
+      : formula.pinyinName;
+    navigate(`/formulabuilder?formula=${encodeURIComponent(formulaName)}`);
+  }
 
-  // --- Loading State ---
+  const propertiesArr = herb ? getPropertiesArr(herb) : [];
+  const channelsArr = herb ? getChannelsArr(herb) : [];
+
   if (loading) {
     return (
-      <div
-        className="min-h-screen flex flex-col items-center justify-center px-4"
-        style={{
-          background: `linear-gradient(120deg, ${COLORS.vanilla} 0%, ${COLORS.carolina} 50%, ${COLORS.violet} 100%)`
-        }}
-      >
+      <div style={bgStyle}>
         <GlobalAnimations />
-        <TcmPartyZoneHeader />
+        <NavBar
+          showReportError={true}
+          showAbout={true}
+          showAdminButtons={true}
+          showLogo={true}
+          fixed={true}
+        />
+        <div style={{ height: NAVBAR_HEIGHT }} />
+        {backToHomeButton}
+        <div style={{ margin: "2.5em auto 1.5em auto", textAlign: "center" }}>
+          <Logo size={60} showBeta={true} />
+        </div>
         <div
           className="rounded-xl p-8 mb-6 flex flex-col items-start animate-fadeInScaleUp card-shadow"
           style={{
-            background: COLORS.vanilla,
-            border: `2.5px solid ${COLORS.violet}`,
-            color: COLORS.seal,
+            background: COLORS.backgroundGold,
+            border: `2.5px solid ${COLORS.accentGold}`,
+            color: COLORS.accentBlack,
             maxWidth: "500px",
             textAlign: "left",
             boxShadow: `0 6px 40px -8px ${COLORS.shadowStrong}`,
+            fontFamily: '"Noto Serif SC", "Songti SC", "KaiTi", serif',
+            margin: "0 auto"
           }}
         >
           <h2 className="text-3xl font-bold mb-4" style={{ color: COLORS.claret }}>Loading...</h2>
           <p className="mb-3">Loading herb data...</p>
         </div>
-        <div className="floating-btns-container">
-          <button
-            style={{
-              background: COLORS.violet,
-              color: COLORS.vanilla,
-              borderRadius: "50%",
-              width: 49,
-              height: 49,
-              minWidth: 49,
-              minHeight: 49,
-              boxShadow: "0 2px 12px 0 #7C5CD366",
-              fontWeight: 700,
-              fontSize: 28,
-              display: "flex",
-              alignItems: "center",
-              justifyContent: "center",
-              border: `2px solid ${COLORS.vanilla}`,
-              transition: "background 0.2s, scale 0.15s",
-            }}
-            aria-label="Show Cart"
-            title="Show Cart"
-            disabled
-          >
-            🛒
-          </button>
-          <BackToTopButton show={showBackToTop} />
-        </div>
+        <FooterCard />
       </div>
     );
   }
 
-  // --- Not Found State ---
   if (!herb) {
     return (
-      <div
-        className="min-h-screen flex flex-col items-center justify-center px-4"
-        style={{
-          background: `linear-gradient(120deg, ${COLORS.vanilla} 0%, ${COLORS.carolina} 50%, ${COLORS.violet} 100%)`
-        }}
-      >
+      <div style={bgStyle}>
         <GlobalAnimations />
-        <TcmPartyZoneHeader />
+        <NavBar
+          showReportError={true}
+          showAbout={true}
+          showAdminButtons={true}
+          showLogo={true}
+          fixed={true}
+        />
+        <div style={{ height: NAVBAR_HEIGHT }} />
+        {backToHomeButton}
+        <div style={{ margin: "2.5em auto 1.5em auto", textAlign: "center" }}>
+          <Logo size={60} showBeta={true} />
+        </div>
         <div
           className="rounded-xl p-8 mb-6 flex flex-col items-start animate-fadeInScaleUp card-shadow"
           style={{
-            background: COLORS.vanilla,
-            border: `2.5px solid ${COLORS.violet}`,
-            color: COLORS.seal,
+            background: COLORS.backgroundGold,
+            border: `2.5px solid ${COLORS.accentGold}`,
+            color: COLORS.accentBlack,
             maxWidth: "500px",
             textAlign: "left",
             boxShadow: `0 6px 40px -8px ${COLORS.shadowStrong}`,
+            fontFamily: '"Noto Serif SC", "Songti SC", "KaiTi", serif',
+            margin: "0 auto"
           }}
         >
           <h2 className="text-3xl font-bold mb-4" style={{ color: COLORS.claret }}>Not Found</h2>
@@ -455,7 +554,7 @@ export default function HerbCard() {
             className="px-4 py-2 mt-2 rounded-full font-bold shadow-xl transition hover:scale-105 animate-bounceIn"
             style={{
               background: COLORS.violet,
-              color: COLORS.vanilla,
+              color: COLORS.backgroundGold,
               border: `2.5px solid ${COLORS.seal}`,
               boxShadow: `0 6px 40px -8px ${COLORS.shadowStrong}`,
             }}
@@ -463,241 +562,230 @@ export default function HerbCard() {
             Back to Home
           </button>
         </div>
-        <div className="floating-btns-container">
-          <button
-            style={{
-              background: COLORS.violet,
-              color: COLORS.vanilla,
-              borderRadius: "50%",
-              width: 49,
-              height: 49,
-              minWidth: 49,
-              minHeight: 49,
-              boxShadow: "0 2px 12px 0 #7C5CD366",
-              fontWeight: 700,
-              fontSize: 28,
-              display: "flex",
-              alignItems: "center",
-              justifyContent: "center",
-              border: `2px solid ${COLORS.vanilla}`,
-              transition: "background 0.2s, scale 0.15s",
-            }}
-            aria-label="Show Cart"
-            title="Show Cart"
-            disabled
-          >
-            🛒
-          </button>
-          <BackToTopButton show={showBackToTop} />
-        </div>
+        <FooterCard />
       </div>
     );
   }
 
-  // --- Main Render ---
   return (
-    <div
-      className="min-h-screen flex flex-col items-center justify-center px-4"
-      style={{ background: `linear-gradient(120deg, ${COLORS.vanilla} 0%, ${COLORS.carolina} 50%, ${COLORS.violet} 100%)` }}
-    >
+    <div style={bgStyle}>
       <GlobalAnimations />
-      <TcmPartyZoneHeader />
-
-      {/* HerbCart Drawer */}
+      <NavBar
+        showReportError={true}
+        showAbout={true}
+        showAdminButtons={true}
+        showLogo={true}
+        fixed={true}
+      />
+      <div style={{ height: NAVBAR_HEIGHT }} />
+      {backToHomeButton}
       <HerbCart
         show={showCart}
         onClose={() => setShowCart(false)}
+        onOpen={() => setShowCart(true)}
         onCreateFormula={handleCreateFormula}
+        sidebarTop={NAVBAR_HEIGHT}
       />
-
-      {/* Floating Cart & BackToTop Buttons */}
-      <div className="floating-btns-container">
-        <button
+      <BackToTopButton right={75} />
+      <div
+        className="flex flex-col items-center justify-center w-full"
+        style={{
+          minHeight: "60vh",
+          width: "100%",
+          marginTop: isMobile ? "12px" : "32px",
+        }}
+      >
+        <div
+          className="rounded-2xl p-8 flex flex-col items-start shadow-2xl animate-fadeInScaleUp card-shadow"
           style={{
-            background: COLORS.violet,
-            color: COLORS.vanilla,
-            borderRadius: "50%",
-            width: 49,
-            height: 49,
-            minWidth: 49,
-            minHeight: 49,
-            boxShadow: "0 2px 12px 0 #7C5CD366",
-            zIndex: 81,
-            fontWeight: 700,
-            fontSize: 28,
-            display: "flex",
-            alignItems: "center",
-            justifyContent: "center",
-            border: `2px solid ${COLORS.vanilla}`,
-            transition: "background 0.2s, scale 0.15s",
-          }}
-          onClick={() => setShowCart(true)}
-          aria-label="Show Cart"
-          title="Show Cart"
-        >
-          🛒{cart.length > 0 && (
-            <span
-              style={{
-                fontSize: 16,
-                marginLeft: 5,
-                background: COLORS.claret,
-                color: COLORS.vanilla,
-                borderRadius: "50%",
-                padding: "2px 8px",
-                fontWeight: 500,
-              }}
-            >
-              {cart.length}
-            </span>
-          )}
-        </button>
-        <BackToTopButton show={showBackToTop} />
-      </div>
-      {/* Main Herb Card UI */}
-      <div className="fixed top-8 right-10 z-40">
-        <Link
-          to="/"
-          className="px-5 py-2 rounded-full font-bold shadow-xl transition-all duration-200 hover:scale-105 animate-bounceIn"
-          style={{
-            background: COLORS.violet,
-            color: COLORS.vanilla,
-            border: `2.5px solid ${COLORS.seal}`,
+            background: `linear-gradient(120deg, ${COLORS.backgroundGold} 80%, ${COLORS.accentGold} 100%)`,
+            border: `2.5px solid ${COLORS.accentGold}`,
+            maxWidth: isMobile ? "98vw" : CARD_MAX_WIDTH,
+            width: isMobile ? "99vw" : "100%",
+            textAlign: "left",
             boxShadow: `0 6px 40px -8px ${COLORS.shadowStrong}`,
+            margin: isMobile ? "0 auto 22px auto" : "0 auto 42px auto",
+            position: "relative",
+            minHeight: "300px",
+            fontFamily: '"Noto Serif SC", "Songti SC", "KaiTi", serif',
+            padding: isMobile ? "18px 7px 22px 7px" : "32px 32px 32px 32px",
+            display: "flex",
+            flexDirection: "column",
+            alignItems: "flex-start",
+            justifyContent: "flex-start",
           }}
         >
-          Back to Home
-        </Link>
-      </div>
-      <div
-        className="rounded-2xl p-8 flex flex-col items-start shadow-2xl animate-fadeInScaleUp card-shadow"
-        style={{
-          background: `linear-gradient(120deg, ${COLORS.vanilla} 80%, ${COLORS.carolina} 100%)`,
-          border: `2.5px solid ${COLORS.violet}`,
-          maxWidth: "650px",
-          width: "100%",
-          textAlign: "left",
-          boxShadow: `0 6px 40px -8px ${COLORS.shadowStrong}`,
-          marginTop: "32px",
-          position: "relative",
-          minHeight: "300px",
-        }}
-      >
-        {/* Herb Image in Top Right */}
-        <HerbImage url={process.env.PUBLIC_URL + "/" + herb.herbImageURL} alt={getHerbDisplayName(herb)} />
-        <div className="flex items-center mb-4 animate-bounceIn">
-          <span className="text-4xl mr-3">🌿</span>
-          <h2 className="font-bold text-3xl" style={{ color: COLORS.claret, textAlign: "left" }}>
-            {highlightText(Array.isArray(herb.pinyinName) ? herb.pinyinName[0] : herb.pinyinName, query)}
-            <span className="ml-2 text-xl" style={{ color: COLORS.violet }}>{herb.chineseCharacters}</span>
-          </h2>
-        </div>
-        <p className="mb-2" style={{ color: COLORS.violet }}>
-          <strong>Category:</strong> {highlightText(herb.category, query)}
-        </p>
-        <p className="mb-2" style={{ color: COLORS.seal }}>
-          <strong>Pharmaceutical Name:</strong> {highlightText(herb.pharmaceuticalName, query)}
-        </p>
-        <p className="mb-2" style={{ color: COLORS.seal }}>
-          <strong>English Name(s):</strong>{" "}
-          {safeArr(herb.englishNames).map((n, i) => (
-            <span key={i}>{highlightText(n, query)}{i < safeArr(herb.englishNames).length - 1 ? ", " : ""}</span>
-          ))}
-        </p>
-        <p className="mb-2" style={{ color: COLORS.seal }}>
-          <strong>Properties:</strong>{" "}
-          {typeof herb.properties === "object"
-            ? [safeArr(herb.properties.taste).join(", "), safeArr(herb.properties.temperature).join(", ")].filter(Boolean).join(" / ")
-            : highlightText(herb.properties, query)}
-        </p>
-        <p className="mb-2" style={{ color: COLORS.seal }}>
-          <strong>Channels Entered:</strong>{" "}
-          {safeArr(herb.channelsEntered).join(", ")}
-        </p>
-        <p className="mb-2" style={{ color: COLORS.seal }}>
-          <strong>Keywords:</strong>{" "}
-          {safeArr(herb.keywords).map((k, i) => (
-            <span key={i}>{highlightText(k, query)}{i < safeArr(herb.keywords).length - 1 ? ", " : ""}</span>
-          ))}
-        </p>
-        <p className="mb-2" style={{ color: COLORS.seal }}>
-          <strong>Dosage:</strong> {highlightText(herb.dosage, query)}
-        </p>
-        <p className="mb-2" style={{ color: COLORS.seal }}>
-          <strong>Cautions/Contraindications:</strong>{" "}
-          {safeArr(herb.cautionsAndContraindications).map((c, i) => (
-            <span key={i}>{highlightText(c, query)}{i < safeArr(herb.cautionsAndContraindications).length - 1 ? "; " : ""}</span>
-          ))}
-        </p>
-        <p className="mb-2" style={{ color: COLORS.seal }}>
-          <strong>Notes:</strong>{" "}
-          {safeArr(herb.notes).map((n, i) => (
-            <span key={i}>{highlightText(n, query)}{i < safeArr(herb.notes).length - 1 ? "; " : ""}</span>
-          ))}
-        </p>
-        {/* Herb Cart Buttons */}
-        <div className="flex gap-4 mt-6">
-          {!isInCart ? (
-            <button
-              className="px-6 py-3 font-bold rounded-full shadow-xl transition hover:scale-105 animate-pulseGlow"
-              style={{
-                background: COLORS.carolina,
-                color: COLORS.seal,
-                border: `2.5px solid ${COLORS.violet}`,
-                boxShadow: `0 6px 40px -8px ${COLORS.shadowStrong}`,
-                alignSelf: "flex-start"
-              }}
-              onClick={handleAddToCart}
-            >
-              Add to Cart
-            </button>
-          ) : (
-            <button
-              className="px-6 py-3 font-bold rounded-full shadow-xl transition hover:scale-105 animate-pulseGlow"
-              style={{
-                background: COLORS.claret,
-                color: COLORS.vanilla,
-                border: `2.5px solid ${COLORS.violet}`,
-                boxShadow: `0 6px 40px -8px ${COLORS.shadowStrong}`,
-                alignSelf: "flex-start"
-              }}
-              onClick={handleRemoveFromCart}
-            >
-              Remove from Cart
-            </button>
-          )}
-          <button
-            className="px-6 py-3 font-bold rounded-full shadow-xl transition hover:scale-105 animate-pulseGlow"
+          {/* Herb Image */}
+          <HerbImage url={process.env.PUBLIC_URL + "/" + herb.herbImageURL} alt={getHerbDisplayName(herb)} isMobile={isMobile} />
+          <div className="flex items-center mb-4 animate-bounceIn" style={{ flexWrap: isMobile ? "wrap" : "nowrap" }}>
+            <span className="text-4xl mr-3">🌿</span>
+            <h2 className="font-bold text-3xl" style={{ color: COLORS.claret, textAlign: "left", wordBreak: "break-word" }}>
+              {highlightText(Array.isArray(herb.pinyinName) ? herb.pinyinName[0] : herb.pinyinName, query)}
+              <span className="ml-2 text-xl" style={{ color: COLORS.violet }}>{herb.chineseCharacters}</span>
+            </h2>
+          </div>
+          <p className="mb-2" style={{ color: COLORS.violet, fontSize: isMobile ? "1em" : "1.07em" }}>
+            <strong>Category:</strong> {highlightText(herb.category, query)}
+          </p>
+          <p className="mb-2" style={{ color: COLORS.seal, fontSize: isMobile ? "1em" : "1.07em" }}>
+            <strong>Pharmaceutical Name:</strong> {highlightText(herb.pharmaceuticalName, query)}
+          </p>
+          <p className="mb-2" style={{ color: COLORS.seal, fontSize: isMobile ? "1em" : "1.07em" }}>
+            <strong>English Name(s):</strong>{" "}
+            {safeArr(herb.englishNames).map((n, i) => (
+              <span key={i}>{highlightText(n, query)}{i < safeArr(herb.englishNames).length - 1 ? ", " : ""}</span>
+            ))}
+          </p>
+          {/* YoSan + Formats bubbles */}
+          <div
             style={{
-              background: COLORS.violet,
-              color: COLORS.vanilla,
-              border: `2.5px solid ${COLORS.seal}`,
-              boxShadow: `0 6px 40px -8px ${COLORS.shadowStrong}`,
-              alignSelf: "flex-start"
+              margin: "0.5em 0 0.5em 0",
+              fontSize: isMobile ? "0.74em" : "0.8em",
+              display: "flex",
+              alignItems: "center",
+              flexWrap: "wrap",
+              gap: isMobile ? "8px" : "18px",
             }}
-            onClick={() => navigate(-1)}
           >
-            Go Back
-          </button>
+            <YoSanCarriesAndFormatsBubble herb={herb} isMobile={isMobile} />
+          </div>
+          {/* Properties bubbles */}
+          <p className="mb-2" style={{
+            color: COLORS.seal,
+            fontSize: isMobile ? "1em" : "1.07em",
+            display: "flex",
+            flexWrap: "wrap",
+            alignItems: "center"
+          }}>
+            <strong>Properties:</strong>{" "}
+            {propertiesArr.length > 0
+              ? propertiesArr.map((val, i) =>
+                  <PropertyBubble
+                    value={val}
+                    uniqueKey={`property-card-${herb.pinyinName || herb.name || i}-${val}-${i}`}
+                    key={`property-card-${herb.pinyinName || herb.name || i}-${val}-${i}`}
+                    isMobile={isMobile}
+                  />
+                )
+              : highlightText(herb.properties, query)}
+          </p>
+          {/* Channels Entered bubbles */}
+          <p className="mb-2" style={{
+            color: COLORS.seal,
+            fontSize: isMobile ? "1em" : "1.07em",
+            display: "flex",
+            flexWrap: "wrap",
+            alignItems: "center"
+          }}>
+            <strong>Channels Entered:</strong>{" "}
+            {channelsArr.length > 0
+              ? channelsArr.map((val, i) =>
+                  <ChannelBubble
+                    value={val}
+                    uniqueKey={`channel-card-${herb.pinyinName || herb.name || i}-${val}-${i}`}
+                    key={`channel-card-${herb.pinyinName || herb.name || i}-${val}-${i}`}
+                    isMobile={isMobile}
+                  />
+                )
+              : safeArr(herb.channelsEntered).join(", ")}
+          </p>
+          <p className="mb-2" style={{ color: COLORS.seal, fontSize: isMobile ? "1em" : "1.07em" }}>
+            <strong>Keywords:</strong>{" "}
+            {safeArr(herb.keywords).map((k, i) => (
+              <span key={i}>{highlightText(k, query)}{i < safeArr(herb.keywords).length - 1 ? ", " : ""}</span>
+            ))}
+          </p>
+          <p className="mb-2" style={{ color: COLORS.seal, fontSize: isMobile ? "1em" : "1.07em" }}>
+            <strong>Dosage:</strong> {highlightText(herb.dosage, query)}
+          </p>
+          <p className="mb-2" style={{ color: COLORS.seal, fontSize: isMobile ? "1em" : "1.07em" }}>
+            <strong>Cautions/Contraindications:</strong>{" "}
+            {safeArr(herb.cautionsAndContraindications).map((c, i) => (
+              <span key={i}>{highlightText(c, query)}{i < safeArr(herb.cautionsAndContraindications).length - 1 ? "; " : ""}</span>
+            ))}
+          </p>
+          <p className="mb-2" style={{ color: COLORS.seal, fontSize: isMobile ? "1em" : "1.07em" }}>
+            <strong>Notes:</strong>{" "}
+            {safeArr(herb.notes).map((n, i) => (
+              <span key={i}>{highlightText(n, query)}{i < safeArr(herb.notes).length - 1 ? "; " : ""}</span>
+            ))}
+          </p>
+          <div
+            className="flex gap-4 mt-6"
+            style={{
+              flexWrap: isMobile ? "wrap" : "nowrap",
+              justifyContent: isMobile ? "center" : "flex-start",
+              width: isMobile ? "100%" : undefined,
+            }}
+          >
+            {!isInCart ? (
+              <button
+                className="px-6 py-3 font-bold rounded-full shadow-xl transition hover:scale-105 animate-pulseGlow"
+                style={{
+                  background: COLORS.accentGold,
+                  color: COLORS.accentBlack,
+                  border: `2.5px solid ${COLORS.violet}`,
+                  boxShadow: `0 6px 40px -8px ${COLORS.shadowStrong}`,
+                  alignSelf: isMobile ? "center" : "flex-start",
+                  width: isMobile ? "90%" : undefined,
+                  fontSize: isMobile ? "1em" : "1.08em",
+                  margin: isMobile ? "0 auto" : undefined,
+                }}
+                onClick={handleAddToCart}
+              >
+                Add to Cart
+              </button>
+            ) : (
+              <button
+                className="px-6 py-3 font-bold rounded-full shadow-xl transition hover:scale-105 animate-pulseGlow"
+                style={{
+                  background: COLORS.claret,
+                  color: COLORS.backgroundGold,
+                  border: `2.5px solid ${COLORS.violet}`,
+                  boxShadow: `0 6px 40px -8px ${COLORS.shadowStrong}`,
+                  alignSelf: isMobile ? "center" : "flex-start",
+                  width: isMobile ? "90%" : undefined,
+                  fontSize: isMobile ? "1em" : "1.08em",
+                  margin: isMobile ? "0 auto" : undefined,
+                }}
+                onClick={handleRemoveFromCart}
+              >
+                Remove from Cart
+              </button>
+            )}
+            <button
+              className="px-6 py-3 font-bold rounded-full shadow-xl transition hover:scale-105 animate-pulseGlow"
+              style={{
+                background: COLORS.violet,
+                color: COLORS.backgroundGold,
+                border: `2.5px solid ${COLORS.seal}`,
+                boxShadow: `0 6px 40px -8px ${COLORS.shadowStrong}`,
+                alignSelf: isMobile ? "center" : "flex-start",
+                width: isMobile ? "90%" : undefined,
+                fontSize: isMobile ? "1em" : "1.08em",
+                margin: isMobile ? "0 auto" : undefined,
+              }}
+              onClick={() => navigate(-1)}
+            >
+              Go Back
+            </button>
+          </div>
         </div>
       </div>
-      {/* PATCH: Show all formulas that contain this herb below the herb card */}
-      <div
-        style={{
-          marginTop: "48px",
-          width: "100%",
-          maxWidth: "980px",
-          background: COLORS.vanilla,
-          borderRadius: "2.2em",
-          boxShadow: `0 6px 40px -8px ${COLORS.shadowStrong}`,
-          border: `2.5px solid ${COLORS.violet}`,
-          padding: "24px 18px",
-        }}
-        className="animate-fadeInScaleUp"
-      >
-        <WhatFormulaMakesUpThoseHerbs
-          herbs={[herb]}
-        />
-      </div>
+      <WhatFormulaMakesUpThoseHerbs
+        herbs={[herb]}
+        mainHerbObj={herb}
+        cart={cart}
+        addHerb={addHerb}
+        removeHerb={removeHerb}
+        showCartOptions={true}
+        onAddFormulaBuilder={handleAddFormulaBuilder}
+        formulaCardStyle={true}
+        highlightMainHerb={true}
+        showAddToFormulaBuilderButton={true} // <-- Pass this!
+      />
+      <HerbCategoryInfo />
+      <FooterCard />
     </div>
   );
 }
