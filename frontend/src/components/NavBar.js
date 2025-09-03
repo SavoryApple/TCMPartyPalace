@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useRef } from "react";
-import { Link, useNavigate } from "react-router-dom";
+import { useNavigate, useLocation } from "react-router-dom";
 import Logo from "./Logo";
 
 const COLORS = {
@@ -12,6 +12,87 @@ const COLORS = {
   shadowStrong: "#B38E3FCC",
 };
 
+// Custom Modal Confirm
+function ModalConfirm({ visible, message, onConfirm, onCancel }) {
+  if (!visible) return null;
+  return (
+    <div
+      style={{
+        position: "fixed",
+        top: 0,
+        left: 0,
+        zIndex: 9999,
+        width: "100vw",
+        height: "100vh",
+        background: "rgba(0,0,0,0.32)",
+        display: "flex",
+        justifyContent: "center",
+        alignItems: "center",
+        animation: "fadeInModal 0.24s",
+      }}
+    >
+      <div
+        style={{
+          background: COLORS.backgroundRed,
+          color: COLORS.accentIvory,
+          border: `3px solid ${COLORS.accentGold}`,
+          borderRadius: "1.5em",
+          padding: "2em 2.3em",
+          minWidth: "320px",
+          maxWidth: "95vw",
+          boxShadow: `0 8px 32px -4px ${COLORS.shadowStrong}`,
+          fontWeight: 700,
+          fontSize: "1.18em",
+          textAlign: "center",
+        }}
+      >
+        {message}
+        <div style={{marginTop: "1.7em", display: "flex", justifyContent: "center", gap: "2.5em"}}>
+          <button
+            style={{
+              background: COLORS.accentGold,
+              color: COLORS.backgroundRed,
+              fontWeight: 900,
+              fontSize: "1em",
+              border: "none",
+              borderRadius: "1em",
+              padding: "0.6em 2em",
+              cursor: "pointer",
+              boxShadow: `0 2px 8px -3px ${COLORS.shadowStrong}`,
+            }}
+            onClick={onConfirm}
+            autoFocus
+          >
+            Yes, Leave
+          </button>
+          <button
+            style={{
+              background: COLORS.accentDarkGold,
+              color: COLORS.accentIvory,
+              fontWeight: 900,
+              fontSize: "1em",
+              border: "none",
+              borderRadius: "1em",
+              padding: "0.6em 2em",
+              cursor: "pointer",
+              boxShadow: `0 2px 8px -3px ${COLORS.shadowStrong}`,
+            }}
+            onClick={onCancel}
+          >
+            Cancel
+          </button>
+        </div>
+      </div>
+      <style>{`
+        @keyframes fadeInModal {
+          0% { opacity: 0; }
+          100% { opacity: 1; }
+        }
+      `}</style>
+    </div>
+  );
+}
+
 export default function NavBar({
   showReportError = false,
   showAbout = false,
@@ -22,6 +103,7 @@ export default function NavBar({
   backToHomeOutsideMenu = false,
 }) {
   const navigate = useNavigate();
+  const location = useLocation();
   const isAdmin =
     localStorage.getItem("role") === "admin" &&
     localStorage.getItem("token");
@@ -37,6 +119,82 @@ export default function NavBar({
 
   const [menuOpen, setMenuOpen] = useState(false);
   const menuRef = useRef(null);
+
+  // Updated quizPaths logic to normalize both quizPaths and current pathname for robust matching
+  const quizPaths = [
+    "elementquiz",
+    "elementquizresults",
+    "elementquizcomprehensive",
+    "/elementquiz",
+    "/elementquizresults",
+    "/elementquizcomprehensive",
+  ];
+  const normalizedPath = location.pathname
+    .toLowerCase()
+    .replace(/^\/+/, "")   // Remove leading slash(es)
+    .replace(/\/$/, "");   // Remove trailing slash
+
+  const isQuizPage = quizPaths.some(path =>
+    path.replace(/^\/+/, "") === normalizedPath
+  );
+
+  // Modal confirm state
+  const [modalState, setModalState] = useState({
+    visible: false,
+    message: "",
+    onConfirm: null,
+    onCancel: null,
+  });
+
+  function showModalConfirm(message, onConfirm, onCancel) {
+    setModalState({ visible: true, message, onConfirm, onCancel });
+  }
+  function hideModalConfirm() {
+    setModalState({ ...modalState, visible: false });
+  }
+
+  // NAVIGATION LOGIC (uses modal only for quiz pages)
+  function goTo(path) {
+    setMenuOpen(false);
+
+    if (isQuizPage) {
+      showModalConfirm(
+        "All quiz data will be erased if you leave this page. Are you sure you want to navigate away?",
+        () => {
+          hideModalConfirm();
+          if (path.startsWith("/")) {
+            navigate(path);
+          } else {
+            navigate("/" + path);
+          }
+        },
+        hideModalConfirm
+      );
+      return;
+    }
+
+    if (path.startsWith("/")) {
+      navigate(path);
+    } else {
+      navigate("/" + path);
+    }
+  }
+
+  function handleLogoClick(e) {
+    e.preventDefault();
+    if (isQuizPage) {
+      showModalConfirm(
+        "All quiz data will be erased if you leave this page. Are you sure you want to go home?",
+        () => {
+          hideModalConfirm();
+          navigate("/");
+        },
+        hideModalConfirm
+      );
+      return;
+    }
+    navigate("/");
+  }
 
   const handleHamburgerClick = (e) => {
     e.stopPropagation();
@@ -68,239 +226,298 @@ export default function NavBar({
     }
   }, [menuOpen, isMobile]);
 
-  // Helper to use absolute navigation for menu buttons
-  const goTo = (path) => {
-    setMenuOpen(false);
-    // Use absolute path for top-level navigation
-    if (path.startsWith("/")) {
-      navigate(path);
-    } else {
-      navigate("/" + path);
-    }
-  };
-
   return (
-    <header
-      className="navbar-header shadow-lg animate-fadeInScaleUp"
-      style={{
-        background: "rgba(166,44,26,0.92)",
-        borderBottom: `5px double ${COLORS.accentGold}`,
-        position: fixed ? "fixed" : "relative",
-        top: fixed ? 0 : undefined,
-        left: fixed ? 0 : undefined,
-        zIndex: 100,
-        width: "100vw",
-        minWidth: "100vw",
-        maxWidth: "100vw",
-        boxSizing: "border-box",
-        height: `${navBarHeight}px`,
-        minHeight: `${navBarHeight}px`,
-        maxHeight: `${navBarHeight}px`,
-        overflow: "hidden",
-        display: "flex",
-        flexDirection: "row",
-        alignItems: "center",
-        justifyContent: "space-between",
-        padding: isMobile ? "0 0.5em" : "0 2em",
-      }}
-    >
-      {/* Logo section */}
-      <div
+    <>
+      {/* Modal confirm for leaving quiz pages */}
+      <ModalConfirm
+        visible={modalState.visible}
+        message={modalState.message}
+        onConfirm={modalState.onConfirm}
+        onCancel={modalState.onCancel}
+      />
+      <header
+        className="navbar-header shadow-lg animate-fadeInScaleUp"
         style={{
+          background: "rgba(166,44,26,0.92)",
+          borderBottom: `5px double ${COLORS.accentGold}`,
+          position: fixed ? "fixed" : "relative",
+          top: fixed ? 0 : undefined,
+          left: fixed ? 0 : undefined,
+          zIndex: 100,
+          width: "100vw",
+          minWidth: "100vw",
+          maxWidth: "100vw",
+          boxSizing: "border-box",
+          height: `${navBarHeight}px`,
+          minHeight: `${navBarHeight}px`,
+          maxHeight: `${navBarHeight}px`,
+          overflow: "hidden",
           display: "flex",
+          flexDirection: "row",
           alignItems: "center",
-          height: "100%",
-          maxHeight: "100%",
+          justifyContent: "space-between",
+          padding: isMobile ? "0 0.5em" : "0 2em",
         }}
       >
-        {showLogo && (
-          <Logo
-            size={isMobile ? 40 : 60}
-            showBeta={true}
-            style={{
-              marginRight: isMobile ? 0 : "1em",
-              marginBottom: isMobile ? "0.5em" : 0,
-              filter: "drop-shadow(0 2px 7px #C9A052)",
-              maxHeight: `${navBarHeight - 10}px`,
-              height: "auto",
-            }}
-          />
-        )}
-      </div>
-      {/* Back to Home always outside hamburger menu if requested */}
-      {showBackToHome && backToHomeOutsideMenu && (
-        <Link
-          to="/"
-          className="px-5 py-2 rounded-full font-bold shadow-xl transition-all duration-200 hover:scale-105"
+        {/* Logo section with click handler */}
+        <div
           style={{
-            background: COLORS.accentGold,
-            color: COLORS.backgroundRed,
-            fontFamily: '"Noto Serif SC", "Songti SC", "KaiTi", serif',
-            border: "none",
-            fontWeight: 700,
-            fontSize: "1em",
-            boxShadow: `0 3px 8px -2px ${COLORS.shadowStrong}`,
-            minWidth: "110px",
-            height: "38px",
-            display: "inline-block",
-            textAlign: "center",
-            zIndex: 102,
-            marginLeft: isMobile ? "0.1em" : "2em",
+            display: "flex",
+            alignItems: "center",
+            height: "100%",
+            maxHeight: "100%",
+            cursor: "pointer"
+          }}
+          onClick={handleLogoClick}
+          tabIndex={0}
+          aria-label="Back to Home"
+          role="button"
+          onKeyDown={(e) => {
+            if (e.key === "Enter" || e.key === " ") handleLogoClick(e);
           }}
         >
-          Back to Home
-        </Link>
-      )}
-      {/* Hamburger icon for mobile */}
-      {isMobile ? (
-        <div style={{ height: "100%", display: "flex", alignItems: "center", position: "relative" }}>
+          {showLogo && (
+            <Logo
+              size={isMobile ? 40 : 60}
+              showBeta={true}
+              style={{
+                marginRight: isMobile ? 0 : "1em",
+                marginBottom: isMobile ? "0.5em" : 0,
+                filter: "drop-shadow(0 2px 7px #C9A052)",
+                maxHeight: `${navBarHeight - 10}px`,
+                height: "auto",
+                cursor: "pointer"
+              }}
+            />
+          )}
+        </div>
+
+        {/* Back to Home always outside hamburger menu if requested */}
+        {showBackToHome && backToHomeOutsideMenu && (
           <button
-            id="nav-hamburger-btn"
-            aria-label={menuOpen ? "Close navigation" : "Open navigation"}
-            onClick={handleHamburgerClick}
+            className="px-5 py-2 rounded-full font-bold shadow-xl transition-all duration-200 hover:scale-105"
             style={{
-              background: "none",
+              background: COLORS.accentGold,
+              color: COLORS.backgroundRed,
+              fontFamily: '"Noto Serif SC", "Songti SC", "KaiTi", serif',
               border: "none",
-              fontSize: "2em",
-              color: COLORS.accentGold,
-              cursor: "pointer",
-              padding: "0 0.3em",
-              lineHeight: 1,
+              fontWeight: 700,
+              fontSize: "1em",
+              boxShadow: `0 3px 8px -2px ${COLORS.shadowStrong}`,
+              minWidth: "110px",
+              height: "38px",
+              display: "inline-block",
+              textAlign: "center",
               zIndex: 102,
+              marginLeft: isMobile ? "0.1em" : "2em",
+            }}
+            onClick={(e) => {
+              e.preventDefault();
+              if (isQuizPage) {
+                showModalConfirm(
+                  "All quiz data will be erased if you leave this page. Are you sure you want to go home?",
+                  () => {
+                    hideModalConfirm();
+                    navigate("/");
+                  },
+                  hideModalConfirm
+                );
+                return;
+              }
+              navigate("/");
             }}
           >
-            {menuOpen ? "✕" : "☰"}
+            Back to Home
           </button>
-          {/* Slide-down menu */}
-          {menuOpen && (
-            <div
-              ref={menuRef}
+        )}
+        {/* Hamburger icon for mobile */}
+        {isMobile ? (
+          <div style={{ height: "100%", display: "flex", alignItems: "center", position: "relative" }}>
+            <button
+              id="nav-hamburger-btn"
+              aria-label={menuOpen ? "Close navigation" : "Open navigation"}
+              onClick={handleHamburgerClick}
               style={{
-                position: "fixed",
-                top: navBarHeight,
-                left: 0,
-                width: "100vw",
-                background: COLORS.backgroundRed,
-                boxShadow: `0 4px 16px -6px ${COLORS.shadowStrong}`,
-                zIndex: 101,
-                display: "flex",
-                flexDirection: "column",
-                alignItems: "flex-start",
-                padding: "0.5em 1em",
-                gap: "0.7em",
-                maxHeight: "calc(100vh - 74px)",
-                overflowY: "auto",
+                background: "none",
+                border: "none",
+                fontSize: "2em",
+                color: COLORS.accentGold,
+                cursor: "pointer",
+                padding: "0 0.3em",
+                lineHeight: 1,
+                zIndex: 102,
               }}
             >
-              <ul
+              {menuOpen ? "✕" : "☰"}
+            </button>
+            {/* Slide-down menu */}
+            {menuOpen && (
+              <div
+                ref={menuRef}
                 style={{
-                  listStyle: "none",
-                  margin: 0,
-                  padding: 0,
+                  position: "fixed",
+                  top: navBarHeight,
+                  left: 0,
+                  width: "100vw",
+                  background: COLORS.backgroundRed,
+                  boxShadow: `0 4px 16px -6px ${COLORS.shadowStrong}`,
+                  zIndex: 101,
                   display: "flex",
                   flexDirection: "column",
+                  alignItems: "flex-start",
+                  padding: "0.5em 1em",
                   gap: "0.7em",
-                  fontFamily: '"Noto Serif SC", "Songti SC", "KaiTi", serif',
-                  width: "100%",
+                  maxHeight: "calc(100vh - 74px)",
+                  overflowY: "auto",
                 }}
               >
-                {/* Only include Back to Home in hamburger menu if NOT outside */}
-                {showBackToHome && !backToHomeOutsideMenu && (
-                  <li>
-                    <Link
-                      to="/"
-                      className="px-5 py-2 rounded-full font-bold shadow-xl transition-all duration-200 hover:scale-105"
-                      style={{
-                        background: COLORS.accentGold,
-                        color: COLORS.backgroundRed,
-                        fontFamily: '"Noto Serif SC", "Songti SC", "KaiTi", serif',
-                        border: "none",
-                        fontWeight: 700,
-                        fontSize: "1em",
-                        boxShadow: `0 3px 8px -2px ${COLORS.shadowStrong}`,
-                        width: "100%",
-                        display: "inline-block",
-                        textAlign: "center",
-                        marginBottom: "0.5em",
-                      }}
-                      onClick={() => setMenuOpen(false)}
-                    >
-                      Back to Home
-                    </Link>
-                  </li>
-                )}
-                {showReportError && (
-                  <li>
-                    <button
-                      style={{
-                        color: COLORS.accentGold,
-                        background: "none",
-                        border: "none",
-                        cursor: "pointer",
-                        font: "inherit",
-                        padding: 0,
-                        fontFamily: '"Noto Serif SC", "Songti SC", "KaiTi", serif',
-                        fontSize: "1.1em",
-                        width: "100%",
-                        textAlign: "left",
-                      }}
-                      onClick={() => goTo("report")}
-                    >
-                      Report an Error
-                    </button>
-                  </li>
-                )}
-                {showAbout && (
-                  <li>
-                    <button
-                      style={{
-                        color: COLORS.accentGold,
-                        background: "none",
-                        border: "none",
-                        cursor: "pointer",
-                        font: "inherit",
-                        padding: 0,
-                        fontFamily: '"Noto Serif SC", "Songti SC", "KaiTi", serif',
-                        fontSize: "1.1em",
-                        width: "100%",
-                        textAlign: "left",
-                      }}
-                      onClick={() => goTo("about")}
-                    >
-                      About
-                    </button>
-                  </li>
-                )}
-                {showAdminButtons && (
-                  !isAdmin ? (
-                    <>
+                <ul
+                  style={{
+                    listStyle: "none",
+                    margin: 0,
+                    padding: 0,
+                    display: "flex",
+                    flexDirection: "column",
+                    gap: "0.7em",
+                    fontFamily: '"Noto Serif SC", "Songti SC", "KaiTi", serif',
+                    width: "100%",
+                  }}
+                >
+                  {/* Only include Back to Home in hamburger menu if NOT outside */}
+                  {showBackToHome && !backToHomeOutsideMenu && (
+                    <li>
+                      <button
+                        className="px-5 py-2 rounded-full font-bold shadow-xl transition-all duration-200 hover:scale-105"
+                        style={{
+                          background: COLORS.accentGold,
+                          color: COLORS.backgroundRed,
+                          fontFamily: '"Noto Serif SC", "Songti SC", "KaiTi", serif',
+                          border: "none",
+                          fontWeight: 700,
+                          fontSize: "1em",
+                          boxShadow: `0 3px 8px -2px ${COLORS.shadowStrong}`,
+                          width: "100%",
+                          display: "inline-block",
+                          textAlign: "center",
+                          marginBottom: "0.5em",
+                        }}
+                        onClick={(e) => {
+                          e.preventDefault();
+                          setMenuOpen(false);
+                          if (isQuizPage) {
+                            showModalConfirm(
+                              "All quiz data will be erased if you leave this page. Are you sure you want to go home?",
+                              () => {
+                                hideModalConfirm();
+                                navigate("/");
+                              },
+                              hideModalConfirm
+                            );
+                            return;
+                          }
+                          navigate("/");
+                        }}
+                      >
+                        Back to Home
+                      </button>
+                    </li>
+                  )}
+                  {showReportError && (
+                    <li>
+                      <button
+                        style={{
+                          color: COLORS.accentGold,
+                          background: "none",
+                          border: "none",
+                          cursor: "pointer",
+                          font: "inherit",
+                          padding: 0,
+                          fontFamily: '"Noto Serif SC", "Songti SC", "KaiTi", serif',
+                          fontSize: "1.1em",
+                          width: "100%",
+                          textAlign: "left",
+                        }}
+                        onClick={() => goTo("report")}
+                      >
+                        Report an Error
+                      </button>
+                    </li>
+                  )}
+                  {showAbout && (
+                    <li>
+                      <button
+                        style={{
+                          color: COLORS.accentGold,
+                          background: "none",
+                          border: "none",
+                          cursor: "pointer",
+                          font: "inherit",
+                          padding: 0,
+                          fontFamily: '"Noto Serif SC", "Songti SC", "KaiTi", serif',
+                          fontSize: "1.1em",
+                          width: "100%",
+                          textAlign: "left",
+                        }}
+                        onClick={() => goTo("about")}
+                      >
+                        About
+                      </button>
+                    </li>
+                  )}
+                  {showAdminButtons && (
+                    !isAdmin ? (
+                      <>
+                        <li>
+                          <button
+                            style={{
+                              background: COLORS.accentGold,
+                              color: COLORS.backgroundRed,
+                              border: "none",
+                              borderRadius: "1.3em",
+                              fontWeight: 700,
+                              fontSize: "1em",
+                              padding: "8px 26px",
+                              cursor: "pointer",
+                              boxShadow: `0 3px 8px -2px ${COLORS.shadowStrong}`,
+                              width: "100%",
+                              marginBottom: "0.5em",
+                              textAlign: "left",
+                            }}
+                            className="hover:bg-accentDarkGold"
+                            onClick={() => goTo("login")}
+                          >
+                            Admin Login
+                          </button>
+                        </li>
+                        <li>
+                          <button
+                            style={{
+                              background: COLORS.accentBlack,
+                              color: COLORS.accentGold,
+                              border: "none",
+                              borderRadius: "1.3em",
+                              fontWeight: 700,
+                              fontSize: "1em",
+                              padding: "8px 26px",
+                              cursor: "pointer",
+                              boxShadow: `0 3px 8px -2px ${COLORS.shadowStrong}`,
+                              width: "100%",
+                              marginBottom: "0.5em",
+                              textAlign: "left",
+                            }}
+                            className="hover:bg-backgroundRed"
+                            onClick={() => goTo("register")}
+                          >
+                            Register Admin
+                          </button>
+                        </li>
+                      </>
+                    ) : (
                       <li>
                         <button
                           style={{
-                            background: COLORS.accentGold,
-                            color: COLORS.backgroundRed,
-                            border: "none",
-                            borderRadius: "1.3em",
-                            fontWeight: 700,
-                            fontSize: "1em",
-                            padding: "8px 26px",
-                            cursor: "pointer",
-                            boxShadow: `0 3px 8px -2px ${COLORS.shadowStrong}`,
-                            width: "100%",
-                            marginBottom: "0.5em",
-                            textAlign: "left",
-                          }}
-                          className="hover:bg-accentDarkGold"
-                          onClick={() => goTo("login")}
-                        >
-                          Admin Login
-                        </button>
-                      </li>
-                      <li>
-                        <button
-                          style={{
-                            background: COLORS.accentBlack,
-                            color: COLORS.accentGold,
+                            background: COLORS.accentEmerald,
+                            color: COLORS.accentIvory,
                             border: "none",
                             borderRadius: "1.3em",
                             fontWeight: 700,
@@ -313,139 +530,136 @@ export default function NavBar({
                             textAlign: "left",
                           }}
                           className="hover:bg-backgroundRed"
-                          onClick={() => goTo("register")}
+                          onClick={() => goTo("admin")}
                         >
-                          Register Admin
+                          Admin Dashboard
                         </button>
                       </li>
-                    </>
-                  ) : (
-                    <li>
-                      <button
-                        style={{
-                          background: COLORS.accentEmerald,
-                          color: COLORS.accentIvory,
-                          border: "none",
-                          borderRadius: "1.3em",
-                          fontWeight: 700,
-                          fontSize: "1em",
-                          padding: "8px 26px",
-                          cursor: "pointer",
-                          boxShadow: `0 3px 8px -2px ${COLORS.shadowStrong}`,
-                          width: "100%",
-                          marginBottom: "0.5em",
-                          textAlign: "left",
-                        }}
-                        className="hover:bg-backgroundRed"
-                        onClick={() => goTo("admin")}
-                      >
-                        Admin Dashboard
-                      </button>
-                    </li>
-                  )
-                )}
-              </ul>
-            </div>
-          )}
-        </div>
-      ) : (
-        // Desktop nav layout
-        <nav
-          style={{
-            display: "flex",
-            alignItems: "center",
-            height: "100%",
-            maxHeight: "100%",
-            overflow: "hidden",
-            flexWrap: "wrap",
-            gap: "1em",
-          }}
-        >
-          <ul
-            className="flex font-semibold"
+                    )
+                  )}
+                </ul>
+              </div>
+            )}
+          </div>
+        ) : (
+          // Desktop nav layout
+          <nav
             style={{
-              margin: 0,
-              padding: 0,
-              flexDirection: "row",
-              flexWrap: "wrap",
-              fontFamily: '"Noto Serif SC", "Songti SC", "KaiTi", serif',
-              display: showReportError || showAbout ? "flex" : "none",
-              gap: "2em",
+              display: "flex",
               alignItems: "center",
+              height: "100%",
+              maxHeight: "100%",
+              overflow: "hidden",
+              flexWrap: "wrap",
+              gap: "1em",
             }}
           >
-            {showReportError && (
-              <li>
-                <button
-                  style={{
-                    color: COLORS.accentGold,
-                    background: "none",
-                    border: "none",
-                    cursor: "pointer",
-                    font: "inherit",
-                    padding: 0,
-                    fontFamily: '"Noto Serif SC", "Songti SC", "KaiTi", serif',
-                    height: "38px",
-                  }}
-                  onClick={() => goTo("report")}
-                >
-                  Report an Error
-                </button>
-              </li>
-            )}
-            {showAbout && (
-              <li>
-                <button
-                  style={{
-                    color: COLORS.accentGold,
-                    background: "none",
-                    border: "none",
-                    cursor: "pointer",
-                    font: "inherit",
-                    padding: 0,
-                    fontFamily: '"Noto Serif SC", "Songti SC", "KaiTi", serif',
-                    height: "38px",
-                  }}
-                  onClick={() => goTo("about")}
-                >
-                  About
-                </button>
-              </li>
-            )}
-          </ul>
-          <div style={{
-            display: "flex",
-            flexDirection: "row",
-            gap: "1em",
-            alignItems: "center",
-            whiteSpace: "nowrap",
-          }}>
-            {showAdminButtons && (
-              !isAdmin ? (
-                <>
+            <ul
+              className="flex font-semibold"
+              style={{
+                margin: 0,
+                padding: 0,
+                flexDirection: "row",
+                flexWrap: "wrap",
+                fontFamily: '"Noto Serif SC", "Songti SC", "KaiTi", serif',
+                display: showReportError || showAbout ? "flex" : "none",
+                gap: "2em",
+                alignItems: "center",
+              }}
+            >
+              {showReportError && (
+                <li>
                   <button
                     style={{
-                      background: COLORS.accentGold,
-                      color: COLORS.backgroundRed,
-                      border: "none",
-                      borderRadius: "1.3em",
-                      fontWeight: 700,
-                      fontSize: "1em",
-                      padding: "8px 26px",
-                      cursor: "pointer",
-                      boxShadow: `0 3px 8px -2px ${COLORS.shadowStrong}`,
-                      height: "38px",
-                      minWidth: "110px",
-                    }}
-                    className="hover:bg-accentDarkGold"
-                    onClick={() => goTo("login")}
-                  >
-                    Admin Login
-                  </button>
-                  <button
-                    style={{
-                      background: COLORS.accentBlack,
                       color: COLORS.accentGold,
+                      background: "none",
+                      border: "none",
+                      cursor: "pointer",
+                      font: "inherit",
+                      padding: 0,
+                      fontFamily: '"Noto Serif SC", "Songti SC", "KaiTi", serif',
+                      height: "38px",
+                    }}
+                    onClick={() => goTo("report")}
+                  >
+                    Report an Error
+                  </button>
+                </li>
+              )}
+              {showAbout && (
+                <li>
+                  <button
+                    style={{
+                      color: COLORS.accentGold,
+                      background: "none",
+                      border: "none",
+                      cursor: "pointer",
+                      font: "inherit",
+                      padding: 0,
+                      fontFamily: '"Noto Serif SC", "Songti SC", "KaiTi", serif',
+                      height: "38px",
+                    }}
+                    onClick={() => goTo("about")}
+                  >
+                    About
+                  </button>
+                </li>
+              )}
+            </ul>
+            <div style={{
+              display: "flex",
+              flexDirection: "row",
+              gap: "1em",
+              alignItems: "center",
+              whiteSpace: "nowrap",
+            }}>
+              {showAdminButtons && (
+                !isAdmin ? (
+                  <>
+                    <button
+                      style={{
+                        background: COLORS.accentGold,
+                        color: COLORS.backgroundRed,
+                        border: "none",
+                        borderRadius: "1.3em",
+                        fontWeight: 700,
+                        fontSize: "1em",
+                        padding: "8px 26px",
+                        cursor: "pointer",
+                        boxShadow: `0 3px 8px -2px ${COLORS.shadowStrong}`,
+                        height: "38px",
+                        minWidth: "110px",
+                      }}
+                      className="hover:bg-accentDarkGold"
+                      onClick={() => goTo("login")}
+                    >
+                      Admin Login
+                    </button>
+                    <button
+                      style={{
+                        background: COLORS.accentBlack,
+                        color: COLORS.accentGold,
+                        border: "none",
+                        borderRadius: "1.3em",
+                        fontWeight: 700,
+                        fontSize: "1em",
+                        padding: "8px 26px",
+                        cursor: "pointer",
+                        boxShadow: `0 3px 8px -2px ${COLORS.shadowStrong}`,
+                        height: "38px",
+                        minWidth: "110px",
+                      }}
+                      className="hover:bg-backgroundRed"
+                      onClick={() => goTo("register")}
+                    >
+                      Register Admin
+                    </button>
+                  </>
+                ) : (
+                  <button
+                    style={{
+                      background: COLORS.accentEmerald,
+                      color: COLORS.accentIvory,
                       border: "none",
                       borderRadius: "1.3em",
                       fontWeight: 700,
@@ -457,58 +671,52 @@ export default function NavBar({
                       minWidth: "110px",
                     }}
                     className="hover:bg-backgroundRed"
-                    onClick={() => goTo("register")}
+                    onClick={() => goTo("admin")}
                   >
-                    Register Admin
+                    Admin Dashboard
                   </button>
-                </>
-              ) : (
+                )
+              )}
+              {showBackToHome && backToHomeOutsideMenu && (
                 <button
+                  className="px-5 py-2 rounded-full font-bold shadow-xl transition-all duration-200 hover:scale-105"
                   style={{
-                    background: COLORS.accentEmerald,
-                    color: COLORS.accentIvory,
+                    background: COLORS.accentGold,
+                    color: COLORS.backgroundRed,
+                    fontFamily: '"Noto Serif SC", "Songti SC", "KaiTi", serif',
                     border: "none",
-                    borderRadius: "1.3em",
                     fontWeight: 700,
                     fontSize: "1em",
-                    padding: "8px 26px",
-                    cursor: "pointer",
                     boxShadow: `0 3px 8px -2px ${COLORS.shadowStrong}`,
-                    height: "38px",
                     minWidth: "110px",
+                    height: "38px",
+                    display: "inline-block",
+                    textAlign: "center",
+                    marginLeft: "2em",
                   }}
-                  className="hover:bg-backgroundRed"
-                  onClick={() => goTo("admin")}
+                  onClick={(e) => {
+                    e.preventDefault();
+                    if (isQuizPage) {
+                      showModalConfirm(
+                        "All quiz data will be erased if you leave this page. Are you sure you want to go home?",
+                        () => {
+                          hideModalConfirm();
+                          navigate("/");
+                        },
+                        hideModalConfirm
+                      );
+                      return;
+                    }
+                    navigate("/");
+                  }}
                 >
-                  Admin Dashboard
+                  Back to Home
                 </button>
-              )
-            )}
-            {showBackToHome && backToHomeOutsideMenu && (
-              <Link
-                to="/"
-                className="px-5 py-2 rounded-full font-bold shadow-xl transition-all duration-200 hover:scale-105"
-                style={{
-                  background: COLORS.accentGold,
-                  color: COLORS.backgroundRed,
-                  fontFamily: '"Noto Serif SC", "Songti SC", "KaiTi", serif',
-                  border: "none",
-                  fontWeight: 700,
-                  fontSize: "1em",
-                  boxShadow: `0 3px 8px -2px ${COLORS.shadowStrong}`,
-                  minWidth: "110px",
-                  height: "38px",
-                  display: "inline-block",
-                  textAlign: "center",
-                  marginLeft: "2em",
-                }}
-              >
-                Back to Home
-              </Link>
-            )}
-          </div>
-        </nav>
-      )}
-    </header>
+              )}
+            </div>
+          </nav>
+        )}
+      </header>
+    </>
   );
 }

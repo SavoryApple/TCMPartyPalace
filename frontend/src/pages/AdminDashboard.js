@@ -4,6 +4,7 @@ import NavBar from "../components/NavBar";
 import FooterCard from "../components/FooterCard";
 import useAutoLogout from "../hooks/useAutoLogout";
 
+
 const COLORS = {
   backgroundRed: "#9A2D1F",
   backgroundGold: "#F9E8C2",

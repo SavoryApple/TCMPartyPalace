@@ -21,9 +21,10 @@ import AdminDashboard from "./pages/AdminDashboard";
 import About from "./pages/About";
 import FooterCard from "./components/FooterCard";
 import NavBar from "./components/NavBar";
-import ComingSoon from "./pages/ComingSoon"; // import ComingSoon page
+import ComingSoon from "./pages/ComingSoon";
+import ElementQuizComprehensive from "./pages/ElementQuizComprehensive";
+import ElementQuizResults from "./pages/ElementQuizResults";
 
-// Theme colors
 const COLORS = {
   backgroundRed: "#9A2D1F",
   backgroundGold: "#F9E8C2",
@@ -39,7 +40,6 @@ const COLORS = {
   shadowStrong: "#B38E3FCC",
 };
 
-// Only cards that are NOT coming soon
 const CARD_DATA = [
   {
     title: "Create Formula",
@@ -75,9 +75,16 @@ const CARD_DATA = [
     textColor: COLORS.accentBlack,
     route: "herbgroups",
   },
+  {
+    title: "Five Element Personality Quiz",
+    description: "Rank your top three TCM personality elements with 100 comprehensive questions.",
+    icon: "🌟",
+    color: COLORS.accentBlue,
+    textColor: COLORS.accentIvory,
+    route: "elementquiz",
+  },
 ];
 
-// Responsive background image hook
 function useResponsiveBgImage() {
   const [bgImage, setBgImage] = useState("/images/backgroundlarger2.jpg");
   useEffect(() => {
@@ -95,7 +102,6 @@ function useResponsiveBgImage() {
   return bgImage;
 }
 
-// Global animations and responsive fixes
 const GlobalAnimations = () => (
   <style>
     {`
@@ -257,7 +263,6 @@ const GlobalAnimations = () => (
   </style>
 );
 
-// Scroll to top on route change (fixes mobile page start position)
 function ScrollToTop() {
   const { pathname } = useLocation();
   useEffect(() => {
@@ -436,9 +441,6 @@ function AnimatedBuildLearnPractice() {
   );
 }
 
-// --- Coming Soon Page ---
-// Remove the FUTURE_CARDS logic. Just route to ComingSoon.js when the card is pressed.
-
 function Home() {
   const navigate = useNavigate();
   const [tutorialOpen, setTutorialOpen] = useState(false);
@@ -458,7 +460,6 @@ function Home() {
     >
       <GlobalAnimations />
 
-      {/* Fixed Navbar */}
       <div className="navbar-fixed">
         <NavBar
           showReportError={true}
@@ -624,7 +625,6 @@ function Home() {
               </span>
             </button>
           ))}
-          {/* --- Coming Soon Button/Card --- */}
           <button
             className="card-shadow animate-fadeInScaleUp transition hover:scale-105 flex flex-col items-center"
             style={{
@@ -720,6 +720,8 @@ export default function App() {
           <Route path="admin" element={<AdminDashboard />} />
           <Route path="about" element={<About />} />
           <Route path="comingsoon" element={<ComingSoon />} />
+          <Route path="elementquiz" element={<ElementQuizComprehensive />} />
+          <Route path="/elementquizresults" element={<ElementQuizResults />} />
         </Routes>
       </Router>
     </HerbCartProvider>
