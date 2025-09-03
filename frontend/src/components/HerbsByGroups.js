@@ -97,6 +97,43 @@ function normalize(str) {
     .replace(/[\u0300-\u036f]/g, "");
 }
 
+// --- HERB PROPERTY BUBBLE ---
+// Update: allow bubbles to be wider and wrap, never cut off
+const PROPERTY_BUBBLE_STYLE = (isMobile) => ({
+  background: "#438C3B",
+  color: "#FCF5E5",
+  borderRadius: "999px",
+  textAlign: "center",
+  boxShadow: "0 1px 6px -3px #D4AF3744",
+  border: "1.1px solid #D4AF37",
+  letterSpacing: "0.01em",
+  fontWeight: 700,
+  fontSize: isMobile ? "0.74em" : "0.8em",
+  padding: isMobile ? "2px 12px" : "2.5px 14px", // increased padding
+  minWidth: isMobile ? 38 : 50,
+  marginRight: "8px", // slightly more margin for spacing
+  marginBottom: "8px",
+  display: "inline-block",
+  maxWidth: "150px", // increased from 80px to allow more text
+  whiteSpace: "normal", // allow wrapping if needed
+  overflowWrap: "break-word",
+  wordBreak: "break-word",
+  verticalAlign: "middle"
+});
+
+function PropertyBubble({ value, uniqueKey, isMobile }) {
+  if (!value) return null;
+  return (
+    <span
+      key={uniqueKey}
+      style={PROPERTY_BUBBLE_STYLE(isMobile)}
+      title={value}
+    >
+      {value}
+    </span>
+  );
+}
+
 // --- MAIN COMPONENT ---
 function HerbsByGroups(
   {
@@ -130,6 +167,21 @@ function HerbsByGroups(
       return "16px";
     }
     return "32px";
+  }
+
+  // Detect mobile with a fallback for SSR
+  const isMobile = typeof window !== "undefined" ? window.innerWidth < 700 : false;
+
+  // Helper for properties array
+  function getPropertiesArr(herb) {
+    if (!herb) return [];
+    let val = herb.properties;
+    if (!val) return [];
+    if (Array.isArray(val)) return val.filter(Boolean);
+    if (typeof val === "string") {
+      return val.split(/[,;/]+/).map((s) => s.trim()).filter(Boolean);
+    }
+    return [];
   }
 
   return (
@@ -233,6 +285,9 @@ function HerbsByGroups(
                 ) : null;
                 const { yoSanCarries, formats } = herbObj || {};
 
+                // Properties
+                const propertiesArr = herbObj ? getPropertiesArr(herbObj) : [];
+
                 return (
                   <li
                     key={key}
@@ -276,7 +331,7 @@ function HerbsByGroups(
                         overflowWrap: "break-word"
                       }}
                     >
-                      {/* Left section: herb name (with badge), pharmaceutical name below */}
+                      {/* Left section: herb name (with badge), pharmaceutical name below, properties below */}
                       <div className="flex flex-col min-w-0 flex-shrink-0" style={{
                         wordBreak: "break-word",
                         overflowWrap: "break-word",
@@ -340,6 +395,28 @@ function HerbsByGroups(
                             {pharmaName}
                           </span>
                         )}
+                        {/* Properties bubbles below pharma name */}
+                        {propertiesArr.length > 0 && (
+                          <div
+                            style={{
+                              marginTop: "6px",
+                              display: "flex",
+                              flexWrap: "wrap",
+                              gap: "0.3em",
+                              maxWidth: "100%",
+                              alignItems: "center",
+                            }}
+                          >
+                            {propertiesArr.map((val, pi) => (
+                              <PropertyBubble
+                                value={val}
+                                uniqueKey={`property-bubble-${display}-${val}-${pi}`}
+                                isMobile={isMobile}
+                                key={`property-bubble-${display}-${val}-${pi}`}
+                              />
+                            ))}
+                          </div>
+                        )}
                       </div>
                       {/* Middle section: keyActions/explanation block */}
                       <div style={{ display: "flex", justifyContent: "center", wordBreak: "break-word", overflowWrap: "break-word", maxWidth: "100vw" }}>
@@ -386,4 +463,5 @@ function HerbsByGroups(
 }
 
 // Export using React.forwardRef to make the function component compatible with refs
+
 export default React.forwardRef(HerbsByGroups);

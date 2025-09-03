@@ -107,6 +107,45 @@ function HerbCartIconButton({ cartCount, onClick, isCartOpen }) {
   );
 }
 
+// Red X close button
+function HerbCartCloseButton({ onClick }) {
+  const [hovered, setHovered] = React.useState(false);
+  return (
+    <button
+      onClick={onClick}
+      onMouseEnter={() => setHovered(true)}
+      onMouseLeave={() => setHovered(false)}
+      aria-label="Close Herb Cart"
+      title="Close Herb Cart"
+      type="button"
+      style={{
+        marginLeft: 8,
+        marginRight: 2,
+        background: hovered ? COLORS.accentRed : COLORS.accentPink,
+        color: hovered ? COLORS.accentIvory : COLORS.accentRed,
+        border: `2px solid ${COLORS.accentRed}`,
+        borderRadius: "50%",
+        width: 28,
+        height: 28,
+        minWidth: 28,
+        minHeight: 28,
+        display: "flex",
+        alignItems: "center",
+        justifyContent: "center",
+        fontWeight: 800,
+        fontSize: 17,
+        cursor: "pointer",
+        boxShadow: `0 1px 6px -1px ${COLORS.accentRed}33`,
+        transition: "background 0.15s, color 0.15s",
+        outline: "none",
+        zIndex: 100,
+      }}
+    >
+      &#10006;
+    </button>
+  );
+}
+
 export default function HerbCart({
   show = true,
   onClose,
@@ -122,6 +161,11 @@ export default function HerbCart({
     } else {
       if (typeof onOpen === "function") onOpen();
     }
+  }
+
+  // When cart is open, clicking the close button should close the cart
+  function handleCartClose() {
+    if (typeof onClose === "function") onClose();
   }
 
   return (
@@ -183,31 +227,51 @@ export default function HerbCart({
               {alert}
             </div>
           )}
-          <div className="flex flex-col mb-1" style={{ flex: "none", alignItems: "flex-start" }}>
-            <h3 className="font-bold text-lg" style={{
-              color: COLORS.accentBlue,
-              textShadow: "0 1px 0 #fff, 0 1px 5px #438C3B22",
-              marginBottom: "2px"
-            }}>
-              Herb Cart
-            </h3>
-            <span
-              style={{
-                fontWeight: 700,
-                fontSize: "1em",
-                marginTop: "0px",
-                color: COLORS.accentDarkGold,
-                background: `${COLORS.background}`,
-                borderRadius: "0.7em",
-                padding: "2px 13px",
-                boxShadow: `0 0 4px 0 ${COLORS.accentGold}18`,
-                letterSpacing: "0.01em",
-                display: "inline-block",
-                marginBottom: "2px"
-              }}
-            >
-              {herbCount}/{maxHerbs}
-            </span>
+          <div
+            className="flex flex-row items-center mb-1"
+            style={{
+              flex: "none",
+              alignItems: "center",
+              justifyContent: "space-between",
+              position: "relative",
+              marginBottom: "2px",
+            }}
+          >
+            <div style={{ display: "flex", alignItems: "center" }}>
+              <h3
+                className="font-bold text-lg"
+                style={{
+                  color: COLORS.accentBlue,
+                  textShadow: "0 1px 0 #fff, 0 1px 5px #438C3B22",
+                  marginBottom: 0,
+                  marginRight: "0px",
+                  display: "inline-flex",
+                  alignItems: "center",
+                }}
+              >
+                Herb Cart
+              </h3>
+              <HerbCartCloseButton onClick={handleCartClose} />
+            </div>
+          </div>
+          {/* Herb count just below Herb Cart title */}
+          <div
+            style={{
+              fontWeight: 700,
+              fontSize: "1em",
+              marginTop: "2px",
+              marginBottom: "10px",
+              color: COLORS.accentDarkGold,
+              background: `${COLORS.background}`,
+              borderRadius: "0.7em",
+              padding: "2px 13px",
+              boxShadow: `0 0 4px 0 ${COLORS.accentGold}18`,
+              letterSpacing: "0.01em",
+              display: "inline-block",
+              alignSelf: "flex-start",
+            }}
+          >
+            {herbCount}/{maxHerbs}
           </div>
           <ul
             style={{
@@ -220,8 +284,10 @@ export default function HerbCart({
             }}
           >
             {cart.length === 0 ? (
-              <li className="italic text-sm py-2 text-center"
-                  style={{ color: COLORS.accentBlue, fontWeight: 600, letterSpacing: "0.01em" }}>
+              <li
+                className="italic text-sm py-2 text-center"
+                style={{ color: COLORS.accentBlue, fontWeight: 600, letterSpacing: "0.01em" }}
+              >
                 No herbs yet.
               </li>
             ) : (
@@ -239,40 +305,55 @@ export default function HerbCart({
                 >
                   <span
                     style={{
-                      overflow: "hidden",
-                      whiteSpace: "nowrap",
-                      textOverflow: "ellipsis",
-                      maxWidth: 128,
-                      color: COLORS.accentBlack,
+                      overflow: "visible", // allow overflow
+                      display: "flex",
+                      alignItems: "center",
+                      gap: "0.75em",
+                      maxWidth: "185px", // increased from 128px
+                      minWidth: 0,
                       fontWeight: 600,
+                      color: COLORS.accentBlack,
                       background: COLORS.accentIvory,
                       borderRadius: "1em",
                       padding: "0.5px 8px",
                       boxShadow: `0 0 5px 0 ${COLORS.accentGold}18`,
-                      display: "flex",
-                      alignItems: "center",
-                      gap: "0.75em",
+                      whiteSpace: "nowrap",
+                      textOverflow: "ellipsis",
                     }}
                     title={h.pinyinName || h.name}
                   >
-                    {h.pinyinName || h.name || (
-                      <span style={{ color: COLORS.accentRed, fontStyle: "italic" }}>
-                        [Unknown]
-                      </span>
-                    )}
+                    <span style={{
+                      overflow: "hidden",
+                      textOverflow: "ellipsis",
+                      whiteSpace: "nowrap",
+                      maxWidth: "110px", // restrict name bubble width
+                      display: "inline-block",
+                    }}>
+                      {h.pinyinName || h.name || (
+                        <span style={{ color: COLORS.accentRed, fontStyle: "italic" }}>
+                          [Unknown]
+                        </span>
+                      )}
+                    </span>
                     {/* Show dosage if present */}
                     {h.dosage && (
-                      <span style={{
-                        color: COLORS.accentDarkGold,
-                        fontWeight: 700,
-                        background: COLORS.background,
-                        borderRadius: "0.6em",
-                        padding: "2px 7px",
-                        fontSize: "0.96em",
-                        marginLeft: "2px",
-                        border: `1px solid ${COLORS.accentGold}`,
-                        boxShadow: `0 0 2px 0 ${COLORS.accentGold}15`
-                      }}>
+                      <span
+                        style={{
+                          color: COLORS.accentDarkGold,
+                          fontWeight: 700,
+                          background: COLORS.background,
+                          borderRadius: "0.6em",
+                          padding: "2px 7px",
+                          fontSize: "0.96em",
+                          border: `1px solid ${COLORS.accentGold}`,
+                          boxShadow: `0 0 2px 0 ${COLORS.accentGold}15`,
+                          marginLeft: "2px",
+                          overflow: "visible", // allow dosage bubble to overflow
+                          whiteSpace: "nowrap",
+                          maxWidth: "65px", // allow wider dosage
+                          display: "inline-block",
+                        }}
+                      >
                         {h.dosage}
                       </span>
                     )}
@@ -317,7 +398,7 @@ export default function HerbCart({
                 transition: "background 0.15s, scale 0.15s",
                 boxShadow: `0 1px 8px 0 ${COLORS.accentEmerald}33`,
                 letterSpacing: "0.01em",
-                animation: cart.length > 0 ? "cartPulseGlow 1.2s infinite" : "none"
+                animation: cart.length > 0 ? "cartPulseGlow 1.2s infinite" : "none",
               }}
               onClick={onCreateFormula}
             >
