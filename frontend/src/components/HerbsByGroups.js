@@ -158,7 +158,7 @@ function HerbsByGroups(
     if (typeof window !== "undefined" && window.innerWidth < 700) {
       return "1fr";
     }
-    return "minmax(180px, 1fr) minmax(220px, 440px) minmax(140px, 200px)";
+    return "minmax(260px, 1fr) minmax(220px, 440px) minmax(140px, 200px)"; // widened first column for name + bubbles
   }
 
   // Responsive gap
@@ -288,6 +288,10 @@ function HerbsByGroups(
                 // Properties
                 const propertiesArr = herbObj ? getPropertiesArr(herbObj) : [];
 
+                // Extract herb display name (pinyin), badge, pharma name, property bubbles
+                const displayName = display;
+                // use same badge as above
+
                 return (
                   <li
                     key={key}
@@ -341,12 +345,14 @@ function HerbsByGroups(
                         <div
                           style={{
                             display: "flex",
+                            flexWrap: "wrap",
                             alignItems: "center",
                             gap: "0.7em",
                             minWidth: 0,
-                            maxWidth: "100%"
+                            maxWidth: "100%",
                           }}
                         >
+                          {/* Pinyin Name + Badge, always on one line */}
                           <span
                             className="font-extrabold"
                             style={{
@@ -355,18 +361,19 @@ function HerbsByGroups(
                               letterSpacing: "-.01em",
                               textShadow: `0 1px 0 ${COLORS.backgroundGold}`,
                               fontFamily: "inherit",
-                              whiteSpace: "normal",
-                              maxWidth: "100%",
+                              whiteSpace: "nowrap", // keep on one line
+                              maxWidth: "calc(100% - 90px)", // allow badge space, prevent wrap
                               overflow: "hidden",
                               textOverflow: "ellipsis",
                               transition: "color 0.2s",
-                              display: "inline",
-                              opacity: herbObj ? 1 : 0.7,
-                              wordBreak: "break-word",
-                              overflowWrap: "break-word"
+                              display: "inline-block",
+                              wordBreak: "keep-all",
+                              alignItems: "center",
+                              opacity: 1,
+                              verticalAlign: "middle"
                             }}
                           >
-                            {display}
+                            {displayName}
                           </span>
                           {badge && (
                             <span className="flex-shrink-0" style={{ verticalAlign: 'middle' }}>

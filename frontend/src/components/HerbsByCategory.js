@@ -112,7 +112,7 @@ function getGridTemplateColumns() {
   if (typeof window !== "undefined" && window.innerWidth < 700) {
     return "1fr";
   }
-  return "minmax(180px, 1fr) minmax(220px, 440px) minmax(140px, 200px)";
+  return "minmax(260px, 1fr) minmax(220px, 440px) minmax(140px, 200px)"; // widened first column for name + bubbles
 }
 function getGridGap() {
   if (typeof window !== "undefined" && window.innerWidth < 700) {
@@ -404,6 +404,10 @@ function HerbsByCategory(
 
                   const propertiesArr = getPropertiesArr(herbObj);
 
+                  // Extract herb display name (pinyin), badge, pharma name, property bubbles
+                  const displayName = getHerbDisplayName(herb, herbObj);
+                  const badge = getHerbBadge(herbObj);
+
                   return (
                     <li
                       key={herbKey}
@@ -450,12 +454,14 @@ function HerbsByCategory(
                           <div
                             style={{
                               display: "flex",
+                              flexWrap: "wrap",
                               alignItems: "center",
                               gap: "0.7em",
                               minWidth: 0,
-                              maxWidth: "100%"
+                              maxWidth: "100%",
                             }}
                           >
+                            {/* Pinyin Name + Badge, always on one line */}
                             <span
                               className="font-extrabold"
                               style={{
@@ -464,21 +470,25 @@ function HerbsByCategory(
                                 letterSpacing: "-.01em",
                                 textShadow: `0 1px 0 ${COLORS.backgroundGold}`,
                                 fontFamily: "inherit",
-                                whiteSpace: "normal",
-                                maxWidth: "100%",
+                                whiteSpace: "nowrap", // keep on one line
+                                maxWidth: "calc(100% - 90px)", // allow badge space, prevent wrap
                                 overflow: "hidden",
                                 textOverflow: "ellipsis",
                                 transition: "color 0.2s",
-                                display: "inline",
-                                wordBreak: "break-word",
-                                overflowWrap: "break-word"
+                                display: "inline-block",
+                                wordBreak: "keep-all",
+                                alignItems: "center",
+                                opacity: 1,
+                                verticalAlign: "middle"
                               }}
                             >
-                              {getHerbDisplayName(herb, herbObj)}
+                              {displayName}
                             </span>
-                            <span className="flex-shrink-0" style={{ verticalAlign: 'middle' }}>
-                              <Badge badge={getHerbBadge(herbObj)} />
-                            </span>
+                            {badge && (
+                              <span className="flex-shrink-0" style={{ verticalAlign: 'middle' }}>
+                                <Badge badge={badge} />
+                              </span>
+                            )}
                           </div>
                           <span
                             className="italic font-semibold"
