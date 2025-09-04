@@ -1,206 +1,531 @@
 // tempQuizQuestions.js
-// Updated to 150 questions: Each element (Wood, Fire, Earth, Metal, Water) has 30 questions,
-// split evenly between Yin (gentle, receptive, nurturing, subtle) and Yang (bold, dynamic, initiating, expressive) aspects.
+// Each question is an object with: prompt, A (Yin), B (Yang)
+// For a sliding scale, show A on one end (value=1), B on the other (value=100)
+// Your UI can label the slider: | A |———|———|———| B |
 
-const WOOD_YIN_QUESTIONS = [
-  "I support others’ growth with encouragement and patience.",
-  "I prefer steady, harmonious progress over bold moves.",
-  "I nurture creativity in myself and those around me.",
-  "I seek peaceful resolutions and gentle change.",
-  "I value collaboration and shared growth.",
-  "I am patient when working toward my goals.",
-  "I help others find their direction calmly.",
-  "I prefer to resolve conflict through understanding.",
-  "I create space for new ideas to develop gradually.",
-  "I appreciate subtle transformation and slow improvement.",
-  "I feel fulfilled when mentoring or guiding others.",
-  "I adapt gently to new situations.",
-  "I find meaning in quiet, persistent effort.",
-  "I encourage teamwork and gentle leadership.",
-  "I value emotional safety in group settings."
-];
-const WOOD_YANG_QUESTIONS = [
-  "I set ambitious goals and create detailed plans to achieve them.",
-  "I feel invigorated by new challenges and opportunities.",
-  "I am comfortable taking charge in group situations.",
-  "I proactively seek out personal growth and learning experiences.",
-  "I rebound quickly after experiencing setbacks.",
-  "I prefer decisive action over prolonged discussion.",
-  "I enjoy troubleshooting and developing creative solutions.",
-  "I value autonomy and independence in daily life.",
-  "Slow progress or inefficiency frustrates me.",
-  "I thrive in competitive environments and strive for excellence.",
-  "I am comfortable with risk and uncertainty when pursuing objectives.",
-  "I am driven by achievement and recognition.",
-  "I naturally motivate and energize others.",
-  "I adapt swiftly to shifting circumstances.",
-  "I defend my freedom and personal boundaries."
-];
-
-const FIRE_YIN_QUESTIONS = [
-  "I enjoy close, heartfelt connections with others.",
-  "I express my feelings gently and thoughtfully.",
-  "I uplift those around me with quiet encouragement.",
-  "I value emotional intimacy over excitement.",
-  "I listen deeply and offer empathy in conversations.",
-  "I create safe spaces for authentic self-expression.",
-  "I find fulfillment in nurturing emotional bonds.",
-  "I prefer gentle celebrations and meaningful rituals.",
-  "I comfort others during emotional challenges.",
-  "I value softness and warmth in my relationships.",
-  "I am sensitive to others’ emotional needs.",
-  "I encourage vulnerability and honesty.",
-  "I feel energized by small, supportive gatherings.",
-  "I express creativity through intimate settings.",
-  "I bring joy in subtle, heartfelt ways."
-];
-const FIRE_YANG_QUESTIONS = [
-  "I feel energized by lively social interactions.",
-  "I am comfortable being the focus of attention.",
-  "I express passion and excitement about life.",
-  "I openly share my emotions with others.",
-  "I build new friendships easily and value connection.",
-  "I enjoy spontaneity and unexpected surprises.",
-  "I use humor to break the ice and connect with people.",
-  "I recover quickly from disappointments.",
-  "I enjoy planning and hosting social gatherings.",
-  "I maintain an optimistic attitude about the future.",
-  "I am expressive and animated in conversations.",
-  "I am drawn to artistic and creative activities.",
-  "I am comfortable sharing my vulnerabilities.",
-  "I celebrate milestones and personal achievements.",
-  "I forgive quickly and move forward easily."
-];
-
-const EARTH_YIN_QUESTIONS = [
-  "I enjoy nurturing others and providing comfort.",
-  "I am patient and tolerant with people.",
-  "I listen attentively and offer support.",
-  "I value loyalty and long-term relationships.",
-  "I am nurturing and supportive in relationships.",
-  "I offer gentle encouragement rather than criticism.",
-  "I conserve resources and avoid unnecessary waste.",
-  "I enjoy routines, rituals, and predictability.",
-  "I am empathetic and compassionate.",
-  "I comfort others during distress.",
-  "I seek harmony and cooperation in group settings.",
-  "I am slow to anger and quick to forgive.",
-  "I find joy in nature and gardening.",
-  "I maintain organization and tidiness.",
-  "I am patient with others' shortcomings."
-];
-const EARTH_YANG_QUESTIONS = [
-  "I am reliable and consistently keep my commitments.",
-  "I value stability and routine in my life.",
-  "I am organized and create structure in my environment.",
-  "I appreciate tradition and continuity.",
-  "I make practical and sensible decisions.",
-  "I am generous with my time and resources.",
-  "I thrive in group activities and teamwork.",
-  "I am dependable, especially in times of need.",
-  "I prefer security and comfort over risk.",
-  "I am deeply connected to my home and family.",
-  "I remain grounded and steady under pressure.",
-  "I anticipate future needs and prepare accordingly.",
-  "I am sensitive to others' emotions and challenges.",
-  "I resolve conflicts peacefully and diplomatically.",
-  "I resolve problems calmly and patiently."
-];
-
-const METAL_YIN_QUESTIONS = [
-  "I value solitude and time for reflection.",
-  "I am cautious and reserved with emotions.",
-  "I find comfort in routine and ritual.",
-  "I reflect thoughtfully before judging others.",
-  "I let go of things that no longer serve me.",
-  "I maintain emotional boundaries.",
-  "I prefer clarity and directness in interactions.",
-  "I am receptive to constructive criticism.",
-  "I am comfortable with consistent routines.",
-  "I respond calmly under pressure.",
-  "I am careful and thorough in my work.",
-  "I am precise and detail-oriented.",
-  "I appreciate simplicity and minimalism.",
-  "I seek out quiet environments for focus.",
-  "I value inner discipline and self-control."
-];
-const METAL_YANG_QUESTIONS = [
-  "I create order and structure in my surroundings.",
-  "I approach decisions analytically and logically.",
-  "I appreciate quality and refinement in products and experiences.",
-  "I am disciplined and focused on my goals.",
-  "I strive for objectivity and fairness.",
-  "I set clear boundaries for myself and others.",
-  "I maintain organization in work and habits.",
-  "I act with honesty and integrity.",
-  "I make difficult decisions with calm rationality.",
-  "I am methodical and efficient in my tasks.",
-  "I am resilient during adverse situations.",
-  "I am skilled at detecting errors and flaws.",
-  "I value transparency and accountability.",
-  "I manage resources and time efficiently.",
-  "I plan and organize projects thoroughly."
+const WOOD_QUESTIONS = [
+  {
+    prompt: "When facing a challenge, I usually...",
+    A: "support others quietly and wait for things to improve.",
+    B: "take charge and push for quick results.",
+  },
+  {
+    prompt: "In groups, I tend to...",
+    A: "let others lead and encourage from the sidelines.",
+    B: "step up and drive the group toward new goals.",
+  },
+  {
+    prompt: "If there’s a problem, I most often...",
+    A: "wait and hope it works out.",
+    B: "act immediately to fix it.",
+  },
+  {
+    prompt: "My approach to growth is usually...",
+    A: "slow and steady.",
+    B: "fast and bold.",
+  },
+  {
+    prompt: "When someone needs help, I...",
+    A: "give gentle advice and let them choose.",
+    B: "direct them with clear steps.",
+  },
+  // New Wood Questions
+  {
+    prompt: "When plans change suddenly, I...",
+    A: "adjust calmly and observe.",
+    B: "rework the plan and move forward.",
+  },
+  {
+    prompt: "My leadership style is...",
+    A: "quiet encouragement.",
+    B: "active direction.",
+  },
+  {
+    prompt: "I handle mistakes by...",
+    A: "reflecting and learning quietly.",
+    B: "quickly correcting and moving on.",
+  },
+  {
+    prompt: "I prefer to...",
+    A: "support others behind the scenes.",
+    B: "lead from the front.",
+  },
+  {
+    prompt: "I respond to criticism by...",
+    A: "considering feedback privately.",
+    B: "addressing it openly and directly.",
+  },
+  {
+    prompt: "I like to solve problems by...",
+    A: "thinking things through.",
+    B: "taking immediate action.",
+  },
+  {
+    prompt: "When I make decisions, I...",
+    A: "consult others and seek consensus.",
+    B: "decide quickly and confidently.",
+  },
+  {
+    prompt: "My energy in projects is...",
+    A: "steady and persistent.",
+    B: "dynamic and driven.",
+  },
+  {
+    prompt: "I prefer teamwork that is...",
+    A: "collaborative and gentle.",
+    B: "goal-oriented and energetic.",
+  },
+  {
+    prompt: "I value success that...",
+    A: "benefits everyone equally.",
+    B: "achieves ambitious goals.",
+  },
+  {
+    prompt: "When under pressure, I...",
+    A: "remain calm and resilient.",
+    B: "rise to the challenge forcefully.",
+  },
+  {
+    prompt: "I handle conflict by...",
+    A: "listening and mediating.",
+    B: "confronting and resolving issues.",
+  },
+  {
+    prompt: "I motivate others by...",
+    A: "offering quiet support.",
+    B: "inspiring action.",
+  },
+  {
+    prompt: "I approach change by...",
+    A: "adjusting gradually.",
+    B: "embracing it quickly.",
+  },
+  {
+    prompt: "My role in groups is usually...",
+    A: "facilitator and supporter.",
+    B: "leader and initiator.",
+  },
 ];
 
-const WATER_YIN_QUESTIONS = [
-  "I am intuitive and sense others' emotions.",
-  "I seek depth and meaning in my experiences.",
-  "I value time alone for reflection and growth.",
-  "I am gentle and sensitive in relationships.",
-  "I value authenticity and honesty in myself and others.",
-  "I express my feelings through creative outlets.",
-  "I value solitude for introspection.",
-  "I comfort others during emotional distress.",
-  "I am thoughtful and introspective.",
-  "I enjoy practicing meditation or mindfulness.",
-  "I am open to spiritual experiences and perspectives.",
-  "I am comfortable with uncertainty.",
-  "I am sensitive to beauty and aesthetics.",
-  "I enjoy deep, meaningful conversations.",
-  "I find meaning in life's challenges and transitions."
-];
-const WATER_YANG_QUESTIONS = [
-  "I am imaginative and approach life creatively.",
-  "I adapt easily to change and uncertainty.",
-  "I am resilient when facing adversity.",
-  "I enjoy exploring my inner world and emotions.",
-  "I value spirituality and personal development.",
-  "I am empathetic and compassionate.",
-  "I am flexible and open-minded to new ideas.",
-  "I am comfortable with ambiguity and mystery.",
-  "I solve problems using creative thinking.",
-  "I enjoy artistic hobbies like music, writing, or painting.",
-  "I adjust my course easily when circumstances change.",
-  "I value emotional honesty.",
-  "I am comfortable with silence and reflection.",
-  "I explore dreams and imagination frequently.",
-  "I am drawn to water and natural landscapes."
+const FIRE_QUESTIONS = [
+  {
+    prompt: "I express my feelings by...",
+    A: "keeping them quiet and private.",
+    B: "sharing them openly and passionately.",
+  },
+  {
+    prompt: "In social settings, I prefer...",
+    A: "small, calm gatherings.",
+    B: "lively, energetic parties.",
+  },
+  {
+    prompt: "When someone is upset, I...",
+    A: "comfort them quietly and listen.",
+    B: "cheer them up with excitement and positivity.",
+  },
+  {
+    prompt: "I celebrate achievements...",
+    A: "in simple, personal ways.",
+    B: "with big, enthusiastic gestures.",
+  },
+  {
+    prompt: "With friends, I value...",
+    A: "deep, gentle bonds.",
+    B: "spontaneous, dynamic connections.",
+  },
+  // New Fire Questions
+  {
+    prompt: "My ideal environment is...",
+    A: "peaceful and warm.",
+    B: "vibrant and stimulating.",
+  },
+  {
+    prompt: "I show excitement by...",
+    A: "smiling softly.",
+    B: "laughing loudly.",
+  },
+  {
+    prompt: "I connect with others by...",
+    A: "sharing quietly.",
+    B: "engaging enthusiastically.",
+  },
+  {
+    prompt: "I prefer conversations that are...",
+    A: "thoughtful and meaningful.",
+    B: "animated and lively.",
+  },
+  {
+    prompt: "My sense of humor is...",
+    A: "subtle and gentle.",
+    B: "bold and expressive.",
+  },
+  {
+    prompt: "I handle boredom by...",
+    A: "reflecting inward.",
+    B: "seeking excitement.",
+  },
+  {
+    prompt: "When I am happy, I...",
+    A: "feel content inside.",
+    B: "show my joy outwardly.",
+  },
+  {
+    prompt: "I build relationships through...",
+    A: "intimacy and trust.",
+    B: "fun and adventure.",
+  },
+  {
+    prompt: "When I feel joyful, I tend to...",
+    A: "enjoy the moment quietly.",
+    B: "celebrate with enthusiasm and others.",
+  },
+  {
+    prompt: "I prefer celebrations that are...",
+    A: "private and meaningful.",
+    B: "public and high-energy.",
+  },
+  {
+    prompt: "My friendships are...",
+    A: "long-lasting and deep.",
+    B: "dynamic and ever-changing.",
+  },
+  {
+    prompt: "I express love by...",
+    A: "gentle gestures.",
+    B: "grand declarations.",
+  },
+  {
+    prompt: "I recharge by...",
+    A: "being alone.",
+    B: "being with others.",
+  },
+  {
+    prompt: "I approach creativity by...",
+    A: "thinking quietly.",
+    B: "collaborating energetically.",
+  },
+  {
+    prompt: "I prefer entertainment that is...",
+    A: "calm and thoughtful.",
+    B: "exciting and fast-paced.",
+  },
 ];
 
-// Export all questions as a single array if needed
+const EARTH_QUESTIONS = [
+  {
+    prompt: "I support others by...",
+    A: "keeping things safe and steady.",
+    B: "organizing and leading group efforts.",
+  },
+  {
+    prompt: "When making decisions, I...",
+    A: "keep things predictable.",
+    B: "act quickly to solve problems.",
+  },
+  {
+    prompt: "I show care by...",
+    A: "listening and accepting others.",
+    B: "giving direct help and advice.",
+  },
+  {
+    prompt: "I value...",
+    A: "tradition and routine.",
+    B: "teamwork and practical solutions to new problems.",
+  },
+  {
+    prompt: "When things go wrong, I...",
+    A: "stay calm and forgive easily.",
+    B: "step in to fix things and keep everyone on track.",
+  },
+  // New Earth Questions
+  {
+    prompt: "I feel most comfortable when...",
+    A: "life is predictable.",
+    B: "I am helping organize others.",
+  },
+  {
+    prompt: "My approach to challenges is...",
+    A: "steady perseverance.",
+    B: "direct problem-solving.",
+  },
+  {
+    prompt: "I prefer to...",
+    A: "keep harmony.",
+    B: "take responsibility for solutions.",
+  },
+  {
+    prompt: "I like routines that are...",
+    A: "consistent.",
+    B: "flexible to group needs.",
+  },
+  {
+    prompt: "I deal with change by...",
+    A: "adapting slowly.",
+    B: "helping everyone adjust.",
+  },
+  {
+    prompt: "I feel secure when...",
+    A: "I know what to expect.",
+    B: "I’m actively involved in solutions.",
+  },
+  {
+    prompt: "I offer support by...",
+    A: "being present and caring.",
+    B: "giving practical help.",
+  },
+  {
+    prompt: "I find peace in...",
+    A: "stability.",
+    B: "working with others.",
+  },
+  {
+    prompt: "I prefer relationships that are...",
+    A: "steady and reliable.",
+    B: "collaborative and active.",
+  },
+  {
+    prompt: "I value harmony that is...",
+    A: "gentle.",
+    B: "well-organized.",
+  },
+  {
+    prompt: "My advice is usually...",
+    A: "accepting and empathetic.",
+    B: "practical and direct.",
+  },
+  {
+    prompt: "I react to stress by...",
+    A: "calming myself.",
+    B: "taking charge to fix things.",
+  },
+  {
+    prompt: "I am happiest when...",
+    A: "everyone is at peace.",
+    B: "everyone is working together.",
+  },
+  {
+    prompt: "I prefer environments that are...",
+    A: "comfortable and familiar.",
+    B: "structured and active.",
+  },
+  {
+    prompt: "I approach conflict by...",
+    A: "seeking compromise.",
+    B: "finding clear solutions.",
+  },
+];
+
+const METAL_QUESTIONS = [
+  {
+    prompt: "I prefer...",
+    A: "quiet reflection and personal boundaries.",
+    B: "clear rules and high standards for everyone.",
+  },
+  {
+    prompt: "In tough times, I...",
+    A: "stay reserved and let go of what’s not needed.",
+    B: "organize and set strict limits.",
+  },
+  {
+    prompt: "I like...",
+    A: "simplicity and minimalism.",
+    B: "precision and thoroughness.",
+  },
+  {
+    prompt: "With feedback, I...",
+    A: "accept it quietly and think it over.",
+    B: "use it right away to improve and fix mistakes.",
+  },
+  {
+    prompt: "I communicate...",
+    A: "gently and with restraint.",
+    B: "directly and clearly.",
+  },
+  // New Metal Questions
+  {
+    prompt: "I value...",
+    A: "privacy and introspection.",
+    B: "clarity and order.",
+  },
+  {
+    prompt: "I organize my space by...",
+    A: "keeping only what I need.",
+    B: "arranging everything precisely.",
+  },
+  {
+    prompt: "I handle emotions by...",
+    A: "processing them privately.",
+    B: "addressing them logically.",
+  },
+  {
+    prompt: "My standards are...",
+    A: "personal and flexible.",
+    B: "strict and universal.",
+  },
+  {
+    prompt: "I prefer feedback that is...",
+    A: "gentle and thoughtful.",
+    B: "honest and direct.",
+  },
+  {
+    prompt: "My work style is...",
+    A: "independent and focused.",
+    B: "exact and efficient.",
+  },
+  {
+    prompt: "I make decisions by...",
+    A: "considering quietly.",
+    B: "analyzing precisely.",
+  },
+  {
+    prompt: "I prefer relationships that are...",
+    A: "respectful and private.",
+    B: "straightforward and clear.",
+  },
+  {
+    prompt: "I approach learning by...",
+    A: "reflecting deeply.",
+    B: "studying thoroughly.",
+  },
+  {
+    prompt: "I react to criticism by...",
+    A: "thinking it over alone.",
+    B: "using it to improve immediately.",
+  },
+  {
+    prompt: "I value beauty that is...",
+    A: "subtle and understated.",
+    B: "refined and perfect.",
+  },
+  {
+    prompt: "I approach challenges by...",
+    A: "detaching and accepting.",
+    B: "setting clear boundaries.",
+  },
+  {
+    prompt: "I prefer routines that are...",
+    A: "simple.",
+    B: "well-defined.",
+  },
+  {
+    prompt: "I communicate best when...",
+    A: "I have time to reflect.",
+    B: "I can be precise.",
+  },
+];
+
+const WATER_QUESTIONS = [
+  {
+    prompt: "I seek...",
+    A: "peace and depth through solitude and reflection.",
+    B: "new ideas and adapt quickly to change.",
+  },
+  {
+    prompt: "When things are uncertain, I...",
+    A: "trust my intuition and go inward.",
+    B: "take creative action and try different solutions.",
+  },
+  {
+    prompt: "I connect with others through...",
+    A: "gentle empathy.",
+    B: "inspiring and sharing imaginative projects.",
+  },
+  {
+    prompt: "I value...",
+    A: "quiet beauty and meaningful talks.",
+    B: "bold creativity and emotional honesty.",
+  },
+  {
+    prompt: "When life is hard, I...",
+    A: "quietly process my feelings.",
+    B: "bounce back and turn problems into opportunities.",
+  },
+  // New Water Questions
+  {
+    prompt: "I prefer...",
+    A: "solitude and reflection.",
+    B: "exploring new experiences.",
+  },
+  {
+    prompt: "I approach life by...",
+    A: "going with the flow.",
+    B: "creating new paths.",
+  },
+  {
+    prompt: "I handle stress by...",
+    A: "retreating inward.",
+    B: "finding creative solutions.",
+  },
+  {
+    prompt: "I learn best when...",
+    A: "I can explore quietly.",
+    B: "I can experiment freely.",
+  },
+  {
+    prompt: "My creativity is...",
+    A: "gentle and subtle.",
+    B: "bold and imaginative.",
+  },
+  {
+    prompt: "I build relationships through...",
+    A: "understanding others deeply.",
+    B: "sharing new ideas.",
+  },
+  {
+    prompt: "I find peace in...",
+    A: "stillness.",
+    B: "creative movement.",
+  },
+  {
+    prompt: "I respond to uncertainty by...",
+    A: "trusting my intuition.",
+    B: "seeking new experiences.",
+  },
+  {
+    prompt: "I value wisdom that is...",
+    A: "quiet and timeless.",
+    B: "innovative and daring.",
+  },
+  {
+    prompt: "I prefer to...",
+    A: "listen and observe.",
+    B: "inspire and motivate.",
+  },
+  {
+    prompt: "My intuition is...",
+    A: "strong and guiding.",
+    B: "adaptive and inventive.",
+  },
+  {
+    prompt: "I handle conflict by...",
+    A: "avoiding confrontation.",
+    B: "transforming it creatively.",
+  },
+  {
+    prompt: "I prefer environments that are...",
+    A: "peaceful and calm.",
+    B: "stimulating and new.",
+  },
+  {
+    prompt: "I express myself by...",
+    A: "writing or reflecting.",
+    B: "creating or performing.",
+  },
+];
+
 const QUIZ_QUESTIONS = [
-  ...WOOD_YIN_QUESTIONS,
-  ...WOOD_YANG_QUESTIONS,
-  ...FIRE_YIN_QUESTIONS,
-  ...FIRE_YANG_QUESTIONS,
-  ...EARTH_YIN_QUESTIONS,
-  ...EARTH_YANG_QUESTIONS,
-  ...METAL_YIN_QUESTIONS,
-  ...METAL_YANG_QUESTIONS,
-  ...WATER_YIN_QUESTIONS,
-  ...WATER_YANG_QUESTIONS,
+  ...WOOD_QUESTIONS,
+  ...FIRE_QUESTIONS,
+  ...EARTH_QUESTIONS,
+  ...METAL_QUESTIONS,
+  ...WATER_QUESTIONS,
 ];
 
 export {
-  WOOD_YIN_QUESTIONS,
-  WOOD_YANG_QUESTIONS,
-  FIRE_YIN_QUESTIONS,
-  FIRE_YANG_QUESTIONS,
-  EARTH_YIN_QUESTIONS,
-  EARTH_YANG_QUESTIONS,
-  METAL_YIN_QUESTIONS,
-  METAL_YANG_QUESTIONS,
-  WATER_YIN_QUESTIONS,
-  WATER_YANG_QUESTIONS,
+  WOOD_QUESTIONS,
+  FIRE_QUESTIONS,
+  EARTH_QUESTIONS,
+  METAL_QUESTIONS,
+  WATER_QUESTIONS,
   QUIZ_QUESTIONS,
 };

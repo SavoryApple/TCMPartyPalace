@@ -3,18 +3,12 @@ import { Link, useNavigate } from "react-router-dom";
 import NavBar from "../components/NavBar";
 import FooterCard from "../components/FooterCard";
 
-// Import updated comprehensive question sets with yin/yang aspect
 import {
-  WOOD_YIN_QUESTIONS,
-  WOOD_YANG_QUESTIONS,
-  FIRE_YIN_QUESTIONS,
-  FIRE_YANG_QUESTIONS,
-  EARTH_YIN_QUESTIONS,
-  EARTH_YANG_QUESTIONS,
-  METAL_YIN_QUESTIONS,
-  METAL_YANG_QUESTIONS,
-  WATER_YIN_QUESTIONS,
-  WATER_YANG_QUESTIONS,
+  WOOD_QUESTIONS,
+  FIRE_QUESTIONS,
+  EARTH_QUESTIONS,
+  METAL_QUESTIONS,
+  WATER_QUESTIONS
 } from "../data/elementinfo/tempQuizQuestions.js";
 
 const COLORS = {
@@ -29,17 +23,16 @@ const COLORS = {
   accentGray: "#D9C8B4",
   backgroundRed: "#9A2D1F",
   shadow: "#B38E3F88",
-  shadowStrong: "#B38E3FCC",
+  shadowStrong: "#B38E3FCC"
 };
 const NAVBAR_HEIGHT = 74;
 
 const QUIZ_SIZE_OPTIONS = [
-  { label: "30 Questions (Least Accurate)", value: 30 },
-  { label: "90 Questions", value: 90 },
-  { label: "150 Questions (Most Accurate)", value: 150 },
+  { label: "45 Questions (Quick)", value: 45 },
+  { label: "60 Questions", value: 60 },
+  { label: "75 Questions (Most Accurate)", value: 75 }
 ];
 
-// Utility for shuffling and picking
 function pickRandomQuestions(array, count) {
   const arr = array.slice();
   for (let i = arr.length - 1; i > 0; i--) {
@@ -49,102 +42,75 @@ function pickRandomQuestions(array, count) {
   return arr.slice(0, count);
 }
 
-// Assemble quiz questions based on size, balancing elements/aspects
 function assembleQuizQuestions(size) {
   if (!size) return [];
-  // 150: 15 yin + 15 yang per element
-  // 90: 9 yin + 9 yang per element
-  // 30: 3 yin + 3 yang per element
-  const perElement = size / 5;
-  const perAspect = perElement / 2;
-
-  const allElementAspectSets = [
-    { arr: WOOD_YIN_QUESTIONS, element: "Wood", aspect: "Yin" },
-    { arr: WOOD_YANG_QUESTIONS, element: "Wood", aspect: "Yang" },
-    { arr: FIRE_YIN_QUESTIONS, element: "Fire", aspect: "Yin" },
-    { arr: FIRE_YANG_QUESTIONS, element: "Fire", aspect: "Yang" },
-    { arr: EARTH_YIN_QUESTIONS, element: "Earth", aspect: "Yin" },
-    { arr: EARTH_YANG_QUESTIONS, element: "Earth", aspect: "Yang" },
-    { arr: METAL_YIN_QUESTIONS, element: "Metal", aspect: "Yin" },
-    { arr: METAL_YANG_QUESTIONS, element: "Metal", aspect: "Yang" },
-    { arr: WATER_YIN_QUESTIONS, element: "Water", aspect: "Yin" },
-    { arr: WATER_YANG_QUESTIONS, element: "Water", aspect: "Yang" },
+  const elements = [
+    { arr: WOOD_QUESTIONS, element: "Wood" },
+    { arr: FIRE_QUESTIONS, element: "Fire" },
+    { arr: EARTH_QUESTIONS, element: "Earth" },
+    { arr: METAL_QUESTIONS, element: "Metal" },
+    { arr: WATER_QUESTIONS, element: "Water" }
   ];
+  const perElement = Math.floor(size / 5);
+
   let questions = [];
-  for (const { arr, element, aspect } of allElementAspectSets) {
+  for (const { arr, element } of elements) {
     questions.push(
-      ...pickRandomQuestions(arr, perAspect).map(text => ({ text, element, aspect }))
+      ...pickRandomQuestions(arr, perElement).map(q => ({ ...q, element }))
     );
   }
-  // Shuffle all questions for the quiz
+
+  while (questions.length < size) {
+    let remainingQuestions = [];
+    for (const { arr, element } of elements) {
+      remainingQuestions.push(...arr.map(q => ({ ...q, element })));
+    }
+    const chosenPrompts = new Set(questions.map(q => q.prompt));
+    const available = remainingQuestions.filter(q => !chosenPrompts.has(q.prompt));
+    if (!available.length) break;
+    questions.push(...pickRandomQuestions(available, size - questions.length));
+  }
+
   return pickRandomQuestions(questions, questions.length);
 }
 
-// Tie-breaker: top two by score, then by "Always" and "Often"
-// Updated to guarantee top two results are different elements (regardless of aspect)
-function getElementAspectScores(answers, questions) {
-  const scoreKeys = [];
-  const scores = {};
-  const alwaysCounts = {};
-  const oftenCounts = {};
-
-  for (const element of ["Wood", "Fire", "Earth", "Metal", "Water"]) {
-    for (const aspect of ["Yin", "Yang"]) {
-      const key = `${element}-${aspect}`;
-      scoreKeys.push(key);
-      scores[key] = 0;
-      alwaysCounts[key] = 0;
-      oftenCounts[key] = 0;
-    }
-  }
+function getElementScores(answers, questions) {
+  const scores = {
+    Wood: 0,
+    Fire: 0,
+    Earth: 0,
+    Metal: 0,
+    Water: 0
+  };
+  const counts = {
+    Wood: 0,
+    Fire: 0,
+    Earth: 0,
+    Metal: 0,
+    Water: 0
+  };
 
   questions.forEach((q, i) => {
-    const val = answers[i] || 0;
-    const key = `${q.element}-${q.aspect}`;
-    scores[key] += val;
-    if (val === 4) alwaysCounts[key]++;
-    if (val === 3) oftenCounts[key]++;
+    let val = answers[i];
+    if (val === undefined || val === "") val = 100; // default is center
+    let mapped;
+    if (val === 100) mapped = 50; // middle
+    else if (val < 100) mapped = 100 - val; // left side (A)
+    else mapped = val - 100; // right side (B)
+    scores[q.element] += mapped;
+    counts[q.element]++;
   });
 
-  let sorted = scoreKeys
-    .map(key => ({ key, score: scores[key] }))
-    .sort((a, b) => b.score - a.score);
+  const averages = Object.keys(scores).map(key => ({
+    element: key,
+    score: counts[key] ? Math.round(scores[key] / counts[key]) : 0
+  }));
 
-  // Tie-break for top two
-  if (sorted.length > 1 && sorted[0].score === sorted[1].score) {
-    const [top0, top1] = [sorted[0].key, sorted[1].key];
-    const always0 = alwaysCounts[top0];
-    const always1 = alwaysCounts[top1];
-    if (always0 !== always1) {
-      sorted = always0 > always1
-        ? [sorted[0], sorted[1]]
-        : [sorted[1], sorted[0]];
-    } else {
-      const often0 = oftenCounts[top0];
-      const often1 = oftenCounts[top1];
-      if (often0 !== often1) {
-        sorted = often0 > often1
-          ? [sorted[0], sorted[1]]
-          : [sorted[1], sorted[0]];
-      } else {
-        sorted = [sorted[0], sorted[1]].sort((a, b) => a.key.localeCompare(b.key));
-      }
-    }
-  }
+  averages.sort((a, b) => b.score - a.score);
 
-  // Guarantee top two have different elements
-  const result = [];
-  for (let i = 0; i < sorted.length; i++) {
-    const element = sorted[i].key.split('-')[0];
-    if (!result.some(r => r.key.split('-')[0] === element)) {
-      result.push(sorted[i]);
-    }
-    if (result.length === 2) break;
-  }
-  return result;
+  return averages;
 }
 
-// Animated Alert Component
 function AnimatedAlert({ message, visible, onClose, type = "warning", delay = 3000, showButtons = false }) {
   useEffect(() => {
     if (visible && !showButtons && delay > 0) {
@@ -210,7 +176,6 @@ function AnimatedAlert({ message, visible, onClose, type = "warning", delay = 30
   );
 }
 
-// Modal Confirm for actions (Back to Home, quiz size change)
 function ModalConfirm({ visible, message, onConfirm, onCancel }) {
   if (!visible) return null;
   return (
@@ -370,24 +335,15 @@ export default function ElementQuizComprehensive() {
     setQuizSizeModal({ visible: false, newSize: null });
   }
 
-  function handleAnswer(qIdx, value) {
-    if (!hasAnswered) setHasAnswered(true);
-    setAnswers(prev => ({
-      ...prev,
-      [qIdx]: value,
-    }));
-  }
-
   function handleSubmit(e) {
     e.preventDefault();
     const totalQuestions = quizQuestions.length;
-    const answeredQuestions = Object.keys(answers).length;
+    const answeredQuestions = Object.keys(answers).filter(key => answers[key] !== "" && answers[key] !== undefined).length;
     if (answeredQuestions < totalQuestions) {
       showAlert(`Please answer all ${totalQuestions} questions before viewing your results.`, "error", 3000);
       return;
     }
-    // Use the updated yin/yang scoring, always returns two different elements
-    const top = getElementAspectScores(answers, quizQuestions);
+    const top = getElementScores(answers, quizQuestions);
     navigate("/elementquizresults", { state: { topElements: top } });
   }
 
@@ -447,7 +403,6 @@ export default function ElementQuizComprehensive() {
       }}
       className="flex flex-col"
     >
-      {/* Animated Alert */}
       <AnimatedAlert
         message={alertState.message}
         visible={alertState.visible}
@@ -457,7 +412,6 @@ export default function ElementQuizComprehensive() {
         showButtons={false}
       />
 
-      {/* Quiz size change modal */}
       <ModalConfirm
         visible={quizSizeModal.visible}
         message="Changing the quiz size will erase all current answers. Are you sure you want to change the quiz length?"
@@ -465,7 +419,6 @@ export default function ElementQuizComprehensive() {
         onCancel={handleQuizSizeModalCancel}
       />
 
-      {/* Back to Home confirmation modal */}
       <ModalConfirm
         visible={backToHomeModal}
         message="All quiz data will be erased if you leave this page. Are you sure you want to return home?"
@@ -473,7 +426,6 @@ export default function ElementQuizComprehensive() {
         onCancel={handleBackToHomeCancel}
       />
 
-      {/* Fixed NavBar */}
       <div
         ref={navBarRef}
         style={{
@@ -524,20 +476,18 @@ export default function ElementQuizComprehensive() {
             fontSize: isMobile ? "1em" : "1.14em",
             marginBottom: "1.1em"
           }}>
-            Discover your top two Five Element types <b>and their aspect (Yin/Yang)</b> in Traditional Chinese Medicine (TCM)! <br />
-            This extremely comprehensive quiz ranks your Wood, Fire, Earth, Metal, and Water personality traits—<b>with Yin/Yang aspect</b>—based on <b>up to 150 questions</b> about your nature, preferences, and life approach.<br /><br />
+            Discover your dominant Five Element type <b>and where you fall on the Yin/Yang spectrum</b> in Traditional Chinese Medicine (TCM)! <br />
+            This comprehensive quiz ranks your Wood, Fire, Earth, Metal, and Water personality traits based on up to 75 questions about your nature, preferences, and life approach.<br /><br />
             <span style={{ color: COLORS.accentEmerald }}>
               Based on TCM theory, Five Elements affect your health, relationships, and decision-making.
             </span>
             <br />
             <span style={{ color: COLORS.accentBlue, fontWeight: 600, fontSize: "0.97em" }}>
               <i>
-                In case of a tie, your dominant element & aspect is determined by the number of strongest ("Always") then strong ("Often") answers.
-                If still tied, alphabetical order is used.
+                For each question, use the slider to choose how much you relate to option A (Yin) or option B (Yang). All options are valid!
               </i>
             </span>
           </div>
-
           {/* Quiz size selection */}
           <div style={{
             background: "#fffbe7",
@@ -581,7 +531,6 @@ export default function ElementQuizComprehensive() {
               </span>
             </div>
           </div>
-
           {/* Quiz Questions */}
           {quizSize && (
             <form onSubmit={handleSubmit} style={{width:"100%"}}>
@@ -591,71 +540,89 @@ export default function ElementQuizComprehensive() {
                 border: `1.5px solid ${COLORS.accentGold}`,
                 marginBottom: "2em"
               }}>
-                {quizQuestions.map((q, idx) => (
-                  <div key={idx} style={{
-                    padding: isMobile ? "10px 0 7px 0" : "14px 0 8px 0",
-                    borderBottom: idx < (quizQuestions.length-1) ? `1px solid ${COLORS.accentGray}` : "none",
-                    marginBottom: "0.2em"
-                  }}>
-                    <label style={{
-                      color: COLORS.accentBlack,
-                      fontWeight: 800,
-                      fontSize: isMobile ? "1em" : "1.08em",
-                      marginBottom: "0.12em",
-                      display: "block"
+                {quizQuestions.map((q, idx) => {
+                  const sliderValue = answers[idx] !== undefined ? answers[idx] : 100;
+                  let displayValue;
+                  if (sliderValue < 100) displayValue = `A: ${100 - sliderValue}`;
+                  else if (sliderValue > 100) displayValue = `B: ${sliderValue - 100}`;
+                  else displayValue = "0";
+
+                  return (
+                    <div key={idx} style={{
+                      padding: isMobile ? "10px 0 7px 0" : "14px 0 8px 0",
+                      borderBottom: idx < (quizQuestions.length-1) ? `1px solid ${COLORS.accentGray}` : "none",
+                      marginBottom: "0.2em"
                     }}>
-                      {idx + 1}. {q.text}
-                    </label>
-                    <div
-                      style={{
+                      <label style={{
+                        color: COLORS.accentBlack,
+                        fontWeight: 800,
+                        fontSize: isMobile ? "1.14em" : "1.18em",
+                        marginBottom: "0.12em",
+                        display: "block",
+                        letterSpacing: "0.01em"
+                      }}>
+                        {idx + 1}. {q.prompt}
+                      </label>
+                      <div style={{
                         display: "flex",
-                        gap: isMobile ? "0.18em" : "0.7em",
-                        flexWrap: "nowrap",
-                        justifyContent: isMobile ? "flex-start" : "flex-start",
                         alignItems: "center",
-                        overflowX: isMobile ? "auto" : "visible",
-                        marginBottom: isMobile ? "2px" : "0px",
-                      }}
-                    >
-                      {["Never", "Rarely", "Sometimes", "Often", "Always"].map((opt, vIdx) => (
-                        <label
-                          key={vIdx}
-                          style={{
-                            background: answers[idx] === vIdx ? COLORS.accentGold : COLORS.backgroundGold,
-                            color: answers[idx] === vIdx ? COLORS.backgroundRed : COLORS.accentBlack,
-                            border: `2px solid ${COLORS.accentGold}`,
-                            borderRadius: "1.7em",
-                            padding: isMobile
-                              ? "6px 2vw"
-                              : "7px 17px",
-                            fontWeight: 700,
-                            cursor: "pointer",
-                            userSelect: "none",
-                            fontSize: isMobile ? "0.82em" : "1em",
-                            boxShadow: answers[idx] === vIdx ? `0 2px 12px -3px ${COLORS.accentGold}88` : "none",
-                            opacity: answers[idx] === vIdx ? 1 : 0.95,
-                            transition: "background 0.16s, color 0.16s",
-                            minWidth: isMobile ? 54 : undefined,
-                            maxWidth: isMobile ? "22vw" : undefined,
-                            textAlign: "center",
-                            marginBottom: isMobile ? "0px" : "0px",
-                            whiteSpace: "nowrap",
-                          }}
-                        >
+                        gap: isMobile ? "0.5em" : "1em",
+                        marginBottom: "0.2em"
+                      }}>
+                        <span style={{
+                          color: COLORS.accentBlack,
+                          fontWeight: 600,
+                          fontSize: isMobile ? "0.97em" : "1em",
+                          minWidth: isMobile ? "65px" : "150px",
+                          textAlign: "right"
+                        }}>
+                          A:&nbsp;{q.A}
+                        </span>
+                        <div style={{ width: isMobile ? "50vw" : "250px", textAlign: "center" }}>
+                          <div
+                            style={{
+                              fontWeight: 800,
+                              fontSize: isMobile ? "1em" : "1.15em",
+                              color: COLORS.accentEmerald,
+                              marginBottom: "0.1em",
+                              userSelect: "none"
+                            }}
+                          >
+                            {displayValue}
+                          </div>
                           <input
-                            type="radio"
-                            name={`q${idx}`}
-                            value={vIdx}
-                            checked={answers[idx] === vIdx}
-                            onChange={() => handleAnswer(idx, vIdx)}
-                            style={{ display: "none" }}
+                            type="range"
+                            min={0}
+                            max={200}
+                            step={1}
+                            value={sliderValue}
+                            onChange={e => {
+                              setAnswers(prev => ({
+                                ...prev,
+                                [idx]: Number(e.target.value)
+                              }));
+                              if (!hasAnswered) setHasAnswered(true);
+                            }}
+                            style={{
+                              width: "100%",
+                              accentColor: COLORS.accentGold,
+                              margin: "0 0.6em"
+                            }}
                           />
-                          {opt}
-                        </label>
-                      ))}
+                        </div>
+                        <span style={{
+                          color: COLORS.accentBlack,
+                          fontWeight: 600,
+                          fontSize: isMobile ? "0.97em" : "1em",
+                          minWidth: isMobile ? "65px" : "150px",
+                          textAlign: "left"
+                        }}>
+                          B:&nbsp;{q.B}
+                        </span>
+                      </div>
                     </div>
-                  </div>
-                ))}
+                  );
+                })}
               </div>
               <div style={{textAlign:"center"}}>
                 <button
