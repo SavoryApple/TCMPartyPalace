@@ -174,7 +174,7 @@ export default function ComingSoon() {
                 fontWeight: 600,
               }}
             >
-              {feature}
+              {idx === 0 ? <span style={{ textDecoration: "line-through" }}>{feature}</span> : feature}
             </li>
           ))}
         </ol>

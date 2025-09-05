@@ -1,9 +1,9 @@
 import React, { useState, useEffect, useRef, useLayoutEffect } from "react";
-import { useNavigate, Link } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import NavBar from "../components/NavBar";
 import FooterCard from "../components/FooterCard";
 import useAutoLogout from "../hooks/useAutoLogout";
-
+import BackToTopButton from "../components/BackToTopButton";
 
 const COLORS = {
   backgroundRed: "#9A2D1F",
@@ -66,6 +66,9 @@ export default function AdminDashboard() {
   const navBarRef = useRef();
   const [navBarHeight, setNavBarHeight] = useState(NAVBAR_HEIGHT);
 
+  // Ref for auto-growing textarea in edit mode
+  const editTextareaRef = useRef(null);
+
   useLayoutEffect(() => {
     function updateHeight() {
       if (navBarRef.current) {
@@ -124,6 +127,15 @@ export default function AdminDashboard() {
     setMessage("");
     setError("");
   }
+
+  // Auto-grow textarea height to fit content on editJson change
+  useEffect(() => {
+    if (editId && editTextareaRef.current) {
+      const textarea = editTextareaRef.current;
+      textarea.style.height = "auto";
+      textarea.style.height = textarea.scrollHeight + "px";
+    }
+  }, [editJson, editId]);
 
   async function handleEditSave(e) {
     e.preventDefault();
@@ -256,38 +268,6 @@ export default function AdminDashboard() {
     }
   }
 
-  // Back to Home button styled and positioned below nav bar
-  const backToHomeButton = (
-    <div
-      style={{
-        position: "fixed",
-        top: navBarHeight + 12,
-        right: 16,
-        zIndex: 101,
-        display: "flex",
-        justifyContent: "flex-end",
-      }}
-      className="back-to-home-btn"
-    >
-      <Link
-        to="/"
-        className="px-5 py-2 rounded-full font-bold shadow-xl transition-all duration-200 hover:scale-105 active:scale-95 focus:ring-2 focus:ring-accentEmerald"
-        style={{
-          background: COLORS.accentGold,
-          color: COLORS.backgroundRed,
-          border: `2px solid ${COLORS.accentBlack}`,
-          textShadow: `0 1px 0 ${COLORS.backgroundGold}`,
-          fontSize: "1.06em",
-          minWidth: 120,
-          textAlign: "center"
-        }}
-        tabIndex={0}
-      >
-        Back to Home
-      </Link>
-    </div>
-  );
-
   // Delete confirmation modal
   const deleteModal = pendingDeleteId ? (
     <div
@@ -413,7 +393,8 @@ export default function AdminDashboard() {
       </div>
       {/* Spacer for navbar */}
       <div style={{ height: navBarHeight, width: "100vw", minHeight: navBarHeight }}></div>
-      {backToHomeButton}
+      {/* Scroll to top button */}
+      <BackToTopButton right={75} />
       {deleteModal}
       {/* Main content area */}
       <div
@@ -610,9 +591,9 @@ export default function AdminDashboard() {
                             style={{ width: "100%" }}
                           >
                             <textarea
+                              ref={editTextareaRef}
                               value={editJson}
                               onChange={e => setEditJson(e.target.value)}
-                              rows={8}
                               style={{
                                 width: "100%",
                                 fontFamily: "monospace",
@@ -620,7 +601,11 @@ export default function AdminDashboard() {
                                 borderRadius: "1em",
                                 border: `2px solid ${COLORS.accentEmerald}`,
                                 padding: "0.7em",
-                                boxSizing: "border-box"
+                                boxSizing: "border-box",
+                                resize: "none",
+                                minHeight: "60px",
+                                maxHeight: "none",
+                                overflowY: "hidden"
                               }}
                             />
                             <div style={{ marginTop: "0.4em", display: "flex", gap: 8 }}>
@@ -669,9 +654,7 @@ export default function AdminDashboard() {
                             background: COLORS.backgroundGold,
                             borderRadius: "1em",
                             padding: "0.7em",
-                            margin: 0,
-                            maxHeight: "180px",
-                            overflowY: "auto"
+                            margin: 0
                           }}>
                             {pretty(item)}
                           </pre>

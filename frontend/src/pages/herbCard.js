@@ -235,6 +235,10 @@ function getHerbKey(herb) {
 
 function HerbImage({ url, alt, isMobile }) {
   const [expanded, setExpanded] = useState(false);
+
+  const normalWidth = isMobile ? 130 : 120;
+  const normalHeight = isMobile ? 130 : 120;
+
   useEffect(() => {
     if (!expanded) return;
     function handleClick(e) {
@@ -253,8 +257,8 @@ function HerbImage({ url, alt, isMobile }) {
           top: isMobile ? undefined : 18,
           right: isMobile ? undefined : 18,
           zIndex: 99,
-          width: isMobile ? "130px" : 120,
-          height: isMobile ? "130px" : 120,
+          width: `${normalWidth}px`,
+          height: `${normalHeight}px`,
           border: `2.5px dashed ${COLORS.violet}`,
           borderRadius: "1em",
           background: COLORS.backgroundGold,
@@ -288,8 +292,8 @@ function HerbImage({ url, alt, isMobile }) {
           boxShadow: `0 4px 18px -3px ${COLORS.shadowStrong}`,
           border: `2.5px solid ${COLORS.violet}`,
           background: COLORS.backgroundGold,
-          width: isMobile ? "130px" : 120,
-          height: isMobile ? "130px" : 120,
+          width: `${normalWidth}px`,
+          height: `${normalHeight}px`,
           transition: "box-shadow 0.2s",
           margin: isMobile ? "0 auto 18px auto" : undefined,
           display: isMobile ? "block" : "block"
@@ -323,20 +327,62 @@ function HerbImage({ url, alt, isMobile }) {
             cursor: "pointer",
           }}
         >
+          {/* Red X button in upper right of overlay */}
+          <button
+            aria-label="Close image"
+            onClick={e => {
+              e.stopPropagation();
+              setExpanded(false);
+            }}
+            style={{
+              position: "fixed",
+              top: "min(3vw, 25px)",
+              right: "min(3vw, 25px)",
+              zIndex: 100000,
+              background: COLORS.accentCrimson,
+              color: "#fff",
+              border: "none",
+              borderRadius: "2em",
+              width: 44,
+              height: 44,
+              fontSize: "2.1em",
+              fontWeight: "bold",
+              boxShadow: "0 2px 18px 0 #0005",
+              cursor: "pointer",
+              display: "flex",
+              alignItems: "center",
+              justifyContent: "center",
+              padding: 0,
+              outline: "none",
+              transition: "background 0.15s",
+            }}
+            tabIndex={0}
+            title="Close image"
+          >
+            ×
+          </button>
+          {/* Only the image is visible, border is around the image only, no background container */}
           <img
             src={url}
             alt={alt || "Herb"}
             style={{
-              maxWidth: "80vw",
-              maxHeight: "82vh",
-              borderRadius: "2em",
+              maxWidth: '88.2vw',
+              maxHeight: '81vh',
+              width: "auto",
+              height: "auto",
+              objectFit: 'contain',
+              borderRadius: '2em',
               boxShadow: `0 10px 60px -8px ${COLORS.shadowStrong}`,
               border: `4px solid ${COLORS.violet}`,
-              background: COLORS.backgroundGold,
-              objectFit: "contain",
+              background: "transparent",
               transition: "box-shadow 0.18s",
+              cursor: "auto",
+              display: "block",
+              margin: 0,
+              padding: 0,
             }}
             className="animate-imgPop"
+            onClick={e => e.stopPropagation()}
           />
         </div>
       )}
@@ -470,7 +516,6 @@ export default function HerbCard() {
     }
   }
 
-  // This function is used for "Add To Formula Builder" button in formulas list
   function handleAddFormulaBuilder(formula) {
     const formulaName = Array.isArray(formula.pinyinName)
       ? formula.pinyinName[0]
@@ -782,7 +827,7 @@ export default function HerbCard() {
         onAddFormulaBuilder={handleAddFormulaBuilder}
         formulaCardStyle={true}
         highlightMainHerb={true}
-        showAddToFormulaBuilderButton={true} // <-- Pass this!
+        showAddToFormulaBuilderButton={true}
       />
       <HerbCategoryInfo />
       <FooterCard />
