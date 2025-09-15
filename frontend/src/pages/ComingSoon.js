@@ -25,6 +25,8 @@ const sidebarTop = NAVBAR_HEIGHT + FILTER_BAR_HEIGHT;
 
 const COMING_FEATURES = [
   "Comprehensive 5 element personality quiz",
+  "Page for patients to visit that explains what chinese medicine is and how acupuncture fits into that",
+  "Page for practitioners to refer patients to when suggesting medicinal foods to add to ones diet, with a simple printable format",
   "Western symptom index showing what TCM syndromes each can belong to",
   "Diagnosis tool where the user selects symptoms/tongue/pulse from a dropdown and an algorithm suggests possible TCM diagnoses, with suggested basic treatments",
   "A new formula category list based on TCM syndromes/zang fu patterns",

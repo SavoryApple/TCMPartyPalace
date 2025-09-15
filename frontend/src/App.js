@@ -24,6 +24,7 @@ import NavBar from "./components/NavBar";
 import ComingSoon from "./pages/ComingSoon";
 import ElementQuizComprehensive from "./pages/ElementQuizComprehensive";
 import ElementQuizResults from "./pages/ElementQuizResults";
+import WhatIsChineseMedicine from "./pages/WhatIsChineseMedicine";
 
 const COLORS = {
   backgroundRed: "#9A2D1F",
@@ -82,6 +83,14 @@ const CARD_DATA = [
     color: COLORS.accentBlue,
     textColor: COLORS.accentIvory,
     route: "elementquiz",
+  },
+  {
+    title: "What is Chinese medicine?",
+    description: "Learn about the foundations, history, and principles of TCM.",
+    icon: "❓",
+    color: COLORS.accentGray,
+    textColor: COLORS.backgroundRed,
+    route: "whatischinesemedicine",
   },
 ];
 
@@ -722,6 +731,7 @@ export default function App() {
           <Route path="comingsoon" element={<ComingSoon />} />
           <Route path="elementquiz" element={<ElementQuizComprehensive />} />
           <Route path="/elementquizresults" element={<ElementQuizResults />} />
+          <Route path="whatischinesemedicine" element={<WhatIsChineseMedicine />} />
         </Routes>
       </Router>
     </HerbCartProvider>
