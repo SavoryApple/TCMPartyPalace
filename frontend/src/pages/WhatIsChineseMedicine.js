@@ -309,6 +309,25 @@ export default function WhatIsChineseMedicine() {
     return () => window.removeEventListener("resize", updateHeight);
   }, []);
 
+  // Update page title and meta description for SEO
+  useLayoutEffect(() => {
+    const originalTitle = document.title;
+    const originalDescription = document.querySelector('meta[name="description"]')?.getAttribute('content');
+    
+    document.title = "What is Traditional Chinese Medicine? | The TCM Atlas";
+    const metaDescription = document.querySelector('meta[name="description"]');
+    if (metaDescription) {
+      metaDescription.setAttribute('content', 'Comprehensive guide to Traditional Chinese Medicine (TCM) covering philosophy, diagnosis, treatments, safety, and scientific evidence. Learn about acupuncture, herbal medicine, and holistic healthcare.');
+    }
+    
+    return () => {
+      document.title = originalTitle;
+      if (metaDescription && originalDescription) {
+        metaDescription.setAttribute('content', originalDescription);
+      }
+    };
+  }, []);
+
   // Reusable Components
   const TCMSection = ({ id, className = "", style = {}, children, collapsible = false, title = "" }) => {
     const isCollapsed = collapsedSections[id];
