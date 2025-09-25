@@ -134,72 +134,6 @@ function ChannelBubble({ value, uniqueKey, isMobile }) {
   );
 }
 
-function YoSanCarriesAndFormatsBubble({ herb, isMobile }) {
-  let yoSanCarries;
-  if (herb.yoSanCarries === true) {
-    yoSanCarries = "Yes";
-  } else if (herb.yoSanCarries === false || herb.yoSanCarries === undefined || herb.yoSanCarries === null) {
-    yoSanCarries = "No";
-  } else {
-    yoSanCarries = String(herb.yoSanCarries);
-  }
-  const formats =
-    Array.isArray(herb.formats) && herb.formats.length > 0
-      ? herb.formats.join(", ")
-      : typeof herb.formats === "string" && herb.formats
-      ? herb.formats
-      : null;
-
-  const bubbleSize = isMobile
-    ? { fontSize: "0.63em", padding: "1px 6px", minWidth: 25, marginRight: 2 }
-    : { fontSize: "0.7em", padding: "1.5px 8px", minWidth: 32, marginRight: 5 };
-
-  return (
-    <span
-      style={{
-        display: "inline-flex",
-        flexDirection: "row",
-        gap: isMobile ? "0.2em" : "0.4em",
-        alignItems: "center",
-        marginTop: 0,
-        marginBottom: 0,
-        fontWeight: 600,
-      }}
-    >
-      <span
-        style={{
-          ...bubbleSize,
-          background: COLORS.yoSanBubble,
-          color: COLORS.yoSanBubbleText,
-          borderRadius: "999px",
-          textAlign: "center",
-          boxShadow: `0 1px 5px -2px ${COLORS.yoSanBubble}55`,
-          border: `1px solid ${COLORS.accentGold}`,
-          letterSpacing: "0.01em",
-        }}
-      >
-        Yo San: {yoSanCarries}
-      </span>
-      {formats && (
-        <span
-          style={{
-            ...bubbleSize,
-            background: COLORS.formatsBubble,
-            color: COLORS.formatsBubbleText,
-            borderRadius: "999px",
-            textAlign: "center",
-            boxShadow: `0 1px 5px -2px ${COLORS.formatsBubble}55`,
-            border: `1px solid ${COLORS.accentGold}`,
-            letterSpacing: "0.01em",
-          }}
-        >
-          Formats: {formats}
-        </span>
-      )}
-    </span>
-  );
-}
-
 function highlightText(text, query) {
   if (!text) return "";
   if (!query) return text;
@@ -327,7 +261,6 @@ function HerbImage({ url, alt, isMobile }) {
             cursor: "pointer",
           }}
         >
-          {/* Red X button in upper right of overlay */}
           <button
             aria-label="Close image"
             onClick={e => {
@@ -361,7 +294,6 @@ function HerbImage({ url, alt, isMobile }) {
           >
             ×
           </button>
-          {/* Only the image is visible, border is around the image only, no background container */}
           <img
             src={url}
             alt={alt || "Herb"}
@@ -403,7 +335,6 @@ function getPropertiesArr(herb) {
   }
   return [];
 }
-
 function getChannelsArr(herb) {
   if (!herb) return [];
   let val = herb.channelsEntered;
@@ -416,6 +347,103 @@ function getChannelsArr(herb) {
       .filter(Boolean);
   }
   return [];
+}
+function getCategoryKeyActions(herb, herbCategoryList) {
+  if (!herb || !herbCategoryList) return undefined;
+  const normalize = (str) =>
+    (str || "")
+      .replace(/\s|-/g, "")
+      .toLowerCase()
+      .normalize("NFD")
+      .replace(/[\u0300-\u036f]/g, "");
+  let herbNameNorm = normalize(herb.pinyinName || herb.name);
+  const catArr = Array.isArray(herbCategoryList.categories)
+    ? herbCategoryList.categories
+    : Array.isArray(herbCategoryList)
+    ? herbCategoryList
+    : [];
+  for (const cat of catArr) {
+    for (const subcat of cat.subcategories || []) {
+      for (const h of subcat.herbs || []) {
+        let hNorm = normalize(h.pinyinName || h.name);
+        if (hNorm === herbNameNorm) {
+          return h.keyActions || h.explanation;
+        }
+      }
+    }
+  }
+  for (const outerCat of catArr) {
+    if (outerCat.categories) {
+      for (const cat of outerCat.categories) {
+        for (const subcat of cat.subcategories || []) {
+          for (const h of subcat.herbs || []) {
+            let hNorm = normalize(h.pinyinName || h.name);
+            if (hNorm === herbNameNorm) {
+              return h.keyActions || h.explanation;
+            }
+          }
+        }
+      }
+    }
+  }
+  return undefined;
+}
+
+function KeyActionsAndExtrasSection({ keyActions, yosancarries, formats }) {
+  if (!keyActions && typeof yosancarries === "undefined" && (!formats || formats.length === 0)) return null;
+  return (
+    <div
+      className="herb-explanation-extra mt-6 w-full"
+      style={{
+        borderTop: `2px solid ${COLORS.accentGold}`,
+        paddingTop: 18,
+        marginBottom: 0,
+      }}
+    >
+      {keyActions && (
+        <div
+          className="herb-keyactions-explanation"
+          style={{
+            background: "#FCF5E5",
+            color: COLORS.claret,
+            fontWeight: 600,
+            fontSize: "1.05em",
+            borderRadius: "1em",
+            padding: "14px 20px",
+            marginBottom: "10px",
+            textAlign: "center",
+            boxShadow: "0 2px 18px -4px #B38E3FCC",
+            border: "2px solid #F9E8C2",
+            letterSpacing: ".01em",
+            maxWidth: "98%",
+            alignSelf: "center",
+            wordBreak: "break-word",
+            lineHeight: "1.4",
+          }}
+        >
+          <strong>Clinical Summary:</strong> {keyActions}
+        </div>
+      )}
+      <div style={{ marginTop: "10px", marginBottom: "10px", fontSize: "1.02em" }}>
+        {typeof yosancarries !== "undefined" && (
+          <div>
+            <strong style={{ color: COLORS.backgroundRed }}>Yo San Carries:</strong>{" "}
+            <span style={{ color: yosancarries ? COLORS.accentEmerald : COLORS.accentCrimson, fontWeight: 600 }}>
+              {yosancarries === true ? "Yes" : yosancarries === false ? "No" : ""}
+            </span>
+          </div>
+        )}
+        {formats && Array.isArray(formats) && formats.length > 0 && (
+          <div>
+            <strong style={{ color: COLORS.backgroundRed }}>Format:</strong>{" "}
+            <span style={{ color: COLORS.accentBlack }}>
+              {formats.join(", ")}
+            </span>
+          </div>
+        )}
+      </div>
+    </div>
+  );
 }
 
 export default function HerbCard() {
@@ -430,6 +458,9 @@ export default function HerbCard() {
 
   const [herb, setHerb] = useState(null);
   const [loading, setLoading] = useState(true);
+  const [herbCategoryList, setHerbCategoryList] = useState([]);
+  const [yosancarries, setYoSanCarries] = useState(undefined);
+  const [formats, setFormats] = useState(undefined);
 
   const API_URL = process.env.REACT_APP_API_URL || "https://thetcmatlas.fly.dev";
   const isMobile = useIsMobile();
@@ -467,15 +498,17 @@ export default function HerbCard() {
       fetch(`${API_URL}/api/data/caleherbs`).then(r => r.json()),
       fetch(`${API_URL}/api/data/caleandnccaomherbs`).then(r => r.json()),
       fetch(`${API_URL}/api/data/nccaomherbs`).then(r => r.json()),
-      fetch(`${API_URL}/api/data/extraherbs`).then(r => r.json())
+      fetch(`${API_URL}/api/data/extraherbs`).then(r => r.json()),
+      fetch(`/data/herbCategoryListObject.json`).then(r => r.json())
     ])
-      .then(([caleHerbs, caleAndNccaomHerbs, nccaomHerbs, extraHerbs]) => {
+      .then(([caleHerbs, caleAndNccaomHerbs, nccaomHerbs, extraHerbs, herbCatList]) => {
         const allHerbs = [
           ...caleHerbs,
           ...caleAndNccaomHerbs,
           ...nccaomHerbs,
           ...extraHerbs
         ];
+        setHerbCategoryList(herbCatList);
         if (id) {
           const decodedId = decodeURIComponent(id).toLowerCase().replace(/\s+/g, "");
           const foundHerb = allHerbs.find(h => {
@@ -488,6 +521,14 @@ export default function HerbCard() {
             return names.includes(decodedId);
           });
           setHerb(foundHerb || null);
+          setYoSanCarries(
+            typeof foundHerb?.yoSanCarries !== "undefined"
+              ? foundHerb.yoSanCarries
+              : typeof foundHerb?.yosancarries !== "undefined"
+              ? foundHerb.yosancarries
+              : undefined
+          );
+          setFormats(foundHerb?.formats || undefined);
         }
         setLoading(false);
       })
@@ -525,6 +566,11 @@ export default function HerbCard() {
 
   const propertiesArr = herb ? getPropertiesArr(herb) : [];
   const channelsArr = herb ? getChannelsArr(herb) : [];
+  const categoryKeyActions = getCategoryKeyActions(herb, herbCategoryList);
+
+  // Actions and Indications
+  const actions = herb?.actions;
+  const indications = herb?.indications;
 
   if (loading) {
     return (
@@ -660,7 +706,6 @@ export default function HerbCard() {
             justifyContent: "flex-start",
           }}
         >
-          {/* Herb Image */}
           <HerbImage url={process.env.PUBLIC_URL + "/" + herb.herbImageURL} alt={getHerbDisplayName(herb)} isMobile={isMobile} />
           <div className="flex items-center mb-4 animate-bounceIn" style={{ flexWrap: isMobile ? "wrap" : "nowrap" }}>
             <span className="text-4xl mr-3">🌿</span>
@@ -681,19 +726,6 @@ export default function HerbCard() {
               <span key={i}>{highlightText(n, query)}{i < safeArr(herb.englishNames).length - 1 ? ", " : ""}</span>
             ))}
           </p>
-          {/* YoSan + Formats bubbles */}
-          <div
-            style={{
-              margin: "0.5em 0 0.5em 0",
-              fontSize: isMobile ? "0.74em" : "0.8em",
-              display: "flex",
-              alignItems: "center",
-              flexWrap: "wrap",
-              gap: isMobile ? "8px" : "18px",
-            }}
-          >
-            <YoSanCarriesAndFormatsBubble herb={herb} isMobile={isMobile} />
-          </div>
           {/* Properties bubbles */}
           <p className="mb-2" style={{
             color: COLORS.seal,
@@ -734,12 +766,28 @@ export default function HerbCard() {
                 )
               : safeArr(herb.channelsEntered).join(", ")}
           </p>
-          <p className="mb-2" style={{ color: COLORS.seal, fontSize: isMobile ? "1em" : "1.07em" }}>
-            <strong>Keywords:</strong>{" "}
-            {safeArr(herb.keywords).map((k, i) => (
-              <span key={i}>{highlightText(k, query)}{i < safeArr(herb.keywords).length - 1 ? ", " : ""}</span>
-            ))}
-          </p>
+          {/* Actions (NEW, styled like cautions/dosage/keywords) */}
+          {actions && (
+            <p className="mb-2" style={{ color: COLORS.seal, fontSize: isMobile ? "1em" : "1.07em" }}>
+              <strong>Actions:</strong>{" "}
+              {Array.isArray(actions)
+                ? actions.map((action, i) => (
+                    <span key={i}>{highlightText(action, query)}{i < actions.length - 1 ? ", " : ""}</span>
+                  ))
+                : highlightText(actions, query)}
+            </p>
+          )}
+          {/* Indications (NEW, styled like cautions/dosage/keywords) */}
+          {indications && (
+            <p className="mb-2" style={{ color: COLORS.seal, fontSize: isMobile ? "1em" : "1.07em" }}>
+              <strong>Indications:</strong>{" "}
+              {Array.isArray(indications)
+                ? indications.map((ind, i) => (
+                    <span key={i}>{highlightText(ind, query)}{i < indications.length - 1 ? ", " : ""}</span>
+                  ))
+                : highlightText(indications, query)}
+            </p>
+          )}
           <p className="mb-2" style={{ color: COLORS.seal, fontSize: isMobile ? "1em" : "1.07em" }}>
             <strong>Dosage:</strong> {highlightText(herb.dosage, query)}
           </p>
@@ -753,6 +801,12 @@ export default function HerbCard() {
             <strong>Notes:</strong>{" "}
             {safeArr(herb.notes).map((n, i) => (
               <span key={i}>{highlightText(n, query)}{i < safeArr(herb.notes).length - 1 ? "; " : ""}</span>
+            ))}
+          </p>
+                    <p className="mb-2" style={{ color: COLORS.seal, fontSize: isMobile ? "1em" : "1.07em" }}>
+            <strong>Keywords:</strong>{" "}
+            {safeArr(herb.keywords).map((k, i) => (
+              <span key={i}>{highlightText(k, query)}{i < safeArr(herb.keywords).length - 1 ? ", " : ""}</span>
             ))}
           </p>
           <div
@@ -815,6 +869,12 @@ export default function HerbCard() {
               Go Back
             </button>
           </div>
+          {/* --- Add herb KeyActions/YoSanCarries/Formats block at the bottom --- */}
+          <KeyActionsAndExtrasSection
+            keyActions={categoryKeyActions}
+            yosancarries={yosancarries}
+            formats={formats}
+          />
         </div>
       </div>
       <WhatFormulaMakesUpThoseHerbs

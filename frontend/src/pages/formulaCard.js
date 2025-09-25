@@ -144,6 +144,86 @@ function extractDosageFromIngredient(ingredientStr) {
   return "";
 }
 
+// Display KeyActions/Explanation block at the bottom
+function KeyActionsExplanation({ explanation, keyActions }) {
+  if (!explanation && !keyActions) return null;
+  return (
+    <div
+      className="formula-keyactions-explanation"
+      style={{
+        background: "#FCF5E5",
+        color: COLORS.claret,
+        fontWeight: 600,
+        fontSize: "1.05em",
+        borderRadius: "1em",
+        padding: "14px 20px",
+        marginTop: "10px",
+        marginBottom: "10px",
+        textAlign: "center",
+        boxShadow: "0 2px 18px -4px #B38E3FCC",
+        border: "2px solid #F9E8C2",
+        letterSpacing: ".01em",
+        maxWidth: "98%",
+        alignSelf: "center",
+        wordBreak: "break-word",
+        lineHeight: "1.4",
+      }}
+    >
+      {keyActions && <div><strong>Key Actions:</strong> {keyActions}</div>}
+      {explanation && <div><strong>Clinical Summary:</strong> {explanation}</div>}
+    </div>
+  );
+}
+
+// YoSanCarries/Formats block
+function ExtraPropsBlock({ yosancarries, formats }) {
+  return (
+    <div style={{ marginTop: "10px", marginBottom: "10px", fontSize: "1.02em" }}>
+      {typeof yosancarries !== "undefined" && (
+        <div>
+          <strong style={{ color: COLORS.backgroundRed }}>Yo San Carries:</strong>{" "}
+          <span style={{ color: yosancarries ? COLORS.accentEmerald : COLORS.accentCrimson, fontWeight: 600 }}>
+            {yosancarries === true ? "Yes" : yosancarries === false ? "No" : ""}
+          </span>
+        </div>
+      )}
+      {formats && Array.isArray(formats) && formats.length > 0 && (
+        <div>
+          <strong style={{ color: COLORS.backgroundRed }}>Format:</strong>{" "}
+          <span style={{ color: COLORS.accentBlack }}>
+            {formats.join(", ")}
+          </span>
+        </div>
+      )}
+    </div>
+  );
+}
+
+// --- Helper: Find formula category explanation ---
+function getCategoryExplanation(formula, formulaCategoryList) {
+  if (!formula || !formulaCategoryList) return undefined;
+  // Find category
+  for (const cat of formulaCategoryList) {
+    for (const subcat of cat.subcategories || []) {
+      for (const f of subcat.formulas || []) {
+        // Match by name, case-insensitive, ignore spaces
+        if (
+          f.name &&
+          formula.pinyinName &&
+          f.name.replace(/\s/g, "").toLowerCase() ===
+            (Array.isArray(formula.pinyinName)
+              ? formula.pinyinName[0]
+              : formula.pinyinName
+            ).replace(/\s/g, "").toLowerCase()
+        ) {
+          return f.explanation;
+        }
+      }
+    }
+  }
+  return undefined;
+}
+
 export default function FormulaCard() {
   const location = useLocation();
   const params = new URLSearchParams(location.search);
@@ -156,6 +236,7 @@ export default function FormulaCard() {
 
   const [allFormulas, setAllFormulas] = useState([]);
   const [allHerbs, setAllHerbs] = useState([]);
+  const [formulaCategoryList, setFormulaCategoryList] = useState([]);
   const [loading, setLoading] = useState(true);
   const [herbLinkAnimating, setHerbLinkAnimating] = useState({});
 
@@ -168,8 +249,9 @@ export default function FormulaCard() {
       fetch(`https://thetcmatlas.fly.dev/api/data/caleherbs`).then(r => r.json()),
       fetch(`https://thetcmatlas.fly.dev/api/data/caleandnccaomherbs`).then(r => r.json()),
       fetch(`https://thetcmatlas.fly.dev/api/data/nccaomherbs`).then(r => r.json()),
-      fetch(`https://thetcmatlas.fly.dev/api/data/extraherbs`).then(r => r.json())
-    ]).then(([caleNccaomFormulasShared, nccaomFormulasOnly, extraFormulas, caleHerbs, caleAndNccaomHerbs, nccaomHerbs, extraHerbs]) => {
+      fetch(`https://thetcmatlas.fly.dev/api/data/extraherbs`).then(r => r.json()),
+      fetch(`/data/formulaCategoryListObject.json`).then(r => r.json()),
+    ]).then(([caleNccaomFormulasShared, nccaomFormulasOnly, extraFormulas, caleHerbs, caleAndNccaomHerbs, nccaomHerbs, extraHerbs, categoryList]) => {
       setAllFormulas([
         ...caleNccaomFormulasShared,
         ...nccaomFormulasOnly,
@@ -181,6 +263,7 @@ export default function FormulaCard() {
         ...nccaomHerbs,
         ...extraHerbs,
       ]);
+      setFormulaCategoryList(categoryList);
       setLoading(false);
     }).catch(() => setLoading(false));
   }, []);
@@ -248,14 +331,12 @@ export default function FormulaCard() {
     return cart.some(h => getHerbKey(h) === herbKey);
   }
 
-  // This will now always pull the dosage from the ingredient string!
   const ingredientHerbs = formula
     ? safeArr(formula.ingredientsAndDosages)
         .map((ing) => {
           const pinyin = getPinyinFromIngredient(ing);
           const herbObj = findHerbObjByName(allHerbs, pinyin);
           if (!herbObj) return null;
-          // Use formula-specific dosage!
           const dosage = extractDosageFromIngredient(ing);
           return { ...herbObj, dosage, originalString: ing };
         })
@@ -268,7 +349,7 @@ export default function FormulaCard() {
     if (allInCart) {
       ingredientHerbs.forEach(h => removeHerb(getHerbKey(h)));
     } else {
-      ingredientHerbs.forEach(h => addHerb(h)); // h has correct formula dosage!
+      ingredientHerbs.forEach(h => addHerb(h));
       setShowCart(true);
     }
   }
@@ -363,7 +444,7 @@ export default function FormulaCard() {
     if (parts.length === 0) {
       return highlightText(mod, query);
     }
-    return parts;
+    return <span>{parts}</span>;
   }
 
   if (loading) {
@@ -466,6 +547,18 @@ export default function FormulaCard() {
       </div>
     );
   }
+
+  const yosancarries =
+    typeof formula.yosancarries !== "undefined"
+      ? formula.yosancarries
+      : typeof formula.yoSanCarries !== "undefined"
+      ? formula.yoSanCarries
+      : undefined;
+
+  const formats = formula.formats || [];
+
+  // --- Get explanation from category file ---
+  const categoryExplanation = getCategoryExplanation(formula, formulaCategoryList);
 
   return (
     <div style={bgStyle}>
@@ -605,7 +698,7 @@ export default function FormulaCard() {
             <strong>Modifications:</strong>
             <ul className="ml-4">
               {safeArr(formula.modifications).map((mod, i) => (
-                <li key={i} style={{ display: "flex", alignItems: "center", marginBottom: "2px" }}>
+                <li key={i} style={{ display: "flex", alignItems: "flex-start", marginBottom: "6px" }}>
                   <span style={numberCircleStyle}>{i + 1}</span>
                   <span>{renderModifications(mod, i)}</span>
                 </li>
@@ -641,6 +734,14 @@ export default function FormulaCard() {
             >
               Add to Formula Builder
             </button>
+          </div>
+          {/* --- Add formula Explanation/KeyActions/YoSanCarries/Formats --- */}
+          <div className="formula-explanation-extra mt-6 w-full" style={{ borderTop: `2px solid ${COLORS.accentGold}`, paddingTop: 18 }}>
+            <KeyActionsExplanation
+              keyActions={formula.keyActions}
+              explanation={formula.explanation || categoryExplanation}
+            />
+            <ExtraPropsBlock yosancarries={yosancarries} formats={formats} />
           </div>
         </div>
       </div>

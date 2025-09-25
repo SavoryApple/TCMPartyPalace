@@ -18,6 +18,11 @@ const COLORS = {
   herbLinkHover: "#438C3B",
   herbLinkBg: "#FFF7E3",
   highlight: "#ffe066",
+  accentHerbInCart: "#fffbe6",
+  accentHerbInCopyList: "#438C3B",
+  accentHerbInCopyListText: "#FCF5E5",
+  checkmarkVisible: "#FF9800", // Bright orange for checkmark
+  checkmarkBorder: "#fff",     // White outline for visibility
 };
 
 function normalize(str) {
@@ -101,48 +106,99 @@ function highlightText(text, query) {
     );
 }
 
-function extractFormulaDosage(ingredientStr, fallbackDosage) {
-  const dosageMatch = ingredientStr.match(/(\d+(\.\d+)?(-\d+(\.\d+)?)?)\s*(g|mg|ml|pieces?)/i);
-  if (dosageMatch) {
-    return dosageMatch[0].trim();
-  }
-  return fallbackDosage || "";
-}
-
 // --- Herb Button Styling Function ---
-function getHerbButtonStyle(inCart, isMainHerb, highlightMainHerb) {
-  if (isMainHerb && highlightMainHerb) {
-    // Distinct highlight for main herb (herbcard.js/formulacard.js)
+function getHerbButtonStyle(isHighlighted, builderHighlight = false) {
+  // No red/yellow highlight, only normal and builder green
+  if (isHighlighted && builderHighlight) {
+    // Green highlight for builder page (and main herb on HerbCard)
     return {
-      background: COLORS.accentGold,
-      color: COLORS.backgroundRed,
+      color: COLORS.accentHerbInCopyListText,
+      background: COLORS.accentHerbInCopyList,
       borderRadius: "1em",
-      border: `2.5px solid ${COLORS.accentEmerald}`,
-      fontWeight: 900,
+      border: `2px solid ${COLORS.accentGold}`,
+      fontWeight: 700,
       fontSize: "1em",
       marginRight: "0.35em",
-      padding: "0 0.6em",
+      padding: "0 0.4em",
       textDecoration: "underline",
       cursor: "pointer",
-      boxShadow: `0 0 0 2px ${COLORS.accentEmerald}66`,
+      boxShadow: `0 0 0 2px ${COLORS.accentGold}33`,
       transition: "all 0.13s cubic-bezier(.36,1.29,.45,1.01)",
+      position: "relative",
     };
   }
-  // Default/carthighlight
+  // Default (no cart/yellow/red highlight)
   return {
     color: COLORS.herbLink,
-    background: inCart ? COLORS.accentEmerald : COLORS.herbLinkBg,
+    background: COLORS.herbLinkBg,
     borderRadius: "1em",
-    border: inCart ? `2px solid ${COLORS.accentGold}` : "none",
+    border: "none",
     fontWeight: 700,
     fontSize: "1em",
     marginRight: "0.35em",
-    padding: inCart ? "0 0.4em" : "0 0.22em",
+    padding: "0 0.22em",
     textDecoration: "underline",
     cursor: "pointer",
-    boxShadow: inCart ? `0 0 0 2px ${COLORS.accentGold}33` : "none",
+    boxShadow: "none",
     transition: "all 0.13s cubic-bezier(.36,1.29,.45,1.01)",
+    position: "relative",
   };
+}
+
+// --- Animated Checkmark Component ---
+// Orange checkmark, white outline, shadow for visibility.
+function AnimatedCheckmark({ show }) {
+  if (!show) return null;
+  return (
+    <span
+      style={{
+        display: "inline-block",
+        marginLeft: 7,
+        verticalAlign: "middle",
+        animation: "checkmark-pop 0.38s cubic-bezier(.36,1.29,.45,1.01)",
+        position: "relative",
+        zIndex: 10,
+      }}
+    >
+      <svg
+        width="23"
+        height="23"
+        viewBox="0 0 24 24"
+        fill="none"
+        style={{
+          display: "inline-block",
+          verticalAlign: "middle",
+          filter: "drop-shadow(0 2px 4px #FF9800)",
+        }}
+        aria-label="In cart"
+      >
+        {/* White outline */}
+        <path
+          d="M5.6 13.5l5 5 7.5-11"
+          stroke={COLORS.checkmarkBorder}
+          strokeWidth="6"
+          strokeLinecap="round"
+          strokeLinejoin="round"
+          style={{ opacity: 0.7 }}
+        />
+        {/* Orange main checkmark */}
+        <path
+          d="M5.6 13.5l5 5 7.5-11"
+          stroke={COLORS.checkmarkVisible}
+          strokeWidth="3"
+          strokeLinecap="round"
+          strokeLinejoin="round"
+        />
+      </svg>
+      <style>{`
+        @keyframes checkmark-pop {
+          0% { opacity: 0; transform: scale(0.6) rotate(-18deg);}
+          72% { opacity: 1; transform: scale(1.15) rotate(6deg);}
+          100% { opacity: 1; transform: scale(1) rotate(0);}
+        }
+      `}</style>
+    </span>
+  );
 }
 
 // --- Small Button Style for HerbCard.js ---
@@ -164,22 +220,69 @@ const SMALL_BUTTON_CONTAINER_STYLE = {
   flexWrap: "wrap"
 };
 
-// --- API ---
 const API_URL = process.env.REACT_APP_API_URL || "https://thetcmatlas.fly.dev";
+
+function KeyActionsExplanation({ explanation, keyActions }) {
+  if (!explanation && !keyActions) return null;
+  return (
+    <div
+      style={{
+        background: COLORS.accentIvory,
+        color: COLORS.accentCrimson,
+        fontWeight: 600,
+        fontSize: "1.05em",
+        borderRadius: "1em",
+        padding: "11px 18px",
+        marginTop: "10px",
+        marginBottom: "10px",
+        textAlign: "center",
+        boxShadow: `0 2px 18px -4px ${COLORS.shadowStrong}`,
+        border: `2px solid ${COLORS.accentGold}`,
+        letterSpacing: ".01em",
+        maxWidth: "98%",
+        alignSelf: "center",
+        wordBreak: "break-word",
+        lineHeight: "1.4",
+      }}
+    >
+      {keyActions && <div><strong>Key Actions:</strong> {keyActions}</div>}
+      {explanation && <div><strong>Clinical Summary:</strong> {explanation}</div>}
+    </div>
+  );
+}
+
+function ExtraPropsBlock({ yosancarries, formats }) {
+  return (
+    <div style={{ marginTop: "10px", marginBottom: "10px", fontSize: "1.02em" }}>
+      {typeof yosancarries !== "undefined" && (
+        <div>
+          <strong style={{ color: COLORS.backgroundRed }}>Yo San Carries:</strong>{" "}
+          <span style={{ color: yosancarries ? COLORS.accentEmerald : COLORS.accentCrimson, fontWeight: 600 }}>
+            {yosancarries === true ? "Yes" : yosancarries === false ? "No" : yosancarries}
+          </span>
+        </div>
+      )}
+      {formats && Array.isArray(formats) && formats.length > 0 && (
+        <div>
+          <strong style={{ color: COLORS.backgroundRed }}>Format:</strong>{" "}
+          <span style={{ color: COLORS.accentBlack }}>
+            {formats.join(", ")}
+          </span>
+        </div>
+      )}
+    </div>
+  );
+}
 
 export default function WhatFormulaMakesUpThoseHerbs({
   herbs,
   excludeFormulaPinyinNames = [],
   onAddFormula,
-  showIndividualAddButtons = false,
   onAddIndividualHerb,
-  onAddFormulaCardClick,
   cart,
   addHerb,
   removeHerb,
-  showCartOptions = false,
   onAddFormulaBuilder,
-  formulaCardStyle = false,
   query = "",
   mainHerbObj,
   showFormulaActions = true,
@@ -191,6 +294,7 @@ export default function WhatFormulaMakesUpThoseHerbs({
   const [allFormulas, setAllFormulas] = useState([]);
   const [loading, setLoading] = useState(true);
   const [herbLinkAnimating, setHerbLinkAnimating] = useState({});
+  const [formulaCategoryList, setFormulaCategoryList] = useState([]);
 
   useEffect(() => {
     setLoading(true);
@@ -202,6 +306,7 @@ export default function WhatFormulaMakesUpThoseHerbs({
       fetch(`${API_URL}/api/data/extraherbs`).then(r => r.json()),
       fetch(`${API_URL}/api/data/nccaomformulas`).then(r => r.json()),
       fetch(`${API_URL}/api/data/nccaomherbs`).then(r => r.json()),
+      fetch(`/data/formulaCategoryListObject.json`).then(r => r.json()).catch(() => []),
     ]).then(([ 
       caleAndNccaomFormulas,
       caleAndNccaomHerbs,
@@ -210,6 +315,7 @@ export default function WhatFormulaMakesUpThoseHerbs({
       extraHerbs,
       nccaomFormulas,
       nccaomHerbs,
+      categoryList,
     ]) => {
       setAllHerbs([
         ...caleHerbs,
@@ -222,11 +328,11 @@ export default function WhatFormulaMakesUpThoseHerbs({
         ...extraFormulas.map(f => ({ ...f, origin: "Extra" })),
         ...nccaomFormulas.map(f => ({ ...f, origin: "NCCAOM" })),
       ]);
+      setFormulaCategoryList(categoryList || []);
       setLoading(false);
     }).catch(() => setLoading(false));
   }, []);
 
-  // --- Memoize normalized selected herbs
   const normalizedSelectedHerbs = useMemo(() => {
     let arr = [];
     if (herbs) {
@@ -263,24 +369,31 @@ export default function WhatFormulaMakesUpThoseHerbs({
     return cart && cart.some(h => getHerbKey(h) === herbKey);
   }
 
-  function isMainHerb(herbObj, ingredientStr) {
-    if (!highlightMainHerb || !mainHerbObj) return false;
-    const herbObjs = Array.isArray(mainHerbObj) ? mainHerbObj : [mainHerbObj];
-    return herbObjs.some(mainHerb => {
-      const mainNorm = normalize(Array.isArray(mainHerb.pinyinName) ? mainHerb.pinyinName[0] : mainHerb.pinyinName);
-      const ingNorm = normalize(parseHerbPinyinNameVariants(ingredientStr)[0]);
-      const mainPharmaNorm = mainHerb.pharmaceuticalName ? normalize(mainHerb.pharmaceuticalName) : "";
-      const mainEnglishNorm = mainHerb.englishNames ? normalize(Array.isArray(mainHerb.englishNames) ? mainHerb.englishNames[0] : mainHerb.englishNames) : "";
-      return (
-        getHerbKey(herbObj) === getHerbKey(mainHerb)
-        || mainNorm === ingNorm
-        || (herbObj.pharmaceuticalName && normalize(herbObj.pharmaceuticalName) === mainPharmaNorm)
-        || (herbObj.englishNames && normalize(Array.isArray(herbObj.englishNames) ? herbObj.englishNames[0] : herbObj.englishNames) === mainEnglishNorm)
-      );
-    });
+  function isHerbInCopyList(herbObj) {
+    const herbKey = getHerbKey(herbObj);
+    return herbs && herbs.some(h => getHerbKey(h) === herbKey);
+  }
+
+  // Helper to check if a herbObj is the main herb
+  function isMainHerb(herbObj) {
+    if (!mainHerbObj || !herbObj) return false;
+    const herbKey = normalize(Array.isArray(herbObj.pinyinName) ? herbObj.pinyinName[0] : herbObj.pinyinName);
+    if (Array.isArray(mainHerbObj)) {
+      return mainHerbObj.some(h => normalize(Array.isArray(h.pinyinName) ? h.pinyinName[0] : h.pinyinName) === herbKey);
+    } else {
+      return normalize(Array.isArray(mainHerbObj.pinyinName) ? mainHerbObj.pinyinName[0] : mainHerbObj.pinyinName) === herbKey;
+    }
+  }
+
+  function handleAddIndividualHerb(herbObj) {
+    if (!herbObj) return;
+    if (typeof onAddIndividualHerb === "function") {
+      onAddIndividualHerb(herbObj);
+    }
   }
 
   function handleHerbClick(herbObj, idx) {
+    if (!addHerb || !removeHerb) return;
     const inCart = isHerbInCart(herbObj);
     setHerbLinkAnimating(prev => ({ ...prev, [idx]: true }));
     setTimeout(() => setHerbLinkAnimating(prev => ({ ...prev, [idx]: false })), 350);
@@ -301,22 +414,7 @@ export default function WhatFormulaMakesUpThoseHerbs({
           fullHerb = findHerbObjByName(variant);
           if (fullHerb) break;
         }
-        const dosage = extractFormulaDosage(ingredientStr, fullHerb ? fullHerb.dosage : "");
-        if (fullHerb) {
-          return {
-            ...fullHerb,
-            id: fullHerb.id || `${normalize(pinyinVariants[0])}-${i}`,
-            originalString: ingredientStr,
-            dosage,
-          };
-        } else {
-          return {
-            pinyinName: pinyinVariants[0],
-            id: `${normalize(pinyinVariants[0])}-${i}`,
-            originalString: ingredientStr,
-            dosage,
-          };
-        }
+        return fullHerb || null;
       })
       .filter(Boolean);
   }
@@ -342,7 +440,6 @@ export default function WhatFormulaMakesUpThoseHerbs({
     const missingHerbs = allFormulaHerbs.filter(h => !currentHerbKeys.has(getHerbKey(h)));
     const allPresent = missingHerbs.length === 0;
 
-    // HerbCard.js customization: show "Add To Formula Builder" instead of "Add X Herbs to Formula"
     if (showAddToFormulaBuilderButton) {
       return (
         <button
@@ -368,7 +465,6 @@ export default function WhatFormulaMakesUpThoseHerbs({
       );
     }
 
-    // Default behavior for FormulaBuilder.js
     return (
       <button
         className="mt-4 px-4 py-2 font-bold rounded-full transition-all duration-150 shadow hover:scale-105"
@@ -395,20 +491,49 @@ export default function WhatFormulaMakesUpThoseHerbs({
     );
   }
 
-  // --- Filtering matching formulas ---
+  function getCategoryExplanation(formula, formulaCategoryList) {
+    if (!formula || !formulaCategoryList) return undefined;
+    for (const cat of formulaCategoryList) {
+      for (const subcat of cat.subcategories || []) {
+        for (const f of subcat.formulas || []) {
+          if (
+            f.name &&
+            formula.pinyinName &&
+            f.name.replace(/\s/g, "").toLowerCase() ===
+              (Array.isArray(formula.pinyinName)
+                ? formula.pinyinName[0]
+                : formula.pinyinName
+              ).replace(/\s/g, "").toLowerCase()
+          ) {
+            return f.explanation;
+          }
+        }
+      }
+    }
+    return undefined;
+  }
+
   const matchingFormulas = useMemo(() => {
     if (normalizedSelectedHerbs.length === 0 || allFormulas.length === 0) return [];
     return allFormulas.filter((formula) => {
       if (!formula.ingredientsAndDosages) return false;
+      if (
+        excludeFormulaPinyinNames &&
+        excludeFormulaPinyinNames.length > 0 &&
+        excludeFormulaPinyinNames.some(ex =>
+          normalize(ex) === normalize(Array.isArray(formula.pinyinName) ? formula.pinyinName[0] : formula.pinyinName)
+        )
+      ) {
+        return false;
+      }
       const formulaHerbsNorm = formula.ingredientsAndDosages
         .map(ing => normalize(parseHerbPinyinNameVariants(ing)[0]));
       return normalizedSelectedHerbs.every(customName =>
         formulaHerbsNorm.some(fh => fh === customName)
       );
     });
-  }, [normalizedSelectedHerbs, allFormulas]);
+  }, [normalizedSelectedHerbs, allFormulas, excludeFormulaPinyinNames]);
 
-  // --- UI rendering ---
   if (loading) {
     return (
       <div className="w-full max-w-5xl mx-auto mt-10 mb-16 p-8 rounded-3xl shadow-2xl" style={{
@@ -440,6 +565,7 @@ export default function WhatFormulaMakesUpThoseHerbs({
     );
   }
 
+  // --- MAIN RENDER ---
   return (
     <div className="w-full max-w-5xl mx-auto mt-10 mb-16 p-8 rounded-3xl shadow-2xl"
       style={{
@@ -455,8 +581,20 @@ export default function WhatFormulaMakesUpThoseHerbs({
         {matchingFormulas.map((formula, formulaIdx) => {
           const badge = getFormulaBadge(formula);
           const allInCart = allHerbsInCart(formula);
-          // Render smaller buttons ONLY on HerbCard.js
-          const useSmallButton = showAddToFormulaBuilderButton;
+          const useBuilder = onlyShowAddToFormulaButton && typeof onAddIndividualHerb === "function";
+
+          // Explanation, yosancarries, formats
+          const categoryExplanation = getCategoryExplanation(formula, formulaCategoryList);
+          const explanation = formula.explanation || categoryExplanation;
+          const keyActions = formula.keyActions || undefined;
+          const yosancarries =
+            typeof formula.yosancarries !== "undefined"
+              ? formula.yosancarries
+              : typeof formula.yoSanCarries !== "undefined"
+              ? formula.yoSanCarries
+              : undefined;
+          const formats = formula.formats || [];
+
           return (
             <div
               key={formula.pinyinName}
@@ -468,6 +606,7 @@ export default function WhatFormulaMakesUpThoseHerbs({
                 padding: "1.4em 1.3em 1.3em 1.3em",
                 color: COLORS.backgroundRed,
                 boxShadow: `0 4px 18px -6px ${COLORS.shadowStrong}`,
+                position: "relative",
               }}
             >
               <div className="flex flex-col">
@@ -489,37 +628,110 @@ export default function WhatFormulaMakesUpThoseHerbs({
               </div>
               <div className="mt-2">
                 <strong style={{ color: COLORS.accentGold }}>Ingredients:</strong>
-                <ul className="pl-0 mt-1">
+                <ul className="pl-0 mt-1" style={{ paddingLeft: 0 }}>
                   {formula.ingredientsAndDosages.map((ing, i) => {
                     const pinyin = parseHerbPinyinNameVariants(ing)[0];
                     const herbObj = findHerbObjByName(pinyin);
                     const inCart = herbObj && isHerbInCart(herbObj);
-                    const isMainHerbHighlight = herbObj && isMainHerb(herbObj, ing);
+                    const inCopyList = herbObj && isHerbInCopyList(herbObj);
 
-                    const buttonStyle = getHerbButtonStyle(inCart, isMainHerbHighlight, highlightMainHerb);
+                    // Highlight logic:
+                    // On FormulaBuilder: highlight ONLY if in herblistcopytoclipboard (green)
+                    // On other pages: only green for builder/highlightMainHerb
+                    let isHighlighted = false;
+                    let builderHighlight = false;
+                    if (useBuilder) {
+                      isHighlighted = inCopyList;
+                      builderHighlight = true;
+                    } else {
+                      if (highlightMainHerb && isMainHerb(herbObj)) {
+                        // On HerbCard and highlightMainHerb is true, main herb gets green
+                        isHighlighted = true;
+                        builderHighlight = true;
+                      }
+                    }
+
+                    // Show checkmark if herb is in cart, even if mainHerb
+                    const showCheckmark = inCart;
 
                     return (
-                      <li key={i} style={{ display: "flex", alignItems: "center", marginBottom: "2px" }}>
+                      <li key={i} style={{
+                        display: "flex",
+                        alignItems: "center",
+                        marginBottom: "2px",
+                        position: "relative",
+                        minHeight: "2.2em",
+                      }}>
+                        <div style={{ flex: 1, minWidth: 0 }}>
                         {herbObj ? (
-                          <button
-                            className={
-                              `${herbLinkAnimating[`${formulaIdx}_${i}`] ? "herb-link-pop " : ""}herb-link-hover${inCart ? " herb-link-in-cart" : ""}${isMainHerbHighlight && highlightMainHerb ? " main-herb-highlight" : ""}`
-                            }
-                            style={buttonStyle}
-                            onClick={() => handleHerbClick(herbObj, `${formulaIdx}_${i}`)}
-                            title={
-                              inCart
-                                ? `Remove ${herbObj.pinyinName} from cart`
-                                : `Add ${herbObj.pinyinName} to cart`
-                            }
-                          >
-                            {highlightText(ing, query)}
-                            {inCart && (
-                              <span style={{ fontWeight: 700, color: COLORS.backgroundRed, marginLeft: 3 }}>✔</span>
-                            )}
-                          </button>
+                          <>
+                            <button
+                              className={`herb-link-hover`}
+                              style={getHerbButtonStyle(isHighlighted, builderHighlight)}
+                              onClick={
+                                useBuilder && !inCopyList
+                                  ? () => handleAddIndividualHerb(herbObj)
+                                  : !useBuilder
+                                  ? () => handleHerbClick(herbObj, `${formulaIdx}_${i}`)
+                                  : undefined
+                              }
+                              title={
+                                useBuilder
+                                  ? (
+                                      !inCopyList
+                                        ? `Add ${herbObj.pinyinName} to list`
+                                        : `${herbObj.pinyinName} already present`
+                                    )
+                                  : inCart
+                                  ? `Remove ${herbObj.pinyinName} from cart`
+                                  : `Add ${herbObj.pinyinName} to cart`
+                              }
+                              tabIndex={0}
+                            >
+                              {highlightText(ing, query)}
+                              {showCheckmark && <AnimatedCheckmark show={true} />}
+                            </button>
+                          </>
                         ) : (
                           <span style={{ color: COLORS.herbLink }}>{highlightText(ing, query)}</span>
+                        )}
+                        </div>
+                        {useBuilder && herbObj && !inCopyList && (
+                          <div style={{
+                            display: "flex",
+                            alignItems: "center",
+                            justifyContent: "center",
+                            height: "100%",
+                            position: "absolute",
+                            right: 0,
+                            top: 0,
+                            bottom: 0,
+                          }}>
+                            <button
+                              style={{
+                                background: COLORS.accentEmerald,
+                                color: COLORS.backgroundGold,
+                                borderRadius: "50%",
+                                fontWeight: "bold",
+                                fontSize: "1.2em",
+                                border: "none",
+                                width: "2em",
+                                height: "2em",
+                                display: "flex",
+                                alignItems: "center",
+                                justifyContent: "center",
+                                boxShadow: `0 1px 5px 0 ${COLORS.accentGold}44`,
+                                cursor: "pointer",
+                                marginLeft: "auto",
+                                transition: "background 0.18s",
+                              }}
+                              onClick={() => handleAddIndividualHerb(herbObj)}
+                              title={`Add ${herbObj.pinyinName} to list`}
+                              tabIndex={0}
+                            >
+                              +
+                            </button>
+                          </div>
                         )}
                       </li>
                     );
@@ -529,14 +741,14 @@ export default function WhatFormulaMakesUpThoseHerbs({
               {showFormulaActions && (
                 <div
                   className="flex gap-2 mt-4 mb-2"
-                  style={useSmallButton ? SMALL_BUTTON_CONTAINER_STYLE : undefined}
+                  style={showAddToFormulaBuilderButton ? SMALL_BUTTON_CONTAINER_STYLE : undefined}
                 >
                   {onlyShowAddToFormulaButton ? (
                     formulaBuilderButton(formula)
                   ) : (
                     <>
                       <button
-                        style={useSmallButton
+                        style={showAddToFormulaBuilderButton
                           ? {
                               ...SMALL_BUTTON_STYLE,
                               background: allInCart ? COLORS.accentGray : COLORS.accentEmerald,
@@ -570,6 +782,13 @@ export default function WhatFormulaMakesUpThoseHerbs({
                   )}
                 </div>
               )}
+              <div style={{ marginTop: "12px", borderTop: `2px solid ${COLORS.accentGold}`, paddingTop: "10px" }}>
+                <KeyActionsExplanation
+                  keyActions={keyActions}
+                  explanation={explanation}
+                />
+                <ExtraPropsBlock yosancarries={yosancarries} formats={formats} />
+              </div>
             </div>
           );
         })}

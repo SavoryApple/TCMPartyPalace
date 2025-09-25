@@ -1,0 +1,156 @@
+/* Main container */
+.container {
+  min-height: 100vh;
+  width: 100vw;
+  background: #F9E8C2;
+  font-family: "Noto Serif SC", "Songti SC", "KaiTi", serif;
+  padding-bottom: 48px;
+}
+
+/* Title */
+.title {
+  text-align: center;
+  font-weight: 900;
+  font-size: 2em;
+  color: #9A2D1F;
+  margin-bottom: 0.18em;
+  margin-top: 0.14em;
+  letter-spacing: -0.01em;
+  text-shadow: 0 2px 12px #D4AF37, 0 1px 0 #F9E8C2;
+}
+
+/* Description */
+.description {
+  font-size: 1.12em;
+  text-align: center;
+  color: #44210A;
+  margin-bottom: 1.1em;
+  margin-top: 0.2em;
+  font-weight: 500;
+  max-width: 700px;
+  margin-left: auto;
+  margin-right: auto;
+  margin-bottom: 2.2em;
+}
+
+/* Setup bar */
+.setupBar {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 18px;
+  justify-content: center;
+  align-items: flex-end;
+  margin-bottom: 36px;
+}
+
+/* Dropdowns & labels */
+.label {
+  font-weight: 700;
+  margin-bottom: 4px;
+  display: block;
+}
+
+.select {
+  font-size: 1em;
+  padding: 7px 12px;
+  border-radius: 7px;
+}
+
+.startButton {
+  background: #2176AE;
+  color: #FCF5E5;
+  font-weight: 900;
+  font-size: 1.09em;
+  border: none;
+  border-radius: 2em;
+  padding: 11px 26px;
+  box-shadow: 0 2px 8px #B38E3FCC;
+  margin-bottom: 0.8em;
+  cursor: pointer;
+  margin-left: 16px;
+  margin-top: 22px;
+}
+
+/* Game board */
+.gameBoard {
+  max-width: 910px;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.moves {
+  margin-bottom: 16px;
+  font-weight: 700;
+  color: #C0392B;
+}
+
+/* Cards grid */
+.cardsGrid {
+  display: grid;
+  gap: 22px 18px;
+  justify-content: center;
+  align-items: center;
+  margin-bottom: 18px;
+  width: 100%;
+  max-width: 880px;
+}
+
+@media (min-width: 600px) {
+  .cardsGrid.fourCols {
+    grid-template-columns: repeat(4, minmax(180px, 1fr));
+  }
+  .cardsGrid.threeCols {
+    grid-template-columns: repeat(3, minmax(220px, 1fr));
+  }
+}
+@media (max-width: 599px) {
+  .cardsGrid.threeCols, .cardsGrid.fourCols {
+    grid-template-columns: repeat(2, minmax(160px, 1fr));
+  }
+}
+
+/* Card */
+.cardButton {
+  background: #44210A;
+  color: #FCF5E5;
+  min-height: 72px;
+  border-radius: 1em;
+  box-shadow: 0 3px 12px -7px #B38E3FCC;
+  font-weight: 700;
+  font-size: 1.06em;
+  border: 2px solid #D4AF37;
+  padding: 13px 8px;
+  margin: 2px;
+  cursor: pointer;
+  outline: none;
+  transition: background 0.2s, color 0.2s;
+  word-break: break-word;
+  opacity: 1;
+}
+
+.cardButton.flipped {
+  background: #D4AF37;
+  color: #44210A;
+  box-shadow: 0 3px 18px -6px #438C3BCC;
+}
+
+.cardButton.matched {
+  opacity: 0.7;
+  cursor: default;
+}
+
+/* Play again button */
+.playAgainButton {
+  background: #C0392B;
+  color: #FCF5E5;
+  font-weight: 900;
+  font-size: 1.09em;
+  border: none;
+  border-radius: 2em;
+  padding: 12px 32px;
+  box-shadow: 0 2px 8px #B38E3FCC;
+  margin-top: 1.2em;
+  cursor: pointer;
+}

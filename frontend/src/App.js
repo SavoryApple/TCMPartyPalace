@@ -25,6 +25,12 @@ import ComingSoon from "./pages/ComingSoon";
 import ElementQuizComprehensive from "./pages/ElementQuizComprehensive";
 import ElementQuizResults from "./pages/ElementQuizResults";
 import WhatIsChineseMedicine from "./pages/WhatIsChineseMedicine";
+import TCMGameLanding from "./pages/TCMGameLanding";
+import FormulaIngredientsRoutes from "./pages/FormulaIngredientsRoutes";
+import HerbMemoryGame from "./pages/HerbMemoryRoutes";
+
+// Add your new import for the games page here if/when you implement it, e.g.:
+// import TCMGamesPage from "./pages/TCMGamesPage";
 
 const COLORS = {
   backgroundRed: "#9A2D1F",
@@ -48,7 +54,7 @@ const CARD_DATA = [
     icon: "🪔",
     color: COLORS.accentGold,
     textColor: COLORS.accentBlack,
-    route: "formulabuilder",
+    route: "/formulabuilder",
   },
   {
     title: "Formulas Listed by Category",
@@ -57,7 +63,7 @@ const CARD_DATA = [
     icon: "⛩️",
     color: COLORS.backgroundGold,
     textColor: COLORS.backgroundRed,
-    route: "formulacategorylist",
+    route: "/formulacategorylist",
   },
   {
     title: "Herbs Listed by Category",
@@ -66,7 +72,7 @@ const CARD_DATA = [
     icon: "🌱",
     color: COLORS.accentEmerald,
     textColor: COLORS.accentIvory,
-    route: "herbcategorylist",
+    route: "/herbcategorylist",
   },
   {
     title: "Common Herb Combinations",
@@ -74,7 +80,7 @@ const CARD_DATA = [
     icon: "🍃",
     color: COLORS.accentGold,
     textColor: COLORS.accentBlack,
-    route: "herbgroups",
+    route: "/herbgroups",
   },
   {
     title: "Five Element Personality Quiz",
@@ -82,7 +88,7 @@ const CARD_DATA = [
     icon: "🌟",
     color: COLORS.accentBlue,
     textColor: COLORS.accentIvory,
-    route: "elementquiz",
+    route: "/elementquiz",
   },
   {
     title: "What is Chinese medicine?",
@@ -90,7 +96,16 @@ const CARD_DATA = [
     icon: "❓",
     color: COLORS.accentGray,
     textColor: COLORS.backgroundRed,
-    route: "whatischinesemedicine",
+    route: "/whatischinesemedicine",
+  },
+  // --- NEW CARD: TCM Games ---
+  {
+    title: "TCM Games",
+    description: "Play games based on herbs and formulas to reinforce learning and have fun.",
+    icon: "🎲",
+    color: COLORS.accentBlue,
+    textColor: COLORS.accentIvory,
+    route: "/tcmgames",
   },
 ];
 
@@ -564,7 +579,7 @@ function Home() {
           </div>
         </div>
         <section className="home-cards">
-          {CARD_DATA.map((card) => (
+          {CARD_DATA.map((card, idx) => (
             <button
               key={card.title}
               className="card-shadow animate-fadeInScaleUp animate-cardPulse transition hover:scale-105 flex flex-col items-center"
@@ -715,23 +730,26 @@ export default function App() {
         <Routes>
           <Route path="/" element={<Home />} />
           <Route index element={<Home />} />
-          <Route path="formulabuilder" element={<FormulaBuilder />} />
-          <Route path="herb/:id" element={<HerbCard />} />
-          <Route path="herbCard" element={<HerbCard />} />
-          <Route path="formulacard/:id" element={<FormulaCard />} />
-          <Route path="formulaCard" element={<FormulaCard />} />
-          <Route path="formulacategorylist" element={<FormulaCategoryList />} />
-          <Route path="herbcategorylist" element={<HerbCategoryList />} />
-          <Route path="herbgroups" element={<HerbGroupsPage />} />
-          <Route path="report" element={<ReportBug />} />
-          <Route path="login" element={<LoginPage />} />
-          <Route path="register" element={<RegisterPage />} />
-          <Route path="admin" element={<AdminDashboard />} />
-          <Route path="about" element={<About />} />
-          <Route path="comingsoon" element={<ComingSoon />} />
-          <Route path="elementquiz" element={<ElementQuizComprehensive />} />
+          <Route path="/formulabuilder" element={<FormulaBuilder />} />
+          <Route path="/herb/:id" element={<HerbCard />} />
+          <Route path="/herbCard" element={<HerbCard />} />
+          <Route path="/formulacard/:id" element={<FormulaCard />} />
+          <Route path="/formulaCard" element={<FormulaCard />} />
+          <Route path="/formulacategorylist" element={<FormulaCategoryList />} />
+          <Route path="/herbcategorylist" element={<HerbCategoryList />} />
+          <Route path="/herbgroups" element={<HerbGroupsPage />} />
+          <Route path="/report" element={<ReportBug />} />
+          <Route path="/login" element={<LoginPage />} />
+          <Route path="/register" element={<RegisterPage />} />
+          <Route path="/admin" element={<AdminDashboard />} />
+          <Route path="/about" element={<About />} />
+          <Route path="/comingsoon" element={<ComingSoon />} />
+          <Route path="/elementquiz" element={<ElementQuizComprehensive />} />
           <Route path="/elementquizresults" element={<ElementQuizResults />} />
-          <Route path="whatischinesemedicine" element={<WhatIsChineseMedicine />} />
+          <Route path="/whatischinesemedicine" element={<WhatIsChineseMedicine />} />
+          <Route path="/tcmgames" element={<TCMGameLanding />} />
+          <Route path="/game/formula-ingredients/*" element={<FormulaIngredientsRoutes />} />
+          <Route path="/game/herbs/*" element={<HerbMemoryGame />} />
         </Routes>
       </Router>
     </HerbCartProvider>
