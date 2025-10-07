@@ -560,6 +560,9 @@ export default function FormulaCard() {
   // --- Get explanation from category file ---
   const categoryExplanation = getCategoryExplanation(formula, formulaCategoryList);
 
+  // --- Handle tongue and pulse ---
+  const tongueAndPulse = formula.tongueandpulse || formula.tongueAndPulse || "";
+
   return (
     <div style={bgStyle}>
       <GlobalAnimations />
@@ -688,6 +691,15 @@ export default function FormulaCard() {
           <div className="mb-2" style={{ color: COLORS.seal }}>
             <strong>Indications:</strong> {highlightText(formula.indications, query)}
           </div>
+
+          {/* TONGUE AND PULSE DISPLAY SECTION START */}
+          {tongueAndPulse && (
+            <div className="mb-2" style={{ color: COLORS.seal }}>
+              <strong>Tongue & Pulse:</strong> {highlightText(tongueAndPulse, query)}
+            </div>
+          )}
+          {/* TONGUE AND PULSE DISPLAY SECTION END */}
+
           <div className="mb-2" style={{ color: COLORS.seal }}>
             <strong>Cautions/Contraindications:</strong>{" "}
             {safeArr(formula.cautionsAndContraindications).map((c, i) => (
@@ -749,4 +761,5 @@ export default function FormulaCard() {
       <FooterCard />
     </div>
   );
+
 }

@@ -28,6 +28,7 @@ import WhatIsChineseMedicine from "./pages/WhatIsChineseMedicine";
 import TCMGameLanding from "./pages/TCMGameLanding";
 import FormulaIngredientsRoutes from "./pages/FormulaIngredientsRoutes";
 import HerbMemoryGame from "./pages/HerbMemoryRoutes";
+import MedicinalFoods from "./pages/MedicinalFoods"; // <-- Added import
 
 // Add your new import for the games page here if/when you implement it, e.g.:
 // import TCMGamesPage from "./pages/TCMGamesPage";
@@ -81,6 +82,14 @@ const CARD_DATA = [
     color: COLORS.accentGold,
     textColor: COLORS.accentBlack,
     route: "/herbgroups",
+  },
+  {
+    title: "Medicinal Foods", // <-- NEW CARD
+    description: "See foods to recommend for every Maciocia syndrome. Printable for patients.",
+    icon: "🍚",
+    color: COLORS.backgroundGold,
+    textColor: COLORS.accentBlack,
+    route: "/medicinalfoods",
   },
   {
     title: "Five Element Personality Quiz",
@@ -738,6 +747,7 @@ export default function App() {
           <Route path="/formulacategorylist" element={<FormulaCategoryList />} />
           <Route path="/herbcategorylist" element={<HerbCategoryList />} />
           <Route path="/herbgroups" element={<HerbGroupsPage />} />
+          <Route path="/medicinalfoods" element={<MedicinalFoods />} /> {/* <-- NEW ROUTE */}
           <Route path="/report" element={<ReportBug />} />
           <Route path="/login" element={<LoginPage />} />
           <Route path="/register" element={<RegisterPage />} />

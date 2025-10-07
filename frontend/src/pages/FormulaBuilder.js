@@ -177,6 +177,9 @@ function FormulaCard({
     return herbObj;
   }
 
+  // --- Tongue & Pulse logic ---
+  const tongueAndPulse = formula.tongueandpulse || formula.tongueAndPulse || "";
+
   return (
     <div
       ref={cardRef}
@@ -228,6 +231,15 @@ function FormulaCard({
         <div className="mb-1">
           <strong>Indications:</strong> {formula.indications}
         </div>
+
+        {/* TONGUE AND PULSE SECTION START */}
+        {tongueAndPulse && (
+          <div className="mb-1">
+            <strong>Tongue & Pulse:</strong> {tongueAndPulse}
+          </div>
+        )}
+        {/* TONGUE AND PULSE SECTION END */}
+
         <div className="mb-1">
           <strong>Cautions/Contraindications:</strong> {formula.cautionsAndContraindications}
         </div>
