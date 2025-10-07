@@ -304,89 +304,6 @@ function ScrollToTop() {
   return null;
 }
 
-function TutorialModal({ open, onClose }) {
-  if (!open) return null;
-  const youtubeVideoId = "esDYrMcjCJw";
-  const youtubeEmbedUrl = `https://www.youtube.com/embed/${youtubeVideoId}?rel=0&modestbranding=1`;
-
-  return (
-    <div
-      style={{
-        position: "fixed",
-        zIndex: 9999,
-        top: 0, left: 0, width: "100vw", height: "100vh",
-        background: "rgba(0,0,0,0.45)",
-        display: "flex", alignItems: "center", justifyContent: "center",
-      }}
-      tabIndex={-1}
-      onClick={onClose}
-    >
-      <div
-        style={{
-          background: COLORS.accentIvory,
-          borderRadius: "1.4em",
-          boxShadow: `0 8px 32px -10px ${COLORS.shadowStrong}`,
-          border: `2px solid ${COLORS.accentGold}`,
-          padding: "22px 22px 14px 22px",
-          maxWidth: 440,
-          width: "90vw",
-          position: "relative"
-        }}
-        onClick={e => e.stopPropagation()}
-        role="dialog"
-        aria-modal="true"
-      >
-        <button
-          onClick={onClose}
-          aria-label="Close tutorial"
-          title="Close"
-          style={{
-            position: "absolute",
-            top: 8,
-            right: 16,
-            background: "none",
-            border: "none",
-            fontSize: "1.7em",
-            color: COLORS.accentGold,
-            cursor: "pointer",
-            fontWeight: 700,
-          }}
-        >
-          ×
-        </button>
-        <div style={{fontSize: "1.3em", fontWeight: 700, marginBottom: 10, color: COLORS.backgroundRed}}>Site Tutorial</div>
-        <div style={{marginBottom: 8, fontWeight: 500}}>
-          Watch this walkthrough to learn how to use the TCM Atlas website.<br />
-          <span style={{ fontSize: "0.95em", color: COLORS.accentGold }}>
-            (You can pause, adjust volume, or scrub the timeline.)
-          </span>
-        </div>
-        <div style={{ width: "100%", maxWidth: 420 }}>
-          <div style={{ position: "relative", paddingBottom: "56.25%", height: 0, width: "100%" }}>
-            <iframe
-              src={youtubeEmbedUrl}
-              title="TCM Atlas Tutorial"
-              allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-              allowFullScreen
-              style={{
-                position: "absolute",
-                top: 0,
-                left: 0,
-                width: "100%",
-                height: "100%",
-                borderRadius: "1em",
-                border: `2px solid ${COLORS.accentGold}`,
-                boxShadow: "0 4px 18px -6px " + COLORS.shadowStrong,
-                background: COLORS.accentIvory,
-              }}
-            />
-          </div>
-        </div>
-      </div>
-    </div>
-  );
-}
-
 function VisitorCounter() {
   const [count, setCount] = useState(null);
   useEffect(() => {
@@ -476,7 +393,6 @@ function AnimatedBuildLearnPractice() {
 
 function Home() {
   const navigate = useNavigate();
-  const [tutorialOpen, setTutorialOpen] = useState(false);
   const bgImage = useResponsiveBgImage();
 
   return (
@@ -504,7 +420,6 @@ function Home() {
       </div>
       <div className="navbar-spacer"></div>
       <div className="main-content">
-        <TutorialModal open={tutorialOpen} onClose={() => setTutorialOpen(false)} />
         <div
           className="hero-section"
           style={{
@@ -538,38 +453,7 @@ function Home() {
                 paddingTop: "32px"
               }}
             >
-              <button
-                onClick={() => setTutorialOpen(true)}
-                className="tutorial-btn"
-                aria-label="Open site tutorial"
-              >
-                <span
-                  style={{
-                    fontSize: "1.8em",
-                    filter: "drop-shadow(0 2px 8px #44210A)",
-                    animation: "iconBounce 1.7s infinite",
-                  }}
-                  aria-hidden="true"
-                >
-                  📺
-                </span>
-                <span
-                  style={{
-                    fontSize: "1.08em",
-                    fontWeight: 900,
-                    background: "linear-gradient(90deg, #D4AF37 20%, #9A2D1F 80%)",
-                    WebkitBackgroundClip: "text",
-                    WebkitTextFillColor: "transparent",
-                    backgroundClip: "text",
-                    textFillColor: "transparent",
-                    textShadow: "0 1px 6px #B38E3F44",
-                    letterSpacing: "-0.01em",
-                    fontFamily: '"Noto Serif SC", "Songti SC", "KaiTi", serif',
-                  }}
-                >
-                  Watch Tutorial
-                </span>
-              </button>
+              {/* Watch Tutorial button removed */}
               <AnimatedBuildLearnPractice />
               <VisitorCounter />
               <p

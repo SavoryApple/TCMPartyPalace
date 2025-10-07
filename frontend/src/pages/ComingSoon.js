@@ -176,7 +176,9 @@ export default function ComingSoon() {
                 fontWeight: 600,
               }}
             >
-              {idx === 0 || idx === 1 ? <span style={{ textDecoration: "line-through" }}>{feature}</span> : feature}
+              {(idx === 0 || idx === 1 || idx === 2) ? (
+                <span style={{ textDecoration: "line-through" }}>{feature}</span>
+              ) : feature}
             </li>
           ))}
         </ol>

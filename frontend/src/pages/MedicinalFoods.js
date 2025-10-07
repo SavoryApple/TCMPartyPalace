@@ -382,7 +382,7 @@ export default function MedicinalFoods() {
           ref={inputRef}
           type="text"
           aria-label="Syndrome search"
-          placeholder="Type an organ or keyword (e.g. Heart, Spleen, Liver)..."
+          placeholder="Type a maccioca differentiation organ (e.g. Heart)..."
           value={search}
           onChange={e => setSearch(e.target.value)}
           style={{
